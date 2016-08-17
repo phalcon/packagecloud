@@ -25,6 +25,7 @@ matrix:
 install:
   - git submodule update --init --recursive
   - export PHALCON_VERSION=$(cat cphalcon/CHANGELOG.md | grep -o -m 1 "# \[\([0-9].[0-9].[0-9]\)\]" | sed "s/# \[\([0-9].[0-9].[0-9]\)\]/\1/")
+  - echo -e ${PHALCON_VERSION}
 
 script:
   - git clone https://github.com/phalcongelist/build.git
