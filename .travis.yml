@@ -22,13 +22,6 @@ matrix:
   allow_failures:
     - env: OS=ubuntu DIST=trusty PACK=deb
 
-install:
-  - git submodule update --init --recursive
-  - export PHALCON_VERSION=$(cat cphalcon/CHANGELOG.md | grep -o -m 1 "# \[\([0-9].[0-9].[0-9]\)\]" | sed "s/# \[\([0-9].[0-9].[0-9]\)\]/\1/")
-  - export GIT_COMMIT=$(cd cphalcon; git rev-parse --short=8 HEAD)
-  - echo -e ${PHALCON_VERSION}
-  - echo -e ${GIT_COMMIT}
-
 script:
   - git clone https://github.com/phalcongelist/build.git cphalcon/cloud-build
   - cd cphalcon; bash cloud-build/pack/travis.sh
