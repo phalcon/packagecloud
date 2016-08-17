@@ -23,8 +23,8 @@ matrix:
     - env: OS=ubuntu DIST=trusty PACK=deb
 
 script:
-  - git clone https://github.com/phalcongelist/build.git cphalcon/cloud-build
-  - cd cphalcon; bash cloud-build/pack/travis.sh
+  - git clone https://github.com/phalcongelist/build.git
+  - build/pack/travis.sh
 
 notifications:
   email:
