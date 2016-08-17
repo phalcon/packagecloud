@@ -1,0 +1,34 @@
+sudo: required
+services:
+  - docker
+
+language: php
+
+php:
+  - 5.5
+  - 5.6
+  - 7.0
+
+cache: false
+
+env:
+  global:
+    - PRODUCT=php-phalcon
+  matrix:
+    - OS=ubuntu DIST=trusty PACK=deb
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - env: OS=ubuntu DIST=trusty PACK=deb
+
+script:
+  - git clone https://github.com/phalcongelist/build.git
+  - bash build/pack/travis.sh
+
+notifications:
+  email:
+    recipients:
+      - serghei@phalconphp.com
+    on_success: change
+    on_failure: always
