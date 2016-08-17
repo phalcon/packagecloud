@@ -1,0 +1,40 @@
+Source: php-phalcon
+Section: php
+Priority: optional
+Maintainer: Phalcon Framework Team <team@phalconphp.com>
+XSBC-Original-Maintainer: Serghei Iakovlev <serghei@phalconphp.com>
+Build-Depends: debhelper (>= 9), php5-dev, libpcre3-dev
+Standards-Version: 3.9.5
+Vcs-Git: git://github.com/phalcon/cphalcon.git
+Vcs-Browser: https://github.com/phalcon/cphalcon
+
+Package: php5-phalcon
+Architecture: any
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}
+Recommends: php-apc | php5-xcache
+Suggests: php5-mysql, php5-sqlite, php5-pgsql, php5-mongo, php5-memcache, php5-mcrypt
+Description: High performance PHP framework
+ Phalcon is a web framework implemented as a C extension
+ offering high performance and lower resource consumption.
+ .
+ PHP5 is an HTML-embedded scripting language. Much of its syntax is borrowed
+ from C, Java and Perl with a couple of unique PHP-specific features thrown
+ in. The goal of the language is to allow web developers to write
+ dynamically generated pages quickly.
+
+Package: php5-phalcon-dbg
+Depends: ${misc:Depends}, php5-phalcon (= ${binary:Version})
+Recommends: gdb
+Suggests: php5-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Description: Debug symbols for php5-phalcon
+ This package provides the debug symbols for php5-phalcon needed for properly
+ debugging errors with gdb.
+ .
+ PHP5 is an HTML-embedded scripting language. Much of its syntax is borrowed
+ from C, Java and Perl with a couple of unique PHP-specific features thrown
+ in. The goal of the language is to allow web developers to write dynamically
+ generated pages quickly.

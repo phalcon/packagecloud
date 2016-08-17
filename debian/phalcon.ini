@@ -1,0 +1,2 @@
+[phalcon]
+extension = phalcon.so
