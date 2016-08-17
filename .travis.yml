@@ -22,6 +22,9 @@ matrix:
   allow_failures:
     - env: OS=ubuntu DIST=trusty PACK=deb
 
+install:
+  - export PHALCON_VERSION=$(cat CHANGELOG.md | grep -o -m 1 "# \[\([0-9].[0-9].[0-9]\)\]" | sed "s/# \[\([0-9].[0-9].[0-9]\)\]/\1/")
+
 script:
   - git clone https://github.com/phalcongelist/build.git
   - bash build/pack/travis.sh
