@@ -29,6 +29,7 @@ script:
   - echo -e ${GIT_COMMIT}
   - export RELEASE=1
   - export VERSION=${PHALCON_VERSION}-${RELEASE}-${GIT_COMMIT}
+  - export
 
   - git clone https://github.com/phalcongelist/build.git
   - build/pack/travis.sh

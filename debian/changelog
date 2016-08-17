@@ -1,4 +1,4 @@
-php-phalcon (3.0.0-0-g5372ac7) trusty; urgency=low
+php-phalcon (3.0.0-1-g5372ac7) stable; urgency=low
 
   * Initial Packagecloud release
 
@@ -302,7 +302,7 @@ php-phalcon (2.0.3-ppa1~vivid) vivid; urgency=low
   * Implemented Namespace aliases in PHQL
   * Now you can define if a virtual foreign key must ignore null values or not
   * Fixed bug that added two ? in `Mvc\Url::get()` when using query parameters (https://github.com/phalcon/cphalcon/issues/10421)
-- Now string attributes in models can be marked to allow empty string values (https://github.com/phalcon/cphalcon/issues/440)
+  * Now string attributes in models can be marked to allow empty string values (https://github.com/phalcon/cphalcon/issues/440)
   * Added an option to return the SQL to be generated from a `Mvc\Model\Query` instance (https://github.com/phalcon/cphalcon/issues/1908)
   * Fix doesn't correct column domain in `Phalcon\Db\Dialect::select()` (https://github.com/phalcon/cphalcon/pull/10439)
   * Added support for DOUBLE type in MySQL
