@@ -14,6 +14,8 @@ cache: false
 env:
   global:
     - PRODUCT=php-phalcon
+    - ENABLED_BRANCHES="master"
+    - PACKAGECLOUD_REPO="phalcon/master"
   matrix:
     - OS=ubuntu DIST=trusty PACK=deb
 
