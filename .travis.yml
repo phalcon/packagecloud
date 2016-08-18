@@ -25,8 +25,8 @@ matrix:
     - env: OS=ubuntu DIST=trusty PACK=deb
 
 before_script:
-  - export LAST_COMMIT=$(cd cphalcon; git log -n 1  --pretty=format:"%H" | awk '{print substr($0, 0, 8)}')
-  - export PARTIAL_VERSION=$(cd cphalcon; cat config.json | jq ".version")
+  - export LAST_COMMIT=$(cd cphalcon; git rev-parse --short=8 HEAD)
+  - export PARTIAL_VERSION=$(cd cphalcon; cat config.json | jq ".version" | sed -E 's/\"//g')
   - export VERSION="$PARTIAL_VERSION-$RELEASE-$LAST_COMMIT"
 
 script:
