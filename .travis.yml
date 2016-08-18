@@ -26,8 +26,8 @@ matrix:
 
 before_script:
   - export LAST_COMMIT=$(cd cphalcon; git log -n 1  --pretty=format:"%H" | awk '{print substr($0, 0, 8)}')
-  - export PARTIAL_VERSION=$(cd cphalcon; cat config.json | grep version | awk -F ':'  '{gsub(/[^0-9a-z\.]/, "", $2); print $2}')
-  - export VERSION="$PARTIAL_VERSION-0-$LAST_COMMIT"
+  - export PARTIAL_VERSION=$(cd cphalcon; cat config.json | jq ".version")
+  - export VERSION="$PARTIAL_VERSION-$RELEASE-$LAST_COMMIT"
 
 script:
   - git clone https://github.com/tarantool/build.git
