@@ -23,13 +23,8 @@ matrix:
     - env: OS=ubuntu DIST=trusty PACK=deb
 
 script:
-  - export PHALCON_VERSION=$(cat cphalcon/CHANGELOG.md | grep -o -m 1 "# \[\([0-9].[0-9].[0-9]\)\]" | sed "s/# \[\([0-9].[0-9].[0-9]\)\]/\1/")
-  - export GIT_COMMIT=$(cd cphalcon; git rev-parse --short=8 HEAD)
-  - echo -e ${PHALCON_VERSION}
-  - echo -e ${GIT_COMMIT}
-  - export RELEASE=1
-  - export VERSION=${PHALCON_VERSION}-${RELEASE}-${GIT_COMMIT}
-  - export
+  - export VERSION=(cd cphalcon; git describe --long --always | sed -n -e 's/^v\([0-9\.]*\)-\([0-9]*\)-\([a-z0-9]*\)/\1-\2-\3/p')
+  - echo $VERSION
 
   - git clone https://github.com/phalcongelist/build.git
   - build/pack/travis.sh
