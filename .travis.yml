@@ -15,9 +15,9 @@ env:
   global:
     - PRODUCT=php-phalcon
     - ENABLED_BRANCHES="master"
-    - RELEASE=1
+    - RELEASE=0
   matrix:
-    - OS=ubuntu DIST=trusty PACK=deb PACKAGECLOUD_REPO="phalcon/ppa"
+    - OS=ubuntu DIST=trusty PACK=deb PACKAGECLOUD_REPO="phalcon/dist"
 
 matrix:
   fast_finish: true
@@ -26,7 +26,6 @@ matrix:
 
 before_script:
   - export VERSION=$(cd cphalcon; git describe --long --always | sed -n -e 's/^v\([0-9\.]*\)-\([0-9]*\)-\([a-z0-9]*\)/\1-\2-\3/p')
-  - echo $VERSION
 
 script:
   - git clone https://github.com/tarantool/build.git
