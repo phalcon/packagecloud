@@ -15,6 +15,7 @@ env:
   global:
     - PRODUCT=php-phalcon
     - ENABLED_BRANCHES="master"
+    - RELEASE=1
   matrix:
     - OS=ubuntu DIST=trusty PACK=deb PACKAGECLOUD_REPO="phalcon/ppa"
 
@@ -23,11 +24,12 @@ matrix:
   allow_failures:
     - env: OS=ubuntu DIST=trusty PACK=deb
 
-script:
+before_script:
   - export VERSION=$(cd cphalcon; git describe --long --always | sed -n -e 's/^v\([0-9\.]*\)-\([0-9]*\)-\([a-z0-9]*\)/\1-\2-\3/p')
   - echo $VERSION
 
-  - git clone https://github.com/phalcongelist/build.git
+script:
+  - git clone https://github.com/tarantool/build.git
   - build/pack/travis.sh
 
 notifications:
