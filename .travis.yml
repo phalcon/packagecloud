@@ -25,7 +25,9 @@ matrix:
     - env: OS=ubuntu DIST=trusty PACK=deb
 
 before_script:
-  - export VERSION=$(cd cphalcon; git describe --long --always | sed -n -e 's/^v\([0-9\.]*\)-\([0-9]*\)-\([a-z0-9]*\)/\1-\2-\3/p')
+  - export LAST_COMMIT=$(git log -n 1  --pretty=format:"%H" | awk '{print substr($0, 0, 8)}')
+  - export PARTIAL_VERSION=$(cat config.json | grep version | awk -F ':'  '{gsub(/[^0-9a-z\.]/, "", $2); print $2}')
+  - export VERSION="$PARTIAL_VERSION-0-$LAST_COMMIT"
 
 script:
   - git clone https://github.com/tarantool/build.git
