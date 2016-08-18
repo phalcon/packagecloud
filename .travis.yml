@@ -18,14 +18,12 @@ env:
     - RELEASE=0
     - PACKAGECLOUD_REPO="phalcon/stable"
   matrix:
-    - OS=ubuntu DIST=precise PACK=deb
     - OS=ubuntu DIST=trusty PACK=deb
     - OS=ubuntu DIST=wily PACK=deb
 
 matrix:
   fast_finish: true
   allow_failures:
-    - env: OS=ubuntu DIST=precise PACK=deb
     - env: OS=ubuntu DIST=trusty PACK=deb
     - env: OS=ubuntu DIST=wily PACK=deb
 

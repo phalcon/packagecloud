@@ -2,6 +2,15 @@
 
 [![Build Status](https://travis-ci.org/phalcongelist/packagecloud.svg?branch=master)](https://travis-ci.org/phalcongelist/packagecloud)
 
+## List of supported OS
+
+*Ubuntu*
+
+| Codename  | OS Release             | Phalcon Releases | PHP version   |
+| --------- | ---------------------- | ---------------- | ------------- |
+| `trusty`  | Trusty Tahr 14.04 LTS  | `3.0.0`          | `5.5.x`       |
+| `wily`    | Wily Werewolf 15.10    | `3.0.0`          | `5.6.x`       |
+
 ## License
 
 Phalcon is open source software licensed under the New BSD License.<br>See the [docs/LICENSE.txt][:docs:] file for more.
