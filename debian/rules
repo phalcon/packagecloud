@@ -19,7 +19,6 @@
 export DH_VERBOSE=1
 
 BUILD=$(CURDIR)/debian/php5-phalcon
-PHP_EX=$(shell php-config5 --extension-dir)
 PHP_APIVER=$(shell php-config5 --phpapi)
 
 PHALCON_DIR=cphalcon/build/php5/safe
