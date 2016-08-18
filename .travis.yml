@@ -15,9 +15,8 @@ env:
   global:
     - PRODUCT=php-phalcon
     - ENABLED_BRANCHES="master"
-    - PACKAGECLOUD_REPO="phalcon/master"
   matrix:
-    - OS=ubuntu DIST=trusty PACK=deb
+    - OS=ubuntu DIST=trusty PACK=deb PACKAGECLOUD_REPO="phalcon/ppa"
 
 matrix:
   fast_finish: true
