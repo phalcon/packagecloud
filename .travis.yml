@@ -15,18 +15,23 @@ env:
   global:
     - PRODUCT=php-phalcon
     - ENABLED_BRANCHES="master"
-    - RELEASE=0
-    - PACKAGECLOUD_REPO="phalcon/stable"
   matrix:
-    - OS=ubuntu DIST=trusty PACK=deb
-    - OS=ubuntu DIST=wily PACK=deb
+    - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" RELEASE=$TRAVIS_BUILD_NUMBER
+    - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=0
+    - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" RELEASE=$TRAVIS_BUILD_NUMBER
+    - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=0
+    - PACK=none PHALCON_VERSION="3.0.x" RELEASE=$TRAVIS_BUILD_NUMBER
+    - PACK=none PHALCON_VERSION="v3.0.0" RELEASE=0
 
 matrix:
   fast_finish: true
   allow_failures:
-    - env: OS=ubuntu DIST=trusty PACK=deb
-    - env: OS=ubuntu DIST=wily PACK=deb
+    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" RELEASE=$TRAVIS_BUILD_NUMBER
+    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" RELEASE=$TRAVIS_BUILD_NUMBER
+    - env: PACK=none PHALCON_VERSION="3.0.x" RELEASE=$TRAVIS_BUILD_NUMBER
 
+install:
+  - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b ${PHALCON_VERSION}
 before_script:
   - export LAST_COMMIT=$(cd cphalcon; git rev-parse --short=8 HEAD)
   - export PARTIAL_VERSION=$(cd cphalcon; cat config.json | jq ".version" | sed -E 's/\"//g')
