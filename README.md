@@ -6,10 +6,11 @@
 
 *Ubuntu*
 
-| Codename  | OS Release             | Phalcon Releases | PHP version   |
-| --------- | ---------------------- | ---------------- | ------------- |
-| `trusty`  | Trusty Tahr 14.04 LTS  | `3.0.0`          | `5.5.x`       |
-| `wily`    | Wily Werewolf 15.10    | `3.0.0`          | `5.6.x`       |
+| Codename  | OS Release             | Phalcon Releases  | PHP version   |
+| --------- | ---------------------- | ----------------- | ------------- |
+| `trusty`  | Trusty Tahr 14.04 LTS  | `3.0.0` - `3.0.1` | `5.5.x`       |
+| `wily`    | Wily Werewolf 15.10    | `3.0.0` - `3.0.1` | `5.6.x`       |
+| `xenial`  | Xenial Xerus 16.04 LTS | `3.0.0` - `3.0.1` | `7.0.x`       |
 
 ## License
 

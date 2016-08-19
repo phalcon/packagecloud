@@ -7,7 +7,7 @@ language: php
 php:
   - 5.5
   - 5.6
-  #- 7.0
+  - 7.0
 
 cache: false
 
@@ -18,8 +18,13 @@ env:
   matrix:
     - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" RELEASE=$TRAVIS_BUILD_NUMBER
     - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=0
+
     - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" RELEASE=$TRAVIS_BUILD_NUMBER
     - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=0
+
+    - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" RELEASE=$TRAVIS_BUILD_NUMBER
+    - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=0
+
     - PACK=none PHALCON_VERSION="3.0.x" RELEASE=$TRAVIS_BUILD_NUMBER
     - PACK=none PHALCON_VERSION="v3.0.0" RELEASE=0
 
@@ -28,7 +33,21 @@ matrix:
   allow_failures:
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" RELEASE=$TRAVIS_BUILD_NUMBER
     - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" RELEASE=$TRAVIS_BUILD_NUMBER
+    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" RELEASE=$TRAVIS_BUILD_NUMBER
     - env: PACK=none PHALCON_VERSION="3.0.x" RELEASE=$TRAVIS_BUILD_NUMBER
+ exclude:
+    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" RELEASE=$TRAVIS_BUILD_NUMBER
+      php: 5.6
+    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=0
+      php: 7.0
+    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" RELEASE=$TRAVIS_BUILD_NUMBER
+      php: 5.5
+    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=0
+      php: 7.0
+    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" RELEASE=$TRAVIS_BUILD_NUMBER
+      php: 5.5
+    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=0
+      php: 5.6
 
 install:
   - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b ${PHALCON_VERSION}
