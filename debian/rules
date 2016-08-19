@@ -19,8 +19,8 @@
 export DH_VERBOSE=1
 
 PHP_FULL_VERSION=$(shell php-config7.0 --version 2> /dev/null || php-config5 --version 2> /dev/null)
-PHP_MAJOR_VERSION=$(shell "${PHP_FULL_VERSION:0:1}")
-PHP_API_VERSION=$(shell php-config5 --phpapi)
+PHP_MAJOR_VERSION=$(shell echo $(PHP_FULL_VERSION) | head -c 1)
+PHP_API_VERSION=$(shell php-config7.0 --phpapi 2> /dev/null || php-config5 --phpapi 2> /dev/null)
 
 ifeq ($(PHP_MAJOR_VERSION), 5))
 	BUILD=$(CURDIR)/debian/php5-phalcon
