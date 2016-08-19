@@ -3,10 +3,10 @@
 #
 #  Phalcon Framework
 #
-#  Copyright (c) 2011-2016 Phalcon Team (https://www.phalconphp.com)
+#  Copyright (c) 2011-2016, Phalcon Team (https://www.phalconphp.com)
 #
 #  This source file is subject to the New BSD License that is bundled
-#  with this package in the file docs/LICENSE.txt.
+#  with this package in the file https://www.phalconphp.com/LICENSE.txt
 #
 #  If you did not receive a copy of the license and are unable to
 #  obtain it through the world-wide-web, please send an email
@@ -17,6 +17,7 @@
 
 # Uncomment this to turn on verbose mode.
 export DH_VERBOSE=1
+export DH_OPTIONS=-v
 
 PHP_FULL_VERSION=$(shell php-config7.0 --version 2> /dev/null || php-config5 --version 2> /dev/null)
 PHP_MAJOR_VERSION=$(shell echo $(PHP_FULL_VERSION) | head -c 1)
