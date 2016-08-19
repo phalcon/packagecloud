@@ -2,27 +2,27 @@ Source: php-phalcon
 Section: php
 Priority: optional
 Maintainer: Serghei Iakovlev <serghei@phalconphp.com>
-Build-Depends: debhelper (>= 9), php5-dev, php5-json, libpcre3-dev
+Build-Depends: debhelper (>= 9), php7.0-dev, php7.0-json, libpcre3-dev
 Standards-Version: 3.9.5
 Vcs-Git: git://github.com/phalcon/cphalcon.git
 Vcs-Browser: https://github.com/phalcon/cphalcon
 
-Package: php5-phalcon
+Package: php7.0-phalcon
 Architecture: any
 Priority: optional
 Pre-Depends: dpkg (>= 1.15.7.2)
 Depends: ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}
-Suggests: php5-mysql, php5-sqlite, php5-pgsql, php5-mongo, php5-memcache, php5-mcrypt
+Suggests: php7.0-mysql, php7.0-sqlite3, php7.0-pgsql, php7.0-memcached, php7.0-mcrypt
 Description: High performance PHP framework
  Phalcon is an open source web framework delivered as a C extension for
  the PHP language providing high performance and lower resource consumption.
  .
  This package provides the Phalcon PHP extension.
 
-Package: php5-phalcon-dbg
-Depends: ${misc:Depends}, php5-phalcon (= ${binary:Version})
+Package: php7.0-phalcon-dbg
+Depends: ${misc:Depends}, php7.0-phalcon (= ${binary:Version})
 Recommends: gdb
-Suggests: php5-dbg
+Suggests: php7.0-phpdbg
 Section: debug
 Priority: extra
 Architecture: any
