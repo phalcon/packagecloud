@@ -35,7 +35,7 @@ matrix:
     - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" RELEASE=$TRAVIS_BUILD_NUMBER
     - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" RELEASE=$TRAVIS_BUILD_NUMBER
     - env: PACK=none PHALCON_VERSION="3.0.x" RELEASE=$TRAVIS_BUILD_NUMBER
- exclude:
+  exclude:
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" RELEASE=$TRAVIS_BUILD_NUMBER
       php: 5.6
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=0
