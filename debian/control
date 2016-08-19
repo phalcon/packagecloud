@@ -3,7 +3,7 @@ Section: php
 Priority: optional
 Maintainer: Serghei Iakovlev <serghei@phalconphp.com>
 Build-Depends: debhelper (>= 9), php5-dev, php5-json, libpcre3-dev
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Vcs-Git: git://github.com/phalcon/cphalcon.git
 Vcs-Browser: https://github.com/phalcon/cphalcon
 

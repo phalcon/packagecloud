@@ -9,6 +9,9 @@ php:
   - 5.6
   - 7.0
 
+git:
+  depth: 1
+
 cache: false
 
 env:
@@ -16,48 +19,50 @@ env:
     - PRODUCT=php-phalcon
     - ENABLED_BRANCHES="master"
     - RELEASE=$TRAVIS_BUILD_NUMBER
+    - DEBEMAIL="team@phalconphp.com"
+    - DEBFULLNAME="Phalcon Team"
   matrix:
     - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
-    - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=1
+    - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=2
 
     - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
-    - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=1
+    - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=2
 
-    - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
-    - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=1
+    - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" ZEND_BACKEND="--backend=ZendEngine3"
+    - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=2
 
     - PACK=none PHALCON_VERSION="3.0.x"
-    - PACK=none PHALCON_VERSION="v3.0.0" RELEASE=1
+    - PACK=none PHALCON_VERSION="v3.0.0" RELEASE=2
 
 matrix:
   fast_finish: true
   allow_failures:
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
     - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
-    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
+    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" ZEND_BACKEND="--backend=ZendEngine3"
     - env: PACK=none PHALCON_VERSION="3.0.x"
   exclude:
-    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=1
+    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=2
       php: 5.5
     - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
       php: 5.5
-    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=1
+    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=2
       php: 5.5
-    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
+    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" ZEND_BACKEND="--backend=ZendEngine3"
       php: 5.5
-    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=1
+    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=2
       php: 5.6
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
       php: 5.6
-    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=1
+    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=2
       php: 5.6
-    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
+    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" ZEND_BACKEND="--backend=ZendEngine3"
       php: 5.6
-    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=1
+    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=2
       php: 7.0
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
       php: 7.0
-    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=1
+    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=2
       php: 7.0
     - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
       php: 7.0
@@ -66,6 +71,8 @@ install:
   - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b ${PHALCON_VERSION}
   - '[[ "$TRAVIS_PHP_VERSION" == "7.0" ]] || rm debian/control.7.0'
   - '[[ "$TRAVIS_PHP_VERSION" != "7.0" ]] || (rm debian/control && mv debian/control.7.0 debian/control)'
+  - '[[ "$PHALCON_VERSION" != "3.0.x" ]] || (bash zephir.sh)'
+  - '[[ "$PHALCON_VERSION" != "3.0.x" ]] || (zephir fullclean && zephir generate $ZEND_BACKEND)'
 
 before_script:
   - export LAST_COMMIT=$(cd cphalcon; git rev-parse --short=8 HEAD)
@@ -73,7 +80,7 @@ before_script:
   - export VERSION="$PARTIAL_VERSION-$RELEASE-$LAST_COMMIT"
 
 script:
-  - git clone https://github.com/tarantool/build.git
+  - git clone https://github.com/phalcongelist/build.git
   - build/pack/travis.sh
 
 notifications:
