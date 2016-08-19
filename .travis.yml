@@ -1,3 +1,17 @@
+#  Phalcon Framework
+#
+#  Copyright (c) 2011-2016, Phalcon Team (https://www.phalconphp.com)
+#
+#  This source file is subject to the New BSD License that is bundled
+#  with this package in the file https://www.phalconphp.com/LICENSE.txt
+#
+#  If you did not receive a copy of the license and are unable to
+#  obtain it through the world-wide-web, please send an email
+#  to license@phalconphp.com so we can send you a copy immediately.
+#
+#  Authors: Andres Gutierrez <andres@phalconphp.com>
+#           Serghei Iakovlev <serghei@phalconphp.com>
+
 sudo: required
 services:
   - docker
@@ -22,17 +36,16 @@ env:
     - DEBEMAIL="team@phalconphp.com"
     - DEBFULLNAME="Phalcon Team"
   matrix:
+    # Stable versions
+    - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
+    - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
+    - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
+    - PACK=none PHALCON_VERSION="v3.0.0" RELEASE=5
+    # Nightly versions
     - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
-    - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=3
-
     - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
-    - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=3
-
     - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" ZEND_BACKEND="--backend=ZendEngine3"
-    - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=3
-
     - PACK=none PHALCON_VERSION="3.0.x"
-    - PACK=none PHALCON_VERSION="v3.0.0" RELEASE=3
 
 matrix:
   fast_finish: true
@@ -42,27 +55,28 @@ matrix:
     - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" ZEND_BACKEND="--backend=ZendEngine3"
     - env: PACK=none PHALCON_VERSION="3.0.x"
   exclude:
-    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=3
+    # Exclude non supported PHP
+    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
       php: 5.5
     - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
       php: 5.5
-    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=3
+    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
       php: 5.5
     - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" ZEND_BACKEND="--backend=ZendEngine3"
       php: 5.5
-    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=3
+    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
       php: 5.6
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
       php: 5.6
-    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=3
+    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
       php: 5.6
     - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" ZEND_BACKEND="--backend=ZendEngine3"
       php: 5.6
-    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=3
+    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
       php: 7.0
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
       php: 7.0
-    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=3
+    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
       php: 7.0
     - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
       php: 7.0
