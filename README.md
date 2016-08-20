@@ -1,12 +1,17 @@
 # Phalcon Build Project
 
-[![Build Status](https://travis-ci.org/phalcongelist/packagecloud.svg?branch=master)](https://travis-ci.org/phalcongelist/packagecloud)
+[![Build Status](https://travis-ci.org/phalcongelist/packagecloud.svg?branch=master)][:build-st:]
 
 ## Installation Instructions
-Phalcon distrubtion is hosted at [PackageCloud](https://packagecloud.io/phalcon). Stable versions correspond to Phalcon release tags and should be used in production. Nightly versions are built daily and should **not** be used in production. Installation/configuration details for each version and operating system can be found in the _Installation_ section for the respective versions below:
 
-* Packages for [stable version](https://packagecloud.io/phalcon/stable)
-* Packages for [nightly version](https://packagecloud.io/phalcon/nightly)
+Phalcon distribution is hosted at [PackageCloud][:cloud:].
+Stable versions correspond to Phalcon release tags and should be used in production.
+Nightly versions are built daily and should **not** be used in production.
+Installation/configuration details for each version and operating system can be found in
+the _Installation_ section for the respective versions below:
+
+* Packages for [stable version][:stable:]
+* Packages for [nightly version][:nightly:]
 
 ## Supported Operating Systems
 
@@ -23,6 +28,11 @@ Phalcon distrubtion is hosted at [PackageCloud](https://packagecloud.io/phalcon)
 
 ## License
 
-Phalcon is open source software licensed under the New BSD License.<br>See the [docs/LICENSE.txt][:docs:] file for more.
+Phalcon is open source software licensed under the New BSD License.<br>
+See the [docs/LICENSE.txt][:docs:] file for more.
 
+[:build-st:]: https://travis-ci.org/phalcongelist/packagecloud
+[:cloud:]: https://packagecloud.io/phalcon
+[:stable:]: https://packagecloud.io/phalcon/stable
+[:nightly:]: https://packagecloud.io/phalcon/nightly
 [:docs:]: https://github.com/phalcongelist/packagecloud/blob/master/docs/LICENSE.txt
