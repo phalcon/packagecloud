@@ -85,7 +85,7 @@ install:
   - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b ${PHALCON_VERSION}
   - '[[ "$TRAVIS_PHP_VERSION" == "7.0" ]] || rm debian/control.7.0'
   - '[[ "$TRAVIS_PHP_VERSION" != "7.0" ]] || (rm debian/control && mv debian/control.7.0 debian/control)'
-  - '[[ "$PHALCON_VERSION" != "3.0.x" ]] || (bash zephir.sh)'
+  - '[[ "$PHALCON_VERSION" != "3.0.x" ]] || (bash zephir.sh; rm $TRAVIS_BUILD_DIR/zephir.sh)'
   - '[[ "$PHALCON_VERSION" != "3.0.x" ]] || (cd cphalcon; zephir fullclean && zephir generate $ZEND_BACKEND)'
 
 before_script:
