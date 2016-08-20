@@ -35,6 +35,7 @@ env:
     - RELEASE=$TRAVIS_BUILD_NUMBER
     - DEBEMAIL="team@phalconphp.com"
     - DEBFULLNAME="Phalcon Team"
+    - DOCKER_REPO="phalconphp/build"
   matrix:
     # Stable versions
     - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
@@ -95,7 +96,7 @@ before_script:
   - export VERSION="$PARTIAL_VERSION-$RELEASE-$LAST_COMMIT"
 
 script:
-  - git clone https://github.com/phalcongelist/build.git
+  - git clone -q --depth=1 https://github.com/phalcongelist/build.git -b phalcon
   - build/pack/travis.sh
 
 notifications:
