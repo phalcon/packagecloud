@@ -31,17 +31,16 @@ cache: false
 env:
   global:
     - PRODUCT=php-phalcon
-    - ENABLED_BRANCHES="master"
     - RELEASE=$TRAVIS_BUILD_NUMBER
     - DEBEMAIL="team@phalconphp.com"
     - DEBFULLNAME="Phalcon Team"
-    - DOCKER_REPO="phalconphp/build"
+    - PACKAGECLOUD_REPO="phalcon/stable"
   matrix:
     # Stable versions
-    - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
-    - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
-    - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
-    - PACK=none PHALCON_VERSION="v3.0.0" RELEASE=5
+    - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" RELEASE=6
+    - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" RELEASE=6
+    - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" RELEASE=6
+    - PACK=none PHALCON_VERSION="v3.0.0" RELEASE=6
     # Nightly versions
     - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
     - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
@@ -57,27 +56,27 @@ matrix:
     - env: PACK=none PHALCON_VERSION="3.0.x"
   exclude:
     # Exclude non supported PHP
-    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
+    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" RELEASE=6
       php: 5.5
     - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
       php: 5.5
-    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
+    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" RELEASE=6
       php: 5.5
     - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" ZEND_BACKEND="--backend=ZendEngine3"
       php: 5.5
-    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
+    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" RELEASE=6
       php: 5.6
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
       php: 5.6
-    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
+    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0" RELEASE=6
       php: 5.6
     - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly" ZEND_BACKEND="--backend=ZendEngine3"
       php: 5.6
-    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
+    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0" RELEASE=6
       php: 7.0
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
       php: 7.0
-    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" PACKAGECLOUD_REPO="phalcon/stable" RELEASE=5
+    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0" RELEASE=6
       php: 7.0
     - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x" PACKAGECLOUD_REPO="phalcon/nightly"
       php: 7.0
@@ -88,7 +87,7 @@ install:
   - '[[ "$TRAVIS_PHP_VERSION" != "7.0" ]] || (rm debian/control && mv debian/control.7.0 debian/control)'
   - '[[ "$PHALCON_VERSION" != "3.0.x" ]] || (bash zephir.sh)'
   - '[[ "$PHALCON_VERSION" != "3.0.x" ]] || (cd cphalcon; zephir fullclean && zephir generate $ZEND_BACKEND)'
-  - rm $TRAVIS_BUILD_DIR/zephir.sh
+  - rm -f $TRAVIS_BUILD_DIR/zephir.sh
 
 before_script:
   - export LAST_COMMIT=$(cd cphalcon; git rev-parse --short=8 HEAD)
