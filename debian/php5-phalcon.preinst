@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -e
+
+dpkg-maintscript-helper mv_conffile /etc/php5/conf.d/phalcon.ini /etc/php5/mods-available/phalcon.ini 3.0.0 -- "$@"
+
+case "$1" in
+	install|upgrade)
+	;;
+
+	abort-upgrade)
+	;;
+
+	*)
+		echo "preinst called with unknown argument \`$1'" >&2
+		exit 1
+	;;
+esac
+
+#DEBHELPER#
+
+exit 0
