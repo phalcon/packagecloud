@@ -11,7 +11,7 @@ Package: php5-phalcon
 Architecture: any
 Priority: optional
 Pre-Depends: dpkg (>= 1.15.7.2)
-Depends: ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}
+Depends: ucf, ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}
 Suggests: php5-mysql, php5-sqlite, php5-pgsql, php5-mongo, php5-memcache
 Description: High performance PHP framework
  Phalcon is an open source web framework delivered as a C extension for
@@ -20,7 +20,7 @@ Description: High performance PHP framework
  This package provides the Phalcon PHP extension.
 
 Package: php5-phalcon-dbg
-Depends: ${misc:Depends}, php5-phalcon (= ${binary:Version})
+Depends: ucf, ${misc:Depends}, php5-phalcon (= ${binary:Version})
 Recommends: gdb
 Suggests: php5-dbg
 Section: debug
