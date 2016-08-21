@@ -35,7 +35,6 @@ PHP_SOURCE_VERSION   := $(DEB_VERSION)
 
 PHP_FULL_VERSION=$(shell php-config7.0 --version 2> /dev/null || php-config5 --version 2> /dev/null)
 PHP_MAJOR_VERSION=$(shell echo $(PHP_FULL_VERSION) | head -c 1)
-PHP_API_VERSION=$(shell php-config7.0 --phpapi 2> /dev/null || php-config5 --phpapi 2> /dev/null)
 
 ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),5))
 	PACKAGE=php5-phalcon
@@ -43,6 +42,7 @@ ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),5))
 	PHALCON_DBG_EXT=$(PACKAGE)-dbg
 	PHALCON_SUBSTVARS=$(PACKAGE).substvars
 	PHALCON_SHARE_PATH=php5/$(PACKAGE)
+	PHP_API_VERSION=$(shell php-config5 --phpapi)
 endif
 
 ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),7))
@@ -51,6 +51,7 @@ ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),7))
 	PHALCON_DBG_EXT=$(PACKAGE)-dbg
 	PHALCON_SUBSTVARS=$(PACKAGE).substvars
 	PHALCON_SHARE_PATH=$(PACKAGE)
+	PHP_API_VERSION=$(shell php-config7.0 --phpapi)
 endif
 
 CFLAGS+=-g3 -fvisibility=hidden -DPHALCON_RELEASE
