@@ -70,7 +70,7 @@ endif
 prepare-files-stamp:
 	mkdir -p debian/usr/share/$(PACKAGE)/phalcon/; \
 	cp debian/phalcon.ini debian/usr/share/$(PACKAGE)/phalcon/phalcon.ini; \
-	echo "debian/usr/share/$(PACKAGE)/phalcon/phalcon.ini /usr/share/$(PACKAGE)/phalcon/phalcon.ini" >> debian/$(PACKAGE).install;
+	echo "debian/usr/share/$(PACKAGE)/phalcon/phalcon.ini /usr/share/$(PACKAGE)/phalcon/" >> debian/$(PACKAGE).install;
 	touch prepare-files-stamp
 
 override_dh_auto_configure:
