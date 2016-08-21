@@ -38,6 +38,7 @@ ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),5))
 	BUILD=$(CURDIR)/debian/$(PACKAGE)
 	PHALCON_DBG_EXT=$(PACKAGE)-dbg
 	PHALCON_SUBSTVARS=$(PACKAGE).substvars
+	PHALCON_SHARE_PATH=php5/$(PACKAGE)
 endif
 
 ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),7))
@@ -45,6 +46,7 @@ ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),7))
 	BUILD=$(CURDIR)/debian/$(PACKAGE)
 	PHALCON_DBG_EXT=$(PACKAGE)-dbg
 	PHALCON_SUBSTVARS=$(PACKAGE).substvars
+	PHALCON_SHARE_PATH=$(PACKAGE)
 endif
 
 CFLAGS+=-g3 -fvisibility=hidden -DPHALCON_RELEASE
@@ -71,10 +73,9 @@ endif
 	dh $@
 
 prepare-files-stamp:
-	echo $(PHP_SOURCE_VERSION); \
-	mkdir -p debian/usr/share/$(PACKAGE)/phalcon/; \
-	cp debian/phalcon.ini debian/usr/share/$(PACKAGE)/phalcon/phalcon.ini; \
-	echo "debian/usr/share/$(PACKAGE)/phalcon/phalcon.ini usr/share/$(PACKAGE)/phalcon/" >> debian/$(PACKAGE).install;
+	mkdir -p debian/usr/share/$(PHALCON_SHARE_PATH)/phalcon/; \
+	cp debian/phalcon.ini debian/usr/share/$(PHALCON_SHARE_PATH)/phalcon/phalcon.ini; \
+	echo "debian/usr/share/$(PHALCON_SHARE_PATH)/phalcon/phalcon.ini usr/share/$(PHALCON_SHARE_PATH)/phalcon/" >> debian/$(PACKAGE).install;
 	touch prepare-files-stamp
 
 override_dh_auto_configure:
