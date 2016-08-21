@@ -5,7 +5,9 @@ set -e
 #EXTRA#
 
 if [ "$1" = "configure" ]; then
+	# Install the new versioned configuration
 	inidir=/etc/php5/mods-available
+
 	if [ -e /usr/share/php5/php5-maintscript-helper ] ; then
 		. /usr/share/php5/php5-maintscript-helper
 
