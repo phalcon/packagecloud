@@ -11,7 +11,7 @@ Package: php7.0-phalcon
 Architecture: any
 Priority: optional
 Pre-Depends: dpkg (>= 1.15.7.2)
-Depends: ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}
+Depends: ucf, ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}
 Suggests: php7.0-mysql, php7.0-sqlite3, php7.0-pgsql, php7.0-memcached
 Description: High performance PHP framework
  Phalcon is an open source web framework delivered as a C extension for

@@ -17,22 +17,31 @@
 
 # Uncomment this to turn on verbose mode.
 export DH_VERBOSE=1
-export DH_OPTIONS=-v
+
+# This has to be exported to make some magic below work.
+export DH_OPTIONS
+
+# enable dpkg build flags
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/default.mk
 
 PHP_FULL_VERSION=$(shell php-config7.0 --version 2> /dev/null || php-config5 --version 2> /dev/null)
 PHP_MAJOR_VERSION=$(shell echo $(PHP_FULL_VERSION) | head -c 1)
 PHP_API_VERSION=$(shell php-config7.0 --phpapi 2> /dev/null || php-config5 --phpapi 2> /dev/null)
 
-ifeq ($(PHP_MAJOR_VERSION), 5))
-	BUILD=$(CURDIR)/debian/php5-phalcon
-	PHALCON_DBG_EXT=php5-phalcon-dbg
-	PHALCON_SUBSTVARS=php5-phalcon.substvars
+ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),5))
+    PACKAGE=php5-phalcon
+	BUILD=$(CURDIR)/debian/$(PACKAGE)
+	PHALCON_DBG_EXT=$(PACKAGE)-dbg
+	PHALCON_SUBSTVARS=$(PACKAGE).substvars
 endif
 
-ifeq ($(PHP_MAJOR_VERSION), 7))
-    BUILD=$(CURDIR)/debian/php7.0-phalcon
-    PHALCON_DBG_EXT=php7.0-phalcon-dbg
-    PHALCON_SUBSTVARS=php7.0-phalcon.substvars
+ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),7))
+    PACKAGE=php7.0-phalcon
+    BUILD=$(CURDIR)/debian/$(PACKAGE)
+    PHALCON_DBG_EXT=$(PACKAGE)-dbg
+    PHALCON_SUBSTVARS=$(PACKAGE).substvars
 endif
 
 CFLAGS+=-g3 -fvisibility=hidden -DPHALCON_RELEASE
@@ -58,6 +67,12 @@ endif
 %:
 	dh $@
 
+prepare-files-stamp:
+    mkdir -p debian/usr/share/$(PACKAGE)/phalcon/; \
+    cp debian/phalcon.ini debian/usr/share/$(PACKAGE)/phalcon/phalcon.ini; \
+    echo "debian/usr/share/$(PACKAGE)/phalcon/phalcon.ini /usr/share/$(PACKAGE)/phalcon/phalcon.ini" >> debian/$(PACKAGE).install;
+    touch prepare-files-stamp
+
 override_dh_auto_configure:
 	(cd $(PHALCON_DIR); phpize; ./configure --enable-phalcon=shared)
 
@@ -72,6 +87,9 @@ override_dh_auto_clean:
 		phpize --clean; \
 		rm -f tmp-php.ini; \
 	)
+
+override_dh_installdirs: prepare-files-stamp
+	dh_installdirs
 
 override_dh_auto_install:
 	INSTALL_ROOT=$(BUILD) $(MAKE) -C $(PHALCON_DIR) install
