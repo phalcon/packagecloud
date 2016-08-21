@@ -71,7 +71,7 @@ endif
 	dh $@
 
 prepare-files-stamp:
-    echo $(PHP_SOURCE_VERSION); \
+	echo $(PHP_SOURCE_VERSION); \
 	mkdir -p debian/usr/share/$(PACKAGE)/phalcon/; \
 	cp debian/phalcon.ini debian/usr/share/$(PACKAGE)/phalcon/phalcon.ini; \
 	echo "debian/usr/share/$(PACKAGE)/phalcon/phalcon.ini usr/share/$(PACKAGE)/phalcon/" >> debian/$(PACKAGE).install;

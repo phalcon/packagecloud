@@ -5,32 +5,32 @@ set -e
 #EXTRA#
 
 if [ "$1" = "upgrade" ]; then
-    inidir=/etc/php/7.0/mods-available
+	inidir=/etc/php/7.0/mods-available
 
-    # First purge the old unversioned configuration
-    if [ -e ${inidir}/phalcon.ini ]; then
-        for ext in '~' '%' .bak .ucf-new .ucf-old .ucf-dist;  do
-            rm -f ${inidir}/phalcon.ini${ext}
-        done
+	# First purge the old unversioned configuration
+	if [ -e ${inidir}/phalcon.ini ]; then
+		for ext in '~' '%' .bak .ucf-new .ucf-old .ucf-dist;  do
+			rm -f ${inidir}/phalcon.ini${ext}
+		done
 
-        rm -f ${inidir}/phalcon.ini
+		rm -f ${inidir}/phalcon.ini
 
-        if which ucf >/dev/null; then
-            ucf --purge ${inidir}/phalcon.ini >/dev/null || true
-        fi
+		if which ucf >/dev/null; then
+			ucf --purge ${inidir}/phalcon.ini >/dev/null || true
+		fi
 
-        if which ucfr >/dev/null; then
-            ucfr --force --purge php7.0-phalcon ${inidir}/phalcon.ini >/dev/null || true
-        fi
-    fi
+		if which ucfr >/dev/null; then
+			ucfr --force --purge php7.0-phalcon ${inidir}/phalcon.ini >/dev/null || true
+		fi
+	fi
 
-    # Cleanup of the old symlinks (including broken symlinks)
-    find /etc/php/7.0/ -type l |
-        while read symlink; do
-            if [ "$(readlink $symlink)" = "${inidir}/phalcon.ini" ]; then
-                rm -f "${symlink}"
-            fi
-        done
+	# Cleanup of the old symlinks (including broken symlinks)
+	find /etc/php/7.0/ -type l |
+		while read symlink; do
+			if [ "$(readlink $symlink)" = "${inidir}/phalcon.ini" ]; then
+				rm -f "${symlink}"
+			fi
+		done
 fi
 
 #DEBHELPER#
