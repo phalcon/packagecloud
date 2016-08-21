@@ -4,19 +4,9 @@ set -e
 
 dpkg-maintscript-helper mv_conffile /etc/php5/conf.d/phalcon.ini /etc/php5/mods-available/phalcon.ini 3.0.0 -- "$@"
 
-case "$1" in
-	configure)
-		php5enmod phalcon
-	;;
-
-	abort-upgrade|abort-remove|abort-deconfigure)
-	;;
-
-	*)
-		echo "postinst called with unknown argument \`$1'" >&2
-		exit 1
-	;;
-esac
+if [ "$1" = "configure" ]; then
+    php5enmod phalcon
+fi
 
 #DEBHELPER#
 
