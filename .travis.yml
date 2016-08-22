@@ -32,22 +32,25 @@ env:
   global:
     - PRODUCT=php-phalcon
     - RELEASE=$TRAVIS_BUILD_NUMBER
-    - STABLE_RELEASE=18
+    - STABLE_RELEASE=19
     - PACKAGECLOUD_REPO="phalcon/stable"
     - STABLE_VERSION="v3.0.0"
     - NIGHTLY_VERSION="3.0.x"
+    - UPSTREAM_BUILDER="phalcon"
   matrix:
     # Stable versions
     - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$STABLE_VERSION
     - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION=$STABLE_VERSION
     - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION=$STABLE_VERSION
     - OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$STABLE_VERSION
+    - OS=debian DIST=stretch PACK=deb PHALCON_VERSION=$STABLE_VERSION
     - PACK=none PHALCON_VERSION=$STABLE_VERSION
     # Nightly versions
     - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
     - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
     - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
     - OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
+    - OS=debian DIST=stretch PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
     - PACK=none PHALCON_VERSION=$NIGHTLY_VERSION
 
 # multiple php version exclusion matrix
@@ -73,6 +76,10 @@ matrix:
       php: 5.5
     - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
       php: 5.5
+    - env: OS=debian DIST=stretch PACK=deb PHALCON_VERSION=$STABLE_VERSION
+      php: 5.5
+    - env: OS=debian DIST=stretch PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
+      php: 5.5
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$STABLE_VERSION
       php: 5.6
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
@@ -80,6 +87,10 @@ matrix:
     - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION=$STABLE_VERSION
       php: 5.6
     - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
+      php: 5.6
+    - env: OS=debian DIST=stretch PACK=deb PHALCON_VERSION=$STABLE_VERSION
+      php: 5.6
+    - env: OS=debian DIST=stretch PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
       php: 5.6
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$STABLE_VERSION
       php: 7.0
@@ -111,7 +122,7 @@ before_script:
   - export VERSION="$PARTIAL_VERSION-$RELEASE-$LAST_COMMIT"
 
 script:
-  - git clone -q --depth=1 https://github.com/phalcongelist/build.git -b phalcon
+  - git clone -q --depth=1 https://github.com/phalcongelist/build.git -b ${UPSTREAM_BUILDER}
   - build/pack/travis.sh
 
 notifications:
