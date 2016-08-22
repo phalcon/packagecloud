@@ -31,66 +31,67 @@ cache: false
 env:
   global:
     - PRODUCT=php-phalcon
-    # See the VERSION bellow
     - RELEASE=$TRAVIS_BUILD_NUMBER
-    - STABLE_RELEASE=17
+    - STABLE_RELEASE=18
     - PACKAGECLOUD_REPO="phalcon/stable"
+    - STABLE_VERSION="v3.0.0"
+    - NIGHTLY_VERSION="3.0.x"
   matrix:
     # Stable versions
-    - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0"
-    - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0"
-    - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0"
-    - OS=debian DIST=jessie PACK=deb PHALCON_VERSION="v3.0.0"
-    - PACK=none PHALCON_VERSION="v3.0.0"
+    - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$STABLE_VERSION
+    - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION=$STABLE_VERSION
+    - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION=$STABLE_VERSION
+    - OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$STABLE_VERSION
+    - PACK=none PHALCON_VERSION=$STABLE_VERSION
     # Nightly versions
-    - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x"
-    - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x"
-    - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x"
-    - OS=debian DIST=jessie PACK=deb PHALCON_VERSION="3.0.x"
-    - PACK=none PHALCON_VERSION="3.0.x"
+    - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
+    - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
+    - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
+    - OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
+    - PACK=none PHALCON_VERSION=$NIGHTLY_VERSION
 
 # multiple php version exclusion matrix
 matrix:
   fast_finish: true
   allow_failures:
-    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x"
-    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x"
-    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x"
-    - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION="3.0.x"
-    - env: PACK=none PHALCON_VERSION="3.0.x"
+    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
+    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
+    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
+    - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
+    - env: PACK=none PHALCON_VERSION=$NIGHTLY_VERSION
   exclude:
     # Exclude non supported PHP
-    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0"
+    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION=$STABLE_VERSION
       php: 5.5
-    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x"
+    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
       php: 5.5
-    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0"
+    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION=$STABLE_VERSION
       php: 5.5
-    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x"
+    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
       php: 5.5
-    - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION="v3.0.0"
+    - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$STABLE_VERSION
       php: 5.5
-    - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION="3.0.x"
+    - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
       php: 5.5
-    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0"
+    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$STABLE_VERSION
       php: 5.6
-    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x"
+    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
       php: 5.6
-    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="v3.0.0"
+    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION=$STABLE_VERSION
       php: 5.6
-    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION="3.0.x"
+    - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
       php: 5.6
-    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="v3.0.0"
+    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$STABLE_VERSION
       php: 7.0
-    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION="3.0.x"
+    - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
       php: 7.0
-    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="v3.0.0"
+    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION=$STABLE_VERSION
       php: 7.0
-    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION="3.0.x"
+    - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
       php: 7.0
-    - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION="v3.0.0"
+    - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$STABLE_VERSION
       php: 7.0
-    - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION="3.0.x"
+    - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
       php: 7.0
 
 install:
@@ -99,12 +100,12 @@ install:
   # TODO: Use common debian/control
   - '[[ "$TRAVIS_PHP_VERSION" == "7.0" ]] || rm debian/control.7.0'
   - '[[ "$TRAVIS_PHP_VERSION" != "7.0" ]] || (rm debian/control && mv debian/control.7.0 debian/control)'
-  - '[[ "$PHALCON_VERSION" != "3.0.x" ]] || (bash zephir.sh)'
-  - '[[ "$PHALCON_VERSION" != "3.0.x" ]] || (cd cphalcon; zephir fullclean && zephir generate $ZEND_BACKEND)'
+  - '[[ "$PHALCON_VERSION" != $NIGHTLY_VERSION ]] || (bash zephir.sh)'
+  - '[[ "$PHALCON_VERSION" != $NIGHTLY_VERSION ]] || (cd cphalcon; zephir fullclean && zephir generate $ZEND_BACKEND)'
 
 before_script:
-  - '[[ "$PHALCON_VERSION" != "3.0.x" ]] || export PACKAGECLOUD_REPO="phalcon/nightly"'
-  - '[[ "$PHALCON_VERSION" == "3.0.x" ]] || export RELEASE=$STABLE_RELEASE'
+  - '[[ "$PHALCON_VERSION" != $NIGHTLY_VERSION ]] || export PACKAGECLOUD_REPO="phalcon/nightly"'
+  - '[[ "$PHALCON_VERSION" == $NIGHTLY_VERSION ]] || export RELEASE=$STABLE_RELEASE'
   - export LAST_COMMIT=$(cd cphalcon; git rev-parse --short=8 HEAD)
   - export PARTIAL_VERSION=$(cd cphalcon; cat config.json | jq ".version" | sed -E 's/\"//g')
   - export VERSION="$PARTIAL_VERSION-$RELEASE-$LAST_COMMIT"
@@ -116,6 +117,6 @@ script:
 notifications:
   email:
     recipients:
-      - serghei@phalconphp.com
+      - build@phalconphp.com
     on_success: change
     on_failure: always
