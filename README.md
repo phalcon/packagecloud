@@ -7,11 +7,7 @@
 Phalcon distribution is hosted at [PackageCloud][:cloud:].
 Stable versions correspond to Phalcon release tags and should be used in production.
 Nightly versions are built daily and should **not** be used in production.
-Installation/configuration details for each version and operating system can be found in
-the _Installation_ section for the respective versions below:
-
-* Packages for [stable version][:stable:]
-* Packages for [nightly version][:nightly:]
+Installation/configuration details for each version and operating system can be found below:
 
 ## Supported Operating Systems
 
@@ -34,6 +30,46 @@ the _Installation_ section for the respective versions below:
 ### CentOS (RHEL) _Coming Soon_
 
 ### Fedora _Coming Soon_
+
+## Add new package repository
+
+### DEB packages
+
++ **Ubuntu** (`trusty`/`wily`/`xenial`)
++ **Debian** (`jessie`/`stretch`)
+
+_Stable releases:_
+```sh
+curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash
+```
+
+_Nightly releases:_
+```sh
+curl -s https://packagecloud.io/install/repositories/phalcon/nightly/script.deb.sh | sudo bash
+```
+
+### Installation
+
+**PHP 5**
+
+_Ubuntu (trusty/wily), Debian (jessie)_
+
+```sh
+sudo apt-get install php5-phalcon
+```
+
+**PHP 7**
+
+_Ubuntu (xenial), Debian (stretch)_
+
+```
+sudo apt-get install php7.0-phalcon
+```
+
+------------------------------------------------------------------------------------------------------------------------
+
+* Packages for [stable version][:stable:]
+* Packages for [nightly version][:nightly:]
 
 ## License
 
