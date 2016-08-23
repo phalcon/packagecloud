@@ -36,6 +36,13 @@ PHP_SOURCE_VERSION   := $(DEB_VERSION)
 PHP_FULL_VERSION=$(shell php-config7.0 --version 2> /dev/null || php-config5 --version 2> /dev/null)
 PHP_MAJOR_VERSION=$(shell echo $(PHP_FULL_VERSION) | head -c 1)
 
+PROPOSED_PHP_VERSION=$(PHP_VERSION)
+ifndef PROPOSED_PHP_VERSION
+$(info "Proposed PHP version is not defined. Used Default")
+else
+$(info "Proposed PHP version is: $(PROPOSED_PHP_VERSION)")
+endif
+
 ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),5))
 	PACKAGE=php5-phalcon
 	BUILD=$(CURDIR)/debian/$(PACKAGE)
