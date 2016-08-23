@@ -120,7 +120,7 @@ before_script:
   - '[[ "$PHALCON_VERSION" != $NIGHTLY_VERSION ]] || export PACKAGECLOUD_REPO="phalcon/nightly"'
   - '[[ "$PHALCON_VERSION" == $NIGHTLY_VERSION ]] || export RELEASE=$STABLE_RELEASE'
   - '[[ -z "$DOCKER_SUFFIX" ]] || export DOCKER_SUFFIX="-${DOCKER_SUFFIX}"'
-  - echo "Docker suffixe is: ${DOCKER_SUFFIX}"
+  - 'echo "Docker suffixe is: ${DOCKER_SUFFIX}"'
   - export LAST_COMMIT=$(cd cphalcon; git rev-parse --short=8 HEAD)
   - export PARTIAL_VERSION=$(cd cphalcon; cat config.json | jq ".version" | sed -E 's/\"//g')
   - export VERSION="$PARTIAL_VERSION-$RELEASE-$LAST_COMMIT"
