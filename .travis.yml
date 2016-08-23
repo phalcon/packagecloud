@@ -32,11 +32,12 @@ env:
   global:
     - PRODUCT=php-phalcon
     - RELEASE=$TRAVIS_BUILD_NUMBER
-    - STABLE_RELEASE=20
+    - STABLE_RELEASE=21
     - PACKAGECLOUD_REPO="phalcon/stable"
     - STABLE_VERSION="v3.0.0"
     - NIGHTLY_VERSION="3.0.x"
     - UPSTREAM_BUILDER="phalcon"
+    - DOCKER_SUFFIX=7.0
   matrix:
     # Stable versions
     - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$STABLE_VERSION
