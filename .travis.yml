@@ -32,12 +32,12 @@ env:
   global:
     - PRODUCT=php-phalcon
     - RELEASE=$TRAVIS_BUILD_NUMBER
-    - STABLE_RELEASE=25
+    - STABLE_RELEASE=26
     - PACKAGECLOUD_REPO="phalcon/stable"
     - STABLE_VERSION="v3.0.0"
     - NIGHTLY_VERSION="3.0.x"
     - UPSTREAM_BUILDER="phalcon"
-    - PHP_VERSION=$TRAVIS_PHP_VERSION
+    - PHP_VERSION=7.0
     #- DOCKER_SUFFIX=7.0
   matrix:
     # Stable versions
