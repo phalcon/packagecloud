@@ -60,7 +60,7 @@ sudo apt-get install php5-phalcon
 
 **PHP 7**
 
-_Ubuntu (xenial), Debian (stretch)_
+_Ubuntu (trusty,xenial), Debian (stretch)_
 
 ```
 sudo apt-get install php7.0-phalcon

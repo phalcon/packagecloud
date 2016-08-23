@@ -22,23 +22,22 @@ export DH_VERBOSE=1
 export DH_OPTIONS
 
 # Enable this for debugging the sed scripts
-#SED=$(CURDIR)/debian/sedsed
-SED := sed
+# SED=$(CURDIR)/debian/sedsed
+SED:=sed
 
 # enable dpkg build flags
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
-DPKG_EXPORT_BUILDFLAGS = 1
+DPKG_EXPORT_BUILDFLAGS=1
 include /usr/share/dpkg/default.mk
 
 export DEB_HOST_MULTIARCH
 
+PHP_VERSION:=
 PROPOSED_PHP_VERSION=$(PHP_VERSION)
 ifeq ($(strip $(PROPOSED_PHP_VERSION)),)
-	$(info "PHP version is not defined. Used system")
 	PHP_FULL_VERSION=$(shell php-config7.0 --version 2> /dev/null || php-config5 --version 2> /dev/null)
 	PHP_MAJOR_VERSION=$(shell echo $(PHP_FULL_VERSION) | head -c 1)
 else
-	$(info "Proposed PHP version is: $(PROPOSED_PHP_VERSION)")
 	PHP_MAJOR_VERSION=$(shell echo $(PROPOSED_PHP_VERSION) | head -c 1)
 endif
 
