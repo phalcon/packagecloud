@@ -32,7 +32,7 @@ env:
   global:
     - PRODUCT=php-phalcon
     - RELEASE=$TRAVIS_BUILD_NUMBER
-    - STABLE_RELEASE=24
+    - STABLE_RELEASE=25
     - PACKAGECLOUD_REPO="phalcon/stable"
     - STABLE_VERSION="v3.0.0"
     - NIGHTLY_VERSION="3.0.x"
@@ -121,9 +121,11 @@ before_script:
   - '[[ "$PHALCON_VERSION" == $NIGHTLY_VERSION ]] || export RELEASE=$STABLE_RELEASE'
   - '[[ -z "$DOCKER_SUFFIX" ]] || export DOCKER_SUFFIX="-${DOCKER_SUFFIX}"'
   - 'echo "Docker suffixe is: ${DOCKER_SUFFIX}"'
+  - 'echo "PHP version is: ${PHP_VERSION}"'
   - export LAST_COMMIT=$(cd cphalcon; git rev-parse --short=8 HEAD)
   - export PARTIAL_VERSION=$(cd cphalcon; cat config.json | jq ".version" | sed -E 's/\"//g')
   - export VERSION="$PARTIAL_VERSION-$RELEASE-$LAST_COMMIT"
+  - export PHP_VERSION="$PHP_VERSION"
 
 script:
   - git clone -q --depth=1 https://github.com/phalcongelist/build.git -b ${UPSTREAM_BUILDER}
