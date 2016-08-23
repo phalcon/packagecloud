@@ -38,7 +38,7 @@ PHP_MAJOR_VERSION=$(shell echo $(PHP_FULL_VERSION) | head -c 1)
 
 PROPOSED_PHP_VERSION=$(PHP_VERSION)
 ifeq ($(strip $(PROPOSED_PHP_VERSION)),)
-$(info "Proposed PHP version is not defined. Used Default")
+$(info "PHP version is not defined. Used system")
 else
 $(info "Proposed PHP version is: $(PROPOSED_PHP_VERSION)")
 endif
