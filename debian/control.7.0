@@ -26,7 +26,7 @@ Suggests: php7.0-phpdbg
 Section: debug
 Priority: extra
 Architecture: any
-Description: Debug symbols for php5-phalcon
+Description: Debug symbols for php7.0-phalcon
  Phalcon is an open source web framework delivered as a C extension for
  the PHP language providing high performance and lower resource consumption.
  .

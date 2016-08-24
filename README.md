@@ -51,13 +51,13 @@ curl -s https://packagecloud.io/install/repositories/phalcon/nightly/script.deb.
 
 ### Installation
 
-**PHP 5**: _Ubuntu (trusty/wily), Debian (jessie)_
+**PHP 5**: _Ubuntu (trusty, wily), Debian (jessie)_
 
 ```sh
 sudo apt-get install php5-phalcon
 ```
 
-**PHP 7**: _Ubuntu (trusty,xenial), Debian (stretch)_
+**PHP 7**: _Ubuntu (trusty, xenial), Debian (stretch)_
 
 ```
 sudo apt-get install php7.0-phalcon
