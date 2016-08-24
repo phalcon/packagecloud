@@ -32,7 +32,7 @@ env:
   global:
     - PRODUCT=php-phalcon
     - RELEASE=$TRAVIS_BUILD_NUMBER
-    - STABLE_RELEASE=1
+    - STABLE_RELEASE=2
     - PACKAGECLOUD_REPO="phalcon/stable"
     - STABLE_VERSION="v3.0.1"
     - NIGHTLY_VERSION="3.0.x"
@@ -44,6 +44,7 @@ env:
     - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION=$STABLE_VERSION
     - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION=$STABLE_VERSION
     - OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$STABLE_VERSION
+    - OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$STABLE_VERSION DOCKER_SUFFIX=7.0 PHP_VERSION=7.0
     - OS=debian DIST=stretch PACK=deb PHALCON_VERSION=$STABLE_VERSION
     - PACK=none PHALCON_VERSION=$STABLE_VERSION
     # Nightly versions
@@ -52,6 +53,7 @@ env:
     - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
     - OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
     - OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
+    - OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION DOCKER_SUFFIX=7.0 PHP_VERSION=7.0
     - OS=debian DIST=stretch PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
     - PACK=none PHALCON_VERSION=$NIGHTLY_VERSION
 
@@ -64,6 +66,7 @@ matrix:
     - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
     - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
     - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
+    - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION DOCKER_SUFFIX=7.0 PHP_VERSION=7.0
     - env: PACK=none PHALCON_VERSION=$NIGHTLY_VERSION
   exclude:
     # Exclude non supported PHP
@@ -80,6 +83,10 @@ matrix:
     - env: OS=ubuntu DIST=xenial PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
       php: 5.5
     - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$STABLE_VERSION
+      php: 5.5
+    - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$STABLE_VERSION DOCKER_SUFFIX=7.0 PHP_VERSION=7.0
+      php: 5.5
+    - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION DOCKER_SUFFIX=7.0 PHP_VERSION=7.0
       php: 5.5
     - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
       php: 5.5
@@ -102,6 +109,10 @@ matrix:
     - env: OS=debian DIST=stretch PACK=deb PHALCON_VERSION=$STABLE_VERSION
       php: 5.6
     - env: OS=debian DIST=stretch PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
+      php: 5.6
+    - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$STABLE_VERSION DOCKER_SUFFIX=7.0 PHP_VERSION=7.0
+      php: 5.6
+    - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION DOCKER_SUFFIX=7.0 PHP_VERSION=7.0
       php: 5.6
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$STABLE_VERSION
       php: 7.0
