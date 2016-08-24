@@ -2,6 +2,9 @@
 
 [![Build Status](https://travis-ci.org/phalcongelist/packagecloud.svg?branch=master)][:build-st:]
 
+Phalcon is an open source web framework delivered as a C extension for the PHP language
+providing high performance and lower resource consumption.
+
 ## Installation Instructions
 
 Phalcon distribution is hosted at [PackageCloud][:cloud:].
