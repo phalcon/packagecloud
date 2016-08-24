@@ -48,6 +48,8 @@ curl -s https://packagecloud.io/install/repositories/phalcon/nightly/script.deb.
 
 ## Installation
 
+### DEB packages
+
 **PHP 5**
 
 ```sh
