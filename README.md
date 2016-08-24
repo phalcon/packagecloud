@@ -18,16 +18,16 @@ Installation/configuration details for each version and operating system [can be
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions |
 | --------- | ---------- | ----------------- | ---------------------- |
-| `trusty`  | 14.04 LTS  | `3.0.0` - `3.0.1` | `5.5.x`, `7.0.x`       |
-| `wily`    | 15.10      | `3.0.0` - `3.0.1` | `5.6.x`                |
-| `xenial`  | 16.04 LTS  | `3.0.0` - `3.0.1` | `7.0.x`                |
+| `trusty`  | 14.04 LTS  | `3.0.0` - `3.0.2` | `5.5.x`, `7.0.x`       |
+| `wily`    | 15.10      | `3.0.0` - `3.0.2` | `5.6.x`                |
+| `xenial`  | 16.04 LTS  | `3.0.0` - `3.0.2` | `7.0.x`                |
 
 ### Debian
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions |
 | --------- | ---------- | ----------------- | ---------------------- |
-| `jessie`  | 8.5 LTS    | `3.0.0` - `3.0.1` | `5.6.x`                |
-| `stretch` | 9          | `3.0.0` - `3.0.1` | `7.0.x`                |
+| `jessie`  | 8.5 LTS    | `3.0.0` - `3.0.2` | `5.6.x`                |
+| `stretch` | 9          | `3.0.0` - `3.0.2` | `7.0.x`                |
 
 ### CentOS (RHEL)
 
@@ -61,7 +61,7 @@ sudo apt-get install php5-phalcon
 
 **PHP 7**
 
-```
+```sh
 sudo apt-get install php7.0-phalcon
 ```
 
