@@ -13,19 +13,18 @@ Installation/configuration details for each version and operating system [can be
 
 ### Ubuntu
 
-| Codename  | OS Release | Phalcon Releases  | PHP version  | Docker image                                        |
-| --------- | ---------- | ----------------- | ------------ | --------------------------------------------------- |
-| `trusty`  | 14.04 LTS  | `3.0.0` - `3.0.1` | `5.5.x`      | [`phalconphp/build:ubuntu-trusty`][:ubuntu-trusty:] |
-| `trusty`  | 14.04 LTS  | `3.0.0` - `3.0.1` | `7.0.x`      | [`phalconphp/build:ubuntu-trusty-7.0`][:trusty-7:]  |
-| `wily`    | 15.10      | `3.0.0` - `3.0.1` | `5.6.x`      | [`phalconphp/build:ubuntu-wily`][:ubuntu-wily:]     |
-| `xenial`  | 16.04 LTS  | `3.0.0` - `3.0.1` | `7.0.x`      | [`phalconphp/build:ubuntu-xenial`][:ubuntu-xenial:] |
+| Codename  | OS Release | Phalcon Releases  | Supported PHP versions |
+| --------- | ---------- | ----------------- | ---------------------- |
+| `trusty`  | 14.04 LTS  | `3.0.0` - `3.0.1` | `5.5.x`, `7.0.x`       |
+| `wily`    | 15.10      | `3.0.0` - `3.0.1` | `5.6.x`                |
+| `xenial`  | 16.04 LTS  | `3.0.0` - `3.0.1` | `7.0.x`                |
 
 ### Debian
 
-| Codename  | OS Release | Phalcon Releases  | PHP version  | Docker image                                          |
-| --------- | ---------- | ----------------- | ------------ | ----------------------------------------------------- |
-| `jessie`  | 8.5 LTS    | `3.0.0` - `3.0.1` | `5.6.x`      | [`phalconphp/build:debian-jessie`][:debian-jessie:]   |
-| `stretch` | 9          | `3.0.0` - `3.0.1` | `7.0.x`      | [`phalconphp/build:debian-stretch`][:debian-stretch:] |
+| Codename  | OS Release | Phalcon Releases  | Supported PHP versions |
+| --------- | ---------- | ----------------- | ---------------------- |
+| `jessie`  | 8.5 LTS    | `3.0.0` - `3.0.1` | `5.6.x`                |
+| `stretch` | 9          | `3.0.0` - `3.0.1` | `7.0.x`                |
 
 ### CentOS (RHEL)
 
@@ -39,25 +38,23 @@ _Coming Soon_
 
 ### DEB packages
 
-_Stable releases:_
 ```sh
+# Stable releases
 curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash
-```
 
-_Nightly releases:_
-```sh
+# Nightly releases
 curl -s https://packagecloud.io/install/repositories/phalcon/nightly/script.deb.sh | sudo bash
 ```
 
-### Installation
+## Installation
 
-**PHP 5**: _Ubuntu (trusty, wily), Debian (jessie)_
+**PHP 5**
 
 ```sh
 sudo apt-get install php5-phalcon
 ```
 
-**PHP 7**: _Ubuntu (trusty, xenial), Debian (stretch)_
+**PHP 7**
 
 ```
 sudo apt-get install php7.0-phalcon
@@ -77,10 +74,4 @@ See the [docs/LICENSE.txt][:docs:] file for more.
 [:cloud:]: https://packagecloud.io/phalcon
 [:stable:]: https://packagecloud.io/phalcon/stable
 [:nightly:]: https://packagecloud.io/phalcon/nightly
-[:trusty-7:]: https://github.com/phalcon/dockerfiles/blob/master/build/ubuntu-trusty-7.0/Dockerfile
-[:ubuntu-trusty:]: https://github.com/phalcon/dockerfiles/blob/master/build/ubuntu-trusty/Dockerfile
-[:ubuntu-wily:]: https://github.com/phalcon/dockerfiles/blob/master/build/ubuntu-wily/Dockerfile
-[:ubuntu-xenial:]: https://github.com/phalcon/dockerfiles/blob/master/build/ubuntu-xenial/Dockerfile
-[:debian-jessie:]: https://github.com/phalcon/dockerfiles/blob/master/build/debian-jessie/Dockerfile
-[:debian-stretch:]: https://github.com/phalcon/dockerfiles/blob/master/build/debian-stretch/Dockerfile
 [:docs:]: https://github.com/phalcongelist/packagecloud/blob/master/docs/LICENSE.txt
