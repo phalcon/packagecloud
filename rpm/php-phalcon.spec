@@ -12,15 +12,14 @@
 #  Authors: Andres Gutierrez <andres@phalconphp.com>
 #           Serghei Iakovlev <serghei@phalconphp.com>
 
-%global php_apiver    %((echo 0; php -i 2>/dev/null | sed -n 's/^PHP API => //p') | tail -1)
-%global php_extdir    %(%{_bindir}php-config --extension-dir 2>/dev/null || echo "undefined")
-%global php_version   %(%{_bindir}php-config --version 2>/dev/null || echo 0)
-%global php_major     %((%{_bindir}php-config --version 2>/dev/null | head -c 1) || echo 0)
-%global ext_release   1
-%global real_name     php-phalcon
-%global php_base      php56u
-%global repo_vendor   ius
-%global ini_name      50-phalcon.ini
+%global php_apiver  %((echo 0; php -i 2>/dev/null | sed -n 's/^PHP API => //p') | tail -1)
+%global php_extdir  %(%{_bindir}php-config --extension-dir 2>/dev/null || echo "undefined")
+%global php_version %(%{_bindir}php-config --version 2>/dev/null || echo 0)
+%global php_major   %((%{_bindir}php-config --version 2>/dev/null | head -c 1) || echo 0)
+%global real_name   php-phalcon
+%global php_base    php56u
+%global repo_vendor ius
+%global ini_name    50-phalcon.ini
 
 %global src_dir cphalcon/build/php%{php_major}/safe
 %if %{__isa_bits} == 32
@@ -32,7 +31,7 @@
 
 Name: %{php_base}-phalcon
 Version: %{version}
-Release: %{ext_release}.%{repo_vendor}%{?dist}
+Release: 1.%{?dist}
 Summary: High performance PHP framework
 Group: Development/Languages
 Packager: Phalcon Buildbot <build@phalconphp.com>
