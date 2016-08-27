@@ -100,7 +100,7 @@ matrix:
       php: 5.5
     - env: OS=el DIST=7 PACK=rpm PHALCON_VERSION=$NIGHTLY_VERSION DOCKER_SUFFIX=ius5.6 PHP_VERSION=php56u REPO_VENDOR=ius
       php: 5.5
-    - env: OS=el DIST=7 PACK=rpm PHALCON_VERSION=$NIGHTLY_VERSION DOCKER_SUFFIX=ius5.6 PHP_VERSION=php56u REPO_VENDOR=ius
+    - env: OS=el DIST=7 PACK=rpm PHALCON_VERSION=$STABLE_VERSION DOCKER_SUFFIX=ius5.6 PHP_VERSION=php56u REPO_VENDOR=ius
       php: 5.5
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$STABLE_VERSION DOCKER_SUFFIX=7.0 PHP_VERSION=7.0
       php: 5.6
@@ -134,7 +134,7 @@ matrix:
       php: 7.0
     - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
       php: 7.0
-    - env: OS=el DIST=7 PACK=rpm PHALCON_VERSION=$NIGHTLY_VERSION DOCKER_SUFFIX=ius5.6 PHP_VERSION=php56u REPO_VENDOR=ius
+    - env: OS=el DIST=7 PACK=rpm PHALCON_VERSION=$STABLE_VERSION DOCKER_SUFFIX=ius5.6 PHP_VERSION=php56u REPO_VENDOR=ius
       php: 7.0
     - env: OS=el DIST=7 PACK=rpm PHALCON_VERSION=$NIGHTLY_VERSION DOCKER_SUFFIX=ius5.6 PHP_VERSION=php56u REPO_VENDOR=ius
       php: 7.0
@@ -156,17 +156,17 @@ before_script:
   - export LAST_COMMIT=$(cd cphalcon; git rev-parse --short=8 HEAD)
   - export PARTIAL_VERSION=$(cd cphalcon; cat config.json | jq ".version" | sed -E 's/\"//g')
   - export VERSION="$PARTIAL_VERSION-$RELEASE-$LAST_COMMIT"
-  - 'echo "-----------------------------------------------"
-    echo "OS:                 $OS"
-    echo "PHP_VERSION:        $PHP_VERSION"
-    echo "DOCKER_SUFFIX:      $DOCKER_SUFFIX"
-    echo "RELEASE:            $RELEASE"
-    echo "PHALCON_VERSION:    $PHALCON_VERSION"
-    echo "VERSION:            $VERSION"
-    echo "LAST_COMMIT:        $LAST_COMMIT"
-    echo "TRAVIS_PHP_VERSION: $TRAVIS_PHP_VERSION"
-    echo "REPO_VENDOR:        $REPO_VENDOR"
-    echo "-----------------------------------------------"'
+  - 'echo -e "-----------------------------------------------"
+    echo -e "OS:                 $OS"
+    echo -e "PHP_VERSION:        $PHP_VERSION"
+    echo -e "DOCKER_SUFFIX:      $DOCKER_SUFFIX"
+    echo -e "RELEASE:            $RELEASE"
+    echo -e "PHALCON_VERSION:    $PHALCON_VERSION"
+    echo -e "VERSION:            $VERSION"
+    echo -e "LAST_COMMIT:        $LAST_COMMIT"
+    echo -e "TRAVIS_PHP_VERSION: $TRAVIS_PHP_VERSION"
+    echo -e "REPO_VENDOR:        $REPO_VENDOR"
+    echo -e "-----------------------------------------------"'
 
 script:
   - git clone -q --depth=1 https://github.com/phalcongelist/build.git -b ${UPSTREAM_BUILDER}
