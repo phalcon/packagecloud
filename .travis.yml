@@ -32,8 +32,6 @@ env:
   global:
     - PRODUCT_PREFIX=php
     - PRODUCT_BASE=phalcon
-    - PRODUCT_EXT=""
-    - EXT=""
     - PRODUCT=php-phalcon
     - RELEASE=$TRAVIS_BUILD_NUMBER
     - STABLE_RELEASE=3
