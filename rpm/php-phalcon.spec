@@ -13,9 +13,8 @@
 #           Serghei Iakovlev <serghei@phalconphp.com>
 
 %global php_apiver  %((echo 0; php -i 2>/dev/null | sed -n 's/^PHP API => //p') | tail -1)
-%global php_extdir  %(%{_bindir}php-config --extension-dir 2>/dev/null || echo "undefined")
-%global php_version %(%{_bindir}php-config --version 2>/dev/null || echo 0)
-%global php_major   %(%{_bindir}php-config --version 2>/dev/null | head -c 1)
+%global php_extdir  %(php-config --extension-dir 2>/dev/null || echo "undefined")
+%global php_major   %(php-config --version 2>/dev/null | head -c 1)
 %global real_name   php-phalcon
 %global php_base    php56u
 %global repo_vendor ius
