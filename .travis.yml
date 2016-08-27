@@ -39,6 +39,7 @@ env:
     - UPSTREAM_BUILDER="phalcon"
   matrix:
     # Stable versions
+    - OS=el DIST=7 PACK=rpm PHALCON_VERSION=$STABLE_VERSION DOCKER_SUFFIX=ius5.6 PHP_VERSION=php56u REPO_VENDOR=ius
     - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$STABLE_VERSION
     - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$STABLE_VERSION DOCKER_SUFFIX=7.0 PHP_VERSION=7.0
     - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION=$STABLE_VERSION
@@ -48,6 +49,7 @@ env:
     - OS=debian DIST=stretch PACK=deb PHALCON_VERSION=$STABLE_VERSION
     - PACK=none PHALCON_VERSION=$STABLE_VERSION
     # Nightly versions
+    - OS=el DIST=7 PACK=rpm PHALCON_VERSION=$NIGHTLY_VERSION DOCKER_SUFFIX=ius5.6 PHP_VERSION=php56u REPO_VENDOR=ius
     - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
     - OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION DOCKER_SUFFIX=7.0 PHP_VERSION=7.0
     - OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
@@ -61,6 +63,7 @@ env:
 matrix:
   fast_finish: true
   allow_failures:
+    - env: OS=el DIST=7 PACK=rpm PHALCON_VERSION=$NIGHTLY_VERSION DOCKER_SUFFIX=ius5.6 PHP_VERSION=php56u REPO_VENDOR=ius
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION DOCKER_SUFFIX=7.0 PHP_VERSION=7.0
     - env: OS=ubuntu DIST=wily PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
@@ -95,6 +98,10 @@ matrix:
       php: 5.5
     - env: OS=debian DIST=stretch PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
       php: 5.5
+    - env: OS=el DIST=7 PACK=rpm PHALCON_VERSION=$NIGHTLY_VERSION DOCKER_SUFFIX=ius5.6 PHP_VERSION=php56u REPO_VENDOR=ius
+      php: 5.5
+    - env: OS=el DIST=7 PACK=rpm PHALCON_VERSION=$NIGHTLY_VERSION DOCKER_SUFFIX=ius5.6 PHP_VERSION=php56u REPO_VENDOR=ius
+      php: 5.5
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$STABLE_VERSION DOCKER_SUFFIX=7.0 PHP_VERSION=7.0
       php: 5.6
     - env: OS=ubuntu DIST=trusty PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION DOCKER_SUFFIX=7.0 PHP_VERSION=7.0
@@ -127,6 +134,10 @@ matrix:
       php: 7.0
     - env: OS=debian DIST=jessie PACK=deb PHALCON_VERSION=$NIGHTLY_VERSION
       php: 7.0
+    - env: OS=el DIST=7 PACK=rpm PHALCON_VERSION=$NIGHTLY_VERSION DOCKER_SUFFIX=ius5.6 PHP_VERSION=php56u REPO_VENDOR=ius
+      php: 7.0
+    - env: OS=el DIST=7 PACK=rpm PHALCON_VERSION=$NIGHTLY_VERSION DOCKER_SUFFIX=ius5.6 PHP_VERSION=php56u REPO_VENDOR=ius
+      php: 7.0
 
 install:
   - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b ${PHALCON_VERSION}
@@ -141,10 +152,21 @@ before_script:
   - '[[ "$PHALCON_VERSION" != $NIGHTLY_VERSION ]] || export PACKAGECLOUD_REPO="phalcon/nightly"'
   - '[[ "$PHALCON_VERSION" == $NIGHTLY_VERSION ]] || export RELEASE=$STABLE_RELEASE'
   - '[[ -z "$DOCKER_SUFFIX" ]] || export DOCKER_SUFFIX="-${DOCKER_SUFFIX}"'
-  - '[[ -z "$PHP_VERSION" ]] || export RELEASE="${RELEASE}+extra"'
+  - '[[ -z "$PHP_VERSION" ]] || [[ "$OS" == "el" ]] || export RELEASE="${RELEASE}+extra"'
   - export LAST_COMMIT=$(cd cphalcon; git rev-parse --short=8 HEAD)
   - export PARTIAL_VERSION=$(cd cphalcon; cat config.json | jq ".version" | sed -E 's/\"//g')
   - export VERSION="$PARTIAL_VERSION-$RELEASE-$LAST_COMMIT"
+  - 'echo "-----------------------------------------------"
+    echo "OS:                 $OS"
+    echo "PHP_VERSION:        $PHP_VERSION"
+    echo "DOCKER_SUFFIX:      $DOCKER_SUFFIX"
+    echo "RELEASE:            $RELEASE"
+    echo "PHALCON_VERSION:    $PHALCON_VERSION"
+    echo "VERSION:            $VERSION"
+    echo "LAST_COMMIT:        $LAST_COMMIT"
+    echo "TRAVIS_PHP_VERSION: $TRAVIS_PHP_VERSION"
+    echo "REPO_VENDOR:        $REPO_VENDOR"
+    echo "-----------------------------------------------"'
 
 script:
   - git clone -q --depth=1 https://github.com/phalcongelist/build.git -b ${UPSTREAM_BUILDER}
