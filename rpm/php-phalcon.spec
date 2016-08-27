@@ -31,7 +31,7 @@
 
 Name: %{php_base}-phalcon
 Version: %{version}
-Release: 1.%{?dist}
+Release: 1.%{repo_vendor}%{?dist}
 Summary: High performance PHP framework
 Group: Development/Languages
 Packager: Phalcon Buildbot <build@phalconphp.com>
