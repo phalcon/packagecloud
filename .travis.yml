@@ -13,8 +13,8 @@
 #           Serghei Iakovlev <serghei@phalconphp.com>
 
 sudo: required
-#services:
-#  - docker
+services:
+  - docker
 
 language: php
 
