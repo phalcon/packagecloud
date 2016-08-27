@@ -74,10 +74,9 @@ sudo apt-get install php7.0-phalcon
 ## License
 
 Phalcon is open source software licensed under the New BSD License.<br>
-See the [docs/LICENSE.txt][:docs:] file for more.
+See the https://www.phalconphp.com/LICENSE.txt file for more.
 
 [:build-st:]: https://travis-ci.org/phalcongelist/packagecloud
 [:cloud:]: https://packagecloud.io/phalcon
 [:stable:]: https://packagecloud.io/phalcon/stable
 [:nightly:]: https://packagecloud.io/phalcon/nightly
-[:docs:]: https://github.com/phalcongelist/packagecloud/blob/master/docs/LICENSE.txt
