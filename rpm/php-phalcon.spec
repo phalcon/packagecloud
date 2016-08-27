@@ -16,7 +16,6 @@
 %global php_extdir    %(%{_bindir}php-config --extension-dir 2>/dev/null || echo "undefined")
 %global php_version   %(%{_bindir}php-config --version 2>/dev/null || echo 0)
 %global php_major     %((%{_bindir}php-config --version 2>/dev/null | head -c 1) || echo 0)
-%global ext_version   3.0.1
 %global ext_release   1
 %global real_name     php-phalcon
 %global php_base      php56u
@@ -32,7 +31,7 @@
 %endif
 
 Name: %{php_base}-phalcon
-Version: %{ext_version}
+Version: %{version}
 Release: %{ext_release}.%{repo_vendor}%{?dist}
 Summary: High performance PHP framework
 Group: Development/Languages
@@ -129,7 +128,7 @@ cd %{src_dir}
 %config(noreplace) %{php_inidir}/%{ini_name}
 
 %changelog
-* Fri Aug 27 2016 Serghei Iakovlev <serghei@phalconphp.com> - %{ext_version}-%{ext_release}.%{repo_vendor}
+* Wed Aug 24 2016 Serghei Iakovlev <serghei@phalconphp.com> - %{version}-%{release}.%{repo_vendor}
 - Fixed Phalcon\Cache\Backend\Redis::flush in order to flush cache correctly
 - Fixed Phalcon\Mvc\Model\Manager::getRelationRecords to correct using multi relation column #12035
 - Fixed Phalcon\Acl\Resource. Now it implements Phalcon\Acl\ResourceInterface #11959
