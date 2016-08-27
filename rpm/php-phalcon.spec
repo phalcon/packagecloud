@@ -25,10 +25,10 @@
 
 %global src_dir cphalcon/build/php%{php_major}/safe
 %if %{__isa_bits} == 32
-src_dir cphalcon/build/php%{php_major}/32bits
+%global src_dir cphalcon/build/php%{php_major}/32bits
 %endif
 %if %{__isa_bits} == 64
-src_dir cphalcon/build/php%{php_major}/64bits
+%global src_dir cphalcon/build/php%{php_major}/64bits
 %endif
 
 Name: %{php_base}-phalcon
