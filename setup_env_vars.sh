@@ -21,99 +21,99 @@ YELLOW="\033[1;33m"
 NC="\033[0m"
 
 export_ius_vars() {
-       	case ${TRAVIS_PHP_VERSION} in
-       		5.5*)
-       			_PRODUCT_EXT=php55u-phalcon
-       			_PHP_VERSION=php55u
-       			_DOCKER_SUFFIX=ius55
-       			;;
-       		5.6*)
-       			_PRODUCT_EXT=php56u-phalcon
-       			_PHP_VERSION=php56u
-       			_DOCKER_SUFFIX=ius56
-       			;;
-       		7.0*)
-       			_PRODUCT_EXT=php70u-phalcon
-       			_PHP_VERSION=php70u
-       			_DOCKER_SUFFIX=ius70
-       			;;
-       		*)
-       			echo -e "${PURPLE}Unsupported PHP version. Exit${NC}"
-       			exit 1
-       			;;
-       	esac
+		case ${TRAVIS_PHP_VERSION} in
+			5.5*)
+				_PRODUCT_EXT=php55u-phalcon
+				_PHP_VERSION=php55u
+				_DOCKER_SUFFIX=ius55
+				;;
+			5.6*)
+				_PRODUCT_EXT=php56u-phalcon
+				_PHP_VERSION=php56u
+				_DOCKER_SUFFIX=ius56
+				;;
+			7.0*)
+				_PRODUCT_EXT=php70u-phalcon
+				_PHP_VERSION=php70u
+				_DOCKER_SUFFIX=ius70
+				;;
+			*)
+				echo -e "${PURPLE}Unsupported PHP version. Exit${NC}"
+				exit 1
+				;;
+		esac
 }
 
 if [ ! -d "cphalcon" ]; then
-       	echo -e "${PURPLE}Unable to locate 'cphalcon' directory. Exit${NC}"
-       	exit 1
+		echo -e "${PURPLE}Unable to locate 'cphalcon' directory. Exit${NC}"
+		exit 1
 fi
 
 export LAST_COMMIT=$(cd cphalcon; git rev-parse --short=8 HEAD)
 export PARTIAL_VERSION=$(cd cphalcon; cat config.json | jq ".version" | sed -E 's/\"//g')
 
 if [ -z ${PHALCON_VERSION} ]; then
-       	echo -e "${PURPLE}Missed \$PHALCON_VERSION variable. Exit${NC}"
-       	exit 1
+		echo -e "${PURPLE}Missed \$PHALCON_VERSION variable. Exit${NC}"
+		exit 1
 fi
 
 if [ -z ${NIGHTLY_VERSION} ]; then
-       	echo -e "${PURPLE}Missed \$NIGHTLY_VERSION variable. Exit${NC}"
-       	exit 1
+		echo -e "${PURPLE}Missed \$NIGHTLY_VERSION variable. Exit${NC}"
+		exit 1
 fi
 
 if [ -z ${STABLE_VERSION} ]; then
-       	echo -e "${PURPLE}Missed \$STABLE_VERSION variable. Exit${NC}"
-       	exit 1
+		echo -e "${PURPLE}Missed \$STABLE_VERSION variable. Exit${NC}"
+		exit 1
 fi
 
 
 if [ -z ${TRAVIS_BUILD_NUMBER} ]; then
-       	echo -e "${PURPLE}Missed \$TRAVIS_BUILD_NUMBER variable. Exit${NC}"
-       	exit 1
+		echo -e "${PURPLE}Missed \$TRAVIS_BUILD_NUMBER variable. Exit${NC}"
+		exit 1
 fi
 
 case ${PHALCON_VERSION} in
-       	$NIGHTLY_VERSION*)
-       		_PACKAGECLOUD_REPO="phalcon/nightly"
-       		_RELEASE=$TRAVIS_BUILD_NUMBER
-       		;;
-       	$STABLE_VERSION*)
-       		_PACKAGECLOUD_REPO="phalcon/stable"
-       		_RELEASE=$STABLE_RELEASE
-       		;;
-       	*)
-       		echo -e "${PURPLE}Unsupported Phalcon version branch. Exit${NC}"
-       		exit 1
-       	;;
+		$NIGHTLY_VERSION*)
+			_PACKAGECLOUD_REPO="phalcon/nightly"
+			_RELEASE=$TRAVIS_BUILD_NUMBER
+			;;
+		$STABLE_VERSION*)
+			_PACKAGECLOUD_REPO="phalcon/stable"
+			_RELEASE=$STABLE_RELEASE
+			;;
+		*)
+			echo -e "${PURPLE}Unsupported Phalcon version branch. Exit${NC}"
+			exit 1
+		;;
 esac
 
 
 if [ ! -z ${REPO_VENDOR} ]; then
-       	case ${REPO_VENDOR} in
-       		ius*)
-       			export_ius_vars
-       			;;
-       		*)
-       			echo -e "${PURPLE}Unsupported PHP version. Exit${NC}"
-       			exit 1
-       			;;
-       	esac
+		case ${REPO_VENDOR} in
+			ius*)
+				export_ius_vars
+				;;
+			*)
+				echo -e "${PURPLE}Unsupported PHP version. Exit${NC}"
+				exit 1
+				;;
+		esac
 elif [ ! -z "${PHP_VERSION}" ]; then
-       	_RELEASE+="+extra"
-       	_PHP_VERSION=${PHP_VERSION}
+		_RELEASE+="+extra"
+		_PHP_VERSION=${PHP_VERSION}
 fi
 
 if [ "${DIST}" == "trusty" && "${PACK}" == "deb" && "${PHP_VERSION}" == "7.0" ]; then
-       	DOCKER_SUFFIX="7.0"
+		export DOCKER_SUFFIX="7.0"
 fi
 
 if [ "${DIST}" == "trusty" && "${PACK}" == "deb" && "${PHP_VERSION}" == "7.0" ]; then
-        DOCKER_SUFFIX="7.0"
+	 export DOCKER_SUFFIX="7.0"
 fi
 
 if [ ! -z "${DOCKER_SUFFIX}" ]; then
-       	_DOCKER_SUFFIX="-${DOCKER_SUFFIX}"
+		_DOCKER_SUFFIX="-${DOCKER_SUFFIX}"
 fi
 
 
