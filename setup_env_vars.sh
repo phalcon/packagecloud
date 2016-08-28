@@ -105,8 +105,8 @@ elif [ ! -z "${PHP_VERSION}" ]; then
 		_PHP_VERSION=${PHP_VERSION}
 fi
 
-[[ "${DIST}" == "trusty" ]] && [[ "${PHP_VERSION}" == "7.0" ]] && _DOCKER_SUFFIX="7.0"
-[[ "${DIST}" == "jessie" ]] && [[ "${PHP_VERSION}" == "7.0" ]] && _DOCKER_SUFFIX="7.0"
+[[ "${DIST}" == "trusty" ]] && [[ "${PHP_VERSION}" == "7.0" ]] && _DOCKER_SUFFIX="-7.0"
+[[ "${DIST}" == "jessie" ]] && [[ "${PHP_VERSION}" == "7.0" ]] && _DOCKER_SUFFIX="-7.0"
 
 if [ ! -z "${DOCKER_SUFFIX}" ]; then
 		_DOCKER_SUFFIX="-${DOCKER_SUFFIX}"
