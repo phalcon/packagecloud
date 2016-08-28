@@ -40,8 +40,9 @@ Source0: phalcon-php-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: %{php_base}-devel
 BuildRequires: %{php_base}-pecl-jsonc-devel
-BuildRequires: libpcre-devel
+BuildRequires: pcre-devel
 BuildRequires: re2c
+Requires: %{php_base}-pdo
 Requires: %{php_base}-common
 Requires: %{php_base}(zend-abi) = %{zend_apiver}
 Requires: %{php_base}(api) = %{php_apiver}
