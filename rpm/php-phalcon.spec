@@ -12,8 +12,9 @@
 #  Authors: Andres Gutierrez <andres@phalconphp.com>
 #           Serghei Iakovlev <serghei@phalconphp.com>
 
-%global php_apiver  %((rpm -E %php_zend_api | cut -d '-' -f 1) | tail -1)
-%global php_major   %(php-config --version 2>/dev/null | head -c 1)
+%global php_apiver  %((rpm -E %php_core_api | cut -d '-' -f 1) | tail -1)
+%global zend_apiver %((rpm -E %php_zend_api | cut -d '-' -f 1) | tail -1)
+%global php_major   %((rpm -E %php_version | head -c 1) | tail -1)
 %global real_name   php-phalcon
 %global php_base    php56u
 %global repo_vendor ius
@@ -42,8 +43,8 @@ BuildRequires: %{php_base}-pecl-jsonc-devel
 BuildRequires: pcre-devel
 BuildRequires: re2c
 Requires: %{php_base}-common
-Requires: %{php_base}(zend-abi) = %{php_zend_api}
-Requires: %{php_base}(api) = %{php_core_api}
+Requires: %{php_base}(zend-abi) = %{zend_apiver}
+Requires: %{php_base}(api) = %{php_apiver}
 
 %description
 High performance PHP framework.
