@@ -12,6 +12,7 @@
 #  Authors: Andres Gutierrez <andres@phalconphp.com>
 #           Serghei Iakovlev <serghei@phalconphp.com>
 
+#%global with_zts    0%{?__ztsphp:1}
 %global php_apiver  %((rpm -E %php_core_api | cut -d '-' -f 1) | tail -1)
 %global zend_apiver %((rpm -E %php_zend_api | cut -d '-' -f 1) | tail -1)
 %global php_major   %((rpm -E %php_version | head -c 1) | tail -1)
@@ -128,7 +129,12 @@ cd %{src_dir}
 %defattr(-,root,root,-)
 %{php_extdir}/phalcon.so
 %config(noreplace) %{php_inidir}/%{ini_name}
-/usr/include/php/ext/phalcon/php_phalcon.h
+%{_includedir}/php/ext/phalcon/php_phalcon.h
+
+#%if %{with_zts}
+#%config(noreplace) %{php_ztsinidir}/%{ini_name}
+#%{php_ztsextdir}/%{pecl_name}.so
+#%endif
 
 %changelog
 * Wed Aug 24 2016 Serghei Iakovlev <serghei@phalconphp.com> - %{version}-%{release}.%{repo_vendor}

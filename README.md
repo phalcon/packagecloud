@@ -32,7 +32,9 @@ Installation/configuration details for each version and operating system [can be
 
 ### CentOS (RHEL)
 
-_Coming Soon_
+| Codename  | OS Release | Phalcon Releases  | Supported PHP versions | PHP repository |
+| --------- | ---------- | ----------------- | ---------------------- | -------------- |
+| `Core`    | 7.2 LTS    | `3.0.1` - `3.0.2` | `php56u`               | `IUS`          |
 
 ### Fedora
 
@@ -64,6 +66,23 @@ sudo apt-get install php5-phalcon
 
 ```sh
 sudo apt-get install php7.0-phalcon
+```
+
+### RPM packages
+
+```sh
+# Stable releases
+curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.rpm.sh | sudo bash
+
+# Nightly releases
+curl -s https://packagecloud.io/install/repositories/phalcon/nightly/script.rpm.sh | sudo bash
+```
+
+**PHP 5**
+
+```
+# IUS repository
+sudo yum install php56u-phalcon
 ```
 
 ## Download packages manually
