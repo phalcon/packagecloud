@@ -12,8 +12,7 @@
 #  Authors: Andres Gutierrez <andres@phalconphp.com>
 #           Serghei Iakovlev <serghei@phalconphp.com>
 
-%global php_apiver  %((echo 0; php -i 2>/dev/null | sed -n 's/^PHP API => //p') | tail -1)
-%global php_extdir  %(php-config --extension-dir 2>/dev/null || echo "undefined")
+%global php_apiver  %((rpm -E %php_zend_api | cut -d '-' -f 1) | tail -1)
 %global php_major   %(php-config --version 2>/dev/null | head -c 1)
 %global real_name   php-phalcon
 %global php_base    php56u
@@ -107,19 +106,19 @@ cd %{src_dir}
 %{__make} %{?_smp_mflags}
 
 %install
-%{__rm} -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 %{__make} -C %{src_dir} install INSTALL_ROOT=$RPM_BUILD_ROOT
 
 # Drop in the bit of configuration
 install -D -m 644 %{ini_name} %{buildroot}%{php_inidir}/%{ini_name}
 
 %clean
-%{__rm} -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
 cd %{src_dir}
 [ -f Makefile ] && %{__make} distclean; \
   %{_bindir}/phpize --clean; \
-  %{__rm} -f tmp-php.ini
+  rm -f tmp-php.ini
 
 %files
 %defattr(-,root,root,-)
