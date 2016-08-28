@@ -110,7 +110,7 @@ export PRODUCT_EXT=$_PRODUCT_EXT
 export PHP_VERSION=$_PHP_VERSION
 export PACKAGECLOUD_REPO=$_PACKAGECLOUD_REPO
 export RELEASE=$_RELEASE
-export VERSION="$PARTIAL_VERSION}-${RELEASE}-${LAST_COMMIT}"
+export VERSION="${PARTIAL_VERSION}-${RELEASE}-${LAST_COMMIT}"
 export DOCKER_SUFFIX=$_DOCKER_SUFFIX
 
 printf "\n\t${GREEN}Stable Phalcon version:${NC}   ${YELLOW}$STABLE_VERSION${NC}"
@@ -120,12 +120,12 @@ printf "\n\t${GREEN}Release:${NC}                  ${YELLOW}$RELEASE${NC}"
 printf "\n\t${GREEN}Last commit SHA:${NC}          ${YELLOW}$LAST_COMMIT${NC}"
 printf "\n\t${GREEN}Partial version:${NC}          ${YELLOW}$PARTIAL_VERSION${NC}"
 printf "\n\t${GREEN}Full version:${NC}             ${YELLOW}$VERSION${NC}"
-printf "\n\t${GREEN}Product:${NC}                  ${YELLOW}$PRODUCT_EXT${NC}"
+printf "\n\t${GREEN}Product:${NC}                  ${YELLOW}${PRODUCT_EXT:-php-phalcon}${NC}"
 printf "\n\t${GREEN}PHP version:${NC}              ${YELLOW}${PHP_VERSION:-undefined}${NC}"
 printf "\n\t${GREEN}Packagecloud repo:${NC}        ${YELLOW}$PACKAGECLOUD_REPO${NC}"
 printf "\n\t${GREEN}Docker suffix:${NC}            ${YELLOW}${DOCKER_SUFFIX:-undefined}${NC}"
 printf "\n\t${GREEN}Repo vendor:${NC}              ${YELLOW}${REPO_VENDOR:-undefined}${NC}"
-printf "\n\t${GREEN}OS:${NC}                       ${YELLOW}${OS}${NC}"
-printf "\n\t${GREEN}DIST:${NC}                     ${YELLOW}${DIST}${NC}"
-printf "\n\t${GREEN}PACK:${NC}                     ${YELLOW}${PACK}${NC}"
+printf "\n\t${GREEN}OS:${NC}                       ${YELLOW}${OS:-undefined}${NC}"
+printf "\n\t${GREEN}DIST:${NC}                     ${YELLOW}${DIST:-undefined}${NC}"
+printf "\n\t${GREEN}PACK:${NC}                     ${YELLOW}$PACK${NC}"
 printf "\n"
