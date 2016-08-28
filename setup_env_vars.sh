@@ -25,14 +25,17 @@ export_ius_vars() {
        		5.5*)
        			_PRODUCT_EXT=php55u-phalcon
        			_PHP_VERSION=php55u
+       			_DOCKER_SUFFIX=ius55
        			;;
        		5.6*)
        			_PRODUCT_EXT=php56u-phalcon
        			_PHP_VERSION=php56u
+       			_DOCKER_SUFFIX=ius56
        			;;
        		7.0*)
        			_PRODUCT_EXT=php70u-phalcon
        			_PHP_VERSION=php70u
+       			_DOCKER_SUFFIX=ius70
        			;;
        		*)
        			echo -e "${PURPLE}Unsupported PHP version. Exit${NC}"
@@ -99,6 +102,14 @@ if [ ! -z ${REPO_VENDOR} ]; then
 elif [ ! -z "${PHP_VERSION}" ]; then
        	_RELEASE+="+extra"
        	_PHP_VERSION=${PHP_VERSION}
+fi
+
+if [ "${DIST}" == "trusty" && "${PACK}" == "deb" && "${PHP_VERSION}" == "7.0" ]; then
+       	DOCKER_SUFFIX="7.0"
+fi
+
+if [ "${DIST}" == "trusty" && "${PACK}" == "deb" && "${PHP_VERSION}" == "7.0" ]; then
+        DOCKER_SUFFIX="7.0"
 fi
 
 if [ ! -z "${DOCKER_SUFFIX}" ]; then
