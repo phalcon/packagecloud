@@ -79,8 +79,10 @@ else
 	CFLAGS+="-O2 -finline-functions"
 endif
 
+export CC="gcc"
 export LDFLAGS
 export CFLAGS
+export CPPFLAGS="-DPHALCON_RELEASE"
 
 %:
 	dh $@

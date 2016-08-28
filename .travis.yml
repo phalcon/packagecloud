@@ -146,6 +146,9 @@ script:
   - git clone -q --depth=1 https://github.com/phalcongelist/build.git -b ${UPSTREAM_BUILDER}
   - ./build/pack/travis.sh
 
+after_failure:
+  - '[[ -f "$TRAVIS_PHP_VERSION" == "7.0" ]] || rm debian/control.7.0'
+
 notifications:
   email:
     recipients:

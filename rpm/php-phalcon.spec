@@ -103,11 +103,14 @@ extension = phalcon.so
 EOF
 
 %build
-CFLAGS+="-O2 -fvisibility=hidden -finline-functions -DPHALCON_RELEASE"
-export CFLAGS
-
+CFLAGS+="-O2 -fvisibility=hidden -finline-functions"
 LDFLAGS+="-Wl,--as-needed -Wl,-Bsymbolic-functions"
+
+export CC="gcc"
 export LDFLAGS
+export CFLAGS
+export CPPFLAGS="-DPHALCON_RELEASE"
+
 ls -l
 
 cd %{src_dir}
