@@ -52,22 +52,6 @@ curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.s
 curl -s https://packagecloud.io/install/repositories/phalcon/nightly/script.deb.sh | sudo bash
 ```
 
-## Installation
-
-### DEB packages
-
-**PHP 5**
-
-```sh
-sudo apt-get install php5-phalcon
-```
-
-**PHP 7**
-
-```sh
-sudo apt-get install php7.0-phalcon
-```
-
 ### RPM packages
 
 ```sh
@@ -78,9 +62,23 @@ curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.rpm.s
 curl -s https://packagecloud.io/install/repositories/phalcon/nightly/script.rpm.sh | sudo bash
 ```
 
-**PHP 5**
+## Installation
 
+### DEB packages
+
+```sh
+# PHP 5
+sudo apt-get install php5-phalcon
+
+# PHP 7
+sudo apt-get install php7.0-phalcon
 ```
+
+### RPM packages
+
+```sh
+# PHP 5
+
 # IUS repository
 sudo yum install php56u-phalcon
 ```
