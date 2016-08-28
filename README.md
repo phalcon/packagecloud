@@ -32,9 +32,11 @@ Installation/configuration details for each version and operating system [can be
 
 ### CentOS (RHEL)
 
-| Codename  | OS Release | Phalcon Releases  | Supported PHP versions | RPM repo |
-| --------- | ---------- | ----------------- | ---------------------- | -------- |
-| `Core`    | 7.2 LTS    | `3.0.1` - `3.0.2` | `php56u`               | `IUS`    |
+| Codename  | OS Release | Phalcon Releases  | Supported PHP versions       | RPM repo       |
+| --------- | ---------- | ----------------- | ---------------------------- | -------------- |
+| `Core`    | 7.2 LTS    | `3.0.1` - `3.0.2` | `php55u`, `php56u`, `php70u` | [`IUS`][:ius:] |
+
+_Support of other RPM repos is coming soon_
 
 ### Fedora
 
@@ -77,10 +79,16 @@ sudo apt-get install php7.0-phalcon
 ### RPM packages
 
 ```sh
-# PHP 5
-
 # IUS repository
+
+# PHP 5.5
+sudo yum install php55u-phalcon
+
+# PHP 5.6
 sudo yum install php56u-phalcon
+
+# PHP 7.0
+sudo yum install php70u-phalcon
 ```
 
 ## Download packages manually
@@ -97,3 +105,4 @@ See the https://www.phalconphp.com/LICENSE.txt file for more.
 [:cloud:]: https://packagecloud.io/phalcon
 [:stable:]: https://packagecloud.io/phalcon/stable
 [:nightly:]: https://packagecloud.io/phalcon/nightly
+[:ius:]: https://github.com/iuscommunity-pkg

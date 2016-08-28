@@ -39,7 +39,9 @@ License: BSD 3-Clause
 URL: https://github.com/phalcon/cphalcon
 Source0: phalcon-php-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+%if %{php_major} == 5
 BuildRequires: %{php_base}-devel
+%endif
 BuildRequires: %{php_base}-pecl-jsonc-devel
 BuildRequires: pcre-devel
 BuildRequires: re2c

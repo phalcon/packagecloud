@@ -108,7 +108,7 @@ if [ "${DIST}" == "trusty" && "${PACK}" == "deb" && "${PHP_VERSION}" == "7.0" ];
 		export DOCKER_SUFFIX="7.0"
 fi
 
-if [ "${DIST}" == "trusty" && "${PACK}" == "deb" && "${PHP_VERSION}" == "7.0" ]; then
+if [ "${DIST}" == "jessie" && "${PACK}" == "deb" && "${PHP_VERSION}" == "7.0" ]; then
 	 export DOCKER_SUFFIX="7.0"
 fi
 
