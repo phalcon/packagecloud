@@ -41,8 +41,9 @@ BuildRequires: %{php_base}-devel
 BuildRequires: %{php_base}-pecl-jsonc-devel
 BuildRequires: pcre-devel
 BuildRequires: re2c
+Requires: %{php_base}-common
 Requires: %{php_base}(zend-abi) = %{php_zend_api}
-Requires: %{php_base}(api) = %{php_apiver}
+Requires: %{php_base}(api) = %{php_core_api}
 
 %description
 High performance PHP framework.
@@ -55,7 +56,7 @@ This package provides the Phalcon PHP extension.
 %prep
 %setup -q -n phalcon-php-%{version}
 
-%{__cat} > %{ini_name} << 'EOF'
+cat > %{ini_name} << 'EOF'
 ;
 ;  Phalcon Framework
 ;
