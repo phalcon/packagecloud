@@ -16,10 +16,18 @@
 %global php_apiver  %((rpm -E %php_core_api | cut -d '-' -f 1) | tail -1)
 %global zend_apiver %((rpm -E %php_zend_api | cut -d '-' -f 1) | tail -1)
 %global php_major   %((rpm -E %php_version | head -c 1) | tail -1)
+%global php_minor   %((rpm -E %php_version | head -c 3) | tail -1)
 %global real_name   php-phalcon
 %global php_base    php56u
 %global repo_vendor ius
-%global ini_name    50-phalcon.ini
+
+# after pdo.ini, json.ini, igbinary.ini
+%if "%{php_minor}" < "5.6"
+%global ini_name z-phalcon.ini
+%else
+# after 40-json.ini, 20-pdo.ini, 40-igbinary.ini
+%global ini_name 50-phalcon.ini
+%endif
 
 %global src_dir cphalcon/build/php%{php_major}/safe
 %if %{__isa_bits} == 32
@@ -33,7 +41,7 @@ Name: %{php_base}-phalcon
 Version: %{version}
 Release: 1.%{repo_vendor}%{?dist}
 Summary: High performance PHP framework
-Group: Development/Languages
+Group: Development/Libraries
 Packager: Phalcon Buildbot <build@phalconphp.com>
 License: BSD 3-Clause
 URL: https://github.com/phalcon/cphalcon
@@ -57,6 +65,8 @@ Phalcon is an open source web framework delivered as a C extension for
 the PHP language providing high performance and lower resource consumption.
 
 This package provides the Phalcon PHP extension.
+
+Documentation: https://docs.phalconphp.com
 
 %prep
 %setup -q -n phalcon-php-%{version}
@@ -109,6 +119,7 @@ ls -l
 cd %{src_dir}
 %{_bindir}/phpize
 %configure --enable-phalcon=shared \
+           --with-libdir=%{_lib} \
            --with-php-config=%{_bindir}/php-config
 %{__make} %{?_smp_mflags}
 
