@@ -86,7 +86,7 @@ case ${PHALCON_VERSION} in
 esac
 
 
-if [ -n ${REPO_VENDOR} ]; then
+if [ ! -z ${REPO_VENDOR} ]; then
        	case ${REPO_VENDOR} in
        		ius*)
        			export_ius_vars
@@ -96,12 +96,12 @@ if [ -n ${REPO_VENDOR} ]; then
        			exit 1
        			;;
        	esac
-elif [ -n "${PHP_VERSION}" ]; then
+elif [ ! -z "${PHP_VERSION}" ]; then
        	_RELEASE+="+extra"
        	_PHP_VERSION=${PHP_VERSION}
 fi
 
-if [ -n "${DOCKER_SUFFIX}" ]; then
+if [ ! -z "${DOCKER_SUFFIX}" ]; then
        	_DOCKER_SUFFIX="-${DOCKER_SUFFIX}"
 fi
 
@@ -110,7 +110,7 @@ export PRODUCT_EXT=$_PRODUCT_EXT
 export PHP_VERSION=$_PHP_VERSION
 export PACKAGECLOUD_REPO=$_PACKAGECLOUD_REPO
 export RELEASE=$_RELEASE
-export VERSION="$PARTIAL_VERSION-$RELEASE-$LAST_COMMIT"
+export VERSION="$PARTIAL_VERSION}-${RELEASE}-${LAST_COMMIT}"
 export DOCKER_SUFFIX=$_DOCKER_SUFFIX
 
 printf "\n\t${GREEN}Stable Phalcon version:${NC}   ${YELLOW}$STABLE_VERSION${NC}"
@@ -125,5 +125,7 @@ printf "\n\t${GREEN}PHP version:${NC}              ${YELLOW}${PHP_VERSION:-undef
 printf "\n\t${GREEN}Packagecloud repo:${NC}        ${YELLOW}$PACKAGECLOUD_REPO${NC}"
 printf "\n\t${GREEN}Docker suffix:${NC}            ${YELLOW}${DOCKER_SUFFIX:-undefined}${NC}"
 printf "\n\t${GREEN}Repo vendor:${NC}              ${YELLOW}${REPO_VENDOR:-undefined}${NC}"
-printf "\n"
+printf "\n\t${GREEN}OS:${NC}                       ${YELLOW}${OS}${NC}"
+printf "\n\t${GREEN}DIST:${NC}                     ${YELLOW}${DIST}${NC}"
+printf "\n\t${GREEN}PACK:${NC}                     ${YELLOW}${PACK}${NC}"
 printf "\n"
