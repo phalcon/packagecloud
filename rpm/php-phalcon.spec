@@ -40,6 +40,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: %{php_base}-devel
 BuildRequires: %{php_base}-pecl-jsonc-devel
 BuildRequires: pcre-devel
+BuildRequires: re2c
 Requires: %{php_base}(zend-abi) = %{php_zend_api}
 Requires: %{php_base}(api) = %{php_apiver}
 
@@ -124,6 +125,7 @@ cd %{src_dir}
 %defattr(-,root,root,-)
 %{php_extdir}/phalcon.so
 %config(noreplace) %{php_inidir}/%{ini_name}
+/usr/include/php/ext/phalcon/php_phalcon.h
 
 %changelog
 * Wed Aug 24 2016 Serghei Iakovlev <serghei@phalconphp.com> - %{version}-%{release}.%{repo_vendor}
