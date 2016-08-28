@@ -44,6 +44,11 @@ export_ius_vars() {
 		esac
 }
 
+usage_missed() {
+		echo -e "${PURPLE}Missed \$$1 variable. Exit${NC}"
+		exit 1
+}
+
 if [ ! -d "cphalcon" ]; then
 		echo -e "${PURPLE}Unable to locate 'cphalcon' directory. Exit${NC}"
 		exit 1
@@ -53,24 +58,20 @@ export LAST_COMMIT=$(cd cphalcon; git rev-parse --short=8 HEAD)
 export PARTIAL_VERSION=$(cd cphalcon; cat config.json | jq ".version" | sed -E 's/\"//g')
 
 if [ -z ${PHALCON_VERSION} ]; then
-		echo -e "${PURPLE}Missed \$PHALCON_VERSION variable. Exit${NC}"
-		exit 1
+		usage_missed "PHALCON_VERSION"
 fi
 
 if [ -z ${NIGHTLY_VERSION} ]; then
-		echo -e "${PURPLE}Missed \$NIGHTLY_VERSION variable. Exit${NC}"
-		exit 1
+		usage_missed "NIGHTLY_VERSION"
 fi
 
 if [ -z ${STABLE_VERSION} ]; then
-		echo -e "${PURPLE}Missed \$STABLE_VERSION variable. Exit${NC}"
-		exit 1
+		usage_missed "STABLE_VERSION"
 fi
 
 
 if [ -z ${TRAVIS_BUILD_NUMBER} ]; then
-		echo -e "${PURPLE}Missed \$TRAVIS_BUILD_NUMBER variable. Exit${NC}"
-		exit 1
+		usage_missed "TRAVIS_BUILD_NUMBER"
 fi
 
 case ${PHALCON_VERSION} in
@@ -104,18 +105,12 @@ elif [ ! -z "${PHP_VERSION}" ]; then
 		_PHP_VERSION=${PHP_VERSION}
 fi
 
-if [ "${DIST}" == "trusty" && "${PACK}" == "deb" && "${PHP_VERSION}" == "7.0" ]; then
-		export _DOCKER_SUFFIX="7.0"
-fi
-
-if [ "${DIST}" == "jessie" && "${PACK}" == "deb" && "${PHP_VERSION}" == "7.0" ]; then
-		export _DOCKER_SUFFIX="7.0"
-fi
+[[ "${DIST}" == "trusty" ]] && [[ "${PHP_VERSION}" == "7.0" ]] && _DOCKER_SUFFIX="7.0"
+[[ "${DIST}" == "jessie" ]] && [[ "${PHP_VERSION}" == "7.0" ]] && _DOCKER_SUFFIX="7.0"
 
 if [ ! -z "${DOCKER_SUFFIX}" ]; then
 		_DOCKER_SUFFIX="-${DOCKER_SUFFIX}"
 fi
-
 
 export PRODUCT_EXT=$_PRODUCT_EXT
 export PHP_VERSION=$_PHP_VERSION
