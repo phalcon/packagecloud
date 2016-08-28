@@ -150,13 +150,11 @@ install:
   - '[[ "$PHALCON_VERSION" != $NIGHTLY_VERSION ]] || (bash zephir.sh; cd cphalcon; zephir fullclean && zephir generate $ZEND_BACKEND)'
 
 before_script:
-  - bash setup_env_vars.sh
-  - export
-  - exit 0
+  - . ./setup_env_vars.sh
 
 script:
   - git clone -q --depth=1 https://github.com/phalcongelist/build.git -b ${UPSTREAM_BUILDER}
-  - build/pack/travis.sh
+  - ./build/pack/travis.sh
 
 notifications:
   email:
