@@ -151,14 +151,7 @@ install:
   - '[[ "$PHALCON_VERSION" != $NIGHTLY_VERSION ]] || (cd cphalcon; zephir fullclean && zephir generate $ZEND_BACKEND)'
 
 before_script:
-  - '[[ "$PHALCON_VERSION" != $NIGHTLY_VERSION ]] || export PACKAGECLOUD_REPO="phalcon/nightly"'
-  - '[[ "$PHALCON_VERSION" == $NIGHTLY_VERSION ]] || export RELEASE=$STABLE_RELEASE'
-  - '[[ -z "$DOCKER_SUFFIX" ]] || export DOCKER_SUFFIX="-${DOCKER_SUFFIX}"'
-  - '[[ -z "$PHP_VERSION" ]] || [[ "$OS" == "el" ]] || export RELEASE="${RELEASE}+extra"'
-  - export LAST_COMMIT=$(cd cphalcon; git rev-parse --short=8 HEAD)
-  - export PARTIAL_VERSION=$(cd cphalcon; cat config.json | jq ".version" | sed -E 's/\"//g')
-  - export VERSION="$PARTIAL_VERSION-$RELEASE-$LAST_COMMIT"
-  - export PRODUCT_EXT="${PRODUCT_PREFIX}${EXT}-${PRODUCT_BASE}"
+  - bash setup_env_vars.sh
 
 script:
   - git clone -q --depth=1 https://github.com/phalcongelist/build.git -b ${UPSTREAM_BUILDER}
