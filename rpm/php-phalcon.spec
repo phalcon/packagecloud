@@ -20,14 +20,8 @@
 %global real_name   php-phalcon
 %global php_base    php56u
 %global repo_vendor ius
-
-# after pdo.ini, json.ini, igbinary.ini
-%if "%{php_minor}" < "5.6"
-%global ini_name z-phalcon.ini
-%else
-# after 40-json.ini, 20-pdo.ini, 40-igbinary.ini
-%global ini_name 50-phalcon.ini
-%endif
+# after 40-json.ini, 20-pdo.ini
+%global ini_name    50-phalcon.ini
 
 %global src_dir cphalcon/build/php%{php_major}/safe
 %if %{__isa_bits} == 32
@@ -109,10 +103,10 @@ extension = phalcon.so
 EOF
 
 %build
-CFLAGS+="-g3 -fvisibility=hidden -DPHALCON_RELEASE"
+CFLAGS+="-O2 -fvisibility=hidden -finline-functions -DPHALCON_RELEASE"
 export CFLAGS
 
-LDFLAGS+="-Wl,--as-needed -Wl,-O1 -Wl,-Bsymbolic-functions"
+LDFLAGS+="-Wl,--as-needed -Wl,-Bsymbolic-functions"
 export LDFLAGS
 ls -l
 
@@ -124,14 +118,14 @@ cd %{src_dir}
 %{__make} %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf ${buildroot}
 %{__make} -C %{src_dir} install INSTALL_ROOT=$RPM_BUILD_ROOT
 
 # Drop in the bit of configuration
 install -D -m 644 %{ini_name} %{buildroot}%{php_inidir}/%{ini_name}
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf ${buildroot}
 
 cd %{src_dir}
 [ -f Makefile ] && %{__make} distclean; \
