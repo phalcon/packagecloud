@@ -32,7 +32,7 @@ Installation/configuration details for each version and operating system [can be
 
 ### CentOS (RHEL)
 
-| Codename  | OS Release | Phalcon Releases  | Supported PHP versions | PHP repository |
+| Codename  | OS Release | Phalcon Releases  | Supported PHP versions | RPM repository |
 | --------- | ---------- | ----------------- | ---------------------- | -------------- |
 | `Core`    | 7.2 LTS    | `3.0.1` - `3.0.2` | `php56u`               | `IUS`          |
 
