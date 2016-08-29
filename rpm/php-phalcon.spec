@@ -14,7 +14,7 @@
 
 %global with_zts    0%{?__ztsphp:1}
 %global with_tests  %{?_with_tests:1}%{!?_with_tests:0}
-%global ext_name    phalcon.so
+%global ext_name    phalcon
 %global php_apiver  %((rpm -E %php_core_api | cut -d '-' -f 1) | tail -1)
 %global zend_apiver %((rpm -E %php_zend_api | cut -d '-' -f 1) | tail -1)
 %global php_major   %((rpm -E %php_version | head -c 1) | tail -1)
@@ -164,7 +164,7 @@ cd %{src_dir}
 
 #%if %{with_zts}
 #%config(noreplace) %{php_ztsinidir}/%{ini_name}
-#%{php_ztsextdir}/%{pecl_name}.so
+#%{php_ztsextdir}/%{ext_name}.so
 #%endif
 
 %changelog
