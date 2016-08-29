@@ -12,7 +12,7 @@
 #  Authors: Andres Gutierrez <andres@phalconphp.com>
 #           Serghei Iakovlev <serghei@phalconphp.com>
 
-#%global with_zts    0%{?__ztsphp:1}
+%global with_zts    0%{?__ztsphp:1}
 %global php_apiver  %((rpm -E %php_core_api | cut -d '-' -f 1) | tail -1)
 %global zend_apiver %((rpm -E %php_zend_api | cut -d '-' -f 1) | tail -1)
 %global php_major   %((rpm -E %php_version | head -c 1) | tail -1)
@@ -126,6 +126,16 @@ rm -rf ${buildroot}
 
 # Drop in the bit of configuration
 install -D -m 644 %{ini_name} %{buildroot}%{php_inidir}/%{ini_name}
+
+%check
+: Get needed extensions for check
+modules=""
+for mod in json pdo; do
+  if [ -f %{php_extdir}/${mod}.so ]; then
+    modules="$modules -d extension=${mod}.so"
+  fi
+done
+
 
 %clean
 rm -rf ${buildroot}
