@@ -125,10 +125,7 @@ export LDFLAGS
 export CFLAGS
 export CPPFLAGS="-DPHALCON_RELEASE"
 
-# debug
-ls -l
 mv %{src_dir} build/NTS
-ls -l build/
 
 %if %{with_zts}
 : Duplicate source tree for NTS / ZTS build
@@ -192,6 +189,12 @@ cd %{src_dir}
 
 %files
 %defattr(-,root,root,-)
+%{!?_licensedir:%global license %%doc}
+%license cphalcon/docs/LICENSE.txt
+%doc cphalcon/CHANGELOG.md
+%doc cphalcon/CONTRIBUTING.md
+%doc cphalcon/README.md
+
 %{php_extdir}/%{ext_name}.so
 %config(noreplace) %{php_inidir}/%{ini_name}
 %{php_incldir}/ext/%{ext_name}/php_phalcon.h
