@@ -25,7 +25,7 @@
 # will be replaced by the automated script
 %global repo_vendor ius
 # after 40-json.ini, 20-pdo.ini
-%global ini_name    50-phalcon.ini
+%global ini_name    50-%{ext_name}.ini
 
 %global src_dir cphalcon/build/php%{php_major}/safe
 %if %{__isa_bits} == 32
@@ -52,7 +52,7 @@ BuildRequires: %{php_base}-pecl-jsonc-devel
 BuildRequires: %{php_base}-devel
 BuildRequires: pcre-devel
 BuildRequires: re2c
-Requires: %{php_base}-pdo
+Requires: %{php_base}-pdo%{?_isa}
 Requires: %{php_base}-common
 Requires: %{php_base}(zend-abi) = %{zend_apiver}
 Requires: %{php_base}(api) = %{php_apiver}
@@ -86,24 +86,25 @@ cat > %{ini_name} << 'EOF'
 ;  Authors: Andres Gutierrez <andres@phalconphp.com>
 ;           Serghei Iakovlev <serghei@phalconphp.com>
 
-[phalcon]
+; %{summary}
+[%{ext_name}]
 extension = %{ext_name}.so
 
 ; ----- Options to use the Phalcon Framework
 
-; phalcon.db.escape_identifiers = On
-; phalcon.db.force_casting = Off
+; %{ext_name}.db.escape_identifiers = On
+; %{ext_name}.db.force_casting = Off
 
-; phalcon.orm.events = On
-; phalcon.orm.virtual_foreign_keys = On
-; phalcon.orm.column_renaming = On
-; phalcon.orm.not_null_validations = On
-; phalcon.orm.exception_on_failed_save = Off
-; phalcon.orm.enable_literals = On
-; phalcon.orm.late_state_binding = Off
-; phalcon.orm.enable_implicit_joins = On
-; phalcon.orm.cast_on_hydrate = Off
-; phalcon.orm.ignore_unknown_columns = Off
+; %{ext_name}.orm.events = On
+; %{ext_name}.orm.virtual_foreign_keys = On
+; %{ext_name}.orm.column_renaming = On
+; %{ext_name}.orm.not_null_validations = On
+; %{ext_name}.orm.exception_on_failed_save = Off
+; %{ext_name}.orm.enable_literals = On
+; %{ext_name}.orm.late_state_binding = Off
+; %{ext_name}.orm.enable_implicit_joins = On
+; %{ext_name}.orm.cast_on_hydrate = Off
+; %{ext_name}.orm.ignore_unknown_columns = Off
 
 EOF
 
@@ -180,12 +181,22 @@ done
 %endif
 
 %clean
-rm -rf ${buildroot}
+extclean() {
+%configure \
+    [ -f Makefile ] && %{__make} distclean; \
+      %{_bindir}/$1 --clean; \
+      rm -f tmp-php.ini
+}
 
-cd %{src_dir}
-[ -f Makefile ] && %{__make} distclean; \
-  %{_bindir}/phpize --clean; \
-  rm -f tmp-php.ini
+cd build/NTS
+extconf php-config
+
+%if %{with_zts}
+cd ../ZTS
+extconf zts-php-config
+%endif
+
+rm -rf ${buildroot}
 
 %files
 %defattr(-,root,root,-)
