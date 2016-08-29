@@ -70,7 +70,7 @@ ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),amd64))
 	PHALCON_DIR=cphalcon/build/php$(PHP_MAJOR_VERSION)/64bits
 endif
 
-CFLAGS+=-fvisibility=hidden -DPHALCON_RELEASE
+CFLAGS+=-g3 -fvisibility=hidden -DPHALCON_RELEASE
 LDFLAGS+=-Wl,--as-needed -Wl,-Bsymbolic-functions
 
 ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
