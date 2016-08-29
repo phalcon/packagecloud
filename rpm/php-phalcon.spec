@@ -108,6 +108,14 @@ extension = %{ext_name}.so
 EOF
 
 %build
+extconf() {
+  --enable-phalcon \
+  --with-libdir=%{_lib} \
+  --with-php-config=$1
+}
+
+: Generate the SAFE sources
+
 CFLAGS+="-O2 -fvisibility=hidden -finline-functions"
 LDFLAGS+="-Wl,--as-needed -Wl,-Bsymbolic-functions"
 
@@ -118,20 +126,39 @@ export CPPFLAGS="-DPHALCON_RELEASE"
 
 # debug
 ls -l
+ls -l dirname %{src_dir}
+mv %{src_dir} build/NTS
+ls -l dirname %{src_dir}
+ls -l build/
 
-cd %{src_dir}
+%if %{with_zts}
+: Duplicate source tree for NTS / ZTS build
+cp -r build/NTS build/ZTS
+%endif
+
+: Build NTS extension
+cd build/NTS
 %{_bindir}/phpize
-%configure --enable-phalcon=shared \
-           --with-libdir=%{_lib} \
-           --with-php-config=%{_bindir}/php-config
+extconf %{_bindir}/php-config
 %{__make} %{?_smp_mflags}
+
+%if %{with_zts}
+: Build ZTS extension
+cd ../ZTS
+%{_bindir}/zts-phpize
+extconf %{_bindir}/zts-php-config
+make %{?_smp_mflags}
+%endif
 
 %install
 rm -rf ${buildroot}
-%{__make} -C %{src_dir} install INSTALL_ROOT=%{buildroot}
-
-# Drop in the bit of configuration
+%{__make} -C build/NTS install INSTALL_ROOT=%{buildroot}
 install -D -m 644 %{ini_name} %{buildroot}%{php_inidir}/%{ini_name}
+
+%if %{with_zts}
+make -C build/ZTS install INSTALL_ROOT=%{buildroot}
+install -Dpm644 %{ini_name} %{buildroot}%{php_ztsinidir}/%{ini_name}
+%endif
 
 %check
 : Get needed extensions for check
@@ -148,6 +175,14 @@ done
     --define extension=%{buildroot}%{php_extdir}/%{ext_name}.so \
     --modules | grep -i %{ext_name}
 
+%if %{with_zts}
+: Minimal load test for ZTS extension
+%{__ztsphp} --no-php-ini \
+    $modules \
+    --define extension=%{buildroot}%{php_ztsextdir}/%{ext_name}.so \
+    --modules | grep -i %{ext_name}
+%endif
+
 %clean
 rm -rf ${buildroot}
 
@@ -160,12 +195,13 @@ cd %{src_dir}
 %defattr(-,root,root,-)
 %{php_extdir}/%{ext_name}.so
 %config(noreplace) %{php_inidir}/%{ini_name}
-%{php_incldir}/ext/phalcon/php_phalcon.h
+%{php_incldir}/ext/%{ext_name}/php_phalcon.h
 
-#%if %{with_zts}
-#%config(noreplace) %{php_ztsinidir}/%{ini_name}
-#%{php_ztsextdir}/%{ext_name}.so
-#%endif
+%if %{with_zts}
+%{php_ztsextdir}/%{ext_name}.so
+%config(noreplace) %{php_ztsinidir}/%{ini_name}
+%{php_ztsincldir}/ext/%{ext_name}/php_phalcon.h
+%endif
 
 %changelog
 * Wed Aug 24 2016 Serghei Iakovlev <serghei@phalconphp.com> - %{version}-%{release}.%{repo_vendor}
