@@ -126,9 +126,7 @@ export CPPFLAGS="-DPHALCON_RELEASE"
 
 # debug
 ls -l
-ls -l dirname %{src_dir}
 mv %{src_dir} build/NTS
-ls -l dirname %{src_dir}
 ls -l build/
 
 %if %{with_zts}
