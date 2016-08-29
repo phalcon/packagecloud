@@ -19,13 +19,13 @@
 %global zend_apiver %((rpm -E %php_zend_api | cut -d '-' -f 1) | tail -1)
 %global php_major   %((rpm -E %php_version | head -c 1) | tail -1)
 %global php_minor   %((rpm -E %php_version | head -c 3) | tail -1)
-%global real_name   php-%{ext_name}
+%global real_name   php-phalcon
 # will be replaced by the automated script
 %global php_base    php56u
 # will be replaced by the automated script
 %global repo_vendor ius
 # after 40-json.ini, 20-pdo.ini
-%global ini_name    50-%{ext_name}.ini
+%global ini_name    50-phalcon.ini
 
 %global src_dir cphalcon/build/php%{php_major}/safe
 %if %{__isa_bits} == 32
@@ -35,7 +35,7 @@
 %global src_dir cphalcon/build/php%{php_major}/64bits
 %endif
 
-Name: %{php_base}-%{ext_name}
+Name: %{php_base}-phalcon
 Version: %{version}
 # will be replaced by the automated script
 Release: 1.%{repo_vendor}%{?dist}
@@ -44,7 +44,7 @@ Group: Development/Libraries
 Packager: Phalcon Buildbot <build@phalconphp.com>
 License: BSD 3-Clause
 URL: https://github.com/phalcon/cphalcon
-Source0: %{ext_name}-php-%{version}.tar.gz
+Source0: phalcon-php-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 %if %{php_major} == 5
 BuildRequires: %{php_base}-pecl-jsonc-devel
@@ -86,24 +86,24 @@ cat > %{ini_name} << 'EOF'
 ;  Authors: Andres Gutierrez <andres@phalconphp.com>
 ;           Serghei Iakovlev <serghei@phalconphp.com>
 
-[%{ext_name}]
+[phalcon]
 extension = %{ext_name}.so
 
 ; ----- Options to use the Phalcon Framework
 
-; %{ext_name}.db.escape_identifiers = On
-; %{ext_name}.db.force_casting = Off
+; phalcon.db.escape_identifiers = On
+; phalcon.db.force_casting = Off
 
-; %{ext_name}.orm.events = On
-; %{ext_name}.orm.virtual_foreign_keys = On
-; %{ext_name}.orm.column_renaming = On
-; %{ext_name}.orm.not_null_validations = On
-; %{ext_name}.orm.exception_on_failed_save = Off
-; %{ext_name}.orm.enable_literals = On
-; %{ext_name}.orm.late_state_binding = Off
-; %{ext_name}.orm.enable_implicit_joins = On
-; %{ext_name}.orm.cast_on_hydrate = Off
-; %{ext_name}.orm.ignore_unknown_columns = Off
+; phalcon.orm.events = On
+; phalcon.orm.virtual_foreign_keys = On
+; phalcon.orm.column_renaming = On
+; phalcon.orm.not_null_validations = On
+; phalcon.orm.exception_on_failed_save = Off
+; phalcon.orm.enable_literals = On
+; phalcon.orm.late_state_binding = Off
+; phalcon.orm.enable_implicit_joins = On
+; phalcon.orm.cast_on_hydrate = Off
+; phalcon.orm.ignore_unknown_columns = Off
 
 EOF
 
@@ -121,7 +121,7 @@ ls -l
 
 cd %{src_dir}
 %{_bindir}/phpize
-%configure --enable-%{ext_name}=shared \
+%configure --enable-phalcon=shared \
            --with-libdir=%{_lib} \
            --with-php-config=%{_bindir}/php-config
 %{__make} %{?_smp_mflags}
@@ -160,7 +160,7 @@ cd %{src_dir}
 %defattr(-,root,root,-)
 %{php_extdir}/%{ext_name}.so
 %config(noreplace) %{php_inidir}/%{ini_name}
-%{php_incldir}/ext/%{ext_name}/php_%{ext_name}.h
+%{php_incldir}/ext/phalcon/php_phalcon.h
 
 #%if %{with_zts}
 #%config(noreplace) %{php_ztsinidir}/%{ini_name}
