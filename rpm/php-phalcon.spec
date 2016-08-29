@@ -14,6 +14,7 @@
 
 %global with_zts    0%{?__ztsphp:1}
 %global with_tests  %{?_with_tests:1}%{!?_with_tests:0}
+%global ext_name    phalcon.so
 %global php_apiver  %((rpm -E %php_core_api | cut -d '-' -f 1) | tail -1)
 %global zend_apiver %((rpm -E %php_zend_api | cut -d '-' -f 1) | tail -1)
 %global php_major   %((rpm -E %php_version | head -c 1) | tail -1)
@@ -83,7 +84,7 @@ cat > %{ini_name} << 'EOF'
 ;           Serghei Iakovlev <serghei@phalconphp.com>
 
 [phalcon]
-extension = phalcon.so
+extension = %{ext_name}
 
 ; ----- Options to use the Phalcon Framework
 
@@ -154,7 +155,7 @@ cd %{src_dir}
 
 %files
 %defattr(-,root,root,-)
-%{php_extdir}/phalcon.so
+%{php_extdir}/%{ext_name}
 %config(noreplace) %{php_inidir}/%{ini_name}
 %{php_incldir}/ext/phalcon/php_phalcon.h
 
