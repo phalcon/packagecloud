@@ -109,6 +109,7 @@ EOF
 
 %build
 extconf() {
+%configure \
   --enable-phalcon \
   --with-libdir=%{_lib} \
   --with-php-config=$1
