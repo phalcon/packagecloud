@@ -13,6 +13,7 @@
 #           Serghei Iakovlev <serghei@phalconphp.com>
 
 %global with_zts    0%{?__ztsphp:1}
+%global with_tests  %{?_with_tests:1}%{!?_with_tests:0}
 %global php_apiver  %((rpm -E %php_core_api | cut -d '-' -f 1) | tail -1)
 %global zend_apiver %((rpm -E %php_zend_api | cut -d '-' -f 1) | tail -1)
 %global php_major   %((rpm -E %php_version | head -c 1) | tail -1)
@@ -111,6 +112,7 @@ export LDFLAGS
 export CFLAGS
 export CPPFLAGS="-DPHALCON_RELEASE"
 
+# debug
 ls -l
 
 cd %{src_dir}
@@ -136,6 +138,11 @@ for mod in json pdo; do
   fi
 done
 
+: Minimal load test for NTS extension
+%{__php} --no-php-ini \
+    $modules \
+    --define extension=%{buildroot}%{php_extdir}/%{ext_name}.so \
+    --modules | grep -i %{ext_name}
 
 %clean
 rm -rf ${buildroot}
