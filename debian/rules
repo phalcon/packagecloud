@@ -79,8 +79,6 @@ else
 	CFLAGS+=-O2 -fomit-frame-pointer -finline-functions
 endif
 
-CPPFLAGS="-DPHALCON_RELEASE"
-
 %:
 	dh $@
 
