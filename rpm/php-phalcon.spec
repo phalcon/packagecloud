@@ -122,7 +122,7 @@ cd %{src_dir}
 
 %install
 rm -rf ${buildroot}
-%{__make} -C %{src_dir} install INSTALL_ROOT=$RPM_BUILD_ROOT
+%{__make} -C %{src_dir} install INSTALL_ROOT=%{buildroot}
 
 # Drop in the bit of configuration
 install -D -m 644 %{ini_name} %{buildroot}%{php_inidir}/%{ini_name}
@@ -139,7 +139,7 @@ cd %{src_dir}
 %defattr(-,root,root,-)
 %{php_extdir}/phalcon.so
 %config(noreplace) %{php_inidir}/%{ini_name}
-%{_includedir}/php/ext/phalcon/php_phalcon.h
+%{php_incldir}/ext/phalcon/php_phalcon.h
 
 #%if %{with_zts}
 #%config(noreplace) %{php_ztsinidir}/%{ini_name}
