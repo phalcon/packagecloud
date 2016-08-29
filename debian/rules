@@ -79,9 +79,7 @@ else
 	CFLAGS+=-O2 -fomit-frame-pointer -finline-functions
 endif
 
-export CFLAGS
-export LDFLAGS
-export CPPFLAGS="-DPHALCON_RELEASE"
+CPPFLAGS="-DPHALCON_RELEASE"
 
 %:
 	dh $@
