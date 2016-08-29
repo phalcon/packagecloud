@@ -76,7 +76,7 @@ LDFLAGS+=-Wl,--as-needed -Wl,-Bsymbolic-functions
 ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 	CFLAGS+=-O0
 else
-	CFLAGS+=-O2 -finline-functions
+	CFLAGS+=-O2 -fomit-frame-pointer -finline-functions
 endif
 
 export CFLAGS
