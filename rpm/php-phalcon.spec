@@ -53,7 +53,7 @@ BuildRequires: %{php_base}-devel
 BuildRequires: pcre-devel
 BuildRequires: re2c
 Requires: %{php_base}-pdo%{?_isa}
-Requires: %{php_base}-common
+Requires: %{php_base}-common%{?_isa}
 Requires: %{php_base}(zend-abi) = %{zend_apiver}
 Requires: %{php_base}(api) = %{php_apiver}
 
@@ -193,18 +193,17 @@ REPORT_EXIT_STATUS=1 \
 
 %clean
 extclean() {
-%configure \
-    [ -f Makefile ] && %{__make} distclean; \
-      %{_bindir}/$1 --clean; \
-      rm -f tmp-php.ini
+[ -f Makefile ] && %{__make} distclean; \
+    %{_bindir}/$1 --clean; \
+    rm -f tmp-php.ini
 }
 
 cd build/NTS
-extclean php-config
+extclean phpize
 
 %if %{with_zts}
 cd ../ZTS
-extclean zts-php-config
+extclean zts-phpize
 %endif
 
 rm -rf ${buildroot}
