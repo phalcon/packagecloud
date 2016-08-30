@@ -18,8 +18,6 @@
 %global php_apiver  %((rpm -E %php_core_api | cut -d '-' -f 1) | tail -1)
 %global zend_apiver %((rpm -E %php_zend_api | cut -d '-' -f 1) | tail -1)
 %global php_major   %((rpm -E %php_version | head -c 1) | tail -1)
-%global php_minor   %((rpm -E %php_version | head -c 3) | tail -1)
-%global real_name   php-phalcon
 # will be replaced by the automated script
 %global php_base    php56u
 # will be replaced by the automated script
@@ -47,13 +45,13 @@ URL: https://github.com/phalcon/cphalcon
 Source0: phalcon-php-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 %if %{php_major} == 5
-BuildRequires: %{php_base}-pecl-jsonc-devel
+BuildRequires: %{php_base}-pecl-jsonc-devel%{?_isa}
 %endif
-BuildRequires: %{php_base}-devel
-BuildRequires: pcre-devel
-BuildRequires: re2c
-Requires: %{php_base}-pdo%{?_isa}
-Requires: %{php_base}-common%{?_isa}
+BuildRequires: %{php_base}-devel%{?_isa}
+BuildRequires: pcre-devel%{?_isa} = %{php_version}
+BuildRequires: re2c%{?_isa}
+Requires: %{php_base}-pdo%{?_isa} = %{php_version}
+Requires: %{php_base}-common%{?_isa} = %{php_version}
 Requires: %{php_base}(zend-abi) = %{zend_apiver}
 Requires: %{php_base}(api) = %{php_apiver}
 
