@@ -32,7 +32,7 @@ env:
   global:
     - PRODUCT=php-phalcon
     - RELEASE=$TRAVIS_BUILD_NUMBER
-    - STABLE_RELEASE=9
+    - STABLE_RELEASE=10
     - PACKAGECLOUD_REPO="phalcon/stable"
     - STABLE_VERSION="v3.0.1"
     - NIGHTLY_VERSION="3.0.x"
@@ -137,7 +137,7 @@ install:
   # TODO: Use common debian/control
   - '[[ "$TRAVIS_PHP_VERSION" == "7.0" ]] || rm debian/control.7.0'
   - '[[ "$TRAVIS_PHP_VERSION" != "7.0" ]] || (rm debian/control && mv debian/control.7.0 debian/control)'
-  - '[[ "$PHALCON_VERSION" != $NIGHTLY_VERSION ]] || (bash zephir.sh; cd cphalcon; zephir fullclean && zephir generate $ZEND_BACKEND)'
+  - '[[ "$PHALCON_VERSION" != $NIGHTLY_VERSION ]] || (bash zephir.sh; cd cphalcon; zephir fullclean && zephir generate $ZEND_BACKEND; php build/gen-build.php)'
 
 before_script:
   - . ./setup_env_vars.sh

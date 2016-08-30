@@ -33,6 +33,12 @@
 %global src_dir cphalcon/build/php%{php_major}/64bits
 %endif
 
+%if 0%{?fedora} >= 17 || 0%{?rhel} >= 7
+%global with_libpcre  1
+%else
+%global with_libpcre  0
+%endif
+
 Name: %{php_base}-phalcon
 Version: %{version}
 # will be replaced by the automated script
@@ -48,7 +54,9 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: %{php_base}-pecl-jsonc-devel%{?_isa}
 %endif
 BuildRequires: %{php_base}-devel%{?_isa}
-BuildRequires: pcre-devel%{?_isa} = %{php_version}
+%if %{with_libpcre}
+BuildRequires: pcre-devel%{?_isa} >= 8.20
+%endif
 BuildRequires: re2c%{?_isa}
 Requires: %{php_base}-pdo%{?_isa} = %{php_version}
 Requires: %{php_base}-common%{?_isa} = %{php_version}
