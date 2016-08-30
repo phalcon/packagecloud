@@ -172,6 +172,17 @@ done
     --define extension=%{buildroot}%{php_extdir}/%{ext_name}.so \
     --modules | grep -i %{ext_name}
 
+%if %{with_tests}
+: Upstream test suite NTS extension
+cd build/NTS
+SKIP_ONLINE_TESTS=1 \
+TEST_PHP_EXECUTABLE=%{__php} \
+TEST_PHP_ARGS="-n $modules -d extension=$PWD/modules/%{ext_name}.so" \
+NO_INTERACTION=1 \
+REPORT_EXIT_STATUS=1 \
+%{__php} -n run-tests.php --show-diff
+%endif
+
 %if %{with_zts}
 : Minimal load test for ZTS extension
 %{__ztsphp} --no-php-ini \
@@ -189,11 +200,11 @@ extclean() {
 }
 
 cd build/NTS
-extconf php-config
+extclean php-config
 
 %if %{with_zts}
 cd ../ZTS
-extconf zts-php-config
+extclean zts-php-config
 %endif
 
 rm -rf ${buildroot}
