@@ -15,9 +15,11 @@
 %global with_zts    0%{?__ztsphp:1}
 %global with_tests  %{?_with_tests:1}%{!?_with_tests:0}
 %global ext_name    phalcon
-%global php_apiver  %((rpm -E %php_core_api | cut -d '-' -f 1) | tail -1)
-%global zend_apiver %((rpm -E %php_zend_api | cut -d '-' -f 1) | tail -1)
-%global php_major   %((rpm -E %php_version | head -c 1) | tail -1)
+%global php_apiver  %((rpm  -E %php_core_api | cut -d '-' -f 1) | tail -1)
+%global zend_apiver %((rpm  -E %php_zend_api | cut -d '-' -f 1) | tail -1)
+%global php_major   %((rpm  -E %php_version  | cut -d. -f1)     | tail -1)
+%global php_minor   %((rrpm -E %php_version  | cut -d. -f2)     | tail -1)
+%global php_patch   %((rrpm -E %php_version  | cut -d. -f3)     | tail -1)
 # will be replaced by the automated script
 %global php_base    php56u
 # will be replaced by the automated script
@@ -58,8 +60,8 @@ BuildRequires: %{php_base}-devel%{?_isa}
 BuildRequires: pcre-devel%{?_isa} >= 8.20
 %endif
 BuildRequires: re2c%{?_isa}
-Requires: %{php_base}-pdo%{?_isa} = %{php_version}
-Requires: %{php_base}-common%{?_isa} = %{php_version}
+Requires: %{php_base}-pdo%{?_isa} = %{php_major}.%{php_minor}
+Requires: %{php_base}-common%{?_isa} = %{php_major}.%{php_minor}
 Requires: %{php_base}(zend-abi) = %{zend_apiver}
 Requires: %{php_base}(api) = %{php_apiver}
 
