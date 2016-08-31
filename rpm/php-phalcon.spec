@@ -18,8 +18,8 @@
 %global php_apiver  %((rpm  -E %php_core_api | cut -d '-' -f 1) | tail -1)
 %global zend_apiver %((rpm  -E %php_zend_api | cut -d '-' -f 1) | tail -1)
 %global php_major   %((rpm  -E %php_version  | cut -d. -f1)     | tail -1)
-%global php_minor   %((rrpm -E %php_version  | cut -d. -f2)     | tail -1)
-%global php_patch   %((rrpm -E %php_version  | cut -d. -f3)     | tail -1)
+%global php_minor   %((rpm -E %php_version  | cut -d. -f2)     | tail -1)
+%global php_patch   %((rpm -E %php_version  | cut -d. -f3)     | tail -1)
 # will be replaced by the automated script
 %global php_base    php56u
 # will be replaced by the automated script
