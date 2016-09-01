@@ -248,5 +248,5 @@ extclean zts-phpize
 - Fixed the Phalcon\Translate\Adapter\Gettext::getOptionsDefault visibility #12157
 - Enabled PHQL cache for PHP7 to improve performance and reuse plannings
 
-* Thu Aug 18 2016 Serghei Iakovlev <serghei@phalconphp.com> - %{version}-%{release}.%{repo_vendor}
+* Thu Aug 18 2016 Serghei Iakovlev <serghei@phalconphp.com> - 3.0.0-29.%{repo_vendor}
 - Initial Packagecloud release
