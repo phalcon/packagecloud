@@ -140,7 +140,7 @@ export CPPFLAGS="-DPHALCON_RELEASE"
 %endif
 
 : Build NTS extension
-%{__cp} build/NTS
+cd build/NTS
 %{_bindir}/phpize
 extconf %{_bindir}/php-config
 %{__make} %{?_smp_mflags}
