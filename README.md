@@ -26,15 +26,14 @@ Installation/configuration details for each version and operating system [can be
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions |
 | --------- | ---------- | ----------------- | ---------------------- |
-| `jessie`  | 8.5 LTS    | `3.0.0` - `3.0.2` | `5.6.x`                |
-| `jessie`  | 8.5 LTS    | `3.0.1` - `3.0.2` | `7.0.x`                |
+| `jessie`  | 8.5 LTS    | `3.0.0` - `3.0.2` | `5.6.x`, `7.0.x`       |
 | `stretch` | 9          | `3.0.0` - `3.0.2` | `7.0.x`                |
 
 ### CentOS (RHEL)
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions       | RPM repo       |
 | --------- | ---------- | ----------------- | ---------------------------- | -------------- |
-| `Core`    | 7.2 LTS    | `3.0.1` - `3.0.2` | `php55u`, `php56u`, `php70u` | [`IUS`][:ius:] |
+| `Core`    | 7.2 LTS    | `3.0.0` - `3.0.2` | `php55u`, `php56u`, `php70u` | [`IUS`][:ius:] |
 
 _Support of other RPM repos is coming soon_
 
