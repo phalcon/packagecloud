@@ -61,9 +61,9 @@ if [ -z ${PHALCON_VERSION} ]; then
 		usage_missed "PHALCON_VERSION"
 fi
 
-#if [ -z ${NIGHTLY_VERSION} ]; then
-#		usage_missed "NIGHTLY_VERSION"
-#fi
+if [ -z ${NIGHTLY_VERSION} ]; then
+		usage_missed "NIGHTLY_VERSION"
+fi
 
 if [ -z ${STABLE_VERSION} ]; then
 		usage_missed "STABLE_VERSION"
@@ -75,10 +75,10 @@ if [ -z ${TRAVIS_BUILD_NUMBER} ]; then
 fi
 
 case ${PHALCON_VERSION} in
-#		$NIGHTLY_VERSION*)
-#			_PACKAGECLOUD_REPO="phalcon/nightly"
-#			_RELEASE=$TRAVIS_BUILD_NUMBER
-#			;;
+		$NIGHTLY_VERSION*)
+			_PACKAGECLOUD_REPO="phalcon/nightly"
+			_RELEASE=$TRAVIS_BUILD_NUMBER
+			;;
 		$STABLE_VERSION*)
 			_PACKAGECLOUD_REPO="phalcon/stable"
 			_RELEASE=$STABLE_RELEASE

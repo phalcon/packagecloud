@@ -76,7 +76,7 @@ Documentation: https://docs.phalconphp.com
 %prep
 %setup -q -n phalcon-php-%{version}
 
-cat > %{ini_name} << 'EOF'
+%{__cat} > %{ini_name} << 'EOF'
 ;
 ;  Phalcon Framework
 ;
@@ -132,15 +132,15 @@ export LDFLAGS
 export CFLAGS
 export CPPFLAGS="-DPHALCON_RELEASE"
 
-mv %{src_dir} build/NTS
+%{__mv} %{src_dir} build/NTS
 
 %if %{with_zts}
 : Duplicate source tree for NTS / ZTS build
-cp -r build/NTS build/ZTS
+%{__cp} -r build/NTS build/ZTS
 %endif
 
 : Build NTS extension
-cd build/NTS
+%{__cp} build/NTS
 %{_bindir}/phpize
 extconf %{_bindir}/php-config
 %{__make} %{?_smp_mflags}
@@ -150,17 +150,17 @@ extconf %{_bindir}/php-config
 cd ../ZTS
 %{_bindir}/zts-phpize
 extconf %{_bindir}/zts-php-config
-make %{?_smp_mflags}
+%{__make} %{?_smp_mflags}
 %endif
 
 %install
-rm -rf ${buildroot}
+%{__rm} -rf ${buildroot}
 %{__make} -C build/NTS install INSTALL_ROOT=%{buildroot}
-install -D -m 644 %{ini_name} %{buildroot}%{php_inidir}/%{ini_name}
+%{__install} -D -m 644 %{ini_name} %{buildroot}%{php_inidir}/%{ini_name}
 
 %if %{with_zts}
-make -C build/ZTS install INSTALL_ROOT=%{buildroot}
-install -Dpm644 %{ini_name} %{buildroot}%{php_ztsinidir}/%{ini_name}
+%{__make} -C build/ZTS install INSTALL_ROOT=%{buildroot}
+%{__install} -Dpm644 %{ini_name} %{buildroot}%{php_ztsinidir}/%{ini_name}
 %endif
 
 %check
@@ -201,7 +201,7 @@ REPORT_EXIT_STATUS=1 \
 extclean() {
 [ -f Makefile ] && %{__make} distclean; \
     %{_bindir}/$1 --clean; \
-    rm -f tmp-php.ini
+    %{__rm} -f tmp-php.ini
 }
 
 cd build/NTS
@@ -212,7 +212,7 @@ cd ../ZTS
 extclean zts-phpize
 %endif
 
-rm -rf ${buildroot}
+%{__rm} -rf ${buildroot}
 
 %files
 %defattr(-,root,root,-)
@@ -233,5 +233,20 @@ rm -rf ${buildroot}
 %endif
 
 %changelog
+ * Wed Aug 24 2016 Serghei Iakovlev <serghei@phalconphp.com> - %{version}-%{release}.%{repo_vendor}
+- Fixed Phalcon\Cache\Backend\Redis::flush in order to flush cache correctly
+- Fixed Phalcon\Mvc\Model\Manager::getRelationRecords to correct using multi relation column #12035
+- Fixed Phalcon\Acl\Resource. Now it implements Phalcon\Acl\ResourceInterface #11959
+- Fixed save method for all cache backends. Now it updates the _lastKey property correctly #12050
+- Fixed virtual foreign key check when having multiple keys #12071
+- Phalcon\Config\Adapter\Ini constructor can now specify parse_ini_file() scanner mode #12079
+- Fixed Phalcon\Cache\Backend\Apc::save due to which the Apc::increment/Apc::decrement could not be used properly #12109
+- Fixed Phalcon\Mvc\Model\Criteria::inWhere so that now the second parameter can be an empty array #10676
+- Fixed ORM related memory leak #12115, #11995, #12116
+- Fixed incorrect Phalcon\Mvc\View::getActiveRenderPath behavior #12139
+- Fixed Phalcon\Security\Random::base64Safe so that now the method returns correct safe string #12141
+- Fixed the Phalcon\Translate\Adapter\Gettext::getOptionsDefault visibility #12157
+- Enabled PHQL cache for PHP7 to improve performance and reuse plannings
+
 * Thu Aug 18 2016 Serghei Iakovlev <serghei@phalconphp.com> - %{version}-%{release}.%{repo_vendor}
 - Initial Packagecloud release
