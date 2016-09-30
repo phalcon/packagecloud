@@ -144,7 +144,7 @@ before_script:
 
 script:
   - git clone -q --depth=1 https://github.com/phalcongelist/build.git -b ${UPSTREAM_BUILDER}
-  - ./build/pack/travis.sh
+  - '[[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_PULL_REQUEST" == "false" ]] && ./build/pack/travis.sh'
 
 notifications:
   email:
