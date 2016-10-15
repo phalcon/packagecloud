@@ -98,7 +98,7 @@ sudo yum install php70u-phalcon
 ## License
 
 Phalcon is open source software licensed under the New BSD License.<br>
-See the https://www.phalconphp.com/LICENSE.txt file for more.
+See the LICENSE.txt file for more.
 
 [:build-st:]: https://travis-ci.org/phalcongelist/packagecloud
 [:cloud:]: https://packagecloud.io/phalcon
