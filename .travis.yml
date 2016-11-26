@@ -34,7 +34,7 @@ env:
     - RELEASE=$TRAVIS_BUILD_NUMBER
     - STABLE_RELEASE=14
     - PACKAGECLOUD_REPO="phalcon/stable"
-    - STABLE_VERSION="v3.0.1"
+    - STABLE_VERSION="v3.0.2"
     - NIGHTLY_VERSION="3.0.x"
     - UPSTREAM_BUILDER="phalcon"
   matrix:
