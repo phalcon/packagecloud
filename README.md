@@ -18,22 +18,22 @@ Installation/configuration details for each version and operating system [can be
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions |
 | --------- | ---------- | ----------------- | ---------------------- |
-| `trusty`  | 14.04 LTS  | `3.0.0` - `3.0.2` | `5.5.x`, `7.0.x`       |
-| `wily`    | 15.10      | `3.0.0` - `3.0.2` | `5.6.x`                |
-| `xenial`  | 16.04 LTS  | `3.0.0` - `3.0.2` | `7.0.x`                |
+| `trusty`  | 14.04 LTS  | `3.0.0` - `3.0.3` | `5.5.x`, `7.0.x`       |
+| `wily`    | 15.10      | `3.0.0` - `3.0.3` | `5.6.x`                |
+| `xenial`  | 16.04 LTS  | `3.0.0` - `3.0.3` | `7.0.x`                |
 
 ### Debian
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions |
 | --------- | ---------- | ----------------- | ---------------------- |
-| `jessie`  | 8.5 LTS    | `3.0.0` - `3.0.2` | `5.6.x`, `7.0.x`       |
-| `stretch` | 9          | `3.0.0` - `3.0.2` | `7.0.x`                |
+| `jessie`  | 8.5 LTS    | `3.0.0` - `3.0.3` | `5.6.x`, `7.0.x`       |
+| `stretch` | 9          | `3.0.0` - `3.0.3` | `7.0.x`                |
 
 ### CentOS (RHEL)
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions       | RPM repo       |
 | --------- | ---------- | ----------------- | ---------------------------- | -------------- |
-| `Core`    | 7.2 LTS    | `3.0.0` - `3.0.2` | `php55u`, `php56u`, `php70u` | [`IUS`][:ius:] |
+| `Core`    | 7.2 LTS    | `3.0.0` - `3.0.3` | `php55u`, `php56u`, `php70u` | [`IUS`][:ius:] |
 
 _Support of other RPM repos is coming soon_
 
