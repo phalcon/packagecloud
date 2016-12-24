@@ -233,7 +233,21 @@ extclean zts-phpize
 %endif
 
 %changelog
-* Sat Nov 26 2016 Serghei Iakovlev <serghei@phalconphp.com> - %{version}-%{release}.%{repo_vendor}
+* Sat Dec 24 2016 Serghei Iakovlev <serghei@phalconphp.com> - %{version}-%{release}.%{repo_vendor}
+- Fixed implementation of Iterator interface in a Phalcon\Forms\Form that could cause a run-time warning
+- Fixed Phalcon\Cache\Backend\Redis::get, Phalcon\Cache\Frontend\Data::afterRetrieve to allow get empty strings from the Redis database #12437
+- Fixed Phalcon\Cache\Backend\Redis::exists to correct check if cache key exists for empty value in the Redis database #12434
+- Fixed Phalcon\Security::checkToken to prevent possible timing attack #12418
+- Fixed Phalcon\Mvc\Model\Resultset\Simple to save snapshot when caching
+- Fixed Phalcon\Http\Request::getHeaders to handle auth headers correctly #12480
+- Fixed Phalcon\Http\Request::getMethod to handle X-HTTP-Method-Override header correctly #12478
+- Fixed Phalcon\Mvc\Model\Criteria::limit and Phalcon\Mvc\Model\Query\Builder::limit to work with limit and offset properly #12419
+- Fixed Phalcon\Forms\Form to correct form validation and set messages for elements #12465, #11500, #11135, #3167, #12395
+- Fixed Phalcon\Cache\Backend\Libmemcached::queryKeys to correct query the existing cached keys #11024
+- Fixed building extension for ImageMagick 7 https://github.com/mkoppanen/imagick/issues/180
+- Fixed Phalcon\Cache\Backend\Redis::save to allow save data termlessly #12327
+
+* Sat Nov 26 2016 Serghei Iakovlev <serghei@phalconphp.com> - 3.0.2-14.%{repo_vendor}
 - Fixed saving snapshot data while caching model #12170, #12000
 - Fixed Phalcon\Http\Response\Headers::send to send correct status header #12179
 - Fixed Phalcon\Mvc\Model::setSnapshotData, Phalcon\Mvc\Model\Resultset\Simple::toArray by fixing an issue like "fetch a, a[key]" using Zephir #11205, #12147
