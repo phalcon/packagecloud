@@ -1,6 +1,6 @@
 #  Phalcon Framework
 #
-#  Copyright (c) 2011-2016, Phalcon Team (https://www.phalconphp.com)
+#  Copyright (c) 2011-2017, Phalcon Team (https://www.phalconphp.com)
 #
 #  This source file is subject to the New BSD License that is bundled
 #  with this package in the file https://www.phalconphp.com/LICENSE.txt
@@ -34,7 +34,7 @@ env:
     - RELEASE=$TRAVIS_BUILD_NUMBER
     - STABLE_RELEASE=1
     - PACKAGECLOUD_REPO="phalcon/stable"
-    - STABLE_VERSION="v3.0.3"
+    - STABLE_VERSION="v3.0.4"
     - NIGHTLY_VERSION="3.0.x"
     - UPSTREAM_BUILDER="phalcon"
   matrix:
