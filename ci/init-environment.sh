@@ -128,7 +128,7 @@ fi
 
 export DOCKER_REPO="phalconphp/build"
 export BUILD_OS=${_BUILD_OS}
-export DOCKER_TAG=${DOCKER_REPO}:${_BUILD_OS}
+export DOCKER_TAG=${DOCKER_REPO}:${_OSDIST}
 export BUILD_TARGET=${_OSDIST}
 export PRODUCT_EXT=$_PRODUCT_EXT
 export PHP_VERSION=$_PHP_VERSION
@@ -154,7 +154,7 @@ printf "\n${GREEN}Packagecloud repo:${NC}      ${YELLOW}${PACKAGECLOUD_REPO}${NC
 printf "\n${GREEN}Docker image suffix:${NC}    ${YELLOW}${DOCKER_SUFFIX:-undefined}${NC}"
 printf "\n${GREEN}Repo vendor:${NC}            ${YELLOW}${REPO_VENDOR:-"NOT USED"}${NC}"
 printf "\n${GREEN}OS:${NC}                     ${YELLOW}${OS:-undefined}${NC}"
-printf "\n${GREEN}BUILD_OS:${NC}               ${YELLOW}${BUILD_OS}${NC}"
+printf "\n${GREEN}Build OS:${NC}               ${YELLOW}${BUILD_OS}${NC}"
 printf "\n${GREEN}Distrib. version:${NC}       ${YELLOW}${DIST:-undefined}${NC}"
 printf "\n${GREEN}Docker repo:${NC}            ${YELLOW}${DOCKER_REPO}${NC}"
 printf "\n${GREEN}Docker tag:${NC}             ${YELLOW}${DOCKER_TAG}${NC}"
