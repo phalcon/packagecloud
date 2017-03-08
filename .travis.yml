@@ -63,7 +63,7 @@ before_install:
   - sudo apt-get update -qq
   # Use ZendEngine3 backend for PHP 7.x
   - '[[ "$TRAVIS_PHP_VERSION" != "7.0" ]] || export ZEND_BACKEND="--backend=ZendEngine3"'
-  # Disable not needed xdebug
+  # Disable not needed xdebug if any
   - phpenv config-rm xdebug.ini || true
   # Create useful symlinks
   - sudo ln -s /home/travis/.phpenv/versions/$(phpenv version-name)/bin/phpize /usr/bin/
@@ -78,8 +78,6 @@ install:
   - '[[ "$CLONE_BRANCH" != $NIGHTLY_BRANCH ]] || bash ./ci/gen-build.sh'
 
 before_script:
-  - fpm --version
-  - zephir version
   - . ./ci/init-environment.sh
 
 script:
