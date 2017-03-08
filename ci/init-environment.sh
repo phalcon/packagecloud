@@ -181,3 +181,5 @@ printf "\n${GREEN}Docker tag:${NC}             ${YELLOW}${DOCKER_TAG}${NC}"
 printf "\n${GREEN}Makefile target:${NC}        ${YELLOW}${BUILD_TARGET}${NC}"
 printf "\n${GREEN}Package type:${NC}           ${YELLOW}${PACKAGE}${NC}"
 printf "\n"
+
+echo ${VERSION} > ${TRAVIS_BUILD_DIR}/VERSION

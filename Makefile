@@ -23,11 +23,15 @@ ARGS=$(filter-out $@,$(MAKECMDGOALS))
 
 all: check
 
+# Sanity checks
 check:
-ifneq ($(wildcard ~/Dropbox/.*),)
+ifneq ($(wildcard ~/cphalcon/.*),)
 	$(info Found Phalcon source dir)
 else
 	$(error Phalcon source dir does not exists)
+endif
+ifeq ("$(wildcard VERSION)","")
+$(error Missing VERSION file)
 endif
 	docker pull $(DOCKER_TAG)
 
