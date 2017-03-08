@@ -72,9 +72,11 @@ fi
 case ${CLONE_BRANCH} in
 		$NIGHTLY_BRANCH*)
 			_PACKAGECLOUD_REPO="phalcon/nightly"
+			_BUILD_VERSION=${NIGHTLY_BUILD_VERSION}
 			;;
 		$STABLE_BRANCH*)
 			_PACKAGECLOUD_REPO="phalcon/stable"
+			_BUILD_VERSION=${STABLE_BUILD_VERSION}
 			;;
 		*)
 			echo -e "${PURPLE}Unsupported git branch. Exit${NC}"
@@ -82,7 +84,7 @@ case ${CLONE_BRANCH} in
 		;;
 esac
 
-_RELEASE_VERSION=${RELEASE_VERSION}
+
 
 if [ ! -z ${REPO_VENDOR} ]; then
 		case ${REPO_VENDOR} in
@@ -95,7 +97,7 @@ if [ ! -z ${REPO_VENDOR} ]; then
 				;;
 		esac
 elif [ ! -z "${PHP_VERSION}" ]; then
-		_RELEASE_VERSION+="+extra"
+		_BUILD_VERSION+="+extra"
 		_PHP_VERSION=${PHP_VERSION}
 fi
 
@@ -109,8 +111,8 @@ fi
 export PRODUCT_EXT=$_PRODUCT_EXT
 export PHP_VERSION=$_PHP_VERSION
 export PACKAGECLOUD_REPO=$_PACKAGECLOUD_REPO
-export RELEASE_VERSION=$_RELEASE_VERSION
-export VERSION="${PARTIAL_VERSION}-${RELEASE_VERSION}-${LAST_COMMIT}"
+export BUILD_VERSION=$_BUILD_VERSION
+export VERSION="${PARTIAL_VERSION}-${BUILD_VERSION}-${LAST_COMMIT}"
 export DOCKER_SUFFIX=$_DOCKER_SUFFIX
 export ZEPHIR_VERSION=$(zephir version)
 export FPM_VERSION=$(fpm --version)
@@ -118,7 +120,7 @@ export FPM_VERSION=$(fpm --version)
 printf "\n${GREEN}Stable branch/tag:${NC}      ${YELLOW}${STABLE_BRANCH}${NC}"
 printf "\n${GREEN}Nightly branch/tag:${NC}     ${YELLOW}${NIGHTLY_BRANCH}${NC}"
 printf "\n${GREEN}Clone branch:${NC}           ${YELLOW}${CLONE_BRANCH}${NC}"
-printf "\n${GREEN}Release:${NC}                ${YELLOW}${RELEASE_VERSION}${NC}"
+printf "\n${GREEN}Build version:${NC}          ${YELLOW}${BUILD_VERSION}${NC}"
 printf "\n${GREEN}Last commit SHA:${NC}        ${YELLOW}${LAST_COMMIT}${NC}"
 printf "\n${GREEN}Partial version:${NC}        ${YELLOW}${PARTIAL_VERSION}${NC}"
 printf "\n${GREEN}Full version name:${NC}      ${YELLOW}${VERSION}${NC}"
@@ -128,8 +130,8 @@ printf "\n${GREEN}Zephir version:${NC}         ${YELLOW}${ZEPHIR_VERSION}${NC}"
 printf "\n${GREEN}FPM version:${NC}            ${YELLOW}${FPM_VERSION}${NC}"
 printf "\n${GREEN}Packagecloud repo:${NC}      ${YELLOW}${PACKAGECLOUD_REPO}${NC}"
 printf "\n${GREEN}Docker image suffix:${NC}    ${YELLOW}${DOCKER_SUFFIX:-undefined}${NC}"
-printf "\n${GREEN}Repo vendor:${NC}            ${YELLOW}${REPO_VENDOR:-undefined}${NC}"
+printf "\n${GREEN}Repo vendor:${NC}            ${YELLOW}${REPO_VENDOR:-"NOT USED"}${NC}"
 printf "\n${GREEN}OS:${NC}                     ${YELLOW}${OS:-undefined}${NC}"
-printf "\n${GREEN}DIST:${NC}                   ${YELLOW}${DIST:-undefined}${NC}"
-printf "\n${GREEN}PACKAGE:${NC}                ${YELLOW}${PACKAGE}${NC}"
+printf "\n${GREEN}Distrib. version:${NC}       ${YELLOW}${DIST:-undefined}${NC}"
+printf "\n${GREEN}Package type:${NC}           ${YELLOW}${PACKAGE}${NC}"
 printf "\n"

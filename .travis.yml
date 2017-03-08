@@ -44,7 +44,8 @@ env:
     - STABLE_BRANCH=v3.0.4
     - NIGHTLY_BRANCH=3.1.x
     # This should be increased to reb-build and push package
-    - RELEASE_VERSION=1
+    - STABLE_BUILD_VERSION=1
+    - NIGHTLY_BUILD_VERSION=1
 
   matrix:
     # Stable versions
