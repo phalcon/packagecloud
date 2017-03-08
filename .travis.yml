@@ -39,6 +39,7 @@ env:
   global:
     - PATH="$HOME/bin:$PATH"
     - PRODUCT=php-phalcon
+    - PACKAGECLOUD_REPO="phalcon/stable"
     # This should be a branch name or a tag
     - STABLE_VERSION=v3.0.4
     - NIGHTLY_VERSION=3.1.x

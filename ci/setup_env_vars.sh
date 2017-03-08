@@ -49,16 +49,16 @@ usage_missed() {
 		exit 1
 }
 
-if [ ! -d "cphalcon" ]; then
+if [ ! -d "$HOME/cphalcon" ]; then
 		echo -e "${PURPLE}Unable to locate 'cphalcon' directory. Exit${NC}"
 		exit 1
 fi
 
-export LAST_COMMIT=$(cd cphalcon; git rev-parse --short=8 HEAD)
-export PARTIAL_VERSION=$(cd cphalcon; cat config.json | jq ".version" | sed -E 's/\"//g')
+export LAST_COMMIT=$(cd $HOME/cphalcon; git rev-parse --short=8 HEAD)
+export PARTIAL_VERSION=$(cd $HOME/cphalcon; cat config.json | jq ".version" | sed -E 's/\"//g')
 
-if [ -z ${PHALCON_VERSION} ]; then
-		usage_missed "PHALCON_VERSION"
+if [ -z ${CLONE_BRANCH} ]; then
+		usage_missed "CLONE_BRANCH"
 fi
 
 if [ -z ${NIGHTLY_VERSION} ]; then
@@ -74,7 +74,7 @@ if [ -z ${TRAVIS_BUILD_NUMBER} ]; then
 		usage_missed "TRAVIS_BUILD_NUMBER"
 fi
 
-case ${PHALCON_VERSION} in
+case ${CLONE_BRANCH} in
 		$NIGHTLY_VERSION*)
 			_PACKAGECLOUD_REPO="phalcon/nightly"
 			_RELEASE=$TRAVIS_BUILD_NUMBER
@@ -119,19 +119,19 @@ export RELEASE=$_RELEASE
 export VERSION="${PARTIAL_VERSION}-${RELEASE}-${LAST_COMMIT}"
 export DOCKER_SUFFIX=$_DOCKER_SUFFIX
 
-printf "\n\t${GREEN}Stable Phalcon version:${NC}   ${YELLOW}$STABLE_VERSION${NC}"
-printf "\n\t${GREEN}Nightly Phalcon version:${NC}  ${YELLOW}$NIGHTLY_VERSION${NC}"
-printf "\n\t${GREEN}Current Phalcon version:${NC}  ${YELLOW}$PHALCON_VERSION${NC}"
-printf "\n\t${GREEN}Release:${NC}                  ${YELLOW}$RELEASE${NC}"
-printf "\n\t${GREEN}Last commit SHA:${NC}          ${YELLOW}$LAST_COMMIT${NC}"
-printf "\n\t${GREEN}Partial version:${NC}          ${YELLOW}$PARTIAL_VERSION${NC}"
-printf "\n\t${GREEN}Full version:${NC}             ${YELLOW}$VERSION${NC}"
+printf "\n\t${GREEN}Stable Phalcon version:${NC}   ${YELLOW}${STABLE_VERSION}${NC}"
+printf "\n\t${GREEN}Nightly Phalcon version:${NC}  ${YELLOW}${NIGHTLY_VERSION}${NC}"
+printf "\n\t${GREEN}Clone branch:${NC}             ${YELLOW}${CLONE_BRANCH}${NC}"
+printf "\n\t${GREEN}Release:${NC}                  ${YELLOW}${RELEASE}${NC}"
+printf "\n\t${GREEN}Last commit SHA:${NC}          ${YELLOW}${LAST_COMMIT}${NC}"
+printf "\n\t${GREEN}Partial version:${NC}          ${YELLOW}${PARTIAL_VERSION}${NC}"
+printf "\n\t${GREEN}Full version:${NC}             ${YELLOW}${VERSION}${NC}"
 printf "\n\t${GREEN}Product:${NC}                  ${YELLOW}${PRODUCT_EXT:-php-phalcon}${NC}"
 printf "\n\t${GREEN}PHP version:${NC}              ${YELLOW}${PHP_VERSION:-undefined}${NC}"
-printf "\n\t${GREEN}Packagecloud repo:${NC}        ${YELLOW}$PACKAGECLOUD_REPO${NC}"
+printf "\n\t${GREEN}Packagecloud repo:${NC}        ${YELLOW}${PACKAGECLOUD_REPO}${NC}"
 printf "\n\t${GREEN}Docker suffix:${NC}            ${YELLOW}${DOCKER_SUFFIX:-undefined}${NC}"
 printf "\n\t${GREEN}Repo vendor:${NC}              ${YELLOW}${REPO_VENDOR:-undefined}${NC}"
 printf "\n\t${GREEN}OS:${NC}                       ${YELLOW}${OS:-undefined}${NC}"
 printf "\n\t${GREEN}DIST:${NC}                     ${YELLOW}${DIST:-undefined}${NC}"
-printf "\n\t${GREEN}PACK:${NC}                     ${YELLOW}$PACK${NC}"
+printf "\n\t${GREEN}PACKAGE:${NC}                  ${YELLOW}${PACKAGE}${NC}"
 printf "\n"
