@@ -81,6 +81,7 @@ before_script:
   - . ./ci/init-environment.sh
 
 script:
+  - bash ./ci/prepare-image.sh
   - bash ./ci/create-package.sh
   - bash ./ci/push.sh
 

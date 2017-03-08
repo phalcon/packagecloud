@@ -14,11 +14,8 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-if [ "${PACKAGE}" == "rpm" ]; then
-	make -C ${TRAVIS_BUILD_DIR}/builder ${BUILD_TARGET}
-elif [ "${PACKAGE}" == "deb" ]; then
-	make -C ${TRAVIS_BUILD_DIR}/builder ${BUILD_TARGET}
-else
-	echo -e "Invalid PACKAGE value"
-	exit 1
-fi
+#
+# Start Docker
+#
+set -ex
+docker pull ${DOCKER_TAG}

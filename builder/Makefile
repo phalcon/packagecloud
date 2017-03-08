@@ -32,8 +32,6 @@ else
 endif
 ifeq ("$(wildcard VERSION)","")
 $(error Missing VERSION file)
-endif
-	docker pull $(DOCKER_TAG)
 
 centos7: check
 	$(info Hello world)
