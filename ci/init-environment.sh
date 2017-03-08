@@ -61,34 +61,28 @@ if [ -z ${CLONE_BRANCH} ]; then
 		usage_missed "CLONE_BRANCH"
 fi
 
-if [ -z ${NIGHTLY_VERSION} ]; then
-		usage_missed "NIGHTLY_VERSION"
+if [ -z ${NIGHTLY_BRANCH} ]; then
+		usage_missed "NIGHTLY_BRANCH"
 fi
 
-if [ -z ${STABLE_VERSION} ]; then
-		usage_missed "STABLE_VERSION"
-fi
-
-
-if [ -z ${TRAVIS_BUILD_NUMBER} ]; then
-		usage_missed "TRAVIS_BUILD_NUMBER"
+if [ -z ${STABLE_BRANCH} ]; then
+		usage_missed "STABLE_BRANCH"
 fi
 
 case ${CLONE_BRANCH} in
-		$NIGHTLY_VERSION*)
+		$NIGHTLY_BRANCH*)
 			_PACKAGECLOUD_REPO="phalcon/nightly"
-			_RELEASE=$TRAVIS_BUILD_NUMBER
 			;;
-		$STABLE_VERSION*)
+		$STABLE_BRANCH*)
 			_PACKAGECLOUD_REPO="phalcon/stable"
-			_RELEASE=$STABLE_RELEASE
 			;;
 		*)
-			echo -e "${PURPLE}Unsupported Phalcon version branch. Exit${NC}"
+			echo -e "${PURPLE}Unsupported git branch. Exit${NC}"
 			exit 1
 		;;
 esac
 
+_RELEASE_VERSION=${RELEASE_VERSION}
 
 if [ ! -z ${REPO_VENDOR} ]; then
 		case ${REPO_VENDOR} in
@@ -101,7 +95,7 @@ if [ ! -z ${REPO_VENDOR} ]; then
 				;;
 		esac
 elif [ ! -z "${PHP_VERSION}" ]; then
-		_RELEASE+="+extra"
+		_RELEASE_VERSION+="+extra"
 		_PHP_VERSION=${PHP_VERSION}
 fi
 
@@ -115,23 +109,27 @@ fi
 export PRODUCT_EXT=$_PRODUCT_EXT
 export PHP_VERSION=$_PHP_VERSION
 export PACKAGECLOUD_REPO=$_PACKAGECLOUD_REPO
-export RELEASE=$_RELEASE
-export VERSION="${PARTIAL_VERSION}-${RELEASE}-${LAST_COMMIT}"
+export RELEASE_VERSION=$_RELEASE_VERSION
+export VERSION="${PARTIAL_VERSION}-${RELEASE_VERSION}-${LAST_COMMIT}"
 export DOCKER_SUFFIX=$_DOCKER_SUFFIX
+export ZEPHIR_VERSION=$(zephir version)
+export FPM_VERSION=$(fpm --version)
 
-printf "\n\t${GREEN}Stable Phalcon version:${NC}   ${YELLOW}${STABLE_VERSION}${NC}"
-printf "\n\t${GREEN}Nightly Phalcon version:${NC}  ${YELLOW}${NIGHTLY_VERSION}${NC}"
-printf "\n\t${GREEN}Clone branch:${NC}             ${YELLOW}${CLONE_BRANCH}${NC}"
-printf "\n\t${GREEN}Release:${NC}                  ${YELLOW}${RELEASE}${NC}"
-printf "\n\t${GREEN}Last commit SHA:${NC}          ${YELLOW}${LAST_COMMIT}${NC}"
-printf "\n\t${GREEN}Partial version:${NC}          ${YELLOW}${PARTIAL_VERSION}${NC}"
-printf "\n\t${GREEN}Full version:${NC}             ${YELLOW}${VERSION}${NC}"
-printf "\n\t${GREEN}Product:${NC}                  ${YELLOW}${PRODUCT_EXT:-php-phalcon}${NC}"
-printf "\n\t${GREEN}PHP version:${NC}              ${YELLOW}${PHP_VERSION:-undefined}${NC}"
-printf "\n\t${GREEN}Packagecloud repo:${NC}        ${YELLOW}${PACKAGECLOUD_REPO}${NC}"
-printf "\n\t${GREEN}Docker suffix:${NC}            ${YELLOW}${DOCKER_SUFFIX:-undefined}${NC}"
-printf "\n\t${GREEN}Repo vendor:${NC}              ${YELLOW}${REPO_VENDOR:-undefined}${NC}"
-printf "\n\t${GREEN}OS:${NC}                       ${YELLOW}${OS:-undefined}${NC}"
-printf "\n\t${GREEN}DIST:${NC}                     ${YELLOW}${DIST:-undefined}${NC}"
-printf "\n\t${GREEN}PACKAGE:${NC}                  ${YELLOW}${PACKAGE}${NC}"
+printf "\n${GREEN}Stable branch/tag:${NC}      ${YELLOW}${STABLE_BRANCH}${NC}"
+printf "\n${GREEN}Nightly branch/tag:${NC}     ${YELLOW}${NIGHTLY_BRANCH}${NC}"
+printf "\n${GREEN}Clone branch:${NC}           ${YELLOW}${CLONE_BRANCH}${NC}"
+printf "\n${GREEN}Release:${NC}                ${YELLOW}${RELEASE_VERSION}${NC}"
+printf "\n${GREEN}Last commit SHA:${NC}        ${YELLOW}${LAST_COMMIT}${NC}"
+printf "\n${GREEN}Partial version:${NC}        ${YELLOW}${PARTIAL_VERSION}${NC}"
+printf "\n${GREEN}Full version name:${NC}      ${YELLOW}${VERSION}${NC}"
+printf "\n${GREEN}Product:${NC}                ${YELLOW}${PRODUCT_EXT:-php-phalcon}${NC}"
+printf "\n${GREEN}PHP version:${NC}            ${YELLOW}${PHP_VERSION:-undefined}${NC}"
+printf "\n${GREEN}Zephir version:${NC}         ${YELLOW}${ZEPHIR_VERSION}${NC}"
+printf "\n${GREEN}FPM version:${NC}            ${YELLOW}${FPM_VERSION}${NC}"
+printf "\n${GREEN}Packagecloud repo:${NC}      ${YELLOW}${PACKAGECLOUD_REPO}${NC}"
+printf "\n${GREEN}Docker image suffix:${NC}    ${YELLOW}${DOCKER_SUFFIX:-undefined}${NC}"
+printf "\n${GREEN}Repo vendor:${NC}            ${YELLOW}${REPO_VENDOR:-undefined}${NC}"
+printf "\n${GREEN}OS:${NC}                     ${YELLOW}${OS:-undefined}${NC}"
+printf "\n${GREEN}DIST:${NC}                   ${YELLOW}${DIST:-undefined}${NC}"
+printf "\n${GREEN}PACKAGE:${NC}                ${YELLOW}${PACKAGE}${NC}"
 printf "\n"

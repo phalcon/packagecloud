@@ -41,20 +41,22 @@ env:
     - PRODUCT=php-phalcon
     - PACKAGECLOUD_REPO="phalcon/stable"
     # This should be a branch name or a tag
-    - STABLE_VERSION=v3.0.4
-    - NIGHTLY_VERSION=3.1.x
+    - STABLE_BRANCH=v3.0.4
+    - NIGHTLY_BRANCH=3.1.x
+    # This should be increased to reb-build and push package
+    - RELEASE_VERSION=1
 
   matrix:
     # Stable versions
-    - OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$STABLE_VERSION REPO_VENDOR=ius
+    - OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$STABLE_BRANCH REPO_VENDOR=ius
     # Nightly versions
-    - OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$NIGHTLY_VERSION REPO_VENDOR=ius
+    - OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$NIGHTLY_BRANCH REPO_VENDOR=ius
 
 # multiple php version exclusion matrix
 matrix:
   fast_finish: true
   allow_failures:
-    - env: OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$NIGHTLY_VERSION REPO_VENDOR=ius
+    - env: OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$NIGHTLY_BRANCH REPO_VENDOR=ius
 
 before_install:
   - sudo apt-get update -qq
@@ -72,18 +74,18 @@ install:
   - bash ./ci/zephir.sh
   - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b ${CLONE_BRANCH} $HOME/cphalcon
   # Regenerate build for nightly versions
-  - '[[ "$CLONE_BRANCH" != $NIGHTLY_VERSION ]] || bash ./ci/gen-build.sh'
+  - '[[ "$CLONE_BRANCH" != $NIGHTLY_BRANCH ]] || bash ./ci/gen-build.sh'
 
 before_script:
   - fpm --version
   - zephir version
-  - . ./ci/setup_env_vars.sh
+  - . ./ci/init-environment.sh
 
 script:
-  - make
+  - bash ./ci/create-package.sh
 
 after_failure:
-  - ls -al $HOME
+  # @TODO
 
 notifications:
   email:
