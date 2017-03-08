@@ -82,6 +82,7 @@ before_script:
 
 script:
   - bash ./ci/create-package.sh
+  - bash ./ci/push.sh
 
 after_failure:
   # @TODO
