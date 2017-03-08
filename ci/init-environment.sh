@@ -19,6 +19,7 @@ PURPLE="\033[0;35m"
 GREEN="\033[0;32m"
 YELLOW="\033[1;33m"
 NC="\033[0m"
+SUPPORTED_OS="fedora-rawhide fedora24 fedora23 centos7 centos6 debian-sid debian-stretch debian-jessie debian-wheezy ubuntu-xenial ubuntu-wily ubuntu-trusty ubuntu-precise"
 
 export_ius_vars() {
 	case ${TRAVIS_PHP_VERSION} in
@@ -94,8 +95,6 @@ case ${CLONE_BRANCH} in
 	;;
 esac
 
-
-
 if [ ! -z ${REPO_VENDOR} ]; then
 	case ${REPO_VENDOR} in
 		ius*)
@@ -126,16 +125,37 @@ else
 	_OSDIST="${_BUILD_OS}-${DIST}"
 fi
 
+function is_supported_os {
+	local list="$1"
+	local item="$2"
+
+	if [[ $list =~ (^|[[:space:]])"$item"($|[[:space:]]) ]]; then
+		result=0
+	else
+		result=1
+	fi
+
+	return ${result}
+}
+
+
+if `is_supported_os "${SUPPORTED_OS}" "${_OSDIST}"`; then
+	export BUILD_TARGET=${_OSDIST}
+else
+	echo -e "${PURPLE}Unsupported OS version ${_OSDIST}. Exit${NC}"
+	exit 1
+fi
+
+
 export DOCKER_REPO="phalconphp/build"
 export BUILD_OS=${_BUILD_OS}
-export DOCKER_TAG=${DOCKER_REPO}:${_OSDIST}
-export BUILD_TARGET=${_OSDIST}
+export DOCKER_SUFFIX=$_DOCKER_SUFFIX
+export DOCKER_TAG=${DOCKER_REPO}:${_OSDIST}${DOCKER_SUFFIX}
 export PRODUCT_EXT=$_PRODUCT_EXT
 export PHP_VERSION=$_PHP_VERSION
 export PACKAGECLOUD_REPO=$_PACKAGECLOUD_REPO
 export BUILD_VERSION=$_BUILD_VERSION
 export VERSION="${PARTIAL_VERSION}-${BUILD_VERSION}-${LAST_COMMIT}"
-export DOCKER_SUFFIX=$_DOCKER_SUFFIX
 export ZEPHIR_VERSION=$(zephir version)
 export FPM_VERSION=$(fpm --version)
 
@@ -151,12 +171,12 @@ printf "\n${GREEN}PHP version:${NC}            ${YELLOW}${PHP_VERSION:-undefined
 printf "\n${GREEN}Zephir version:${NC}         ${YELLOW}${ZEPHIR_VERSION}${NC}"
 printf "\n${GREEN}FPM version:${NC}            ${YELLOW}${FPM_VERSION}${NC}"
 printf "\n${GREEN}Packagecloud repo:${NC}      ${YELLOW}${PACKAGECLOUD_REPO}${NC}"
-printf "\n${GREEN}Docker image suffix:${NC}    ${YELLOW}${DOCKER_SUFFIX:-undefined}${NC}"
 printf "\n${GREEN}Repo vendor:${NC}            ${YELLOW}${REPO_VENDOR:-"NOT USED"}${NC}"
 printf "\n${GREEN}OS:${NC}                     ${YELLOW}${OS:-undefined}${NC}"
 printf "\n${GREEN}Build OS:${NC}               ${YELLOW}${BUILD_OS}${NC}"
 printf "\n${GREEN}Distrib. version:${NC}       ${YELLOW}${DIST:-undefined}${NC}"
 printf "\n${GREEN}Docker repo:${NC}            ${YELLOW}${DOCKER_REPO}${NC}"
+printf "\n${GREEN}Docker image suffix:${NC}    ${YELLOW}${DOCKER_SUFFIX:-"NOT USED"}${NC}"
 printf "\n${GREEN}Docker tag:${NC}             ${YELLOW}${DOCKER_TAG}${NC}"
 printf "\n${GREEN}Makefile target:${NC}        ${YELLOW}${BUILD_TARGET}${NC}"
 printf "\n${GREEN}Package type:${NC}           ${YELLOW}${PACKAGE}${NC}"
