@@ -13,31 +13,29 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-SHELL         := $(shell which bash)
-NAME           = phalcon
-VERSION        = 3.1.0a
-ROOT_DIR      := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-ARGS           = $(filter-out $@,$(MAKECMDGOALS))
+SHELL:=$(shell which bash)
+ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+ARGS=$(filter-out $@,$(MAKECMDGOALS))
 
 .SILENT: ;               # no need for @
 .ONESHELL: ;             # recipes execute in same shell
 .EXPORT_ALL_VARIABLES: ; # send all vars to shell
-.NOTPARALLEL: ;          # wait for this target to finish
-Makefile: ;              # skip prerequisite discovery
 
-.PHONY: package
+all: check
 
 check:
-ifneq ($(wildcard ~/cphalcon/.*),)
+ifneq ($(wildcard ~/Dropbox/.*),)
 	$(info Found Phalcon source dir)
 else
 	$(error Phalcon source dir does not exists)
 endif
+	docker pull $(DOCKER_TAG)
 
-
-package: check
+centos7: check
 	$(info Hello world)
 	exit 0
 
-%:
-	  @:
+clean:
+
+.SECONDARY: # no target is removed because it is considered intermediate
+.PHONY: clean

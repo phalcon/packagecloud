@@ -14,4 +14,11 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-make -C ${TRAVIS_BUILD_DIR} package
+if [ "${PACKAGE}" == "rpm" ]; then
+	make -C ${TRAVIS_BUILD_DIR} ${BUILD_TARGET}
+elif [ "${PACKAGE}" == "deb" ]; then
+	make -C ${TRAVIS_BUILD_DIR} ${BUILD_TARGET}
+else
+	echo -e "Invalid PACKAGE value"
+	exit 1
+fi
