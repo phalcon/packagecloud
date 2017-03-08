@@ -80,7 +80,7 @@ Documentation: https://docs.phalconphp.com
 ;
 ;  Phalcon Framework
 ;
-;  Copyright (c) 2011-2016 Phalcon Team (https://www.phalconphp.com)
+;  Copyright (c) 2011-2017 Phalcon Team (https://www.phalconphp.com)
 ;
 ;  This source file is subject to the New BSD License that is bundled
 ;  with this package in the file https://www.phalconphp.com/LICENSE.txt
