@@ -14,4 +14,4 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-make -C ${TRAVIS_BUILD_DIR}
+make -C ${TRAVIS_BUILD_DIR} package

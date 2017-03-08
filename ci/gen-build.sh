@@ -19,7 +19,5 @@ ZEND_BACKEND="${ZEND_BACKEND:-""}"
 cd $HOME/cphalcon
 zephir fullclean
 
-echo -e ${ZEND_BACKEND}
-
 zephir generate ${ZEND_BACKEND}
 php build/gen-build.php

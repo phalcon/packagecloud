@@ -13,11 +13,31 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-NAME=phalcon
-VERSION=3.1.0a
+SHELL         := $(shell which bash)
+NAME           = phalcon
+VERSION        = 3.1.0a
+ROOT_DIR      := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+ARGS           = $(filter-out $@,$(MAKECMDGOALS))
+
+.SILENT: ;               # no need for @
+.ONESHELL: ;             # recipes execute in same shell
+.EXPORT_ALL_VARIABLES: ; # send all vars to shell
+.NOTPARALLEL: ;          # wait for this target to finish
+Makefile: ;              # skip prerequisite discovery
 
 .PHONY: package
 
-package:
+check:
+ifneq ($(wildcard ~/cphalcon/.*),)
+	$(info Found Phalcon source dir)
+else
+	$(error Phalcon source dir does not exists)
+endif
+
+
+package: check
 	$(info Hello world)
 	exit 0
+
+%:
+	  @:
