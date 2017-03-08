@@ -76,12 +76,13 @@ install:
 before_script:
   - fpm --version
   - zephir version
+  - . ./ci/setup_env_vars.sh
 
 script:
   - make
 
 after_failure:
-  - ls -al
+  - ls -al $HOME
 
 notifications:
   email:
