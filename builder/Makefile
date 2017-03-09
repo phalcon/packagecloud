@@ -21,6 +21,10 @@ ARGS=$(filter-out $@,$(MAKECMDGOALS))
 .ONESHELL: ;             # recipes execute in same shell
 .EXPORT_ALL_VARIABLES: ; # send all vars to shell
 
+# Setting variables
+VERSION=$(shell cat VERSION | sed -n 's/^\([0-9]\{1,\}\.[0-9]\{1,\}\.[0-9]\{1,\}[a-z]\{0,1\}\)-\([0-9]*\)-\([a-z0-9]*\)/\1/p')
+RELEASE=$(shell cat VERSION | sed -n 's/^\([0-9]\{1,\}\.[0-9]\{1,\}\.[0-9]\{1,\}[a-z]\{0,1\}\)-\([0-9]*\)-\([a-z0-9]*\)/\2/p')
+
 all: check
 
 # Sanity checks
@@ -31,10 +35,11 @@ else
 	$(error Phalcon source dir does not exists)
 endif
 ifeq ("$(wildcard VERSION)","")
-$(error Missing VERSION file)
+	$(error Missing VERSION file)
+endif
 
 centos7: check
-	$(info Hello world)
+	$(info $(VERSION)-$(RELEASE))
 	exit 0
 
 clean:

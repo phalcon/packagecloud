@@ -19,3 +19,7 @@
 #
 set -ex
 docker pull ${DOCKER_TAG}
+
+retcode=$?
+rm -f ${BUILD_DIR}/VERSION
+exit $retcode

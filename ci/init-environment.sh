@@ -139,14 +139,12 @@ function is_supported_os {
 	return ${result}
 }
 
-
 if `is_supported_os "${SUPPORTED_OS}" "${_OSDIST}"`; then
 	export BUILD_TARGET=${_OSDIST}
 else
 	echo -e "${PURPLE}Unsupported OS version ${_OSDIST}. Exit${NC}"
 	exit 1
 fi
-
 
 export DOCKER_REPO="phalconphp/build"
 export BUILD_OS=${_BUILD_OS}
