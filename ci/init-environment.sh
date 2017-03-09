@@ -50,7 +50,7 @@ usage_missed() {
 	exit 1
 }
 
-if [ ! -d "$HOME/cphalcon" ]; then
+if [ ! -d "${BUILDDIR}" ]; then
 	echo -e "${PURPLE}Unable to locate 'cphalcon' directory. Exit${NC}"
 	exit 1
 fi
@@ -146,7 +146,6 @@ else
 	exit 1
 fi
 
-export DOCKER_REPO="phalconphp/build"
 export BUILD_OS=${_BUILD_OS}
 export DOCKER_SUFFIX=$_DOCKER_SUFFIX
 export DOCKER_TAG=${DOCKER_REPO}:${_OSDIST}${DOCKER_SUFFIX}
@@ -155,9 +154,7 @@ export PHP_VERSION=$_PHP_VERSION
 export PACKAGECLOUD_REPO=$_PACKAGECLOUD_REPO
 export BUILD_VERSION=$_BUILD_VERSION
 export VERSION="${PARTIAL_VERSION}-${BUILD_VERSION}-${LAST_COMMIT}"
-export BUILD_DIR=${TRAVIS_BUILD_DIR}/builder
 export ZEPHIR_VERSION=$(zephir version)
-export FPM_VERSION=$(fpm --version)
 
 printf "\n${GREEN}Stable branch/tag:${NC}      ${YELLOW}${STABLE_BRANCH}${NC}"
 printf "\n${GREEN}Nightly branch/tag:${NC}     ${YELLOW}${NIGHTLY_BRANCH}${NC}"
@@ -169,7 +166,6 @@ printf "\n${GREEN}Full version name:${NC}      ${YELLOW}${VERSION}${NC}"
 printf "\n${GREEN}Product:${NC}                ${YELLOW}${PRODUCT_EXT:-php-phalcon}${NC}"
 printf "\n${GREEN}PHP version:${NC}            ${YELLOW}${PHP_VERSION:-undefined}${NC}"
 printf "\n${GREEN}Zephir version:${NC}         ${YELLOW}${ZEPHIR_VERSION}${NC}"
-printf "\n${GREEN}FPM version:${NC}            ${YELLOW}${FPM_VERSION}${NC}"
 printf "\n${GREEN}Packagecloud repo:${NC}      ${YELLOW}${PACKAGECLOUD_REPO}${NC}"
 printf "\n${GREEN}Repo vendor:${NC}            ${YELLOW}${REPO_VENDOR:-"NOT USED"}${NC}"
 printf "\n${GREEN}OS:${NC}                     ${YELLOW}${OS:-undefined}${NC}"
@@ -180,7 +176,7 @@ printf "\n${GREEN}Docker image suffix:${NC}    ${YELLOW}${DOCKER_SUFFIX:-"NOT US
 printf "\n${GREEN}Docker tag:${NC}             ${YELLOW}${DOCKER_TAG}${NC}"
 printf "\n${GREEN}Makefile target:${NC}        ${YELLOW}${BUILD_TARGET}${NC}"
 printf "\n${GREEN}Package type:${NC}           ${YELLOW}${PACKAGE}${NC}"
-printf "\n${GREEN}Build dir:${NC}              ${YELLOW}${BUILD_DIR}${NC}"
+printf "\n${GREEN}Build dir:${NC}              ${YELLOW}${BUILDDIR}${NC}"
 printf "\n"
 
 echo ${VERSION} > ${BUILD_DIR}/VERSION

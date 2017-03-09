@@ -39,7 +39,9 @@ env:
   global:
     - PATH="$HOME/bin:$PATH"
     - PRODUCT=php-phalcon
-    - PACKAGECLOUD_REPO="phalcon/stable"
+    - PACKAGECLOUD_REPO=phalcon/stable
+    - DOCKER_REPO=phalconphp/build
+    - BUILDDIR=$TRAVIS_BUILD_DIR/cphalcon
     # This should be a branch name or a tag
     - STABLE_BRANCH=v3.0.4
     - NIGHTLY_BRANCH=3.1.x
@@ -60,7 +62,6 @@ matrix:
     - env: OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$NIGHTLY_BRANCH REPO_VENDOR=ius
 
 before_install:
-  - sudo apt-get update -qq
   # Use ZendEngine3 backend for PHP 7.x
   - '[[ "$TRAVIS_PHP_VERSION" != "7.0" ]] || export ZEND_BACKEND="--backend=ZendEngine3"'
   # Disable not needed xdebug if any
@@ -70,10 +71,8 @@ before_install:
   - sudo ln -s /home/travis/.phpenv/versions/$(phpenv version-name)/bin/php-config /usr/bin/
 
 install:
-  - sudo apt-get install -y ruby-dev &> /dev/null
-  - gem install --no-ri --no-rdoc fpm &> /dev/null
-  - bash ./ci/zephir.sh
-  - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b ${CLONE_BRANCH} $HOME/cphalcon
+  - bash ./ci/install-zephir.sh
+  - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b ${CLONE_BRANCH} ${TRAVIS_BUILD_DIR}/cphalcon
   - git clone -q --depth=1 https://github.com/packpack/packpack.git packpack
   # Regenerate build for nightly versions
   - '[[ "$CLONE_BRANCH" != $NIGHTLY_BRANCH ]] || bash ./ci/gen-build.sh'
