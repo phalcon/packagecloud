@@ -55,8 +55,8 @@ if [ ! -d "${BUILDDIR}" ]; then
 	exit 1
 fi
 
-export LAST_COMMIT=$(cd $HOME/cphalcon; git rev-parse --short=8 HEAD)
-export PARTIAL_VERSION=$(cd $HOME/cphalcon; cat config.json | jq ".version" | sed -E 's/\"//g')
+export LAST_COMMIT=$(cd ${BUILDDIR}; git rev-parse --short=8 HEAD)
+export PARTIAL_VERSION=$(cd${BUILDDIR}; cat config.json | jq ".version" | sed -E 's/\"//g')
 export TRAVIS_BUILD_DIR="${TRAVIS_BUILD_DIR:-$(dirname $(cd $(dirname $0) && pwd))}"
 
 if [ -z ${CLONE_BRANCH} ]; then
