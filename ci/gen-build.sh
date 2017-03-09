@@ -16,7 +16,7 @@
 
 ZEND_BACKEND="${ZEND_BACKEND:-""}"
 
-cd $HOME/cphalcon
+cd ${PHALCON_DIR}
 zephir fullclean
 
 zephir generate ${ZEND_BACKEND}

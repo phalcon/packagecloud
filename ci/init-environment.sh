@@ -50,13 +50,13 @@ usage_missed() {
 	exit 1
 }
 
-if [ ! -d "${BUILDDIR}" ]; then
+if [ ! -d "${PHALCON_DIR}" ]; then
 	echo -e "${PURPLE}Unable to locate 'cphalcon' directory. Exit${NC}"
 	exit 1
 fi
 
-export LAST_COMMIT=$(cd ${BUILDDIR}; git rev-parse --short=8 HEAD)
-export PARTIAL_VERSION=$(cd${BUILDDIR}; cat config.json | jq ".version" | sed -E 's/\"//g')
+export LAST_COMMIT=$(cd ${PHALCON_DIR}; git rev-parse --short=8 HEAD)
+export VERSION=$(cd ${PHALCON_DIR}; cat config.json | jq ".version" | sed -E 's/\"//g')
 export TRAVIS_BUILD_DIR="${TRAVIS_BUILD_DIR:-$(dirname $(cd $(dirname $0) && pwd))}"
 
 if [ -z ${CLONE_BRANCH} ]; then
@@ -140,43 +140,43 @@ function is_supported_os {
 }
 
 if `is_supported_os "${SUPPORTED_OS}" "${_OSDIST}"`; then
-	export BUILD_TARGET=${_OSDIST}
+	echo;
 else
 	echo -e "${PURPLE}Unsupported OS version ${_OSDIST}. Exit${NC}"
 	exit 1
 fi
 
 export BUILD_OS=${_BUILD_OS}
-export DOCKER_SUFFIX=$_DOCKER_SUFFIX
+export DOCKER_SUFFIX=${_DOCKER_SUFFIX}
+export DOCKER_IMAGE=${_OSDIST}${DOCKER_SUFFIX}
 export DOCKER_TAG=${DOCKER_REPO}:${_OSDIST}${DOCKER_SUFFIX}
-export PRODUCT_EXT=$_PRODUCT_EXT
-export PHP_VERSION=$_PHP_VERSION
-export PACKAGECLOUD_REPO=$_PACKAGECLOUD_REPO
-export BUILD_VERSION=$_BUILD_VERSION
-export VERSION="${PARTIAL_VERSION}-${BUILD_VERSION}-${LAST_COMMIT}"
+export PRODUCT_EXT=${_PRODUCT_EXT}
+export PHP_VERSION=${_PHP_VERSION}
+export PACKAGECLOUD_REPO=${_PACKAGECLOUD_REPO}
+export BUILDDIR=${PHALCON_DIR}
+export RELEASE=${_BUILD_VERSION}
 export ZEPHIR_VERSION=$(zephir version)
 
-printf "\n${GREEN}Stable branch/tag:${NC}      ${YELLOW}${STABLE_BRANCH}${NC}"
-printf "\n${GREEN}Nightly branch/tag:${NC}     ${YELLOW}${NIGHTLY_BRANCH}${NC}"
-printf "\n${GREEN}Clone branch:${NC}           ${YELLOW}${CLONE_BRANCH}${NC}"
-printf "\n${GREEN}Build version:${NC}          ${YELLOW}${BUILD_VERSION}${NC}"
-printf "\n${GREEN}Last commit SHA:${NC}        ${YELLOW}${LAST_COMMIT}${NC}"
-printf "\n${GREEN}Partial version:${NC}        ${YELLOW}${PARTIAL_VERSION}${NC}"
-printf "\n${GREEN}Full version name:${NC}      ${YELLOW}${VERSION}${NC}"
-printf "\n${GREEN}Product:${NC}                ${YELLOW}${PRODUCT_EXT:-php-phalcon}${NC}"
-printf "\n${GREEN}PHP version:${NC}            ${YELLOW}${PHP_VERSION:-undefined}${NC}"
-printf "\n${GREEN}Zephir version:${NC}         ${YELLOW}${ZEPHIR_VERSION}${NC}"
-printf "\n${GREEN}Packagecloud repo:${NC}      ${YELLOW}${PACKAGECLOUD_REPO}${NC}"
-printf "\n${GREEN}Repo vendor:${NC}            ${YELLOW}${REPO_VENDOR:-"NOT USED"}${NC}"
-printf "\n${GREEN}OS:${NC}                     ${YELLOW}${OS:-undefined}${NC}"
-printf "\n${GREEN}Build OS:${NC}               ${YELLOW}${BUILD_OS}${NC}"
-printf "\n${GREEN}Distrib. version:${NC}       ${YELLOW}${DIST:-undefined}${NC}"
-printf "\n${GREEN}Docker repo:${NC}            ${YELLOW}${DOCKER_REPO}${NC}"
-printf "\n${GREEN}Docker image suffix:${NC}    ${YELLOW}${DOCKER_SUFFIX:-"NOT USED"}${NC}"
-printf "\n${GREEN}Docker tag:${NC}             ${YELLOW}${DOCKER_TAG}${NC}"
-printf "\n${GREEN}Makefile target:${NC}        ${YELLOW}${BUILD_TARGET}${NC}"
-printf "\n${GREEN}Package type:${NC}           ${YELLOW}${PACKAGE}${NC}"
-printf "\n${GREEN}Build dir:${NC}              ${YELLOW}${BUILDDIR}${NC}"
+printf "\n${GREEN}Stable branch/tag:${NC}           ${YELLOW}${STABLE_BRANCH}${NC}"
+printf "\n${GREEN}Nightly branch/tag:${NC}          ${YELLOW}${NIGHTLY_BRANCH}${NC}"
+printf "\n${GREEN}Clone branch:${NC}                ${YELLOW}${CLONE_BRANCH}${NC}"
+printf "\n${GREEN}Build version:${NC}               ${YELLOW}${RELEASE}${NC}"
+printf "\n${GREEN}Last commit SHA:${NC}             ${YELLOW}${LAST_COMMIT}${NC}"
+printf "\n${GREEN}Semantic version:${NC}            ${YELLOW}${VERSION}${NC}"
+printf "\n${GREEN}Full version name:${NC}           ${YELLOW}${VERSION}-${RELEASE}-${LAST_COMMIT}${NC}"
+printf "\n${GREEN}Product:${NC}                     ${YELLOW}${PRODUCT_EXT:-php-phalcon}${NC}"
+printf "\n${GREEN}PHP version:${NC}                 ${YELLOW}${PHP_VERSION:-undefined}${NC}"
+printf "\n${GREEN}Zephir version:${NC}              ${YELLOW}${ZEPHIR_VERSION}${NC}"
+printf "\n${GREEN}Packagecloud repo:${NC}           ${YELLOW}${PACKAGECLOUD_REPO}${NC}"
+printf "\n${GREEN}Repo vendor:${NC}                 ${YELLOW}${REPO_VENDOR:-"NOT USED"}${NC}"
+printf "\n${GREEN}OS:${NC}                          ${YELLOW}${OS:-undefined}${NC}"
+printf "\n${GREEN}Build OS:${NC}                    ${YELLOW}${BUILD_OS}${NC}"
+printf "\n${GREEN}Distrib. version:${NC}            ${YELLOW}${DIST:-undefined}${NC}"
+printf "\n${GREEN}Docker repo:${NC}                 ${YELLOW}${DOCKER_REPO}${NC}"
+printf "\n${GREEN}Docker image:${NC}                ${YELLOW}${DOCKER_IMAGE:-"NOT USED"}${NC}"
+printf "\n${GREEN}Full qualified docker image:${NC} ${YELLOW}${DOCKER_TAG}${NC}"
+printf "\n${GREEN}Docker suffix:${NC}               ${YELLOW}${DOCKER_SUFFIX:-"NOT USED"}${NC}"
+printf "\n${GREEN}Package type:${NC}                ${YELLOW}${PACKAGE}${NC}"
+printf "\n${GREEN}Phalcon dir:${NC}                 ${YELLOW}${PHALCON_DIR}${NC}"
+printf "\n${GREEN}Build dir:${NC}                   ${YELLOW}${BUILDDIR}${NC}"
 printf "\n"
-
-echo ${VERSION} > ${BUILD_DIR}/VERSION

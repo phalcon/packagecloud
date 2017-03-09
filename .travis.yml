@@ -41,7 +41,7 @@ env:
     - PRODUCT=php-phalcon
     - PACKAGECLOUD_REPO=phalcon/stable
     - DOCKER_REPO=phalconphp/build
-    - BUILDDIR=$TRAVIS_BUILD_DIR/cphalcon
+    - PHALCON_DIR=$TRAVIS_BUILD_DIR/cphalcon
     # This should be a branch name or a tag
     - STABLE_BRANCH=v3.0.4
     - NIGHTLY_BRANCH=3.1.x
@@ -72,8 +72,9 @@ before_install:
 
 install:
   - bash ./ci/install-zephir.sh
-  - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b ${CLONE_BRANCH} ${TRAVIS_BUILD_DIR}/cphalcon
-  - git clone -q --depth=1 https://github.com/packpack/packpack.git packpack
+  - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b $CLONE_BRANCH $PHALCON_DIR
+  # See https://github.com/packpack/packpack/pull/63
+  - git clone -q --depth=1 https://github.com/sergeyklay/build.git -b patch-1 packpack
   # Regenerate build for nightly versions
   - '[[ "$CLONE_BRANCH" != $NIGHTLY_BRANCH ]] || bash ./ci/gen-build.sh'
 
