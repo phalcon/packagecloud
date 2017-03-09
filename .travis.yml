@@ -74,6 +74,7 @@ install:
   - gem install --no-ri --no-rdoc fpm &> /dev/null
   - bash ./ci/zephir.sh
   - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b ${CLONE_BRANCH} $HOME/cphalcon
+  - git clone -q --depth=1 https://github.com/packpack/packpack.git packpack
   # Regenerate build for nightly versions
   - '[[ "$CLONE_BRANCH" != $NIGHTLY_BRANCH ]] || bash ./ci/gen-build.sh'
 
@@ -81,9 +82,7 @@ before_script:
   - . ./ci/init-environment.sh
 
 script:
-  - bash ./ci/prepare-image.sh
-  - bash ./ci/create-package.sh
-  - bash ./ci/push.sh
+  - bash ./packpack/packpack
 
 after_failure:
   # @TODO
