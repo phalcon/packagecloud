@@ -48,6 +48,9 @@ env:
     # This should be increased to reb-build and push package
     - STABLE_BUILD_VERSION=1
     - NIGHTLY_BUILD_VERSION=1
+    - CHANGELOG_NAME="Phalcon Team"
+    - CHANGELOG_EMAIL="build@phalconphp.com"
+    - CHANGELOG_TEXT="Automated build. See details on GitHub release page https://github.com/phalcon/cphalcon/releases"
 
   matrix:
     # Stable versions
