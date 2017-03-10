@@ -51,6 +51,7 @@ env:
     - CHANGELOG_NAME="Phalcon Team"
     - CHANGELOG_EMAIL="build@phalconphp.com"
     - CHANGELOG_TEXT="Automated build. See details on GitHub release page https://github.com/phalcon/cphalcon/releases"
+    - TARGET=package
 
   matrix:
     # Stable versions
@@ -76,16 +77,14 @@ before_install:
 install:
   - bash ./ci/install-zephir.sh
   - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b $CLONE_BRANCH $PHALCON_DIR
-  # See https://github.com/packpack/packpack/pull/63
-  - git clone -q --depth=1 https://github.com/sergeyklay/build.git -b patch-1 packpack
-  # Regenerate build for nightly versions
-  - '[[ "$CLONE_BRANCH" != $NIGHTLY_BRANCH ]] || bash ./ci/gen-build.sh'
 
 before_script:
+  # Regenerate build for nightly versions
+  - '[[ "$CLONE_BRANCH" != $NIGHTLY_BRANCH ]] || bash ./ci/gen-build.sh'
   - . ./ci/init-environment.sh
 
 script:
-  - bash ./packpack/packpack
+  - make -f .travis.mk ${TARGET}
 
 after_failure:
   # @TODO
