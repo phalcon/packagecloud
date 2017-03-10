@@ -16,22 +16,53 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
+SHELL=/bin/bash
+ZEPHIR=zephir
+PHP=php
 SCRIPTDIR:=${CURDIR}
+
+# See https://github.com/packpack/packpack/pull/63
+PACK_REPO=https://github.com/sergeyklay/build.git
+PACK_BRANCH=patch-1
+
+ZEND_BACKEND?=""
 
 all: package
 
-source:
-	# See https://github.com/packpack/packpack/pull/63
-	git clone https://github.com/packpack/packpack.git sergeyklay/build.git -b patch-1 $(SCRIPTDIR)/packpack
+gen-build: check-env
+ifneq ($(CLONE_BRANCH), $(STABLE_BRANCH))
+	$(info Regenerate build...)
+	cd $(PHALCON_DIR); \
+	$(ZEPHIR) fullclean; \
+	$(ZEPHIR) generate ${ZEND_BACKEND}; \
+	$(PHP) build/gen-build.php
+endif
+
+check-env:
+ifndef PHALCON_DIR
+	$(error PHALCON_DIR is undefined)
+endif
+ifndef CLONE_BRANCH
+	$(error CLONE_BRANCH is undefined)
+endif
+ifndef STABLE_BRANCH
+	$(error STABLE_BRANCH is undefined)
+endif
+
+source: gen-build
+	$(info Create tarball...)
+	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
 	TARBALL_COMPRESSOR=gz packpack/packpack tarball
 
-package:
-	# See https://github.com/packpack/packpack/pull/63
-	git clone https://github.com/packpack/packpack.git sergeyklay/build.git -b patch-1 $(SCRIPTDIR)/packpack
+package: gen-build
+	$(info Build package...)
+	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
 	./packpack/packpack
 
 clean:
+	$(info Clenup...)
 	rm -rf $(SCRIPTDIR)/packpack
 
+.ONESHELL:
 .SECONDARY:
-.PHONY: clean
+.PHONY: source package clean check-env gen-build

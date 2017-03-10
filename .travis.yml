@@ -79,8 +79,6 @@ install:
   - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b $CLONE_BRANCH $PHALCON_DIR
 
 before_script:
-  # Regenerate build for nightly versions
-  - '[[ "$CLONE_BRANCH" != $NIGHTLY_BRANCH ]] || bash ./ci/gen-build.sh'
   - . ./ci/init-environment.sh
 
 script:
