@@ -14,5 +14,5 @@
 #
 
 define grabv
-$(shell cat "$1" | grep version | head -1 | sed -E 's|[\", ]||g' | cut -d ':' -f 2)
+$(shell cat "$1" | grep version | head -1 | $(SED) -E 's|[\", ]||g' | cut -d ':' -f 2)
 endef

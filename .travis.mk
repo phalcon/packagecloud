@@ -18,6 +18,9 @@
 SHELL=/bin/bash
 SCRIPTDIR:=${CURDIR}
 
+# Enable this for debugging the sed scripts
+SED=$(SCRIPTDIR)/sedsed
+
 include $(SCRIPTDIR)/builder/functions.mk
 include $(SCRIPTDIR)/builder/config.mk
 include $(SCRIPTDIR)/builder/check.mk
