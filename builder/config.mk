@@ -94,10 +94,11 @@ DOCKER_SUFFIX=-7.0
 endif
 endif
 
-REVISION=$(shell cd $(PHALCON_DIR); git rev-parse --short=8 HEAD)
-VERSION?=$(shell cat "$(PHALCON_DIR)/config.json" | grep version | head -1 | $(SED) -E 's|[\", ]||g' | cut -d ':' -f 2)
+REVISION=$(shell cd $(SOURCEDIR); git rev-parse --short=8 HEAD)
+VERSION?=$(shell cat "$(SOURCEDIR)/config.json" | grep version | head -1 | sed -E 's|[\", ]||g' | cut -d ':' -f 2)
 VERSION_FULL=$(VERSION)-$(RELEASE)-$(REVISION)
 ZEPHIR_VERSION=$(shell $(ZEPHIR) version)
 DOCKER_IMAGE=$(OSDIST)$(DOCKER_SUFFIX)
 DOCKER_TAG=$(DOCKER_REPO):$(OSDIST)$(DOCKER_SUFFIX)
-BUILDDIR=$(PHALCON_DIR)/build
+BUILDDIR=$(SCRIPTDIR)/build
+TARBALL_EXTRA_ARGS=--exclude=.github --exclude=.editorconfig --exclude=.gitattributes

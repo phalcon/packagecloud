@@ -17,7 +17,7 @@ gen-host-vars: report
 	$(shell echo "#!/usr/bin/env bash" > $(SCRIPTDIR)/.variables.sh)
 	$(shell echo "export PRODUCT=\"$(PRODUCT)\"" >> $(SCRIPTDIR)/.variables.sh)
 	$(shell echo "export PRODUCT_EXTRA=\"$(PRODUCT_EXTRA)\"" >> $(SCRIPTDIR)/.variables.sh)
-	$(shell echo "export PHALCON_DIR=\"$(PHALCON_DIR)\"" >> $(SCRIPTDIR)/.variables.sh)
+	$(shell echo "export SOURCEDIR=\"$(SOURCEDIR)\"" >> $(SCRIPTDIR)/.variables.sh)
 	$(shell echo "export BUILDDIR=\"$(BUILDDIR)\"" >> $(SCRIPTDIR)/.variables.sh)
 	$(shell echo "export SCRIPTDIR=\"$(SCRIPTDIR)\"" >> $(SCRIPTDIR)/.variables.sh)
 	$(shell echo "export STABLE_BRANCH=\"$(STABLE_BRANCH)\"" >> $(SCRIPTDIR)/.variables.sh)
@@ -49,6 +49,7 @@ gen-host-vars: report
 
 gen-docker-vars:
 	$(shell echo "PRODUCT_EXTRA=$(PRODUCT_EXTRA)" > $(BUILDDIR)/env)
+	$(shell echo "TRAVIS_PHP_VERSION=$(TRAVIS_PHP_VERSION)" >> $(BUILDDIR)/env)
 	$(shell echo "PHP_VERSION=$(PHP_VERSION)" >> $(BUILDDIR)/env)
 	$(shell echo "REPO_VENDOR=$(REPO_VENDOR)" >> $(BUILDDIR)/env)
 
@@ -58,7 +59,7 @@ report:
 	@echo "   Product ............................: $(PRODUCT)"
 	@echo "   Product extra ......................: $(PRODUCT_EXTRA)"
 	@echo ""
-	@echo "   Product path .......................: $(PHALCON_DIR)"
+	@echo "   Source path ........................: $(SOURCEDIR)"
 	@echo "   Build path .........................: $(BUILDDIR)"
 	@echo "   Current path .......................: $(SCRIPTDIR)"
 	@echo ""

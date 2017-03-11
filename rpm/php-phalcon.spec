@@ -25,12 +25,12 @@
 # after 40-json.ini, 20-pdo.ini
 %global ini_name    50-%{ext_name}.ini
 
-%global src_dir cphalcon/build/php%{php_major}/safe
+%global src_dir build/php%{php_major}/safe
 %if %{__isa_bits} == 32
-%global src_dir cphalcon/build/php%{php_major}/32bits
+%global src_dir build/php%{php_major}/32bits
 %endif
 %if %{__isa_bits} == 64
-%global src_dir cphalcon/build/php%{php_major}/64bits
+%global src_dir build/php%{php_major}/64bits
 %endif
 
 %if 0%{?fedora} >= 17 || 0%{?rhel} >= 7
@@ -45,7 +45,7 @@ Version: %{version}
 Release: 1.%{repo_vendor}%{?dist}
 Summary: High performance PHP framework
 Group: Development/Libraries
-Packager: Phalcon Buildbot <build@phalconphp.com>
+Packager: Phalcon Team <build@phalconphp.com>
 License: BSD 3-Clause
 URL: https://github.com/phalcon/cphalcon
 Source0: phalcon-php-%{version}.tar.gz
@@ -132,6 +132,8 @@ export LDFLAGS
 export CFLAGS
 export CPPFLAGS="-DPHALCON_RELEASE"
 
+ls -al
+ls -al /build
 %{__mv} %{src_dir} build/NTS
 
 %if %{with_zts}
@@ -217,10 +219,11 @@ extclean zts-phpize
 %files
 %defattr(-,root,root,-)
 %{!?_licensedir:%global license %%doc}
-%license cphalcon/docs/LICENSE.txt
-%doc cphalcon/CHANGELOG.md
-%doc cphalcon/CONTRIBUTING.md
-%doc cphalcon/README.md
+%license docs/LICENSE.txt
+%doc BACKERS.md
+%doc CHANGELOG.md
+%doc CONTRIBUTING.md
+%doc README.md
 
 %{php_extdir}/%{ext_name}.so
 %config(noreplace) %{php_inidir}/%{ini_name}

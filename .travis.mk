@@ -18,39 +18,39 @@
 SHELL:=$(shell which bash)
 SCRIPTDIR:=${CURDIR}
 
-# Enable this for debugging the sed scripts
-SED=$(SCRIPTDIR)/sedsed
-
 .SILENT: ;               # no need for @
 .NOTPARALLEL: ;          # wait for this target to finish
 .EXPORT_ALL_VARIABLES: ; # send all vars to shell
 
+.PHONY: gen-build source package clean gen-host-vars gen-docker-vars patching-spec
+
 include $(SCRIPTDIR)/builder/config.mk
 include $(SCRIPTDIR)/builder/check.mk
 include $(SCRIPTDIR)/builder/vars.mk
+include $(SCRIPTDIR)/builder/patching.mk
 
 gen-build: gen-host-vars
 ifneq ($(CLONE_BRANCH), $(STABLE_BRANCH))
 	$(info Regenerate build...)
-	cd $(PHALCON_DIR); \
+	cd $(SOURCEDIR); \
 	$(ZEPHIR) fullclean; \
 	$(ZEPHIR) generate ${ZEND_BACKEND}; \
 	$(PHP) build/gen-build.php
 endif
 
-source: gen-build gen-docker-vars
+source: gen-build gen-docker-vars patching-spec
 	$(info Create tarball...)
 	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
-	TARBALL_COMPRESSOR=gz packpack/packpack tarball
+	TARBALL_COMPRESSOR=gz $(SCRIPTDIR)/packpack/packpack tarball
 
-package: gen-build
+package: gen-build gen-docker-vars patching-spec
 	$(info Build package...)
 	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
-	./packpack/packpack
+	$(SCRIPTDIR)/packpack/packpack
 
-clean: gen-docker-vars
-	$(info Clenup...)
+clean: gen-host-vars
+	$(info Cleanup...)
 	rm -rf $(SCRIPTDIR)/packpack $(SCRIPTDIR)/.variables.sh; \
-	cd $(PHALCON_DIR); \
+	cd $(SOURCEDIR); \
 	$(ZEPHIR) fullclean; \
 	git checkout --

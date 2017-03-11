@@ -1,3 +1,2 @@
 *.mk         linguist-language=Makefile
 debian/rules linguist-language=Makefile
-sedsed       linguist-language=bash

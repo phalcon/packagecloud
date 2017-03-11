@@ -41,7 +41,7 @@ env:
     - PRODUCT=php-phalcon
     - PACKAGECLOUD_REPO=phalcon/stable
     - DOCKER_REPO=phalconphp/build
-    - PHALCON_DIR=$TRAVIS_BUILD_DIR/cphalcon
+    - SOURCEDIR=$TRAVIS_BUILD_DIR/cphalcon
     # This should be a branch name or a tag
     - STABLE_BRANCH=v3.0.4
     - NIGHTLY_BRANCH=3.1.x
@@ -50,7 +50,7 @@ env:
     - NIGHTLY_BUILD_VERSION=1
     - CHANGELOG_NAME="Phalcon Team"
     - CHANGELOG_EMAIL="build@phalconphp.com"
-    - CHANGELOG_TEXT="Automated build. See details at release page: https://github.com/phalcon/cphalcon/releases"
+    - CHANGELOG_TEXT="Automated build. See details at release page https://github.com/phalcon/cphalcon/releases"
     - TARGET=package
 
   matrix:
@@ -76,13 +76,16 @@ before_install:
 
 install:
   - bash ./install-zephir.sh
-  - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b $CLONE_BRANCH $PHALCON_DIR
+  - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b $CLONE_BRANCH $SOURCEDIR
 
 before_script:
   # @TODO
 
 script:
   - make -f .travis.mk ${TARGET}
+
+before_deploy:
+  - ls -l build/
 
 after_failure:
   # @TODO

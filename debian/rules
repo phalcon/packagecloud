@@ -57,15 +57,15 @@ ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),7))
 	PHP_API_VERSION=$(shell php-config7.0 --phpapi)
 endif
 
-PHALCON_DIR=cphalcon/build/php$(PHP_MAJOR_VERSION)/safe
+SOURCEDIR=cphalcon/build/php$(PHP_MAJOR_VERSION)/safe
 DEB_HOST_ARCH?=$(shell dpkg-architecture -qDEB_HOST_ARCH)
 
 ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),i386))
-	PHALCON_DIR=cphalcon/build/php$(PHP_MAJOR_VERSION)/32bits
+	SOURCEDIR=cphalcon/build/php$(PHP_MAJOR_VERSION)/32bits
 endif
 
 ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),amd64))
-	PHALCON_DIR=cphalcon/build/php$(PHP_MAJOR_VERSION)/64bits
+	SOURCEDIR=cphalcon/build/php$(PHP_MAJOR_VERSION)/64bits
 endif
 
 CFLAGS+=-g3 -fvisibility=hidden -DPHALCON_RELEASE
@@ -87,15 +87,15 @@ prepare-files-stamp:
 	touch prepare-files-stamp
 
 override_dh_auto_configure:
-	(cd $(PHALCON_DIR); phpize; ./configure --enable-phalcon=shared)
+	(cd $(SOURCEDIR); phpize; ./configure --enable-phalcon=shared)
 
 override_dh_auto_build:
-	$(MAKE) -C $(PHALCON_DIR)
+	$(MAKE) -C $(SOURCEDIR)
 
 override_dh_auto_clean:
 	dh_auto_clean
 	( \
-		cd $(PHALCON_DIR); \
+		cd $(SOURCEDIR); \
 		[ -f Makefile ] && $(MAKE) distclean; \
 		phpize --clean; \
 		rm -f tmp-php.ini; \
@@ -105,7 +105,7 @@ override_dh_installdirs: prepare-files-stamp
 	dh_installdirs
 
 override_dh_auto_install:
-	INSTALL_ROOT=$(BUILD) $(MAKE) -C $(PHALCON_DIR) install
+	INSTALL_ROOT=$(BUILD) $(MAKE) -C $(SOURCEDIR) install
 
 override_dh_strip:
 	dh_strip -s --dbg-package=$(PHALCON_DBG_EXT)

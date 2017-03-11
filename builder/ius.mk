@@ -19,19 +19,19 @@ ifeq ($(filter $(PHP_MAJOR),$(SUPPORTED_IUS_VERSIONS)),)
 $(error The $(PHP_MAJOR) is unsupported PHP version for $(REPO_VENDOR))
 endif
 
-ifneq ($(filter $(PHP_MAJOR),5.5),)
+ifeq ($(PHP_MAJOR),5.5)
 PRODUCT_EXTRA=php55u-phalcon
 PHP_VERSION=php55u
 DOCKER_SUFFIX=-ius55
 endif
 
-ifneq ($(filter $(PHP_MAJOR),5.6),)
+ifeq ($(PHP_MAJOR),5.6)
 PRODUCT_EXTRA=php56u-phalcon
 PHP_VERSION=php56u
 DOCKER_SUFFIX=-ius56
 endif
 
-ifneq ($(filter $(PHP_MAJOR),7.0),)
+ifeq ($(PHP_MAJOR),7.0)
 PRODUCT_EXTRA=php70u-phalcon
 PHP_VERSION=php70u
 DOCKER_SUFFIX=-ius70

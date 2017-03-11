@@ -17,9 +17,6 @@ trim_trailing_whitespace = false
 [*.sh]
 indent_style = tab
 
-[sedsed]
-indent_style = tab
-
 [*.mk]
 indent_style = tab
 

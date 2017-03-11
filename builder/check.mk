@@ -13,8 +13,8 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-ifndef PHALCON_DIR
-$(error PHALCON_DIR is undefined)
+ifndef SOURCEDIR
+$(error SOURCEDIR is undefined)
 endif
 
 ifeq ($(TRAVIS_PHP_VERSION),)
@@ -33,7 +33,7 @@ ifndef NIGHTLY_BRANCH
 $(error NIGHTLY_BRANCH is undefined)
 endif
 
-ifndef ZEPHIR
+ifeq ($(ZEPHIR),)
 $(error Zephir is not available please install it first)
 endif
 
