@@ -21,10 +21,9 @@ SCRIPTDIR:=${CURDIR}
 # Enable this for debugging the sed scripts
 SED=$(SCRIPTDIR)/sedsed
 
-.NOTPARALLEL: ; # wait for this target to finish
-.EXPORT_ALL_VARIABLES: ;
+.NOTPARALLEL: ;          # wait for this target to finish
+.EXPORT_ALL_VARIABLES: ; # send all vars to shell
 
-include $(SCRIPTDIR)/builder/functions.mk
 include $(SCRIPTDIR)/builder/config.mk
 include $(SCRIPTDIR)/builder/check.mk
 include $(SCRIPTDIR)/builder/vars.mk

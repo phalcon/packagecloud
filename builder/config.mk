@@ -95,7 +95,7 @@ endif
 endif
 
 REVISION=$(shell cd $(PHALCON_DIR); git rev-parse --short=8 HEAD)
-VERSION=$(call grabv,$(PHALCON_DIR)/config.json)
+VERSION?=$(shell cat "$(PHALCON_DIR)/config.json" | grep version | head -1 | $(SED) -E 's|[\", ]||g' | cut -d ':' -f 2)
 VERSION_FULL=$(VERSION)-$(RELEASE)-$(REVISION)
 ZEPHIR_VERSION=$(shell $(ZEPHIR) version)
 DOCKER_IMAGE=$(OSDIST)$(DOCKER_SUFFIX)
