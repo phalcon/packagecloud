@@ -13,4 +13,4 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-$(info Entering inside DEB-based OS)
+$(info "[DEBUG]: Entering inside DEB-based OS")

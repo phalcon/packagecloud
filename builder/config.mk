@@ -13,10 +13,10 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-NO_COLOR=\x1b[0m
-OK_COLOR=\x1b[32;01m
-ERROR_COLOR=\x1b[31;01m
-WARN_COLOR=\x1b[33;01m
+PURPLE=\033[0;35m
+GREEN=\033[0;32m
+YELLOW=\033[1;33m
+NC=\033[0m
 
 ZEPHIR=$(shell command -v zephir 2> /dev/null)
 PHP=php

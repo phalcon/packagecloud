@@ -15,11 +15,14 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-SHELL=/bin/bash
+SHELL:=$(shell which bash)
 SCRIPTDIR:=${CURDIR}
 
 # Enable this for debugging the sed scripts
 SED=$(SCRIPTDIR)/sedsed
+
+# wait for this target to finish
+.NOTPARALLEL: ;
 
 include $(SCRIPTDIR)/builder/functions.mk
 include $(SCRIPTDIR)/builder/config.mk
