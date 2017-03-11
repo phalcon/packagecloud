@@ -13,7 +13,9 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-.NOTPARALLEL: ; # wait for this target to finish
+.SILENT: ;               # no need for @
+.NOTPARALLEL: ;          # wait for this target to finish
+.EXPORT_ALL_VARIABLES: ; # send all vars to shell
 
 ifneq (,$(wildcard /etc/redhat-release))
 include builder/rpm.mk

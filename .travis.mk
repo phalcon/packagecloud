@@ -21,6 +21,7 @@ SCRIPTDIR:=${CURDIR}
 # Enable this for debugging the sed scripts
 SED=$(SCRIPTDIR)/sedsed
 
+.SILENT: ;               # no need for @
 .NOTPARALLEL: ;          # wait for this target to finish
 .EXPORT_ALL_VARIABLES: ; # send all vars to shell
 
