@@ -13,4 +13,6 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-$(info "[DEBUG]: Entering inside DEB-based OS")
+@echo "-------------------------------------------------------------------"
+@echo "Entering inside DEB-based OS"
+@echo "-------------------------------------------------------------------"

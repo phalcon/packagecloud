@@ -13,6 +13,10 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
+@echo "-------------------------------------------------------------------"
+@echo "Entering inside RPM-based OS"
+@echo "-------------------------------------------------------------------"
+
 ifndef PHP_VERSION
 PHP_VERSION=""
 endif
@@ -23,7 +27,7 @@ ifndef PRODUCT_EXTRA
 PRODUCT_EXTRA=""
 endif
 
-$(info "[DEBUG]: Entering inside RPM-based OS")
-$(info "[DEBUG]: $$PHP_VERSION=${PHP_VERSION}")
-$(info "[DEBUG]: $$REPO_VENDOR=${REPO_VENDOR}")
-$(info "[DEBUG]: $$PRODUCT_EXTRA=${PRODUCT_EXTRA}")
+
+$(info "[DEBUG] $$PHP_VERSION=${PHP_VERSION}")
+$(info "[DEBUG] $$REPO_VENDOR=${REPO_VENDOR}")
+$(info "[DEBUG] $$PRODUCT_EXTRA=${PRODUCT_EXTRA}")
