@@ -22,13 +22,14 @@ SCRIPTDIR:=${CURDIR}
 SED=$(SCRIPTDIR)/sedsed
 
 .NOTPARALLEL: ; # wait for this target to finish
+.EXPORT_ALL_VARIABLES: ;
 
 include $(SCRIPTDIR)/builder/functions.mk
 include $(SCRIPTDIR)/builder/config.mk
 include $(SCRIPTDIR)/builder/check.mk
 include $(SCRIPTDIR)/builder/vars.mk
 
-gen-build:
+gen-build: gen-host-vars
 ifneq ($(CLONE_BRANCH), $(STABLE_BRANCH))
 	$(info Regenerate build...)
 	cd $(PHALCON_DIR); \
@@ -37,7 +38,7 @@ ifneq ($(CLONE_BRANCH), $(STABLE_BRANCH))
 	$(PHP) build/gen-build.php
 endif
 
-source: gen-build
+source: gen-build gen-docker-vars
 	$(info Create tarball...)
 	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
 	TARBALL_COMPRESSOR=gz packpack/packpack tarball
@@ -47,7 +48,7 @@ package: gen-build
 	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
 	./packpack/packpack
 
-clean:
+clean: gen-docker-vars
 	$(info Clenup...)
 	rm -rf $(SCRIPTDIR)/packpack $(SCRIPTDIR)/.variables.sh; \
 	cd $(PHALCON_DIR); \
