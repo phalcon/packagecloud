@@ -25,7 +25,7 @@ gen-vars: get-info
 	$(shell echo "export NIGHTLY_BRANCH=\"$(NIGHTLY_BRANCH)\"" >> $(SCRIPTDIR)/.variables.sh)
 	$(shell echo "export CLONE_BRANCH=\"$(CLONE_BRANCH)\"" >> $(SCRIPTDIR)/.variables.sh)
 	$(shell echo "export RELEASE=\"$(RELEASE)\"" >> $(SCRIPTDIR)/.variables.sh)
-	$(shell echo "export LAST_COMMIT=\"$(LAST_COMMIT)\"" >> $(SCRIPTDIR)/.variables.sh)
+	$(shell echo "export REVISION=\"$(REVISION)\"" >> $(SCRIPTDIR)/.variables.sh)
 	$(shell echo "export VERSION=\"$(VERSION)\"" >> $(SCRIPTDIR)/.variables.sh)
 	$(shell echo "export VERSION_FULL=\"$(VERSION_FULL)\"" >> $(SCRIPTDIR)/.variables.sh)
 	$(shell echo "export TRAVIS_PHP_VERSION=\"$(TRAVIS_PHP_VERSION)\"" >> $(SCRIPTDIR)/.variables.sh)
@@ -61,8 +61,8 @@ get-info:
 	@echo "   Nightly branch/tag .................: $(NIGHTLY_BRANCH)"
 	@echo "   Clone branch/tag ...................: $(CLONE_BRANCH)"
 	@echo ""
-	@echo "   Build version ......................: $(RELEASE)"
-	@echo "   Last commit SHA ....................: $(LAST_COMMIT)"
+	@echo "   Build release ......................: $(RELEASE)"
+	@echo "   Revision ...........................: $(REVISION)"
 	@echo "   Semantic version: ..................: $(VERSION)"
 	@echo "   Full version name ..................: $(VERSION_FULL)"
 	@echo ""
