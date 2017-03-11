@@ -13,11 +13,6 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-PURPLE=\033[0;35m
-GREEN=\033[0;32m
-YELLOW=\033[1;33m
-NC=\033[0m
-
 ZEPHIR=$(shell command -v zephir 2> /dev/null)
 PHP=php
 

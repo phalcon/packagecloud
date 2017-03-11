@@ -13,6 +13,8 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
+.NOTPARALLEL: ; # wait for this target to finish
+
 ifneq (,$(wildcard /etc/redhat-release))
 include builder/rpm.mk
 else ifneq (,$(wildcard /etc/debian_version))

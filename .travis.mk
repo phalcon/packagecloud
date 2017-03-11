@@ -21,8 +21,7 @@ SCRIPTDIR:=${CURDIR}
 # Enable this for debugging the sed scripts
 SED=$(SCRIPTDIR)/sedsed
 
-# wait for this target to finish
-.NOTPARALLEL: ;
+.NOTPARALLEL: ; # wait for this target to finish
 
 include $(SCRIPTDIR)/builder/functions.mk
 include $(SCRIPTDIR)/builder/config.mk
