@@ -13,8 +13,4 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-ifneq (,$(wildcard /etc/redhat-release))
-include builder/rpm.mk
-else ifneq (,$(wildcard /etc/debian_version))
-include builder/deb.mk
-endif
+$(info Entering inside DEB-based OS)

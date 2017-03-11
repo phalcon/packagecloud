@@ -13,8 +13,14 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-ifneq (,$(wildcard /etc/redhat-release))
-include builder/rpm.mk
-else ifneq (,$(wildcard /etc/debian_version))
-include builder/deb.mk
+$(info Entering inside RPM-based OS)
+
+ifndef PHP_VERSION
+PHP_VERSION=""
+endif
+ifndef REPO_VENDOR
+REPO_VENDOR=""
+endif
+ifndef PRODUCT_EXTRA
+PRODUCT_EXTRA=""
 endif
