@@ -13,7 +13,7 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-gen-host-vars: get-info
+gen-host-vars: report
 	$(shell echo "#!/usr/bin/env bash" > $(SCRIPTDIR)/.variables.sh)
 	$(shell echo "export PRODUCT=\"$(PRODUCT)\"" >> $(SCRIPTDIR)/.variables.sh)
 	$(shell echo "export PRODUCT_EXTRA=\"$(PRODUCT_EXTRA)\"" >> $(SCRIPTDIR)/.variables.sh)
@@ -52,7 +52,7 @@ gen-docker-vars:
 	$(shell echo "PHP_VERSION=$(PHP_VERSION)" >> $(BUILDDIR)/env)
 	$(shell echo "REPO_VENDOR=$(REPO_VENDOR)" >> $(BUILDDIR)/env)
 
-get-info:
+report:
 	@echo ""
 	@echo ""
 	@echo "   Product ............................: $(PRODUCT)"
