@@ -14,5 +14,5 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-echo "Calling sed $@..." >&2
+echo "[DEBUG]: Calling sed $@..." >&2
 exec sed "$@"
