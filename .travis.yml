@@ -50,7 +50,7 @@ env:
     - NIGHTLY_BUILD_VERSION=1
     - CHANGELOG_NAME="Phalcon Team"
     - CHANGELOG_EMAIL="build@phalconphp.com"
-    - CHANGELOG_TEXT="Automated build. See details on GitHub release page https://github.com/phalcon/cphalcon/releases"
+    - CHANGELOG_TEXT="Automated build. See details at release page: https://github.com/phalcon/cphalcon/releases"
     - TARGET=package
 
   matrix:
@@ -82,9 +82,6 @@ before_script:
   # @TODO
 
 script:
-  #- make -f .travis.mk gen-host-vars
-  #- make -f .travis.mk gen-docker-vars
-  #- . ./.variables.sh
   - make -f .travis.mk ${TARGET}
 
 after_failure:
