@@ -17,10 +17,6 @@ ifndef PHALCON_DIR
 $(error PHALCON_DIR is undefined)
 endif
 
-ifndef TRAVIS_PHP_VERSION
-$(error TRAVIS_PHP_VERSION is not available please install it first)
-endif
-
 ifeq ($(TRAVIS_PHP_VERSION),)
 $(error TRAVIS_PHP_VERSION is undefined)
 endif
