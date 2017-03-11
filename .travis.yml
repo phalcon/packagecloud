@@ -82,7 +82,8 @@ before_script:
   # @TODO
 
 script:
-  - make -f .travis.mk gen-vars
+  - make -f .travis.mk gen-host-vars
+  - make -f .travis.mk gen-docker-vars
   - . ./.variables.sh
   - make -f .travis.mk ${TARGET}
 
