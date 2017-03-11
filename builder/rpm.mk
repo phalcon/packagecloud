@@ -24,3 +24,7 @@ endif
 ifndef PRODUCT_EXTRA
 PRODUCT_EXTRA=""
 endif
+
+$(info $$PHP_VERSION is [${PHP_VERSION}])
+$(info $$REPO_VENDOR is [${REPO_VENDOR}])
+$(info $$PRODUCT_EXTRA is [${PRODUCT_EXTRA}])
