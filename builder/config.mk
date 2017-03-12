@@ -13,9 +13,6 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-ZEPHIR=$(shell command -v zephir 2> /dev/null)
-PHP=php
-
 # See https://github.com/packpack/packpack/pull/63
 PACK_REPO=https://github.com/sergeyklay/build.git
 DOCKER_REPO=phalconphp/build
@@ -97,7 +94,6 @@ endif
 REVISION=$(shell cd $(SOURCEDIR); git rev-parse --short=8 HEAD)
 VERSION?=$(shell cat "$(SOURCEDIR)/config.json" | grep version | head -1 | sed -E 's|[\", ]||g' | cut -d ':' -f 2)
 VERSION_FULL=$(VERSION)-$(RELEASE)-$(REVISION)
-ZEPHIR_VERSION=$(shell $(ZEPHIR) version)
 DOCKER_IMAGE=$(OSDIST)$(DOCKER_SUFFIX)
 DOCKER_TAG=$(DOCKER_REPO):$(OSDIST)$(DOCKER_SUFFIX)
 BUILDDIR=$(SCRIPTDIR)/build

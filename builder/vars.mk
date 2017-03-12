@@ -41,7 +41,6 @@ report:
 	@echo "   Travis PHP version .................: $(TRAVIS_PHP_VERSION)"
 	@echo "   PHP major version ..................: $(PHP_MAJOR)"
 	@echo "   Overrided PHP version ..............: $(PHP_VERSION)"
-	@echo "   Zephir version .....................: $(ZEPHIR_VERSION)"
 	@echo "   Zend Engine backend ................: $(ZEND_BACKEND)"
 	@echo ""
 	@echo "   Repo vendor ........................: $(REPO_VENDOR)"

@@ -17,7 +17,7 @@ RPM_SPEC=$(SCRIPTDIR)/rpm/php-phalcon.spec
 RPM_PRODUCT=
 RPM_PHP_BASE=
 
-PHALCON_HEADERS=$(shell grep -r -l "^void zephir_init_static_properties_Phalcon_Tag" $(SOURCEDIR)/build)
+PHALCON_HEADERS=$(shell grep -r -l "^void zephir_init_static_properties_Phalcon_Tag" $(SOURCEDIR)/build | grep phalcon.zep.h)
 
 ifneq ($(PRODUCT_EXTRA),)
 RPM_PRODUCT:=$(PRODUCT_EXTRA)

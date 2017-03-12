@@ -33,10 +33,6 @@ ifndef NIGHTLY_BRANCH
 $(error NIGHTLY_BRANCH is undefined)
 endif
 
-ifeq ($(ZEPHIR),)
-$(error Zephir is not available please install it first)
-endif
-
 ifndef OS
 $(error OS is undefined)
 endif
