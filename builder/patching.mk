@@ -17,6 +17,8 @@ RPM_SPEC=$(SCRIPTDIR)/rpm/php-phalcon.spec
 RPM_PRODUCT=
 RPM_PHP_BASE=
 
+PHALCON_HEADERS=$(shell grep -r -l "^void zephir_init_static_properties_Phalcon_Tag" $(SOURCEDIR)/build)
+
 ifneq ($(PRODUCT_EXTRA),)
 RPM_PRODUCT:=$(PRODUCT_EXTRA)
 else ifneq ($(PRODUCT),)
@@ -30,6 +32,26 @@ RPM_PHP_BASE:=$(PHP_VERSION)
 else
 RPM_PHP_BASE:=php
 endif
+
+define patching_init_static_properties
+	echo "-------------------------------------------------------------------"
+	echo "Patching $(1)"
+	echo "-------------------------------------------------------------------"
+	cp $(1) $@.tmp
+	sed \
+		-e 's/void zephir_init_static_properties_Phalcon_Tag/static void zephir_init_static_properties_Phalcon_Tag/' \
+		-i $@.tmp
+	grep -F "static void zephir_init_static_properties_Phalcon_Tag" $@.tmp || \
+		(echo "Failed to patch $(1)" && exit 1)
+	mv -f $@.tmp $(1)
+	echo
+endef
+
+patching-headers: $(PHALCON_HEADERS)
+	@echo "-------------------------------------------------------------------"
+	@echo "Scan for $(PHALCON_HEADERS)"
+	@echo "-------------------------------------------------------------------"
+	$(foreach file,$(PHALCON_HEADERS),$(call patching_init_static_properties,$(file));)
 
 patching-spec: $(RPM_SPEC)
 	@echo "-------------------------------------------------------------------"
