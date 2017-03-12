@@ -21,35 +21,20 @@ SCRIPTDIR:=${CURDIR}
 .SILENT: ;               # no need for @
 .NOTPARALLEL: ;          # wait for this target to finish
 .EXPORT_ALL_VARIABLES: ; # send all vars to shell
-.PHONY: gen-build source package clean gen-docker-vars patching-spec patching-headers
+
+.PHONY: source package gen-docker-vars patching-spec patching-headers
 
 include $(SCRIPTDIR)/builder/config.mk
 include $(SCRIPTDIR)/builder/check.mk
 include $(SCRIPTDIR)/builder/vars.mk
 include $(SCRIPTDIR)/builder/patching.mk
 
-gen-build:
-ifneq ($(CLONE_BRANCH), $(STABLE_BRANCH))
-	$(info Regenerate build...)
-	cd $(SOURCEDIR); \
-	$(ZEPHIR) fullclean; \
-	$(ZEPHIR) generate ${ZEND_BACKEND}; \
-	$(PHP) build/gen-build.php
-endif
-
-source: gen-build gen-docker-vars patching-spec patching-headers
+source: gen-docker-vars patching-spec patching-headers
 	$(info Create tarball...)
 	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
 	TARBALL_COMPRESSOR=gz $(SCRIPTDIR)/packpack/packpack tarball
 
-package: gen-build gen-docker-vars patching-spec patching-headers
+package: gen-docker-vars patching-spec patching-headers
 	$(info Build package...)
 	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
 	$(SCRIPTDIR)/packpack/packpack
-
-clean:
-	$(info Cleanup...)
-	rm -rf $(SCRIPTDIR)/packpack $(SCRIPTDIR)/.variables.sh; \
-	cd $(SOURCEDIR); \
-	$(ZEPHIR) fullclean; \
-	git checkout --

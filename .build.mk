@@ -13,6 +13,6 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-#.SILENT: ;               # no need for @
+.SILENT: ;               # no need for @
 .NOTPARALLEL: ;          # wait for this target to finish
 .EXPORT_ALL_VARIABLES: ; # send all vars to shell

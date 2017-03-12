@@ -34,9 +34,12 @@ cache:
   timeout: 691200
   directories:
     - $HOME/.cache
+    - $HOME/.ccache
 
 env:
   global:
+    - ZEND_DONT_UNLOAD_MODULES=1
+    - CC="ccache gcc"
     - PATH="$HOME/bin:$PATH"
     - PRODUCT=php-phalcon
     - PACKAGECLOUD_REPO=phalcon/stable
@@ -79,13 +82,23 @@ install:
   - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b $CLONE_BRANCH $SOURCEDIR
 
 before_script:
-  # @TODO
+  # Regenerate build
+  - '[[ "$CLONE_BRANCH" != "$NIGHTLY_BRANCH" ]] || (cd $SOURCEDIR; zephir fullclean && zephir generate ${ZEND_BACKEND} && php build/gen-build.php)'
+  # Required for generating builds, optimized for 32-bit and 64-bit platforms
+  - '[[ "$CLONE_BRANCH" != "$NIGHTLY_BRANCH" ]] || (cd $SOURCEDIR/ext; export CFLAGS="-g3 -O1 -std=gnu90 -Wall -DZEPHIR_RELEASE=1"; phpize &> /dev/null && ./configure --silent --enable-phalcon &> /dev/null && make --silent -j"$(getconf _NPROCESSORS_ONLN)" &> /dev/null && make --silent install)'
+  - '[[ "$CLONE_BRANCH" != "$NIGHTLY_BRANCH" ]] || phpenv config-add ${TRAVIS_BUILD_DIR}/ci/phalcon.ini'
+  - '[[ "$CLONE_BRANCH" != "$NIGHTLY_BRANCH" ]] || (cd $SOURCEDIR; php build/gen-build.php)'
 
 script:
   - make -f .travis.mk ${TARGET}
 
 before_deploy:
   - ls -l build/
+
+deploy:
+  # Deploy packages to PackageCloud
+  - provider: packagecloud
+    skip_cleanup: true
 
 after_failure:
   # @TODO
