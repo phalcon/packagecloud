@@ -13,6 +13,8 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
+DEB_SPEC=$(SCRIPTDIR)/debian/rules
+
 RPM_SPEC=$(SCRIPTDIR)/rpm/php-phalcon.spec
 RPM_PRODUCT=
 RPM_PHP_BASE=
@@ -53,7 +55,7 @@ patching-headers: $(PHALCON_HEADERS)
 	@echo "-------------------------------------------------------------------"
 	$(foreach file,$(PHALCON_HEADERS),$(call patching_init_static_properties,$(file));)
 
-patching-spec: $(RPM_SPEC)
+patching-rpm: $(RPM_SPEC)
 	@echo "-------------------------------------------------------------------"
 	@echo "Patching RPM spec"
 	@echo "-------------------------------------------------------------------"
@@ -69,4 +71,13 @@ patching-spec: $(RPM_SPEC)
 		(echo "Failed to patch RPM spec" && exit 1)
 	@mkdir -p $(SOURCEDIR)/rpm
 	@ mv -f $@.tmp $(SOURCEDIR)/rpm/php-phalcon.spec
+	@echo
+
+patching-deb: $(DEB_SPEC)
+	@echo "-------------------------------------------------------------------"
+	@echo "Patching DEB rules"
+	@echo "-------------------------------------------------------------------"
+	@cp $< $@.tmp
+	@cp -r $(SCRIPTDIR)/debian $(SOURCEDIR)/debian
+	@ mv -f $@.tmp $(SOURCEDIR)/debian/rules
 	@echo
