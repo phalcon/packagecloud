@@ -2,7 +2,7 @@ Source: php-phalcon
 Section: php
 Priority: optional
 Maintainer: Serghei Iakovlev <serghei@phalconphp.com>
-Build-Depends: debhelper (>= 9), gcc, re2c, php7.0-dev, php7.0-json, libpcre3-dev
+Build-Depends: debhelper (>= 9), dpkg-dev (>= 1.16.1~), build-essential, re2c, php7.0-dev, php7.0-json, libpcre3-dev, libfile-fcntllock-perl
 Standards-Version: 3.9.7
 Vcs-Git: git://github.com/phalcon/cphalcon.git
 Vcs-Browser: https://github.com/phalcon/cphalcon
