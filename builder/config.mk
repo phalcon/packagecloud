@@ -64,10 +64,10 @@ $(error $(PACKAGE) does not exist in supported package types)
 endif
 
 ifneq ($(CLONE_BRANCH), $(STABLE_BRANCH))
-PACKAGECLOUD_REPO=phalcon/nightly7
+PACKAGECLOUD_REPO=nightly
 BUILD_VERSION=$(NIGHTLY_BUILD_VERSION)
 else
-PACKAGECLOUD_REPO=phalcon/stable7
+PACKAGECLOUD_REPO=stable
 BUILD_VERSION=$(STABLE_BUILD_VERSION)
 endif
 

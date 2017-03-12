@@ -49,6 +49,7 @@ report:
 	@echo "   Distrib. version ...................: $(DIST)"
 	@echo ""
 	@echo "   Packagecloud repo ..................: $(PACKAGECLOUD_REPO)"
+	@echo "   Packagecloud user ..................: $(PACKAGECLOUD_USER)"
 	@echo "   Docker repo ........................: $(DOCKER_REPO)"
 	@echo "   Docker image .......................: $(DOCKER_IMAGE)"
 	@echo "   Docker suffix ......................: $(DOCKER_SUFFIX)"

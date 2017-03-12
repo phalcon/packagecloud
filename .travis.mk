@@ -22,19 +22,19 @@ SCRIPTDIR:=${CURDIR}
 .NOTPARALLEL: ;          # wait for this target to finish
 .EXPORT_ALL_VARIABLES: ; # send all vars to shell
 
-.PHONY: source package gen-docker-vars patching-rpm patching-deb patching-headers
+.PHONY: source package gen-docker-vars patching-rpm patching-deb patching-headers report
 
 include $(SCRIPTDIR)/builder/config.mk
 include $(SCRIPTDIR)/builder/check.mk
 include $(SCRIPTDIR)/builder/vars.mk
 include $(SCRIPTDIR)/builder/patching.mk
 
-source: gen-docker-vars patching-rpm patching-deb patching-headers
+source: gen-docker-vars patching-rpm patching-deb patching-headers report
 	$(info Create tarball...)
 	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
 	TARBALL_COMPRESSOR=gz $(SCRIPTDIR)/packpack/packpack tarball
 
-package: gen-docker-vars patching-rpm patching-deb patching-headers
+package: gen-docker-vars patching-rpm patching-deb patching-headers report
 	$(info Build package...)
 	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
 	$(SCRIPTDIR)/packpack/packpack
