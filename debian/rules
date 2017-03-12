@@ -21,11 +21,10 @@ export DH_VERBOSE=1
 # This has to be exported to make some magic below work.
 export DH_OPTIONS
 
-SED:=sed
-
 # enable dpkg build flags
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 DPKG_EXPORT_BUILDFLAGS=1
+
 include /usr/share/dpkg/default.mk
 
 export DEB_HOST_MULTIARCH
@@ -42,8 +41,6 @@ endif
 ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),5))
 	PACKAGE=php5-phalcon
 	BUILD=$(CURDIR)/debian/$(PACKAGE)
-	PHALCON_DBG_EXT=$(PACKAGE)-dbg
-	PHALCON_SUBSTVARS=$(PACKAGE).substvars
 	PHALCON_SHARE_PATH=php5/$(PACKAGE)
 	PHP_API_VERSION=$(shell php-config5 --phpapi)
 endif
@@ -51,12 +48,12 @@ endif
 ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),7))
 	PACKAGE=php7.0-phalcon
 	BUILD=$(CURDIR)/debian/$(PACKAGE)
-	PHALCON_DBG_EXT=$(PACKAGE)-dbg
-	PHALCON_SUBSTVARS=$(PACKAGE).substvars
 	PHALCON_SHARE_PATH=$(PACKAGE)
 	PHP_API_VERSION=$(shell php-config7.0 --phpapi)
 endif
 
+PHALCON_SUBSTVARS=$(PACKAGE).substvars
+PHALCON_DBG_EXT=$(PACKAGE)-dbg
 SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/safe
 DEB_HOST_ARCH?=$(shell dpkg-architecture -qDEB_HOST_ARCH)
 
