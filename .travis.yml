@@ -83,7 +83,7 @@ install:
 
 before_script:
   # Regenerate build
-  - '[[ "$CLONE_BRANCH" != "$NIGHTLY_BRANCH" ]] || (cd $SOURCEDIR; zephir fullclean && zephir generate ${ZEND_BACKEND} && php build/gen-build.php)'
+  - '[[ "$CLONE_BRANCH" != "$NIGHTLY_BRANCH" ]] || (cd $SOURCEDIR; zephir fullclean && zephir generate ${ZEND_BACKEND})'
   # Required for generating builds, optimized for 32-bit and 64-bit platforms
   - '[[ "$CLONE_BRANCH" != "$NIGHTLY_BRANCH" ]] || (cd $SOURCEDIR/ext; export CFLAGS="-g3 -O1 -std=gnu90 -Wall -DZEPHIR_RELEASE=1"; phpize &> /dev/null && ./configure --silent --enable-phalcon &> /dev/null && make --silent -j"$(getconf _NPROCESSORS_ONLN)" &> /dev/null && make --silent install)'
   - '[[ "$CLONE_BRANCH" != "$NIGHTLY_BRANCH" ]] || phpenv config-add ${TRAVIS_BUILD_DIR}/ci/phalcon.ini'
