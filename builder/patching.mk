@@ -81,3 +81,10 @@ patching-deb: $(DEB_SPEC)
 	@cp -r $(SCRIPTDIR)/debian $(SOURCEDIR)/debian
 	@ mv -f $@.tmp $(SOURCEDIR)/debian/rules
 	@echo
+
+copying-build:
+	@echo "-------------------------------------------------------------------"
+	@echo "Copying $(SCRIPTDIR)/.build.mk"
+	@echo "-------------------------------------------------------------------"
+	@cp $(SCRIPTDIR)/.build.mk $(SOURCEDIR)/.build.mk
+	@echo

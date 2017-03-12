@@ -13,27 +13,10 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-$(info We are here)
-
 REPO_VENDOR ?=
+BUILD_RELEASE = $(RELEASE)
 
-$(BUILDDIR)/$(RPMSPEC): $(RPMSPECIN)
-	@echo "-------------------------------------------------------------------"
-	@echo "Custom patching RPM spec"
-	@echo "-------------------------------------------------------------------"
-	@cp $< $@.tmp
-	sed \
-		-e 's/Version:\([ ]*\).*/Version: $(VERSION)/' \
-		-e 's/Release:\([ ]*\).*/Release: $(RELEASE)$(REPO_VENDOR)%{dist}/' \
-		-e 's/Source0:\([ ]*\).*/Source0: $(TARBALL)/' \
-		-e 's/%setup.*/%setup -q -n $(PRODUCT)-$(VERSION)/' \
-		-e '0,/%autosetup.*/ s/%autosetup.*/%autosetup -n $(PRODUCT)-$(VERSION)/' \
-		-i $@.tmp
-	grep -F "Version: $(VERSION)" $@.tmp && \
-		grep -F "Release: $(RELEASE)" $@.tmp && \
-		grep -F "Source0: $(TARBALL)" $@.tmp && \
-		(grep -F "%setup -q -n $(PRODUCT)-$(VERSION)" $@.tmp || \
-		grep -F "%autosetup" $@.tmp) || \
-		(echo "Failed to patch RPM spec" && exit 1)
-	@ mv -f $@.tmp $@
-	@echo
+ifneq ($(REPO_VENDOR),)
+RELEASE := $(BUILD_RELEASE).$(REPO_VENDOR)
+endif
+
