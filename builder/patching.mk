@@ -48,3 +48,16 @@ patching-spec: $(RPM_SPEC)
 	@mkdir -p $(SOURCEDIR)/rpm
 	@ mv -f $@.tmp $(SOURCEDIR)/rpm/php-phalcon.spec
 	@echo
+
+patching-tag: $(SOURCEDIR)/ext/phalcon.c
+	@echo "-------------------------------------------------------------------"
+	@echo "Patching phalcon.c"
+	@echo "-------------------------------------------------------------------"
+	@cp $< $@.tmp
+	sed \
+		-e 's/zephir_init_static_properties_Phalcon_Tag(TSRMLS_C);/zephir_init_static_properties_Phalcon_Tag(TSRMLS_D);/' \
+		-i $@.tmp
+	grep -F "zephir_init_static_properties_Phalcon_Tag" $@.tmp || \
+		(echo "Failed to patch phalcon.c" && exit 1)
+	@ mv -f $@.tmp $(SOURCEDIR)/ext/phalcon.c
+	@echo

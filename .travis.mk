@@ -43,7 +43,7 @@ source: gen-build gen-docker-vars patching-spec
 	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
 	TARBALL_COMPRESSOR=gz $(SCRIPTDIR)/packpack/packpack tarball
 
-package: gen-build gen-docker-vars patching-spec
+package: gen-build gen-docker-vars patching-spec patching-tag
 	$(info Build package...)
 	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
 	$(SCRIPTDIR)/packpack/packpack

@@ -132,8 +132,6 @@ export LDFLAGS
 export CFLAGS
 export CPPFLAGS="-DPHALCON_RELEASE"
 
-ls -al
-ls -al /build
 %{__mv} %{src_dir} build/NTS
 
 %if %{with_zts}
