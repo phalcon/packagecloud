@@ -57,15 +57,15 @@ ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),7))
 	PHP_API_VERSION=$(shell php-config7.0 --phpapi)
 endif
 
-SOURCEDIR=cphalcon/build/php$(PHP_MAJOR_VERSION)/safe
+SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/safe
 DEB_HOST_ARCH?=$(shell dpkg-architecture -qDEB_HOST_ARCH)
 
 ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),i386))
-	SOURCEDIR=cphalcon/build/php$(PHP_MAJOR_VERSION)/32bits
+	SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/32bits
 endif
 
 ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),amd64))
-	SOURCEDIR=cphalcon/build/php$(PHP_MAJOR_VERSION)/64bits
+	SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/64bits
 endif
 
 CFLAGS+=-g3 -fvisibility=hidden -DPHALCON_RELEASE
