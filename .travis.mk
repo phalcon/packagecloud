@@ -22,14 +22,14 @@ SCRIPTDIR:=${CURDIR}
 .NOTPARALLEL: ;          # wait for this target to finish
 .EXPORT_ALL_VARIABLES: ; # send all vars to shell
 
-.PHONY: gen-build source package clean gen-host-vars gen-docker-vars patching-spec
+.PHONY: gen-build source package clean gen-docker-vars patching-spec
 
 include $(SCRIPTDIR)/builder/config.mk
 include $(SCRIPTDIR)/builder/check.mk
 include $(SCRIPTDIR)/builder/vars.mk
 include $(SCRIPTDIR)/builder/patching.mk
 
-gen-build: gen-host-vars
+gen-build:
 ifneq ($(CLONE_BRANCH), $(STABLE_BRANCH))
 	$(info Regenerate build...)
 	cd $(SOURCEDIR); \
@@ -43,12 +43,12 @@ source: gen-build gen-docker-vars patching-spec
 	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
 	TARBALL_COMPRESSOR=gz $(SCRIPTDIR)/packpack/packpack tarball
 
-package: gen-build gen-docker-vars patching-spec patching-tag
+package: gen-build gen-docker-vars patching-spec
 	$(info Build package...)
 	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
 	$(SCRIPTDIR)/packpack/packpack
 
-clean: gen-host-vars
+clean:
 	$(info Cleanup...)
 	rm -rf $(SCRIPTDIR)/packpack $(SCRIPTDIR)/.variables.sh; \
 	cd $(SOURCEDIR); \
