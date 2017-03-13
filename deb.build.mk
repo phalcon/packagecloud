@@ -13,16 +13,4 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-REPO_VENDOR ?=
-BUILD_RELEASE = $(RELEASE)
-
-ifeq ($(PACKAGE),rmp)
-$(info Patching RPM release)
-ifneq ($(REPO_VENDOR),)
-RELEASE := $(BUILD_RELEASE).$(REPO_VENDOR)
-endif
-else ifeq ($(PACKAGE),deb)
 $(info Patching DEB release)
-else
-$(info Do nothing)
-endif
