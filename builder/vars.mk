@@ -18,6 +18,7 @@ gen-docker-vars:
 	$(shell echo "TRAVIS_PHP_VERSION=$(TRAVIS_PHP_VERSION)" >> $(BUILDDIR)/env)
 	$(shell echo "PHP_VERSION=$(PHP_VERSION)" >> $(BUILDDIR)/env)
 	$(shell echo "REPO_VENDOR=$(REPO_VENDOR)" >> $(BUILDDIR)/env)
+	$(shell echo "PACKAGE=$(PACKAGE)" >> $(BUILDDIR)/env)
 
 report:
 	@echo ""
