@@ -13,6 +13,10 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
+CHANGELOG_NAME=Phalcon Team
+CHANGELOG_EMAIL=build@phalconphp.com
+CHANGELOG_TEXT=Automated build. See details at release page https://github.com/phalcon/cphalcon/releases
+
 # See https://github.com/packpack/packpack/pull/63
 PACK_REPO=https://github.com/sergeyklay/build.git
 DOCKER_REPO=phalconphp/build

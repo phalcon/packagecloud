@@ -52,9 +52,6 @@ env:
     # This should be increased to reb-build and push package
     - STABLE_BUILD_VERSION=1
     - NIGHTLY_BUILD_VERSION=$TRAVIS_BUILD_NUMBER
-    - CHANGELOG_NAME="Phalcon Team"
-    - CHANGELOG_EMAIL="build@phalconphp.com"
-    - CHANGELOG_TEXT="Automated build. See details at release page https://github.com/phalcon/cphalcon/releases"
     - TARGET=package
 
   matrix:
@@ -176,12 +173,21 @@ script:
   - make -f .travis.mk ${TARGET}
 
 before_deploy:
+  - '[[ "$CLONE_BRANCH" != "$NIGHTLY_BRANCH" ]] || export PACKAGECLOUD_REPO=nightly'
   - ls -l build/
 
 deploy:
   # Deploy packages to PackageCloud
   - provider: packagecloud
+    username: "${PACKAGECLOUD_USER}"
+    repository: "${PACKAGECLOUD_REPO}"
+    token: "${PACKAGECLOUD_TOKEN}"
+    dist: "${OS}/${DIST}"
+    package_glob: build/*.{rpm,deb,dsc}
     skip_cleanup: true
+    on:
+      branch: "master"
+      condition: -n "${OS}" && -n "${DIST}" && -n "${PACKAGECLOUD_TOKEN}"
 
 after_failure:
   # @TODO
