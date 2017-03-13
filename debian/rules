@@ -83,7 +83,9 @@ prepare-files-stamp:
 	touch prepare-files-stamp
 
 override_dh_auto_configure:
-	(cd $(SOURCEDIR); phpize; ./configure --enable-phalcon=shared)
+	cd $(SOURCEDIR); \
+	phpize; \
+	./configure --enable-phalcon=shared
 
 override_dh_auto_build:
 	$(MAKE) -C $(SOURCEDIR)
