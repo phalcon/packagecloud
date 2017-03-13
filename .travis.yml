@@ -94,6 +94,8 @@ matrix:
       php: 7.0
 
 before_install:
+  # Use proper debian/stuff
+  - '[[ "$TRAVIS_PHP_VERSION" != "7.0" ]] || (rm -f ${TRAVIS_BUILD_DIR}/debian/php5-phalcon.* && mv -f ${TRAVIS_BUILD_DIR}/debian/control.7.0 ${TRAVIS_BUILD_DIR}/debian/control)'
   # Use ZendEngine3 backend for PHP 7.x
   - '[[ "$TRAVIS_PHP_VERSION" != "7.0" ]] || export ZEND_BACKEND="--backend=ZendEngine3"'
   # Disable not needed xdebug if any

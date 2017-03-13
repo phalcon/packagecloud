@@ -53,7 +53,6 @@ ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),7))
 endif
 
 PHALCON_SUBSTVARS=$(PACKAGE).substvars
-PHALCON_DBG_EXT=$(PACKAGE)-dbg
 SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/safe
 DEB_HOST_ARCH?=$(shell dpkg-architecture -qDEB_HOST_ARCH)
 
@@ -105,7 +104,7 @@ override_dh_auto_install:
 	INSTALL_ROOT=$(BUILD) $(MAKE) -C $(SOURCEDIR) install
 
 override_dh_strip:
-	dh_strip -s --dbg-package=$(PHALCON_DBG_EXT)
+	dh_strip -s --dbg-package=$(PACKAGE)-dbg
 
 override_dh_gencontrol:
 	echo "php:Depends=phpapi-$(PHP_API_VERSION)" >> debian/$(PHALCON_SUBSTVARS)
