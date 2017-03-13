@@ -105,10 +105,11 @@ before_install:
   - sudo ln -s /home/travis/.phpenv/versions/$(phpenv version-name)/bin/php-config /usr/bin/
 
 install:
-  - bash ./install-zephir.sh
-  - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b $CLONE_BRANCH $SOURCEDIR
+  # Install Zephir
+  - bash ./zephir.sh
 
 before_script:
+  - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b $CLONE_BRANCH $SOURCEDIR
   # Regenerate build
   - '[[ "$CLONE_BRANCH" != "$NIGHTLY_BRANCH" ]] || (cd $SOURCEDIR; zephir fullclean && zephir generate ${ZEND_BACKEND})'
   # Required for generating builds, optimized for 32-bit and 64-bit platforms
