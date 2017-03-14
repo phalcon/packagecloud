@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 #
 # Phalcon Build Project
 #
@@ -14,14 +13,26 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-git clone -q --depth=1 https://github.com/phalcon/zephir.git /tmp/zephir
-cd /tmp/zephir
+SUPPORTED_IUS_VERSIONS=5.5 5.6 7.0
 
-ZEPHIRDIR="$( cd "$( dirname . )" && pwd )"
-sed "s#%ZEPHIRDIR%#$ZEPHIRDIR#g" bin/zephir > bin/zephir-cmd
-chmod 755 bin/zephir-cmd
+ifeq ($(filter $(PHP_MAJOR),$(SUPPORTED_IUS_VERSIONS)),)
+$(error The $(PHP_MAJOR) is unsupported PHP version for $(REPO_VENDOR))
+endif
 
-mkdir -p ~/bin
+ifeq ($(PHP_MAJOR),5.5)
+PRODUCT_EXTRA=php55u-phalcon
+PHP_VERSION=php55u
+DOCKER_SUFFIX=-ius55
+endif
 
-cp bin/zephir-cmd ~/bin/zephir
-rm bin/zephir-cmd
+ifeq ($(PHP_MAJOR),5.6)
+PRODUCT_EXTRA=php56u-phalcon
+PHP_VERSION=php56u
+DOCKER_SUFFIX=-ius56
+endif
+
+ifeq ($(PHP_MAJOR),7.0)
+PRODUCT_EXTRA=php70u-phalcon
+PHP_VERSION=php70u
+DOCKER_SUFFIX=-ius70
+endif

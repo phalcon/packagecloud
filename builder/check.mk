@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 #
 # Phalcon Build Project
 #
@@ -14,14 +13,34 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-git clone -q --depth=1 https://github.com/phalcon/zephir.git /tmp/zephir
-cd /tmp/zephir
+ifndef SOURCEDIR
+$(error SOURCEDIR is undefined)
+endif
 
-ZEPHIRDIR="$( cd "$( dirname . )" && pwd )"
-sed "s#%ZEPHIRDIR%#$ZEPHIRDIR#g" bin/zephir > bin/zephir-cmd
-chmod 755 bin/zephir-cmd
+ifeq ($(TRAVIS_PHP_VERSION),)
+$(error TRAVIS_PHP_VERSION is undefined)
+endif
 
-mkdir -p ~/bin
+ifndef CLONE_BRANCH
+$(error CLONE_BRANCH is undefined)
+endif
 
-cp bin/zephir-cmd ~/bin/zephir
-rm bin/zephir-cmd
+ifndef STABLE_BRANCH
+$(error STABLE_BRANCH is undefined)
+endif
+
+ifndef NIGHTLY_BRANCH
+$(error NIGHTLY_BRANCH is undefined)
+endif
+
+ifndef OS
+$(error OS is undefined)
+endif
+
+ifndef DIST
+$(error DIST is undefined)
+endif
+
+ifndef PACKAGE
+$(error PACKAGE is undefined)
+endif

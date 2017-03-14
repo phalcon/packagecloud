@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 #
 # Phalcon Build Project
 #
@@ -14,14 +13,10 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-git clone -q --depth=1 https://github.com/phalcon/zephir.git /tmp/zephir
-cd /tmp/zephir
+REPO_VENDOR ?=
+BUILD_RELEASE = $(RELEASE)
 
-ZEPHIRDIR="$( cd "$( dirname . )" && pwd )"
-sed "s#%ZEPHIRDIR%#$ZEPHIRDIR#g" bin/zephir > bin/zephir-cmd
-chmod 755 bin/zephir-cmd
-
-mkdir -p ~/bin
-
-cp bin/zephir-cmd ~/bin/zephir
-rm bin/zephir-cmd
+$(info Patching RPM release)
+ifneq ($(REPO_VENDOR),)
+RELEASE := $(BUILD_RELEASE).$(REPO_VENDOR)
+endif

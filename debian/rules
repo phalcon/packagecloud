@@ -3,7 +3,7 @@
 #
 #  Phalcon Framework
 #
-#  Copyright (c) 2011-2016, Phalcon Team (https://www.phalconphp.com)
+#  Copyright (c) 2011-2017, Phalcon Team (https://www.phalconphp.com)
 #
 #  This source file is subject to the New BSD License that is bundled
 #  with this package in the file https://www.phalconphp.com/LICENSE.txt
@@ -21,13 +21,10 @@ export DH_VERBOSE=1
 # This has to be exported to make some magic below work.
 export DH_OPTIONS
 
-# Enable this for debugging the sed scripts
-# SED=$(CURDIR)/debian/sedsed
-SED:=sed
-
 # enable dpkg build flags
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 DPKG_EXPORT_BUILDFLAGS=1
+
 include /usr/share/dpkg/default.mk
 
 export DEB_HOST_MULTIARCH
@@ -44,8 +41,6 @@ endif
 ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),5))
 	PACKAGE=php5-phalcon
 	BUILD=$(CURDIR)/debian/$(PACKAGE)
-	PHALCON_DBG_EXT=$(PACKAGE)-dbg
-	PHALCON_SUBSTVARS=$(PACKAGE).substvars
 	PHALCON_SHARE_PATH=php5/$(PACKAGE)
 	PHP_API_VERSION=$(shell php-config5 --phpapi)
 endif
@@ -53,21 +48,20 @@ endif
 ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),7))
 	PACKAGE=php7.0-phalcon
 	BUILD=$(CURDIR)/debian/$(PACKAGE)
-	PHALCON_DBG_EXT=$(PACKAGE)-dbg
-	PHALCON_SUBSTVARS=$(PACKAGE).substvars
 	PHALCON_SHARE_PATH=$(PACKAGE)
 	PHP_API_VERSION=$(shell php-config7.0 --phpapi)
 endif
 
-PHALCON_DIR=cphalcon/build/php$(PHP_MAJOR_VERSION)/safe
+PHALCON_SUBSTVARS=$(PACKAGE).substvars
+SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/safe
 DEB_HOST_ARCH?=$(shell dpkg-architecture -qDEB_HOST_ARCH)
 
 ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),i386))
-	PHALCON_DIR=cphalcon/build/php$(PHP_MAJOR_VERSION)/32bits
+	SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/32bits
 endif
 
 ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),amd64))
-	PHALCON_DIR=cphalcon/build/php$(PHP_MAJOR_VERSION)/64bits
+	SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/64bits
 endif
 
 CFLAGS+=-g3 -fvisibility=hidden -DPHALCON_RELEASE
@@ -89,15 +83,17 @@ prepare-files-stamp:
 	touch prepare-files-stamp
 
 override_dh_auto_configure:
-	(cd $(PHALCON_DIR); phpize; ./configure --enable-phalcon=shared)
+	cd $(SOURCEDIR); \
+	phpize; \
+	./configure --enable-phalcon=shared
 
 override_dh_auto_build:
-	$(MAKE) -C $(PHALCON_DIR)
+	$(MAKE) -C $(SOURCEDIR)
 
 override_dh_auto_clean:
 	dh_auto_clean
 	( \
-		cd $(PHALCON_DIR); \
+		cd $(SOURCEDIR); \
 		[ -f Makefile ] && $(MAKE) distclean; \
 		phpize --clean; \
 		rm -f tmp-php.ini; \
@@ -107,10 +103,10 @@ override_dh_installdirs: prepare-files-stamp
 	dh_installdirs
 
 override_dh_auto_install:
-	INSTALL_ROOT=$(BUILD) $(MAKE) -C $(PHALCON_DIR) install
+	INSTALL_ROOT=$(BUILD) $(MAKE) -C $(SOURCEDIR) install
 
 override_dh_strip:
-	dh_strip -s --dbg-package=$(PHALCON_DBG_EXT)
+	dh_strip -s --dbg-package=$(PACKAGE)-dbg
 
 override_dh_gencontrol:
 	echo "php:Depends=phpapi-$(PHP_API_VERSION)" >> debian/$(PHALCON_SUBSTVARS)
