@@ -35,6 +35,21 @@ else
 RPM_PHP_BASE:=php
 endif
 
+define patching_rpmspec
+	cp $(1) rpmspec.tmp
+	sed \
+		-e 's/Name:\([\ \t]*\)%{php_base}-phalcon/Name: $(RPM_PRODUCT)/' \
+		-e 's/%global\([\ \t]*\)php_base\([\ \t]*\).*/%global php_base $(RPM_PHP_BASE)/' \
+		-e 's/%global\([\ \t]*\)repo_vendor\([\ \t]*\).*/%global repo_vendor $(REPO_VENDOR)/' \
+		-i rpmspec.tmp
+	grep -F "Name: $(RPM_PRODUCT)" rpmspec.tmp && \
+		grep -F "php_base $(RPM_PHP_BASE)" rpmspec.tmp && \
+		grep -F "repo_vendor $(REPO_VENDOR)" rpmspec.tmp || \
+		(echo "Failed to patch $(1)" && exit 1)
+	mkdir -p $(SOURCEDIR)/rpm
+	mv -f rpmspec.tmp $(SOURCEDIR)/rpm/php-phalcon.spec
+endef
+
 define patching_init_static_properties
 	echo "-------------------------------------------------------------------"
 	echo "Patching $(1)"
@@ -50,44 +65,35 @@ define patching_init_static_properties
 endef
 
 patching-headers: $(PHALCON_HEADERS)
-	@echo "-------------------------------------------------------------------"
-	@echo "Scan for $(PHALCON_HEADERS)"
-	@echo "-------------------------------------------------------------------"
+	$(info -------------------------------------------------------------------)
+	$(info Scan for $(PHALCON_HEADERS))
+	$(info -------------------------------------------------------------------)
 	$(foreach file,$(PHALCON_HEADERS),$(call patching_init_static_properties,$(file));)
+	$(info )
 
-patching-rpm: $(RPM_SPEC)
-	@echo "-------------------------------------------------------------------"
-	@echo "Patching RPM spec"
-	@echo "-------------------------------------------------------------------"
-	@cp $< $@.tmp
-	sed \
-		-e 's/Name:\([\ \t]*\)%{php_base}-phalcon/Name: $(RPM_PRODUCT)/' \
-		-e 's/%global\([\ \t]*\)php_base\([\ \t]*\).*/%global php_base $(RPM_PHP_BASE)/' \
-		-e 's/%global\([\ \t]*\)repo_vendor\([\ \t]*\).*/%global repo_vendor $(REPO_VENDOR)/' \
-		-i $@.tmp
-	grep -F "Name: $(RPM_PRODUCT)" $@.tmp && \
-		grep -F "php_base $(RPM_PHP_BASE)" $@.tmp && \
-		grep -F "repo_vendor $(REPO_VENDOR)" $@.tmp || \
-		(echo "Failed to patch RPM spec" && exit 1)
-	@mkdir -p $(SOURCEDIR)/rpm
-	@ mv -f $@.tmp $(SOURCEDIR)/rpm/php-phalcon.spec
-	@echo
+prepare-build: prepare-$(PACKAGE)-spec
+	$(info -------------------------------------------------------------------)
+	$(info Patching $(SCRIPTDIR)/build.tpl)
+	$(info -------------------------------------------------------------------)
+	@cp $(SCRIPTDIR)/build.tpl $@.tmp
+ifneq ($(REPO_VENDOR),)
+	@echo "RELEASE=$(RELEASE).$(REPO_VENDOR)" >> $@.tmp
+endif
+	@mv -f $@.tmp $(SOURCEDIR)/.build.mk
+	$(info )
 
-patching-deb: $(DEB_SPEC)
-	@echo "-------------------------------------------------------------------"
-	@echo "Patching DEB rules"
-	@echo "-------------------------------------------------------------------"
+prepare-deb-spec: $(DEB_SPEC)
+	$(info -------------------------------------------------------------------)
+	$(info Patching DEB rules)
+	$(info -------------------------------------------------------------------)
 	@cp $< $@.tmp
 	@cp -r $(SCRIPTDIR)/debian $(SOURCEDIR)/debian
-	@ mv -f $@.tmp $(SOURCEDIR)/debian/rules
-	@echo
+	@mv -f $@.tmp $(SOURCEDIR)/debian/rules
+	$(info )
 
-copying-build: $(PACKAGE)-build
-	@echo "-------------------------------------------------------------------"
-	@echo "Copying $(PACKAGE).build.mk => .build.mk"
-	@echo "-------------------------------------------------------------------"
-	@cp $(SCRIPTDIR)/.build.mk $(SOURCEDIR)/.build.mk
-	@echo
-
-$(PACKAGE)-build:
-	@cp $(SCRIPTDIR)/$(PACKAGE).build.mk $(SCRIPTDIR)/.build.mk
+prepare-rpm-spec: $(RPM_SPEC)
+	$(info -------------------------------------------------------------------)
+	$(info Patching RPM spec)
+	$(info -------------------------------------------------------------------)
+	$(call patching_rpmspec,$<)
+	$(info )

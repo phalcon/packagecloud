@@ -12,5 +12,3 @@
 #
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
-
-$(info Patching DEB release)
