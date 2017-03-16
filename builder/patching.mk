@@ -73,7 +73,7 @@ patching-headers: $(PHALCON_HEADERS)
 
 prepare-build: prepare-$(PACKAGE)-spec
 	$(info -------------------------------------------------------------------)
-	$(info Patching $(SCRIPTDIR)/build.tpl)
+	$(info Prepare .build.mk)
 	$(info -------------------------------------------------------------------)
 	@cp $(SCRIPTDIR)/build.tpl $@.tmp
 ifneq ($(REPO_VENDOR),)
@@ -84,7 +84,7 @@ endif
 
 prepare-deb-spec: $(DEB_SPEC)
 	$(info -------------------------------------------------------------------)
-	$(info Patching DEB rules)
+	$(info Patching $<)
 	$(info -------------------------------------------------------------------)
 	@cp $< $@.tmp
 	@cp -r $(SCRIPTDIR)/debian $(SOURCEDIR)/debian
@@ -93,7 +93,7 @@ prepare-deb-spec: $(DEB_SPEC)
 
 prepare-rpm-spec: $(RPM_SPEC)
 	$(info -------------------------------------------------------------------)
-	$(info Patching RPM spec)
+	$(info Patching $<)
 	$(info -------------------------------------------------------------------)
 	$(call patching_rpmspec,$<)
 	$(info )
