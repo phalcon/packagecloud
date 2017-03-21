@@ -17,7 +17,7 @@
 
 SHELL:=$(shell which bash)
 SCRIPTDIR:=${CURDIR}
-D_TARGETS=report patching-headers prepare-build
+D_TARGETS=report prepare-build
 
 .EXPORT_ALL_VARIABLES: ; # send all vars to shell
 
