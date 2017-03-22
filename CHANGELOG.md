@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Changed
 - Improved preparing build
+- Used original https://github.com/packpack/packpack.git repo to build packages
+- Removed patching headers target
+- Renamed Debug symbols for Debain/Ubuntu
 
 ## 1.0.0 - 2017-03-14
 ### Added
