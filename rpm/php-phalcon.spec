@@ -83,14 +83,13 @@ Documentation: https://docs.phalconphp.com
 ;  Copyright (c) 2011-2017 Phalcon Team (https://www.phalconphp.com)
 ;
 ;  This source file is subject to the New BSD License that is bundled
-;  with this package in the file https://www.phalconphp.com/LICENSE.txt
+;  with this package in the file https://license.phalconphp.com
 ;
 ;  If you did not receive a copy of the license and are unable to
 ;  obtain it through the world-wide-web, please send an email
 ;  to license@phalconphp.com so we can send you a copy immediately.
 ;
-;  Authors: Andres Gutierrez <andres@phalconphp.com>
-;           Serghei Iakovlev <serghei@phalconphp.com>
+;  Authors: Phalcon Framework Team <team@phalconphp.com>
 
 ; %{summary}
 [%{ext_name}]
@@ -234,7 +233,32 @@ extclean zts-phpize
 %endif
 
 %changelog
-* Mon Feb 20 2017 Serghei Iakovlev <serghei@phalconphp.com> - %{version}-%{release}.%{repo_vendor}
+php-phalcon (3.1.0-1) stable; urgency=low
+
+* Wed Mar 22 2017 Serghei Iakovlev <serghei@phalconphp.com> - %{version}-%{release}.%{repo_vendor}
+- Added Phalcon\Validation\Validator\Callback, Phalcon\Validation::getData
+- Added the ability to truncate database tables
+- Added Phalcon\Mvc\Model\Binder, class used for binding models to parameters in dispatcher, micro, added Phalcon\Dispatcher::getBoundModels and Phalcon\Mvc\Micro::getBoundModels to getting bound models, added Phalcon\Mvc\Micro\Collection\LazyLoader::callMethod
+- Added afterBinding event to Phalcon\Dispatcher and Phalcon\Mvc\Micro, added Phalcon\Mvc\Micro::afterBinding
+- Added the ability to set custom Resultset class returned by find() #12166
+- Added the ability to clear appended and prepended title elements (Phalcon\Tag::appendTitle, Phalcon\Tag::prependTitle). Now you can use array to add multiple titles. For more details check #12238
+- Added the ability to specify what empty means in the 'allowEmpty' option of the validators. Now it accepts as well an array specifying what's empty, for example ['', false]
+- Added the ability to use Phalcon\Validation with Phalcon\Mvc\Collection, deprecated Phalcon\Mvc\Model\Validator classes
+- Added the value of the object intanceof Interface to Phalcon\Acl\Adapter\Memory
+- Added the ability to get original values from Phalcon\Mvc\Model\Binder, added Phalcon\Mvc\Micro::getModelBinder, Phalcon\Dispatcher::getModelBinder
+- Added prepend parameter to Phalcon\Loader::register to specify autoloader's loading order to top most
+- Fixes internal cache saving in Phalcon\Mvc\Model\Binder when no cache backend is used
+- Fixed Phalcon\Session\Bag::remove to initialize the bag before removing a value #12647
+- Fixed Phalcon\Mvc\Model::getChangedFields to correct detect changes from NULL to Zero #12628
+- Fixed Phalcon\Mvc\Model to create/refresh snapshot after create/update/refresh operation #11007, #11818, #11424
+- Fixed Phalcon\Mvc\Model::validate to correctly set code message #12645
+- Fixed Phalcon\Mvc\Model to correctly add error when try to save empty string value to not null and not default column #12688
+- Fixed Phalcon\Validation\Validator\Uniqueness collection persistent condition
+- Fixed Phalcon\Loader::autoLoad to prevent PHP warning #12684
+- Fixed Phalcon\Mvc\Model\Query::_executeSelect to correctly get the column map #12715
+- Fixed params view scope for PHP 5 #12648
+
+* Mon Feb 20 2017 Serghei Iakovlev <serghei@phalconphp.com> -  3.0.4-1.%{repo_vendor}
 - Fixed Isnull check is not correct when the model field defaults to an empty string #12507
 - Fixed Phalcon\Forms\Element::label to accept 0 as label instead of validating it as empty #12148
 - Fixed Phalcon\Crypt::getAvailableCiphers, Phalcon\Crypt::decrypt, Phalcon\Crypt::encrypt by getting missed aliases for ciphers #12539

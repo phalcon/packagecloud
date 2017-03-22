@@ -47,10 +47,10 @@ env:
     - DOCKER_REPO=phalconphp/build
     - SOURCEDIR=$TRAVIS_BUILD_DIR/cphalcon
     # This should be a branch name or a tag
-    - STABLE_BRANCH=v3.0.4
+    - STABLE_BRANCH=v3.1.0
     - NIGHTLY_BRANCH=3.1.x
     # This should be increased to reb-build and push package
-    - STABLE_BUILD_VERSION=2
+    - STABLE_BUILD_VERSION=1
     - NIGHTLY_BUILD_VERSION=$TRAVIS_BUILD_NUMBER
     - TARGET=package
 
