@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+
+## 1.1.0 - 2017-03-22
 ### Changed
 - Improved preparing build
 - Used original https://github.com/packpack/packpack.git repo to build packages
