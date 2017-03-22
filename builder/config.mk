@@ -17,10 +17,10 @@ CHANGELOG_NAME=Phalcon Team
 CHANGELOG_EMAIL=build@phalconphp.com
 CHANGELOG_TEXT=Automated build. See details at release page https://github.com/phalcon/cphalcon/releases
 
-# See https://github.com/packpack/packpack/pull/63
-PACK_REPO=https://github.com/sergeyklay/build.git
+PACK_REPO=https://github.com/packpack/packpack.git
+PACK_BRANCH=master
+
 DOCKER_REPO=phalconphp/build
-PACK_BRANCH=patch-1
 
 PHP_VERSION?=
 ZEND_BACKEND?=

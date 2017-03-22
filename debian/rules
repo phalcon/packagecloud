@@ -106,7 +106,7 @@ override_dh_auto_install:
 	INSTALL_ROOT=$(BUILD) $(MAKE) -C $(SOURCEDIR) install
 
 override_dh_strip:
-	dh_strip -s --dbg-package=$(PACKAGE)-dbg
+	dh_strip -s --dbg-package=$(PACKAGE)-dbgsym
 
 override_dh_gencontrol:
 	echo "php:Depends=phpapi-$(PHP_API_VERSION)" >> debian/$(PHALCON_SUBSTVARS)

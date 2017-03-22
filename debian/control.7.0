@@ -19,10 +19,11 @@ Description: High performance PHP framework
  .
  This package provides the Phalcon PHP extension.
 
-Package: php7.0-phalcon-dbg
+Package: php7.0-phalcon-dbgsym
 Depends: ucf, ${misc:Depends}, php7.0-phalcon (= ${binary:Version})
 Recommends: gdb
-Suggests: php7.0-phpdbg
+Replaces: php7.0-phalcon-dbg (<< 3.1.0)
+Suggests: php7.0-common-dbgsym
 Section: debug
 Priority: extra
 Architecture: any
