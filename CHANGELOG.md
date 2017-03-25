@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-
+### Changed
+- Cleaned not needed changelogs
 
 ## 1.1.0 - 2017-03-22
 ### Changed
