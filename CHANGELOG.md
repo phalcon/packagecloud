@@ -5,7 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Added ability to build PHP 7.1 packages
+
 ### Changed
+- Used latest Zephir and Zephir Parser to generate nighly builds
 - Cleaned not needed changelogs
 
 ## 1.1.0 - 2017-03-22
