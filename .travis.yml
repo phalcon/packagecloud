@@ -4,13 +4,13 @@
 # Copyright (c) 2011-2017, Phalcon Team (https://www.phalconphp.com)
 #
 # This source file is subject to the New BSD License that is bundled
-# with this package in the file LICENSE.txt
+# with this package in the file LICENSE.txt.
 #
 # If you did not receive a copy of the license and are unable to
 # obtain it through the world-wide-web, please send an email
 # to license@phalconphp.com so we can send you a copy immediately.
 #
-# Authors: Serghei Iakovlev <serghei@phalconphp.com>
+# Authors: Phalcon Framework Team <team@phalconphp.com>
 #
 
 sudo: required
@@ -25,6 +25,7 @@ php:
   - 5.5
   - 5.6
   - 7.0
+  - 7.1
 
 git:
   depth: 1
@@ -47,7 +48,7 @@ env:
     - DOCKER_REPO=phalconphp/build
     - SOURCEDIR=$TRAVIS_BUILD_DIR/cphalcon
     # This should be a branch name or a tag
-    - STABLE_BRANCH=v3.1.1
+    - STABLE_BRANCH=v3.1.2
     - NIGHTLY_BRANCH=3.1.x
     # This should be increased to reb-build and push package
     - STABLE_BUILD_VERSION=1
@@ -158,6 +159,7 @@ before_install:
 
 install:
   # Install Zephir
+  - bash ./zephir_parser.sh
   - bash ./zephir.sh
 
 before_script:
