@@ -236,7 +236,7 @@ matrix:
 
 before_install:
   # Use proper debian/stuff
-  - bash ./prepare_debian.sh
+  - if [ $OS != "el" ]; then bash ./prepare_debian.sh; fi;
   # Use ZendEngine3 backend for PHP 7.x
   - if [ $(echo $TRAVIS_PHP_VERSION | cut -f1 -d.) != 5 ]; then export ZEND_BACKEND="--backend=ZendEngine3"; fi;
   # Disable not needed xdebug if any
@@ -247,7 +247,7 @@ before_install:
 
 install:
   # Install Zephir
-  - bash ./zephir_parser.sh
+  - bash ./zephir_parser.sh &> /dev/null
   - bash ./zephir.sh
 
 before_script:
