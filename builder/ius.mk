@@ -13,7 +13,7 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-SUPPORTED_IUS_VERSIONS=5.5 5.6 7.0
+SUPPORTED_IUS_VERSIONS=5.5 5.6 7.0 7.1
 
 ifeq ($(filter $(PHP_MAJOR),$(SUPPORTED_IUS_VERSIONS)),)
 $(error The $(PHP_MAJOR) is unsupported PHP version for $(REPO_VENDOR))
@@ -35,4 +35,10 @@ ifeq ($(PHP_MAJOR),7.0)
 PRODUCT_EXTRA=php70u-phalcon
 PHP_VERSION=php70u
 DOCKER_SUFFIX=-ius70
+endif
+
+ifeq ($(PHP_MAJOR),7.1)
+PRODUCT_EXTRA=php71u-phalcon
+PHP_VERSION=php71u
+DOCKER_SUFFIX=-ius71
 endif
