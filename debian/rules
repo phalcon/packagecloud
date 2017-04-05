@@ -12,8 +12,7 @@
 #  obtain it through the world-wide-web, please send an email
 #  to license@phalconphp.com so we can send you a copy immediately.
 #
-#  Authors: Andres Gutierrez <andres@phalconphp.com>
-#           Serghei Iakovlev <serghei@phalconphp.com>
+#  Authors: Phalcon Framework Team <team@phalconphp.com>
 
 # Uncomment this to turn on verbose mode.
 export DH_VERBOSE=1
@@ -31,25 +30,25 @@ export DEB_HOST_MULTIARCH
 
 PHP_VERSION:=
 PROPOSED_PHP_VERSION=$(PHP_VERSION)
+
 ifeq ($(strip $(PROPOSED_PHP_VERSION)),)
-	PHP_FULL_VERSION=$(shell php-config7.0 --version 2> /dev/null || php-config5 --version 2> /dev/null)
-	PHP_MAJOR_VERSION=$(shell echo $(PHP_FULL_VERSION) | head -c 1)
+PHP_FULL_VERSION=$(shell php-config --version 2> /dev/null || php-config5 --version 2> /dev/null)
+PHP_MAJOR_VERSION=$(shell echo $(PHP_FULL_VERSION) | head -c 1)
 else
-	PHP_MAJOR_VERSION=$(shell echo $(PROPOSED_PHP_VERSION) | head -c 1)
+PHP_MAJOR_VERSION=$(shell echo $(PROPOSED_PHP_VERSION) | head -c 1)
 endif
 
 ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),5))
-	PACKAGE=php5-phalcon
-	BUILD=$(CURDIR)/debian/$(PACKAGE)
-	PHALCON_SHARE_PATH=php5/$(PACKAGE)
-	PHP_API_VERSION=$(shell php-config5 --phpapi)
-endif
-
-ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),7))
-	PACKAGE=php7.0-phalcon
-	BUILD=$(CURDIR)/debian/$(PACKAGE)
-	PHALCON_SHARE_PATH=$(PACKAGE)
-	PHP_API_VERSION=$(shell php-config7.0 --phpapi)
+PACKAGE=php5-phalcon
+BUILD=$(CURDIR)/debian/$(PACKAGE)
+PHALCON_SHARE_PATH=php5/$(PACKAGE)
+PHP_API_VERSION=$(shell php-config5 --phpapi)
+else
+PHP_MINOR_VERSION=$(shell php-config --version | cut -f1,2 -d.)
+PACKAGE=php$(PHP_MINOR_VERSION)-phalcon
+BUILD=$(CURDIR)/debian/$(PACKAGE)
+PHALCON_SHARE_PATH=$(PACKAGE)
+PHP_API_VERSION=$(shell php-config --phpapi)
 endif
 
 PHALCON_SUBSTVARS=$(PACKAGE).substvars
@@ -57,20 +56,20 @@ SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/safe
 DEB_HOST_ARCH?=$(shell dpkg-architecture -qDEB_HOST_ARCH)
 
 ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),i386))
-	SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/32bits
+SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/32bits
 endif
 
 ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),amd64))
-	SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/64bits
+SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/64bits
 endif
 
 CFLAGS+=-g3 -fvisibility=hidden -DPHALCON_RELEASE
 LDFLAGS+=-Wl,--as-needed -Wl,-Bsymbolic-functions
 
 ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
-	CFLAGS+=-O0
+CFLAGS+=-O0
 else
-	CFLAGS+=-O2 -fomit-frame-pointer -finline-functions
+CFLAGS+=-O2 -fomit-frame-pointer -finline-functions
 endif
 
 %:

@@ -93,9 +93,12 @@ matrix:
     - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
     - env: OS=ubuntu DIST=wily PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
     - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-    - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+    - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
     - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
     - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
+    - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+    - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+    - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
   exclude:
     # Exclude non supported PHP
     - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
@@ -233,9 +236,9 @@ matrix:
 
 before_install:
   # Use proper debian/stuff
-  - '[[ "$TRAVIS_PHP_VERSION" != "7.0" ]] || (rm -f ${TRAVIS_BUILD_DIR}/debian/php5-phalcon.* && mv -f ${TRAVIS_BUILD_DIR}/debian/control.7.0 ${TRAVIS_BUILD_DIR}/debian/control)'
+  - bash ./prepare_debian.sh
   # Use ZendEngine3 backend for PHP 7.x
-  - '[[ "$TRAVIS_PHP_VERSION" != "7.0" ]] || export ZEND_BACKEND="--backend=ZendEngine3"'
+  - if [ $(echo $TRAVIS_PHP_VERSION | cut -f1 -d.) != 5 ]; then export ZEND_BACKEND="--backend=ZendEngine3"; fi;
   # Disable not needed xdebug if any
   - phpenv config-rm xdebug.ini || true
   # Create useful symlinks
