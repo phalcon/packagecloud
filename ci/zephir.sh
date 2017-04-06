@@ -14,14 +14,16 @@
 # Authors: Phalcon Framework Team <team@phalconphp.com>
 #
 
-git clone -q --depth=1 https://github.com/phalcon/zephir.git /tmp/zephir
+git clone -q --depth=1 https://github.com/phalcon/zephir.git -b ${ZEPHIR_VERSION} /tmp/zephir
 cd /tmp/zephir
 
 ZEPHIRDIR="$( cd "$( dirname . )" && pwd )"
 sed "s#%ZEPHIRDIR%#$ZEPHIRDIR#g" bin/zephir > bin/zephir-cmd
 chmod 755 bin/zephir-cmd
 
-mkdir -p ~/bin
+mkdir -p ${HOME}/bin
 
-cp bin/zephir-cmd ~/bin/zephir
+cp bin/zephir-cmd ${HOME}/bin/zephir
 rm bin/zephir-cmd
+
+zephir help
