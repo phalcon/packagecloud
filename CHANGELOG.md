@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Used latest Zephir and Zephir Parser to generate nighly builds
 - Cleaned not needed changelogs
+- Improved debian rules to correct handle PHP 7.1
 
 ## 1.1.0 - 2017-03-22
 ### Changed
