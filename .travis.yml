@@ -53,7 +53,7 @@ env:
         - STABLE_BRANCH=v3.1.2
         - NIGHTLY_BRANCH=3.2.x
         # This should be increased to reb-build and push package
-        - STABLE_BUILD_VERSION=1
+        - STABLE_BUILD_VERSION=2
         - NIGHTLY_BUILD_VERSION=$TRAVIS_BUILD_NUMBER
         - TARGET=package
 
