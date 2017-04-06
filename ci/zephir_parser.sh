@@ -17,10 +17,9 @@ set -e
 
 echo -e "Install Zephir Parser..."
 
-git clone -q --depth=1 https://github.com/phalcon/php-zephir-parser.git -b ${ZEPHIR_PARSER_VERSION} /tmp/parser
-cd /tmp/parser
+git clone -q --depth=1 https://github.com/phalcon/php-zephir-parser.git -b ${ZEPHIR_PARSER_VERSION} /tmp/parser &> /dev/null
 
 # Only for Travis CI
-TRAVIS_BUILD_DIR=$(pwd) bash ./tests/ci/install-travis
+TRAVIS_BUILD_DIR=/tmp/parser bash /tmp/parser/tests/ci/install-travis
 
 php --ri "Zephir Parser"

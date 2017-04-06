@@ -16,7 +16,7 @@
 
 set -e
 
-git clone -q --depth=1 https://github.com/phalcon/zephir.git -b ${ZEPHIR_VERSION} /tmp/zephir
+git clone -q --depth=1 https://github.com/phalcon/zephir.git -b ${ZEPHIR_VERSION} /tmp/zephir &> /dev/null
 cd /tmp/zephir
 
 ZEPHIRDIR="$( cd "$( dirname . )" && pwd )"
