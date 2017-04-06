@@ -19,6 +19,7 @@ set -e
 cd ${SOURCEDIR}
 
 zephir fullclean
+echo -e "zephir generate ${ZEND_BACKEND}"
 zephir generate ${ZEND_BACKEND}
 
 cd ${SOURCEDIR}/build
