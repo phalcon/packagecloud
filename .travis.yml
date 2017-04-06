@@ -236,11 +236,12 @@ matrix:
           php: 7.1
 
 before_install:
-    - export PHP_MAJOR="$(echo $TRAVIS_PHP_VERSION | cut -d '.' -f 1)"
+    - export PHP_MAJOR_VERSION="$(echo $TRAVIS_PHP_VERSION | cut -d '.' -f 1)"
     # Use proper debian/stuff
     - if [ $OS != "el" ]; then bash ${TRAVIS_BUILD_DIR}/ci/prepare_debian.sh; fi
-    # Use ZendEngine3 backend for PHP 7.x
-    - if [ $PHP_MAJOR -eq 5 ]; then export ZEND_BACKEND="--backend=ZendEngine3"; fi
+    # Use proper ZendEngine
+    - if [ ${PHP_MAJOR_VERSION} -eq 5 ]; then export ZEND_BACKEND="--backend=ZendEngine2"; fi
+    - if [ ${PHP_MAJOR_VERSION} -eq 7 ]; then export ZEND_BACKEND="--backend=ZendEngine3"; fi
     # Disable not needed xdebug if any
     - phpenv config-rm xdebug.ini || true
     # Create useful symlinks
