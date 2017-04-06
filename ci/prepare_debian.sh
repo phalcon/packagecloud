@@ -14,6 +14,8 @@
 # Authors: Phalcon Framework Team <team@phalconphp.com>
 #
 
+set -e
+
 echo -e "Current PHP version: ${TRAVIS_PHP_VERSION}"
 
 if [ "$TRAVIS_PHP_VERSION" = "7.0" ] || [ "$TRAVIS_PHP_VERSION" = "7.1" ]; then

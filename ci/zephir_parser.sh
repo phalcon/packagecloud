@@ -13,6 +13,8 @@
 #
 #  Authors: Phalcon Framework Team <team@phalconphp.com>
 
+set -e
+
 echo -e "Install Zephir Parser..."
 
 git clone -q --depth=1 https://github.com/phalcon/php-zephir-parser.git -b ${ZEPHIR_PARSER_VERSION} /tmp/parser

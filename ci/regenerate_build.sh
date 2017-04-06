@@ -16,16 +16,16 @@
 
 set -e
 
-git clone -q --depth=1 https://github.com/phalcon/zephir.git -b ${ZEPHIR_VERSION} /tmp/zephir
-cd /tmp/zephir
+cd ${SOURCEDIR}
 
-ZEPHIRDIR="$( cd "$( dirname . )" && pwd )"
-sed "s#%ZEPHIRDIR%#$ZEPHIRDIR#g" bin/zephir > bin/zephir-cmd
-chmod 755 bin/zephir-cmd
+zephir fullclean
+zephir generate ${ZEND_BACKEND}
 
-mkdir -p ${HOME}/bin
+cd ${SOURCEDIR}/build
 
-cp bin/zephir-cmd ${HOME}/bin/zephir
-rm bin/zephir-cmd
+./install --phpize $(phpenv which phpize) --php-config $(phpenv which php-config)
 
-zephir help
+phpenv config-add ${TRAVIS_BUILD_DIR}/ci/phalcon.ini
+
+cd ${SOURCEDIR}/build
+$(phpenv which php) gen-build.php
