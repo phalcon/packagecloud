@@ -19,8 +19,22 @@ set -e
 cd ${SOURCEDIR}
 
 zephir fullclean
-echo -e "zephir generate ${ZEND_BACKEND}"
-zephir generate ${ZEND_BACKEND}
+
+if [ ${PHP_MAJOR_VERSION} -eq 7 ]; then
+	rm -rf ${SOURCEDIR}/ext/kernel
+
+	echo -e "zephir generate ${ZEND_BACKEND}"
+	zephir generate ${ZEND_BACKEND}
+
+	# Workaround to clean ZE3 kernel from ZE2
+	OUTDATED_KERNEL_FILES=`git status --short | grep ' D ' | awk -F' D ' '{print $2}'`
+
+	echo -e "Going to remove from git index:\n${OUTDATED_KERNEL_FILES}"
+	echo $OUTDATED_KERNEL_FILES | xargs git rm -rf
+else
+	echo -e "zephir generate ${ZEND_BACKEND}"
+	zephir generate ${ZEND_BACKEND}
+fi
 
 cd ${SOURCEDIR}/build
 
