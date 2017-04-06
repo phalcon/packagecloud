@@ -37,7 +37,7 @@ Installation/configuration details for each version and operating system [can be
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions       | RPM repo       |
 | --------- | ---------- | ----------------- | ---------------------------- | -------------- |
-| `Core`    | 7.2 LTS    | `3.0.0` - `3.1.1` | `php55u`, `php56u`, `php70u` | [`IUS`][:ius:] |
+| `Core`    | 7.2 LTS    | `3.0.0` - `3.1.2` | `php55u`, `php56u`, `php70u` | [`IUS`][:ius:] |
 | `Core`    | 7.2 LTS    | `3.1.2`           | `php71u`                     | [`IUS`][:ius:] |
 
 _Support of other RPM repos is coming soon_

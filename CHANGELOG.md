@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Cleaned not needed changelogs
 - Improved debian rules to correct handle PHP 7.1
 
+## Fixed
+- Fixed file package file name to be able release a few versions for one distro
+
 ## 1.1.0 - 2017-03-22
 ### Changed
 - Improved preparing build
