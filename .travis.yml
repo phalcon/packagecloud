@@ -4,197 +4,287 @@
 # Copyright (c) 2011-2017, Phalcon Team (https://www.phalconphp.com)
 #
 # This source file is subject to the New BSD License that is bundled
-# with this package in the file LICENSE.txt
+# with this package in the file LICENSE.txt.
 #
 # If you did not receive a copy of the license and are unable to
 # obtain it through the world-wide-web, please send an email
 # to license@phalconphp.com so we can send you a copy immediately.
 #
-# Authors: Serghei Iakovlev <serghei@phalconphp.com>
+# Authors: Phalcon Framework Team <team@phalconphp.com>
 #
 
 sudo: required
 dist: trusty
 
 services:
-  - docker
+    - docker
 
 language: php
 
 php:
-  - 5.5
-  - 5.6
-  - 7.0
+    - 5.5
+    - 5.6
+    - 7.0
+    - 7.1
 
 git:
   depth: 1
 
 cache:
-  apt: true
-  timeout: 691200
-  directories:
-    - $HOME/.cache
-    - $HOME/.ccache
+    apt: true
+    timeout: 691200
+    directories:
+        - $HOME/.cache
+        - $HOME/.ccache
 
 env:
-  global:
-    - ZEND_DONT_UNLOAD_MODULES=1
-    - CC="ccache gcc"
-    - PATH="$HOME/bin:$PATH"
-    - PRODUCT=php-phalcon
-    - PACKAGECLOUD_USER=phalcon
-    - PACKAGECLOUD_REPO=stable
-    - DOCKER_REPO=phalconphp/build
-    - SOURCEDIR=$TRAVIS_BUILD_DIR/cphalcon
-    # This should be a branch name or a tag
-    - STABLE_BRANCH=v3.1.1
-    - NIGHTLY_BRANCH=3.1.x
-    # This should be increased to reb-build and push package
-    - STABLE_BUILD_VERSION=1
-    - NIGHTLY_BUILD_VERSION=$TRAVIS_BUILD_NUMBER
-    - TARGET=package
+    global:
+        - ZEND_DONT_UNLOAD_MODULES=1
+        - CC="ccache gcc"
+        - PATH="$HOME/bin:$PATH"
+        - PRODUCT=php-phalcon
+        - PACKAGECLOUD_USER=phalcon
+        - PACKAGECLOUD_REPO=stable
+        - DOCKER_REPO=phalconphp/build
+        - SOURCEDIR=$TRAVIS_BUILD_DIR/cphalcon
+        - ZEPHIR_VERSION=0.9.7
+        - ZEPHIR_PARSER_VERSION=v1.0.1
+        # This should be a branch name or a tag
+        - STABLE_BRANCH=v3.1.2
+        - NIGHTLY_BRANCH=3.2.x
+        # This should be increased to reb-build and push package
+        - STABLE_BUILD_VERSION=1
+        - NIGHTLY_BUILD_VERSION=$TRAVIS_BUILD_NUMBER
+        - TARGET=package
 
-  matrix:
-    # Stable versions
-    - OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$STABLE_BRANCH REPO_VENDOR=ius
-    - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-    - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
-    - OS=ubuntu DIST=wily PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-    - OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-    - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-    - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
-    - OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-    # Nightly versions
-    - OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$NIGHTLY_BRANCH REPO_VENDOR=ius
-    - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-    - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
-    - OS=ubuntu DIST=wily PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-    - OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-    - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-    - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
-    - OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+    matrix:
+        # Stable versions
+        - OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$STABLE_BRANCH REPO_VENDOR=ius
+        - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+        - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
+        - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+        - OS=ubuntu DIST=wily PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+        - OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+        - OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+        - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+        - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
+        - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+        - OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+        - OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+        # Nightly versions
+        - OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$NIGHTLY_BRANCH REPO_VENDOR=ius
+        - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+        - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
+        - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+        - OS=ubuntu DIST=wily PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+        - OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+        - OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+        - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+        - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
+        - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+        - OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+        - OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
 
 # multiple php version exclusion matrix
 matrix:
-  fast_finish: true
-  allow_failures:
-    - env: OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$NIGHTLY_BRANCH REPO_VENDOR=ius
-    - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-    - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
-    - env: OS=ubuntu DIST=wily PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-    - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-    - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-    - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-    - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
-  exclude:
-    # Exclude non supported PHP
-    - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
-      php: 5.5
-    - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
-      php: 5.5
-    - env: OS=ubuntu DIST=wily PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-      php: 5.5
-    - env: OS=ubuntu DIST=wily PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-      php: 5.5
-    - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-      php: 5.5
-    - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-      php: 5.5
-    - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-      php: 5.5
-    - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
-      php: 5.5
-    - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
-      php: 5.5
-    - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-      php: 5.5
-    - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-      php: 5.5
-    - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-      php: 5.5
-    - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
-      php: 5.6
-    - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
-      php: 5.6
-    - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-      php: 5.6
-    - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-      php: 5.6
-    - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-      php: 5.6
-    - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-      php: 5.6
-    - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-      php: 5.6
-    - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-      php: 5.6
-    - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
-      php: 5.6
-    - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
-      php: 5.6
-    - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-      php: 7.0
-    - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-      php: 7.0
-    - env: OS=ubuntu DIST=wily PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-      php: 7.0
-    - env: OS=ubuntu DIST=wily PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-      php: 7.0
-    - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-      php: 7.0
-    - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-      php: 7.0
+    fast_finish: true
+    allow_failures:
+        - env: OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$NIGHTLY_BRANCH REPO_VENDOR=ius
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+        - env: OS=ubuntu DIST=wily PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+    exclude:
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
+          php: 5.5
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
+          php: 5.5
+        - env: OS=ubuntu DIST=wily PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 5.5
+        - env: OS=ubuntu DIST=wily PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 5.5
+        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 5.5
+        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 5.5
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 5.5
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
+          php: 5.5
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
+          php: 5.5
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 5.5
+        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 5.5
+        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 5.5
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+          php: 5.5
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+          php: 5.5
+        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+          php: 5.5
+        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+          php: 5.5
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+          php: 5.5
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+          php: 5.5
+        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+          php: 5.5
+        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+          php: 5.5
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
+          php: 5.6
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
+          php: 5.6
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 5.6
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 5.6
+        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 5.6
+        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 5.6
+        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 5.6
+        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 5.6
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
+          php: 5.6
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
+          php: 5.6
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+          php: 5.6
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+          php: 5.6
+        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+          php: 5.6
+        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+          php: 5.6
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+          php: 5.6
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+          php: 5.6
+        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+          php: 5.6
+        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+          php: 5.6
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 7.0
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 7.0
+        - env: OS=ubuntu DIST=wily PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 7.0
+        - env: OS=ubuntu DIST=wily PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 7.0
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 7.0
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 7.0
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+          php: 7.0
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+          php: 7.0
+        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+          php: 7.0
+        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+          php: 7.0
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+          php: 7.0
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+          php: 7.0
+        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+          php: 7.0
+        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+          php: 7.0
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 7.1
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
+          php: 7.1
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 7.1
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
+          php: 7.1
+        - env: OS=ubuntu DIST=wily PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 7.1
+        - env: OS=ubuntu DIST=wily PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 7.1
+        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 7.1
+        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 7.1
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 7.1
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
+          php: 7.1
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 7.1
+        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
+          php: 7.1
+        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 7.1
+        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 7.1
 
 before_install:
-  # Use proper debian/stuff
-  - '[[ "$TRAVIS_PHP_VERSION" != "7.0" ]] || (rm -f ${TRAVIS_BUILD_DIR}/debian/php5-phalcon.* && mv -f ${TRAVIS_BUILD_DIR}/debian/control.7.0 ${TRAVIS_BUILD_DIR}/debian/control)'
-  # Use ZendEngine3 backend for PHP 7.x
-  - '[[ "$TRAVIS_PHP_VERSION" != "7.0" ]] || export ZEND_BACKEND="--backend=ZendEngine3"'
-  # Disable not needed xdebug if any
-  - phpenv config-rm xdebug.ini || true
-  # Create useful symlinks
-  - sudo ln -s /home/travis/.phpenv/versions/$(phpenv version-name)/bin/phpize /usr/bin/
-  - sudo ln -s /home/travis/.phpenv/versions/$(phpenv version-name)/bin/php-config /usr/bin/
+    - export PHP_MAJOR_VERSION="$(echo $TRAVIS_PHP_VERSION | cut -d '.' -f 1)"
+    # Use proper debian/stuff
+    - if [ $OS != "el" ]; then bash ${TRAVIS_BUILD_DIR}/ci/prepare_debian.sh; fi
+    # Use proper ZendEngine
+    - if [ ${PHP_MAJOR_VERSION} -eq 5 ]; then export ZEND_BACKEND="--backend=ZendEngine2"; fi
+    - if [ ${PHP_MAJOR_VERSION} -eq 7 ]; then export ZEND_BACKEND="--backend=ZendEngine3"; fi
+    # Disable not needed xdebug if any
+    - phpenv config-rm xdebug.ini || true
+    # Create useful symlinks
+    - sudo ln -s /home/travis/.phpenv/versions/$(phpenv version-name)/bin/phpize /usr/bin/
+    - sudo ln -s /home/travis/.phpenv/versions/$(phpenv version-name)/bin/php-config /usr/bin/
 
 install:
-  # Install Zephir
-  - bash ./zephir.sh
+    # Install Zephir
+    - if [ "${CLONE_BRANCH}" = "${NIGHTLY_BRANCH}" ]; then
+        bash ${TRAVIS_BUILD_DIR}/ci/zephir_parser.sh;
+        bash ${TRAVIS_BUILD_DIR}/ci/zephir.sh;
+      fi
 
 before_script:
-  - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b $CLONE_BRANCH $SOURCEDIR
-  # Regenerate build
-  - '[[ "$CLONE_BRANCH" != "$NIGHTLY_BRANCH" ]] || (cd $SOURCEDIR; zephir fullclean && zephir generate ${ZEND_BACKEND})'
-  # Required for generating builds, optimized for 32-bit and 64-bit platforms
-  - '[[ "$CLONE_BRANCH" != "$NIGHTLY_BRANCH" ]] || (cd $SOURCEDIR/ext; export CFLAGS="-g3 -O1 -std=gnu90 -Wall -DZEPHIR_RELEASE=1"; phpize &> /dev/null && ./configure --silent --enable-phalcon &> /dev/null && make --silent -j"$(getconf _NPROCESSORS_ONLN)" &> /dev/null && make --silent install)'
-  - '[[ "$CLONE_BRANCH" != "$NIGHTLY_BRANCH" ]] || phpenv config-add ${TRAVIS_BUILD_DIR}/ci/phalcon.ini'
-  - '[[ "$CLONE_BRANCH" != "$NIGHTLY_BRANCH" ]] || (cd $SOURCEDIR; php build/gen-build.php)'
+    - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b $CLONE_BRANCH $SOURCEDIR
+    # Regenerate build and
+    - if [ "${CLONE_BRANCH}" = "${NIGHTLY_BRANCH}" ]; then bash ${TRAVIS_BUILD_DIR}/ci/regenerate_build.sh; fi
 
 script:
-  - make -f .travis.mk ${TARGET}
+    - cd ${TRAVIS_BUILD_DIR}; make -f .travis.mk ${TARGET}
 
 before_deploy:
-  - '[[ "$CLONE_BRANCH" != "$NIGHTLY_BRANCH" ]] || export PACKAGECLOUD_REPO=nightly'
-  - ls -l build/
+    - if [ "${CLONE_BRANCH}" = "${NIGHTLY_BRANCH}" ]; then export PACKAGECLOUD_REPO=nightly; fi
+    - ls -l build/;
 
 deploy:
-  # Deploy packages to PackageCloud
-  - provider: packagecloud
-    username: "${PACKAGECLOUD_USER}"
-    repository: "${PACKAGECLOUD_REPO}"
-    token: "${PACKAGECLOUD_TOKEN}"
-    dist: "${OS}/${DIST}"
-    package_glob: build/*.{rpm,deb,dsc}
-    skip_cleanup: true
-    on:
-      branch: "master"
-      condition: -n "${OS}" && -n "${DIST}" && -n "${PACKAGECLOUD_TOKEN}"
+    - provider: packagecloud
+      username: "${PACKAGECLOUD_USER}"
+      repository: "${PACKAGECLOUD_REPO}"
+      token: "${PACKAGECLOUD_TOKEN}"
+      dist: "${OS}/${DIST}"
+      package_glob: build/*.{rpm,deb,dsc}
+      skip_cleanup: true
+      on:
+          branch: "master"
+          condition: -n "${OS}" && -n "${DIST}" && -n "${PACKAGECLOUD_TOKEN}"
 
 after_failure:
-  # @TODO
+    # @TODO
 
 notifications:
-  email:
-    recipients:
-      - build@phalconphp.com
-    on_success: change
-    on_failure: always
+    email:
+        recipients:
+            - build@phalconphp.com
+        on_success: change
+        on_failure: always

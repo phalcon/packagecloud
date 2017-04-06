@@ -18,22 +18,27 @@ Installation/configuration details for each version and operating system [can be
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions |
 | --------- | ---------- | ----------------- | ---------------------- |
-| `trusty`  | 14.04 LTS  | `3.0.0` - `3.1.1` | `5.5.x`, `7.0.x`       |
-| `wily`    | 15.10      | `3.0.0` - `3.1.1` | `5.6.x`                |
-| `xenial`  | 16.04 LTS  | `3.0.0` - `3.1.1` | `7.0.x`                |
+| `trusty`  | 14.04 LTS  | `3.0.0` - `3.1.2` | `5.5.x`, `7.0.x`       |
+| `trusty`  | 14.04 LTS  | `3.1.2`           | `7.1.x`                |
+| `wily`    | 15.10      | `3.0.0` - `3.1.2` | `5.6.x`                |
+| `xenial`  | 16.04 LTS  | `3.0.0` - `3.1.2` | `7.0.x`                |
+| `xenial`  | 16.04 LTS  | `3.1.2`           | `7.1.x`                |
 
 ### Debian
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions |
 | --------- | ---------- | ----------------- | ---------------------- |
-| `jessie`  | 8.5 LTS    | `3.0.0` - `3.1.1` | `5.6.x`, `7.0.x`       |
-| `stretch` | 9          | `3.0.0` - `3.1.1` | `7.0.x`                |
+| `jessie`  | 8.5 LTS    | `3.0.0` - `3.1.2` | `5.6.x`, `7.0.x`       |
+| `jessie`  | 8.5 LTS    | `3.1.2`           | `7.1.x`                |
+| `stretch` | 9          | `3.0.0` - `3.1.2` | `7.0.x`                |
+| `stretch` | 9          | `3.1.2`           | `7.1.x`                |
 
 ### CentOS (RHEL)
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions       | RPM repo       |
 | --------- | ---------- | ----------------- | ---------------------------- | -------------- |
 | `Core`    | 7.2 LTS    | `3.0.0` - `3.1.1` | `php55u`, `php56u`, `php70u` | [`IUS`][:ius:] |
+| `Core`    | 7.2 LTS    | `3.1.2`           | `php71u`                     | [`IUS`][:ius:] |
 
 _Support of other RPM repos is coming soon_
 
@@ -71,8 +76,11 @@ curl -s https://packagecloud.io/install/repositories/phalcon/nightly/script.rpm.
 # PHP 5
 sudo apt-get install php5-phalcon
 
-# PHP 7
+# PHP 7.0
 sudo apt-get install php7.0-phalcon
+
+# PHP 7.1
+sudo apt-get install php7.1-phalcon
 ```
 
 ### RPM packages
@@ -88,6 +96,9 @@ sudo yum install php56u-phalcon
 
 # PHP 7.0
 sudo yum install php70u-phalcon
+
+# PHP 7.1
+sudo yum install php71u-phalcon
 ```
 
 ## Download packages manually
