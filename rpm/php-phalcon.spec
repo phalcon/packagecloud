@@ -59,8 +59,8 @@ BuildRequires: pcre-devel%{?_isa} >= 8.20
 BuildRequires: re2c%{?_isa}
 Requires: %{php_base}-pdo%{?_isa}
 Requires: %{php_base}-common%{?_isa}
-Requires: %{php_base}(zend-abi) = %{zend_apiver}
-Requires: %{php_base}(api) = %{php_apiver}
+Requires: php(zend-abi) = %{php_zend_api}
+Requires: php(api) = %{php_core_api}
 
 %description
 High performance PHP framework.
