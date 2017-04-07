@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Changed
-- Improved RPM-spec by by removing hardcoded virtual provides specific things
+- Improved RPM-spec by removing hardcoded virtual provides specific things
 
 ## [1.2.0] - 2017-04-06
 ### Added
