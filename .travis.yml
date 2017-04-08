@@ -39,8 +39,6 @@ cache:
 
 env:
     global:
-        - ZEND_DONT_UNLOAD_MODULES=1
-        - CC="ccache gcc"
         - PATH="$HOME/bin:$PATH"
         - PRODUCT=php-phalcon
         - PACKAGECLOUD_USER=phalcon
