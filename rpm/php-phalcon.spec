@@ -82,7 +82,7 @@ Documentation: https://docs.phalconphp.com
 ;  Copyright (c) 2011-2017 Phalcon Team (https://www.phalconphp.com)
 ;
 ;  This source file is subject to the New BSD License that is bundled
-;  with this package in the file https://license.phalconphp.com
+;  with this package in the file LICENSE.txt.
 ;
 ;  If you did not receive a copy of the license and are unable to
 ;  obtain it through the world-wide-web, please send an email
@@ -109,6 +109,7 @@ extension = %{ext_name}.so
 ; %{ext_name}.orm.enable_implicit_joins = On
 ; %{ext_name}.orm.cast_on_hydrate = Off
 ; %{ext_name}.orm.ignore_unknown_columns = Off
+; %{ext_name}.orm.update_snapshot_on_save = On
 
 EOF
 
