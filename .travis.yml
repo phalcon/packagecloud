@@ -45,13 +45,13 @@ env:
         - PACKAGECLOUD_REPO=stable
         - DOCKER_REPO=phalconphp/build
         - SOURCEDIR=$TRAVIS_BUILD_DIR/cphalcon
-        - ZEPHIR_VERSION=0.9.7
-        - ZEPHIR_PARSER_VERSION=v1.0.2
+        - ZEPHIR_VERSION=0.9.8
+        - ZEPHIR_PARSER_VERSION=v1.0.3
         # This should be a branch name or a tag
-        - STABLE_BRANCH=v3.1.2
+        - STABLE_BRANCH=v3.2.0
         - NIGHTLY_BRANCH=3.2.x
         # This should be increased to reb-build and push package
-        - STABLE_BUILD_VERSION=2
+        - STABLE_BUILD_VERSION=1
         - NIGHTLY_BUILD_VERSION=$TRAVIS_BUILD_NUMBER
         - TARGET=package
 
