@@ -21,7 +21,7 @@ D_TARGETS=report prepare-build
 
 .EXPORT_ALL_VARIABLES: ; # send all vars to shell
 
-.PHONY: source package prepare-deb-spec prepare-rpm-spec $(D_TARGETS)
+.PHONY: source package prepare-deb-spec prepare-rpm-spec patching-sources $(D_TARGETS)
 
 include $(SCRIPTDIR)/builder/config.mk
 include $(SCRIPTDIR)/builder/check.mk
