@@ -216,7 +216,7 @@ extclean zts-phpize
 %files
 %defattr(-,root,root,-)
 %{!?_licensedir:%global license %%doc}
-%license docs/LICENSE.txt
+%license LICENSE.txt
 %doc BACKERS.md
 %doc CHANGELOG.md
 %doc CONTRIBUTING.md
