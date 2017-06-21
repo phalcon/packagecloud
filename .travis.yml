@@ -45,7 +45,7 @@ env:
         - PACKAGECLOUD_REPO=stable
         - DOCKER_REPO=phalconphp/build
         - SOURCEDIR=$TRAVIS_BUILD_DIR/cphalcon
-        - ZEPHIR_VERSION=0.9.8
+        - ZEPHIR_VERSION=0.9.9
         - ZEPHIR_PARSER_VERSION=v1.0.3
         # This should be a branch name or a tag
         - STABLE_BRANCH=v3.2.0
