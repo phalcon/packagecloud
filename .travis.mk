@@ -27,12 +27,12 @@ include $(SCRIPTDIR)/builder/config.mk
 include $(SCRIPTDIR)/builder/check.mk
 include $(SCRIPTDIR)/builder/patching.mk
 
-source: $(D_TARGETS)
+source: $(D_TARGETS) patching-sources
 	$(info Create tarball...)
 	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
 	TARBALL_COMPRESSOR=gz $(SCRIPTDIR)/packpack/packpack tarball
 
-package: $(D_TARGETS)
+package: $(D_TARGETS) patching-sources
 	$(info Build package...)
 	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
 	$(SCRIPTDIR)/packpack/packpack
