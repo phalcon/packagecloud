@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [1.2.2] - 2017-07-10
 ### Changed
 - Removed no longer needed `patching-sources` target
 
@@ -40,6 +42,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Ubuntu 14.04-16.04, Debian 8.5-9 and CentOS 7.2 by using
 [Packpack](https://github.com/packpack/packpack).
 
+[1.2.2]: https://github.com/phalcongelist/packagecloud/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/phalcongelist/packagecloud/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/phalcongelist/packagecloud/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/phalcongelist/packagecloud/compare/v1.0.0...v1.1.0
