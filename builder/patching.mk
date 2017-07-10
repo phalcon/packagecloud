@@ -33,8 +33,6 @@ else
 RPM_PHP_BASE:=php
 endif
 
-PHALCON_SOURCE=$(shell grep -r -l "zend_error_noreturn" $(SOURCEDIR)/build/php5 | grep phalcon.zep.c)
-
 define patching_rpmspec
 	cp $(1) rpmspec.tmp
 	sed \
@@ -49,27 +47,6 @@ define patching_rpmspec
 	mkdir -p $(SOURCEDIR)/rpm
 	mv -f rpmspec.tmp $(SOURCEDIR)/rpm/php-phalcon.spec
 endef
-
-define patching_zend_error_noreturn
-	echo "-------------------------------------------------------------------"
-	echo "Patching $(1)"
-	echo "-------------------------------------------------------------------"
-	cp $(1) $@.tmp
-	sed \
-		-e 's/zend_error_noreturn/zend_error/' \
-		-i $@.tmp
-	grep -F "zend_error" $@.tmp || \
-		(echo "Failed to patch $(1)" && exit 1)
-	mv -f $@.tmp $(1)
-	echo
-endef
-
-patching-sources: $(PHALCON_SOURCE)
-	$(info -------------------------------------------------------------------)
-	$(info Scan for $(PHALCON_SOURCE))
-	$(info -------------------------------------------------------------------)
-	$(foreach file,$(PHALCON_SOURCE),$(call patching_zend_error_noreturn,$(file));)
-	$(info )
 
 prepare-build: prepare-$(PACKAGE)-spec
 	$(info -------------------------------------------------------------------)

@@ -21,18 +21,18 @@ D_TARGETS=report prepare-build
 
 .EXPORT_ALL_VARIABLES: ; # send all vars to shell
 
-.PHONY: source package prepare-deb-spec prepare-rpm-spec patching-sources $(D_TARGETS)
+.PHONY: source package prepare-deb-spec prepare-rpm-spec $(D_TARGETS)
 
 include $(SCRIPTDIR)/builder/config.mk
 include $(SCRIPTDIR)/builder/check.mk
 include $(SCRIPTDIR)/builder/patching.mk
 
-source: $(D_TARGETS) patching-sources
+source: $(D_TARGETS)
 	$(info Create tarball...)
 	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
 	TARBALL_COMPRESSOR=gz $(SCRIPTDIR)/packpack/packpack tarball
 
-package: $(D_TARGETS) patching-sources
+package: $(D_TARGETS)
 	$(info Build package...)
 	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
 	$(SCRIPTDIR)/packpack/packpack
