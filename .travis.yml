@@ -45,10 +45,10 @@ env:
         - PACKAGECLOUD_REPO=stable
         - DOCKER_REPO=phalconphp/build
         - SOURCEDIR=$TRAVIS_BUILD_DIR/cphalcon
-        - ZEPHIR_VERSION=0.9.9
+        - ZEPHIR_VERSION=0.9.11
         - ZEPHIR_PARSER_VERSION=v1.0.3
         # This should be a branch name or a tag
-        - STABLE_BRANCH=v3.2.1
+        - STABLE_BRANCH=v3.2.2
         - NIGHTLY_BRANCH=3.2.x
         # This should be increased to reb-build and push package
         - STABLE_BUILD_VERSION=1
@@ -236,10 +236,15 @@ matrix:
 before_install:
     - export PHP_MAJOR_VERSION="$(echo $TRAVIS_PHP_VERSION | cut -d '.' -f 1)"
     # Use proper debian/stuff
-    - if [ $OS != "el" ]; then bash ${TRAVIS_BUILD_DIR}/ci/prepare_debian.sh; fi
+    - if [ $OS != "el" ]; then
+        bash ${TRAVIS_BUILD_DIR}/ci/prepare_debian.sh;
+      fi
     # Use proper ZendEngine
-    - if [ ${PHP_MAJOR_VERSION} -eq 5 ]; then export ZEND_BACKEND="--backend=ZendEngine2"; fi
-    - if [ ${PHP_MAJOR_VERSION} -eq 7 ]; then export ZEND_BACKEND="--backend=ZendEngine3"; fi
+    - if [ ${PHP_MAJOR_VERSION} -eq 5 ]; then
+        export ZEND_BACKEND="--backend=ZendEngine2";
+      else
+        export ZEND_BACKEND="--backend=ZendEngine3";
+      fi
     # Disable not needed xdebug if any
     - phpenv config-rm xdebug.ini || true
     # Create useful symlinks
@@ -256,13 +261,17 @@ install:
 before_script:
     - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b $CLONE_BRANCH $SOURCEDIR
     # Regenerate build and
-    - if [ "${CLONE_BRANCH}" = "${NIGHTLY_BRANCH}" ]; then bash ${TRAVIS_BUILD_DIR}/ci/regenerate_build.sh; fi
+    - if [ "${CLONE_BRANCH}" = "${NIGHTLY_BRANCH}" ]; then
+        bash ${TRAVIS_BUILD_DIR}/ci/regenerate_build.sh;
+      fi
 
 script:
     - cd ${TRAVIS_BUILD_DIR}; make -f .travis.mk ${TARGET}
 
 before_deploy:
-    - if [ "${CLONE_BRANCH}" = "${NIGHTLY_BRANCH}" ]; then export PACKAGECLOUD_REPO=nightly; fi
+    - if [ "${CLONE_BRANCH}" = "${NIGHTLY_BRANCH}" ]; then
+        export PACKAGECLOUD_REPO=nightly;
+      fi
     - ls -l build/;
 
 deploy:
