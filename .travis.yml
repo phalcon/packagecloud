@@ -1,7 +1,7 @@
 #
 # Phalcon Build Project
 #
-# Copyright (c) 2011-2017, Phalcon Team (https://www.phalconphp.com)
+# Copyright (c) 2011-present, Phalcon Team (https://www.phalconphp.com)
 #
 # This source file is subject to the New BSD License that is bundled
 # with this package in the file LICENSE.txt.
@@ -45,10 +45,10 @@ env:
         - PACKAGECLOUD_REPO=stable
         - DOCKER_REPO=phalconphp/build
         - SOURCEDIR=$TRAVIS_BUILD_DIR/cphalcon
-        - ZEPHIR_VERSION=0.10.3
+        - ZEPHIR_VERSION=0.10.4
         - ZEPHIR_PARSER_VERSION=v1.1.0
         # This should be a branch name or a tag
-        - STABLE_BRANCH=v3.2.3
+        - STABLE_BRANCH=v3.2.4
         - NIGHTLY_BRANCH=3.3.x
         # This should be increased to reb-build and push package
         - STABLE_BUILD_VERSION=1
