@@ -1,0 +1,35 @@
+Source: php-phalcon
+Section: php
+Priority: optional
+Maintainer: Serghei Iakovlev <serghei@phalconphp.com>
+Build-Depends: debhelper (>= 9), dpkg-dev (>= 1.16.1~), build-essential, re2c, php7.2-dev, php7.2-json, libpcre3-dev, libfile-fcntllock-perl
+Standards-Version: 3.9.7
+Vcs-Git: git://github.com/phalcon/cphalcon.git
+Vcs-Browser: https://github.com/phalcon/cphalcon
+
+Package: php7.2-phalcon
+Architecture: any
+Priority: optional
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: ucf, ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}
+Suggests: php7.2-mysql, php7.2-sqlite3, php7.2-pgsql, php7.2-memcached
+Description: High performance PHP framework
+ Phalcon is an open source web framework delivered as a C extension for
+ the PHP language providing high performance and lower resource consumption.
+ .
+ This package provides the Phalcon PHP extension.
+
+Package: php7.2-phalcon-dbgsym
+Depends: ucf, ${misc:Depends}, php7.2-phalcon (= ${binary:Version})
+Recommends: gdb
+Replaces: php7.2-phalcon-dbg (<< 3.1.0)
+Suggests: php7.2-common-dbgsym
+Section: debug
+Priority: extra
+Architecture: any
+Description: Debug symbols for php7.2-phalcon
+ Phalcon is an open source web framework delivered as a C extension for
+ the PHP language providing high performance and lower resource consumption.
+ .
+ This package provides the debug symbols for Phalcon PHP extension
+ needed for properly debugging errors with gdb.

@@ -19,26 +19,30 @@ Installation/configuration details for each version and operating system [can be
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions |
 | --------- | ---------- | ----------------- | ---------------------- |
 | `trusty`  | 14.04 LTS  | `3.0.0` - `3.2.4` | `5.5.x`, `7.0.x`       |
-| `trusty`  | 14.04 LTS  | `3.1.2` - `3.2.4` | `7.1.x`                |
-| `wily`    | 15.10      | `3.0.0` - `3.2.2` | `5.6.x`                |
-| `xenial`  | 16.04 LTS  | `3.0.0` - `3.2.4` | `7.0.x`                |
-| `xenial`  | 16.04 LTS  | `3.1.2` - `3.2.4` | `7.1.x`                |
+| `trusty`  | 14.04 LTS  | `3.1.2` - `3.3.0` | `7.1.x`                |
+| `trusty`  | 14.04 LTS  | `3.3.0`           | `7.2.x`                |
+| `xenial`  | 16.04 LTS  | `3.0.0` - `3.3.0` | `7.0.x`                |
+| `xenial`  | 16.04 LTS  | `3.1.2` - `3.3.0` | `7.1.x`                |
+| `xenial`  | 16.04 LTS  | `3.3.0`           | `7.2.x`                |
 
 ### Debian
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions |
 | --------- | ---------- | ----------------- | ---------------------- |
-| `jessie`  | 8.5 LTS    | `3.0.0` - `3.2.4` | `5.6.x`, `7.0.x`       |
-| `jessie`  | 8.5 LTS    | `3.1.2` - `3.2.4` | `7.1.x`                |
-| `stretch` | 9          | `3.0.0` - `3.2.4` | `7.0.x`                |
-| `stretch` | 9          | `3.1.2` - `3.2.4` | `7.1.x`                |
+| `jessie`  | 8.5 LTS    | `3.0.0` - `3.3.0` | `5.6.x`, `7.0.x`       |
+| `jessie`  | 8.5 LTS    | `3.1.2` - `3.3.0` | `7.1.x`                |
+| `jessie`  | 8.5 LTS    | `3.3.0`           | `7.2.x`                |
+| `stretch` | 9          | `3.0.0` - `3.3.0` | `7.0.x`                |
+| `stretch` | 9          | `3.1.2` - `3.3.0` | `7.1.x`                |
+| `stretch` | 9          | `3.3.0`           | `7.2.x`                |
 
 ### CentOS (RHEL)
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions       | RPM repo       |
 | --------- | ---------- | ----------------- | ---------------------------- | -------------- |
-| `Core`    | 7.2 LTS    | `3.0.0` - `3.2.4` | `php55u`, `php56u`, `php70u` | [`IUS`][:ius:] |
-| `Core`    | 7.2 LTS    | `3.1.2` - `3.2.4` | `php71u`                     | [`IUS`][:ius:] |
+| `Core`    | 7.2 LTS    | `3.0.0` - `3.3.0` | `php55u`, `php56u`, `php70u` | [`IUS`][:ius:] |
+| `Core`    | 7.2 LTS    | `3.1.2` - `3.3.0` | `php71u`                     | [`IUS`][:ius:] |
+| `Core`    | 7.2 LTS    | `3.3.0`           | `7.2.x`                      | [`IUS`][:ius:] |
 
 _Support of other RPM repos is coming soon_
 
@@ -81,6 +85,9 @@ sudo apt-get install php7.0-phalcon
 
 # PHP 7.1
 sudo apt-get install php7.1-phalcon
+
+# PHP 7.2
+sudo apt-get install php7.1-phalcon
 ```
 
 ### RPM packages
@@ -99,6 +106,9 @@ sudo yum install php70u-phalcon
 
 # PHP 7.1
 sudo yum install php71u-phalcon
+
+# PHP 7.2
+sudo yum install php72u-phalcon
 ```
 
 ## Download packages manually
