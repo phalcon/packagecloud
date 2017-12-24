@@ -27,7 +27,9 @@ else
 RPM_PRODUCT:=php-phalcon
 endif
 
-ifneq ($(PHP_VERSION),)
+ifeq ($(PHP_VERSION),php72u)
+RPM_PHP_BASE:=php
+else ifneq ($(PHP_VERSION),)
 RPM_PHP_BASE:=$(PHP_VERSION)
 else
 RPM_PHP_BASE:=php

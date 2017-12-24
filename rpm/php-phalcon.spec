@@ -57,6 +57,12 @@ BuildRequires: %{php_base}-devel%{?_isa}
 BuildRequires: pcre-devel%{?_isa} >= 8.20
 %endif
 BuildRequires: re2c%{?_isa}
+# grep -nr __builtin_saddl_overflow ~/src/php/7.2.0 | wc -l
+# 6
+# The `__builtin_saddl_overflow' was added in clang 3.4 and gcc 5.0.0
+%if "%{php_version}" >= "7.2"
+BuildRequires: gcc >= 5.0.0
+%endif
 Requires: %{php_base}-pdo%{?_isa}
 Requires: %{php_base}-common%{?_isa}
 Requires: php(zend-abi) = %{php_zend_api}
@@ -88,7 +94,7 @@ Documentation: https://docs.phalconphp.com
 ;  obtain it through the world-wide-web, please send an email
 ;  to license@phalconphp.com so we can send you a copy immediately.
 ;
-;  Authors: Phalcon Framework Team <team@phalconphp.com>
+;  Authors: Phalcon Team <team@phalconphp.com>
 
 ; %{summary}
 [%{ext_name}]
@@ -110,6 +116,7 @@ extension = %{ext_name}.so
 ; %{ext_name}.orm.cast_on_hydrate = Off
 ; %{ext_name}.orm.ignore_unknown_columns = Off
 ; %{ext_name}.orm.update_snapshot_on_save = On
+; %{ext_name}.orm.disable_assign_setters = Off
 
 EOF
 
@@ -163,6 +170,9 @@ extconf %{_bindir}/zts-php-config
 %endif
 
 %check
+%{__cc} --version
+%{__php} --version
+
 : Get needed extensions for check
 modules=""
 for mod in json pdo; do
@@ -170,6 +180,8 @@ for mod in json pdo; do
     modules="$modules -d extension=${mod}.so"
   fi
 done
+
+ls -al %{buildroot}%{php_extdir}/
 
 : Minimal load test for NTS extension
 %{__php} --no-php-ini \

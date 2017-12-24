@@ -101,6 +101,12 @@ DOCKER_SUFFIX=-7.1
 endif
 endif
 
+ifeq ($(PHP_VERSION),7.2)
+ifneq (,$(filter $(DIST),stretch jessie trusty xenial))
+DOCKER_SUFFIX=-7.2
+endif
+endif
+
 REVISION=$(shell cd $(SOURCEDIR); git rev-parse --short=8 HEAD)
 VERSION?=$(shell cat "$(SOURCEDIR)/config.json" | grep version | head -1 | sed -E 's|[\", ]||g' | cut -d ':' -f 2)
 VERSION_FULL=$(VERSION)-$(RELEASE)-$(REVISION)
