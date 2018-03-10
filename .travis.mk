@@ -29,7 +29,8 @@ $(SCRIPTDIR)/packpack:
 	$(shell git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack)
 	$(info -------------------------------------------------------------------)
 	$(info Patching packpak...)
-	$(shell cd $(SCRIPTDIR)/packpack && git apply $(SCRIPTDIR)/gh-84.diff)
+	$(shell cd $(SCRIPTDIR)/packpack && git apply $(SCRIPTDIR)/gh-84.patch)
+	$(info -------------------------------------------------------------------)
 
 .PHONY: source
 source: $(D_TARGETS) $(SCRIPTDIR)/packpack
