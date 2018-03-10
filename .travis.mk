@@ -26,10 +26,10 @@ include $(SCRIPTDIR)/builder/check.mk
 include $(SCRIPTDIR)/builder/patching.mk
 
 $(SCRIPTDIR)/packpack:
-	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
+	$(shell git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack)
 	$(info -------------------------------------------------------------------)
 	$(info Patching packpak...)
-	git apply gh-84.diff
+	$(shell cd $(SCRIPTDIR)/packpack && git apply $(SCRIPTDIR)/gh-84.diff)
 
 .PHONY: source
 source: $(D_TARGETS) $(SCRIPTDIR)/packpack
