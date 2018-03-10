@@ -15,28 +15,33 @@
 # Authors: Serghei Iakovlev <serghei@phalconphp.com>
 #
 
-SHELL:=$(shell which bash)
-SCRIPTDIR:=${CURDIR}
-D_TARGETS=report prepare-build
+SHELL := $(shell which bash)
+SCRIPTDIR := ${CURDIR}
+D_TARGETS = report prepare-build
 
 .EXPORT_ALL_VARIABLES: ; # send all vars to shell
-
-.PHONY: source package prepare-deb-spec prepare-rpm-spec $(D_TARGETS)
 
 include $(SCRIPTDIR)/builder/config.mk
 include $(SCRIPTDIR)/builder/check.mk
 include $(SCRIPTDIR)/builder/patching.mk
 
-source: $(D_TARGETS)
-	$(info Create tarball...)
+$(SCRIPTDIR)/packpack:
 	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
+	$(info -------------------------------------------------------------------)
+	$(info Patching packpak...)
+	git apply gh-84.diff
+
+.PHONY: source
+source: $(D_TARGETS) $(SCRIPTDIR)/packpack
+	$(info Create tarball...)
 	TARBALL_COMPRESSOR=gz $(SCRIPTDIR)/packpack/packpack tarball
 
-package: $(D_TARGETS)
+.PHONY: package
+package: $(D_TARGETS) $(SCRIPTDIR)/packpack
 	$(info Build package...)
-	git clone -q --depth=1 $(PACK_REPO) -b $(PACK_BRANCH) $(SCRIPTDIR)/packpack
 	$(SCRIPTDIR)/packpack/packpack
 
+.PHONY: report
 report:
 	$(info )
 	$(info Product ............................: $(PRODUCT))
