@@ -50,6 +50,7 @@ define patching_rpmspec
 	mv -f rpmspec.tmp $(SOURCEDIR)/rpm/php-phalcon.spec
 endef
 
+.PHONY: prepare-build
 prepare-build: prepare-$(PACKAGE)-spec
 	$(info -------------------------------------------------------------------)
 	$(info Prepare .build.mk)
@@ -61,6 +62,7 @@ endif
 	@mv -f $@.tmp $(SOURCEDIR)/.build.mk
 	$(info )
 
+.PHONY: prepare-deb-spec
 prepare-deb-spec: $(DEB_SPEC)
 	$(info -------------------------------------------------------------------)
 	$(info Patching $<)
@@ -70,6 +72,7 @@ prepare-deb-spec: $(DEB_SPEC)
 	@mv -f $@.tmp $(SOURCEDIR)/debian/rules
 	$(info )
 
+.PHONY: prepare-rpm-spec
 prepare-rpm-spec: $(RPM_SPEC)
 	$(info -------------------------------------------------------------------)
 	$(info Patching $<)
