@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.2.3] - 2018-03-10
+### Fixed
+- Patching packpack due to https://github.com/packpack/packpack/pull/84#issuecomment-371755389
+
 ## [1.2.2] - 2017-07-10
 ### Changed
 - Removed no longer needed `patching-sources` target
@@ -42,6 +46,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Ubuntu 14.04-16.04, Debian 8.5-9 and CentOS 7.2 by using
 [Packpack](https://github.com/packpack/packpack).
 
+[Unreleased]: https://github.com/phalcongelist/packagecloud/compare/v1.2.3...HEAD
+[1.2.3]: https://github.com/phalcongelist/packagecloud/compare/v1.2.2...v1.2.3
 [1.2.2]: https://github.com/phalcongelist/packagecloud/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/phalcongelist/packagecloud/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/phalcongelist/packagecloud/compare/v1.1.0...v1.2.0
