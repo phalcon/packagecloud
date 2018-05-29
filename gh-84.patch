@@ -1,10 +1,10 @@
 diff --git a/pack/rpm.mk b/pack/rpm.mk
-index c74e942..324c6da 100644
+index 053af96..8c9e5a1 100644
 --- a/pack/rpm.mk
 +++ b/pack/rpm.mk
-@@ -8,13 +8,7 @@ $(error Can't find RPM spec in rpm/ directory)
- endif
- $(info Using $(RPMSPECIN) file)
+@@ -10,13 +10,7 @@ $(info Using $(RPMSPECIN) file)
+ 
+ EXTRA_SOURCE_FILES := $(filter-out $(RPMSPECIN),$(wildcard rpm/*))
  
 -RPMSPEC_AVAIL := $(shell command -v rpmspec 2> /dev/null)
 -
