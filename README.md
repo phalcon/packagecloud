@@ -24,6 +24,9 @@ Installation/configuration details for each version and operating system [can be
 | `xenial`  | 16.04 LTS  | `3.0.0` - `3.4.0` | `7.0.x`                |
 | `xenial`  | 16.04 LTS  | `3.1.2` - `3.4.0` | `7.1.x`                |
 | `xenial`  | 16.04 LTS  | `3.3.0` - `3.4.0` | `7.2.x`                |
+| `bionic`  | 18.04 LTS  | `3.4.0`           | `7.0.x`                |
+| `bionic`  | 18.04 LTS  | `3.4.0`           | `7.1.x`                |
+| `bionic`  | 18.04 LTS  | `3.4.0`           | `7.2.x`                |
 
 ### Debian
 

@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Added ability to build packages for Ubuntu 18.04
 
 ## [1.2.3] - 2018-03-10
 ### Fixed
