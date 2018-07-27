@@ -35,7 +35,7 @@ STABLE_BUILD_VERSION?=1
 FEDORA:=fedora-rawhide fedora24 fedora23
 CENTOS:=centos7 centos6
 DEBIAN:=debian-sid debian-stretch debian-jessie debian-wheezy
-UBUNTU:=ubuntu-yakkety ubuntu-xenial ubuntu-wily ubuntu-trusty ubuntu-precise
+UBUNTU:=ubuntu-bionic ubuntu-xenial ubuntu-trusty
 
 DEBS:=$(DEBIAN) $(UBUNTU)
 RPMS:=$(FEDORA) $(CENTOS)

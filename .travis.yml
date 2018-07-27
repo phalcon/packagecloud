@@ -45,7 +45,7 @@ env:
         - STABLE_BRANCH=v3.4.0
         - NIGHTLY_BRANCH=3.4.x
         # This should be increased to reb-build and push package
-        - STABLE_BUILD_VERSION=3
+        - STABLE_BUILD_VERSION=4
         - NIGHTLY_BUILD_VERSION=$TRAVIS_BUILD_NUMBER
         - TARGET=package
         - RE2C_VERSION="1.0.3"
