@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Added ability to build packages for Ubuntu 18.04
+- Added a common Debian/Ubuntu prebuild.sh script
 
 ## [1.2.3] - 2018-03-10
 ### Fixed
