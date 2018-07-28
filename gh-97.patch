@@ -1,0 +1,12 @@
+diff --git a/packpack b/packpack
+index 6f4c80f..1659773 100755
+--- a/packpack
++++ b/packpack
+@@ -155,6 +155,7 @@ docker run \
+         --entrypoint=/build/userwrapper.sh \
+         -e XDG_CACHE_HOME=/cache \
+         -e CCACHE_DIR=/cache/ccache \
++        -e TMPDIR=/tmp \
+         --volume "${CACHE_DIR}:/cache" \
+         ${DOCKER_REPO}:${DOCKER_IMAGE} \
+         make -f /pack/Makefile -C /source BUILDDIR=/build -j "$@"

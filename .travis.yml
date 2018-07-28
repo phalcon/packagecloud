@@ -10,7 +10,7 @@
 # obtain it through the world-wide-web, please send an email
 # to license@phalconphp.com so we can send you a copy immediately.
 #
-# Authors: Phalcon Framework Team <team@phalconphp.com>
+# Authors: Phalcon Team <team@phalconphp.com>
 #
 
 sudo: required
@@ -45,7 +45,7 @@ env:
         - STABLE_BRANCH=v3.4.0
         - NIGHTLY_BRANCH=3.4.x
         # This should be increased to reb-build and push package
-        - STABLE_BUILD_VERSION=2
+        - STABLE_BUILD_VERSION=5
         - NIGHTLY_BUILD_VERSION=$TRAVIS_BUILD_NUMBER
         - TARGET=package
         - RE2C_VERSION="1.0.3"
@@ -60,6 +60,9 @@ env:
         - OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
         - OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
         - OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
+        - OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+        - OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+        - OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
         - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
         - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
         - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
@@ -76,6 +79,9 @@ env:
         - OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
         - OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
         - OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
+        - OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+        - OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+        - OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
         - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
         - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
         - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
@@ -96,6 +102,9 @@ matrix:
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
@@ -112,6 +121,10 @@ matrix:
           php: 5.5
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
           php: 5.5
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 5.5
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 5.5
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
           php: 5.5
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
@@ -132,6 +145,10 @@ matrix:
           php: 5.5
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
           php: 5.5
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+          php: 5.5
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+          php: 5.5
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
           php: 5.5
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
@@ -147,6 +164,10 @@ matrix:
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
           php: 5.5
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
+          php: 5.5
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
+          php: 5.5
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
           php: 5.5
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
           php: 5.5
@@ -168,6 +189,10 @@ matrix:
           php: 5.6
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
           php: 5.6
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 5.6
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 5.6
         - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
           php: 5.6
         - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
@@ -184,6 +209,10 @@ matrix:
           php: 5.6
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
           php: 5.6
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+          php: 5.6
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+          php: 5.6
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
           php: 5.6
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
@@ -199,6 +228,10 @@ matrix:
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
           php: 5.6
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
+          php: 5.6
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
+          php: 5.6
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
           php: 5.6
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
           php: 5.6
@@ -224,6 +257,10 @@ matrix:
           php: 7.0
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
           php: 7.0
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+          php: 7.0
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+          php: 7.0
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
           php: 7.0
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
@@ -239,6 +276,10 @@ matrix:
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
           php: 7.0
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
+          php: 7.0
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
+          php: 7.0
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
           php: 7.0
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
           php: 7.0
@@ -268,6 +309,14 @@ matrix:
           php: 7.1
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
           php: 7.1
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 7.1
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
+          php: 7.1
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 7.1
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
+          php: 7.1
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
           php: 7.1
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
@@ -307,6 +356,14 @@ matrix:
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
           php: 7.2
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
+          php: 7.2
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
+          php: 7.2
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+          php: 7.2
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
+          php: 7.2
+        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
           php: 7.2
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
           php: 7.2

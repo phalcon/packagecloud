@@ -19,6 +19,7 @@ CHANGELOG_TEXT=Automated build. See details at release page https://github.com/p
 
 PACK_REPO=https://github.com/packpack/packpack.git
 PACK_BRANCH=master
+PACK_COMMIT=30ff7b51654c19b8919d01ca8d4aa480e87e8241
 
 DOCKER_REPO=phalconphp/build
 
@@ -35,7 +36,7 @@ STABLE_BUILD_VERSION?=1
 FEDORA:=fedora-rawhide fedora24 fedora23
 CENTOS:=centos7 centos6
 DEBIAN:=debian-sid debian-stretch debian-jessie debian-wheezy
-UBUNTU:=ubuntu-yakkety ubuntu-xenial ubuntu-wily ubuntu-trusty ubuntu-precise
+UBUNTU:=ubuntu-bionic ubuntu-xenial ubuntu-trusty
 
 DEBS:=$(DEBIAN) $(UBUNTU)
 RPMS:=$(FEDORA) $(CENTOS)

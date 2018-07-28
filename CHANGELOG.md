@@ -6,9 +6,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.3.0] - 2018-07-28
+### Added
+- Added ability to build packages for Ubuntu 18.04 [phalcongelist/packagecloud#27](https://github.com/phalcongelist/packagecloud/issues/27), [phalcon/cphalcon#13376](https://github.com/phalcon/cphalcon/issues/13376)
+- Added a common Debian/Ubuntu `prebuild.sh` script
+
+### Changed
+- Freezed packpack version to make sure that we use the same packpack always
+
+### Fixed
+- Added `TMPDIR` variable to the build container [packpack/packpack#97](https://github.com/packpack/packpack/issues/97)
+
 ## [1.2.3] - 2018-03-10
 ### Fixed
-- Patching packpack due to https://github.com/packpack/packpack/pull/84#issuecomment-371755389
+- Patching packpack due to [packpack/packpack#84](https://github.com/packpack/packpack/pull/84#issuecomment-371755389)
 
 ## [1.2.2] - 2017-07-10
 ### Changed
@@ -46,7 +57,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Ubuntu 14.04-16.04, Debian 8.5-9 and CentOS 7.2 by using
 [Packpack](https://github.com/packpack/packpack).
 
-[Unreleased]: https://github.com/phalcongelist/packagecloud/compare/v1.2.3...HEAD
+[Unreleased]: https://github.com/phalcongelist/packagecloud/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/phalcongelist/packagecloud/compare/v1.2.3...v1.3.0
 [1.2.3]: https://github.com/phalcongelist/packagecloud/compare/v1.2.2...v1.2.3
 [1.2.2]: https://github.com/phalcongelist/packagecloud/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/phalcongelist/packagecloud/compare/v1.2.0...v1.2.1
