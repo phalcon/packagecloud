@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [1.3.0] - 2018-07-28
 ### Added
 - Added ability to build packages for Ubuntu 18.04
 - Added a common Debian/Ubuntu prebuild.sh script
