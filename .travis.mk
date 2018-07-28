@@ -30,6 +30,7 @@ $(SCRIPTDIR)/packpack:
 	$(info -------------------------------------------------------------------)
 	$(info Patching packpak...)
 	$(shell cd $(SCRIPTDIR)/packpack && git apply $(SCRIPTDIR)/gh-84.patch)
+	$(shell cd $(SCRIPTDIR)/packpack && git apply $(SCRIPTDIR)/gh-97.patch)
 	$(info -------------------------------------------------------------------)
 
 .PHONY: source

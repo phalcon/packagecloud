@@ -9,9 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Added ability to build packages for Ubuntu 18.04
 - Added a common Debian/Ubuntu prebuild.sh script
 
+### Fixed
+- Added `TMPDIR` variable to the build container [packpack/packpack#97](https://github.com/packpack/packpack/issues/97)
+
 ## [1.2.3] - 2018-03-10
 ### Fixed
-- Patching packpack due to https://github.com/packpack/packpack/pull/84#issuecomment-371755389
+- Patching packpack due to [packpack/packpack#84](https://github.com/packpack/packpack/pull/84#issuecomment-371755389)
 
 ## [1.2.2] - 2017-07-10
 ### Changed
