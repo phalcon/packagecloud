@@ -19,6 +19,7 @@ CHANGELOG_TEXT=Automated build. See details at release page https://github.com/p
 
 PACK_REPO=https://github.com/packpack/packpack.git
 PACK_BRANCH=master
+PACK_COMMIT=30ff7b51654c19b8919d01ca8d4aa480e87e8241
 
 DOCKER_REPO=phalconphp/build
 
