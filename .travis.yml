@@ -42,10 +42,10 @@ env:
         - ZEPHIR_VERSION=0.10.7
         - ZEPHIR_PARSER_VERSION=v1.1.1
         # This should be a branch name or a tag
-        - STABLE_BRANCH=v3.4.0
+        - STABLE_BRANCH=v3.4.1
         - NIGHTLY_BRANCH=3.4.x
         # This should be increased to reb-build and push package
-        - STABLE_BUILD_VERSION=5
+        - STABLE_BUILD_VERSION=1
         - NIGHTLY_BUILD_VERSION=$TRAVIS_BUILD_NUMBER
         - TARGET=package
         - RE2C_VERSION="1.0.3"

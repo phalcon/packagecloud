@@ -16,36 +16,34 @@ Installation/configuration details for each version and operating system [can be
 
 ### Ubuntu
 
-| Codename  | OS Release | Phalcon Releases  | Supported PHP versions |
-| --------- | ---------- | ----------------- | ---------------------- |
-| `trusty`  | 14.04 LTS  | `3.0.0` - `3.4.0` | `5.5.x`, `7.0.x`       |
-| `trusty`  | 14.04 LTS  | `3.1.2` - `3.4.0` | `7.1.x`                |
-| `trusty`  | 14.04 LTS  | `3.3.0` - `3.4.0` | `7.2.x`                |
-| `xenial`  | 16.04 LTS  | `3.0.0` - `3.4.0` | `7.0.x`                |
-| `xenial`  | 16.04 LTS  | `3.1.2` - `3.4.0` | `7.1.x`                |
-| `xenial`  | 16.04 LTS  | `3.3.0` - `3.4.0` | `7.2.x`                |
-| `bionic`  | 18.04 LTS  | `3.4.0`           | `7.0.x`                |
-| `bionic`  | 18.04 LTS  | `3.4.0`           | `7.1.x`                |
-| `bionic`  | 18.04 LTS  | `3.4.0`           | `7.2.x`                |
+| Codename  | OS Release | Phalcon Releases  | Supported PHP versions    |
+| --------- | ---------- | ----------------- | ------------------------- |
+| `trusty`  | 14.04 LTS  | `3.0.0` - `3.4.1` | `5.5.x`, `7.0.x`          |
+| `trusty`  | 14.04 LTS  | `3.1.2` - `3.4.1` | `7.1.x`                   |
+| `trusty`  | 14.04 LTS  | `3.3.0` - `3.4.1` | `7.2.x`                   |
+| `xenial`  | 16.04 LTS  | `3.0.0` - `3.4.1` | `7.0.x`                   |
+| `xenial`  | 16.04 LTS  | `3.1.2` - `3.4.1` | `7.1.x`                   |
+| `xenial`  | 16.04 LTS  | `3.3.0` - `3.4.1` | `7.2.x`                   |
+| `bionic`  | 18.04 LTS  | `3.4.0` - `3.4.1` | `7.0.x`, `7.1.x`, `7.2.x` |
 
 ### Debian
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions |
 | --------- | ---------- | ----------------- | ---------------------- |
-| `jessie`  | 8.5 LTS    | `3.0.0` - `3.4.0` | `5.6.x`, `7.0.x`       |
-| `jessie`  | 8.5 LTS    | `3.1.2` - `3.4.0` | `7.1.x`                |
-| `jessie`  | 8.5 LTS    | `3.3.0` - `3.4.0` | `7.2.x`                |
-| `stretch` | 9          | `3.0.0` - `3.4.0` | `7.0.x`                |
-| `stretch` | 9          | `3.1.2` - `3.4.0` | `7.1.x`                |
-| `stretch` | 9          | `3.3.0` - `3.4.0` | `7.2.x`                |
+| `jessie`  | 8.5 LTS    | `3.0.0` - `3.4.1` | `5.6.x`, `7.0.x`       |
+| `jessie`  | 8.5 LTS    | `3.1.2` - `3.4.1` | `7.1.x`                |
+| `jessie`  | 8.5 LTS    | `3.3.0` - `3.4.1` | `7.2.x`                |
+| `stretch` | 9          | `3.0.0` - `3.4.1` | `7.0.x`                |
+| `stretch` | 9          | `3.1.2` - `3.4.1` | `7.1.x`                |
+| `stretch` | 9          | `3.3.0` - `3.4.1` | `7.2.x`                |
 
 ### CentOS (RHEL)
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions       | RPM repo       |
 | --------- | ---------- | ----------------- | ---------------------------- | -------------- |
-| `Core`    | 7.2 LTS    | `3.0.0` - `3.4.0` | `php55u`, `php56u`, `php70u` | [`IUS`][:ius:] |
-| `Core`    | 7.2 LTS    | `3.1.2` - `3.4.0` | `php71u`                     | [`IUS`][:ius:] |
-| `Core`    | 7.2 LTS    | `3.3.0` - `3.4.0` | `7.2.x`                      | [`IUS`][:ius:] |
+| `Core`    | 7.2 LTS    | `3.0.0` - `3.4.1` | `php55u`, `php56u`, `php70u` | [`IUS`][:ius:] |
+| `Core`    | 7.2 LTS    | `3.1.2` - `3.4.1` | `php71u`                     | [`IUS`][:ius:] |
+| `Core`    | 7.2 LTS    | `3.3.0` - `3.4.1` | `7.2.x`                      | [`IUS`][:ius:] |
 
 _Support of other RPM repos is coming soon_
 
@@ -121,8 +119,9 @@ sudo yum install php72u-phalcon
 
 ## License
 
-Phalcon is open source software licensed under the New BSD License.<br>
-See the LICENSE.txt file for more.
+Phalcon is open source software licensed under the BSD 3-Clause License.
+Copyright © 2011-present, Phalcon Team.<br>
+See the [LICENSE.txt](https://github.com/phalcongelist/packagecloud/blob/master/LICENSE.txt) file for more.
 
 [:build-st:]: https://travis-ci.org/phalcongelist/packagecloud
 [:cloud:]: https://packagecloud.io/phalcon
