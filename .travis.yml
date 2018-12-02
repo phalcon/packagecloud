@@ -1,17 +1,17 @@
+# This file is part of the Phalcon.
 #
-# Phalcon Build Project
+# (c) Phalcon Team <team@phalconphp.com>
 #
-# Copyright (c) 2011-present, Phalcon Team (https://www.phalconphp.com)
+# For the full copyright and license information, please view
+# the LICENSE.txt file that was distributed with this source code.
 #
-# This source file is subject to the New BSD License that is bundled
-# with this package in the file LICENSE.txt.
+# If you did not receive a copy of the license it is available
+# through the world-wide-web at the following url:
+# https://license.phalconphp.com
 #
 # If you did not receive a copy of the license and are unable to
 # obtain it through the world-wide-web, please send an email
 # to license@phalconphp.com so we can send you a copy immediately.
-#
-# Authors: Phalcon Team <team@phalconphp.com>
-#
 
 sudo: required
 dist: trusty
@@ -39,16 +39,16 @@ env:
         - PACKAGECLOUD_REPO=stable
         - DOCKER_REPO=phalconphp/build
         - SOURCEDIR=$TRAVIS_BUILD_DIR/cphalcon
-        - ZEPHIR_VERSION=0.10.7
-        - ZEPHIR_PARSER_VERSION=v1.1.1
+        - ZEPHIR_VERSION=0.10.14
+        - ZEPHIR_PARSER_VERSION=v1.1.3
         # This should be a branch name or a tag
-        - STABLE_BRANCH=v3.4.1
+        - STABLE_BRANCH=v3.4.2
         - NIGHTLY_BRANCH=3.4.x
         # This should be increased to reb-build and push package
         - STABLE_BUILD_VERSION=1
         - NIGHTLY_BUILD_VERSION=$TRAVIS_BUILD_NUMBER
         - TARGET=package
-        - RE2C_VERSION="1.0.3"
+        - RE2C_VERSION="1.1.1"
 
     matrix:
         # Stable versions

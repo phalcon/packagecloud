@@ -1,19 +1,20 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
 #
-# Phalcon Build Project
+# This file is part of the Phalcon.
 #
-# Copyright (c) 2011-present, Phalcon Team (https://www.phalconphp.com)
+# (c) Phalcon Team <team@phalconphp.com>
 #
-# This source file is subject to the New BSD License that is bundled
-# with this package in the file LICENSE.txt
+# For the full copyright and license information, please view
+# the LICENSE.txt file that was distributed with this source code.
+#
+# If you did not receive a copy of the license it is available
+# through the world-wide-web at the following url:
+# https://license.phalconphp.com
 #
 # If you did not receive a copy of the license and are unable to
 # obtain it through the world-wide-web, please send an email
 # to license@phalconphp.com so we can send you a copy immediately.
-#
-# Authors: Serghei Iakovlev <serghei@phalconphp.com>
-#
 
 SHELL := $(shell which bash)
 SCRIPTDIR := ${CURDIR}

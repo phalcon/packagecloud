@@ -1,4 +1,4 @@
-# Phalcon Build Project
+# Phalcon Package Builder
 
 [![Build Status](https://travis-ci.org/phalcongelist/packagecloud.svg?branch=master)][:build-st:]
 
@@ -119,7 +119,7 @@ sudo yum install php72u-phalcon
 
 ## License
 
-Phalcon is open source software licensed under the BSD 3-Clause License.
+This work licensed under the BSD 3-Clause License.<br>
 Copyright © 2011-present, Phalcon Team.<br>
 See the [LICENSE.txt](https://github.com/phalcongelist/packagecloud/blob/master/LICENSE.txt) file for more.
 
