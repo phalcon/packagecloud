@@ -13,7 +13,6 @@
 # obtain it through the world-wide-web, please send an email
 # to license@phalconphp.com so we can send you a copy immediately.
 
-sudo: required
 dist: trusty
 
 services:
@@ -40,12 +39,12 @@ env:
         - DOCKER_REPO=phalconphp/build
         - SOURCEDIR=$TRAVIS_BUILD_DIR/cphalcon
         - ZEPHIR_VERSION=0.10.14
-        - ZEPHIR_PARSER_VERSION=v1.1.3
+        - ZEPHIR_PARSER_VERSION=v1.1.4
         # This should be a branch name or a tag
         - STABLE_BRANCH=v3.4.2
         - NIGHTLY_BRANCH=3.4.x
         # This should be increased to reb-build and push package
-        - STABLE_BUILD_VERSION=1
+        - STABLE_BUILD_VERSION=2
         - NIGHTLY_BUILD_VERSION=$TRAVIS_BUILD_NUMBER
         - TARGET=package
         - RE2C_VERSION="1.1.1"

@@ -18,32 +18,32 @@ Installation/configuration details for each version and operating system [can be
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions    |
 | --------- | ---------- | ----------------- | ------------------------- |
-| `trusty`  | 14.04 LTS  | `3.0.0` - `3.4.1` | `5.5.x`, `7.0.x`          |
-| `trusty`  | 14.04 LTS  | `3.1.2` - `3.4.1` | `7.1.x`                   |
-| `trusty`  | 14.04 LTS  | `3.3.0` - `3.4.1` | `7.2.x`                   |
-| `xenial`  | 16.04 LTS  | `3.0.0` - `3.4.1` | `7.0.x`                   |
-| `xenial`  | 16.04 LTS  | `3.1.2` - `3.4.1` | `7.1.x`                   |
-| `xenial`  | 16.04 LTS  | `3.3.0` - `3.4.1` | `7.2.x`                   |
-| `bionic`  | 18.04 LTS  | `3.4.0` - `3.4.1` | `7.0.x`, `7.1.x`, `7.2.x` |
+| `trusty`  | 14.04 LTS  | `3.0.0` - `3.4.2` | `5.5.x`, `7.0.x`          |
+| `trusty`  | 14.04 LTS  | `3.1.2` - `3.4.2` | `7.1.x`                   |
+| `trusty`  | 14.04 LTS  | `3.3.0` - `3.4.2` | `7.2.x`                   |
+| `xenial`  | 16.04 LTS  | `3.0.0` - `3.4.2` | `7.0.x`                   |
+| `xenial`  | 16.04 LTS  | `3.1.2` - `3.4.2` | `7.1.x`                   |
+| `xenial`  | 16.04 LTS  | `3.3.0` - `3.4.2` | `7.2.x`                   |
+| `bionic`  | 18.04 LTS  | `3.4.0` - `3.4.2` | `7.0.x`, `7.1.x`, `7.2.x` |
 
 ### Debian
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions |
 | --------- | ---------- | ----------------- | ---------------------- |
-| `jessie`  | 8.5 LTS    | `3.0.0` - `3.4.1` | `5.6.x`, `7.0.x`       |
-| `jessie`  | 8.5 LTS    | `3.1.2` - `3.4.1` | `7.1.x`                |
-| `jessie`  | 8.5 LTS    | `3.3.0` - `3.4.1` | `7.2.x`                |
-| `stretch` | 9          | `3.0.0` - `3.4.1` | `7.0.x`                |
-| `stretch` | 9          | `3.1.2` - `3.4.1` | `7.1.x`                |
-| `stretch` | 9          | `3.3.0` - `3.4.1` | `7.2.x`                |
+| `jessie`  | 8.5 LTS    | `3.0.0` - `3.4.2` | `5.6.x`, `7.0.x`       |
+| `jessie`  | 8.5 LTS    | `3.1.2` - `3.4.2` | `7.1.x`                |
+| `jessie`  | 8.5 LTS    | `3.3.0` - `3.4.2` | `7.2.x`                |
+| `stretch` | 9          | `3.0.0` - `3.4.2` | `7.0.x`                |
+| `stretch` | 9          | `3.1.2` - `3.4.2` | `7.1.x`                |
+| `stretch` | 9          | `3.3.0` - `3.4.2` | `7.2.x`                |
 
 ### CentOS (RHEL)
 
 | Codename  | OS Release | Phalcon Releases  | Supported PHP versions       | RPM repo       |
 | --------- | ---------- | ----------------- | ---------------------------- | -------------- |
-| `Core`    | 7.2 LTS    | `3.0.0` - `3.4.1` | `php55u`, `php56u`, `php70u` | [`IUS`][:ius:] |
-| `Core`    | 7.2 LTS    | `3.1.2` - `3.4.1` | `php71u`                     | [`IUS`][:ius:] |
-| `Core`    | 7.2 LTS    | `3.3.0` - `3.4.1` | `7.2.x`                      | [`IUS`][:ius:] |
+| `Core`    | 7.2 LTS    | `3.0.0` - `3.4.2` | `php55u`, `php56u`, `php70u` | [`IUS`][:ius:] |
+| `Core`    | 7.2 LTS    | `3.1.2` - `3.4.2` | `php71u`                     | [`IUS`][:ius:] |
+| `Core`    | 7.2 LTS    | `3.3.0` - `3.4.2` | `7.2.x`                      | [`IUS`][:ius:] |
 
 _Support of other RPM repos is coming soon_
 
