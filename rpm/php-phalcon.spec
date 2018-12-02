@@ -1,15 +1,17 @@
-#  Phalcon Framework
+# This file is part of the Phalcon.
 #
-#  Copyright (c) 2011-present, Phalcon Team (https://www.phalconphp.com)
+# (c) Phalcon Team <team@phalconphp.com>
 #
-#  This source file is subject to the New BSD License that is bundled
-#  with this package in the file https://license.phalconphp.com
+# For the full copyright and license information, please view
+# the LICENSE.txt file that was distributed with this source code.
 #
-#  If you did not receive a copy of the license and are unable to
-#  obtain it through the world-wide-web, please send an email
-#  to license@phalconphp.com so we can send you a copy immediately.
+# If you did not receive a copy of the license it is available
+# through the world-wide-web at the following url:
+# https://license.phalconphp.com
 #
-#  Authors: Phalcon Framework Team <team@phalconphp.com>
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@phalconphp.com so we can send you a copy immediately.
 
 %global with_zts    0%{?__ztsphp:1}
 %global with_tests  %{?_with_tests:1}%{!?_with_tests:0}
@@ -83,18 +85,20 @@ Documentation: https://docs.phalconphp.com
 
 %{__cat} > %{ini_name} << 'EOF'
 ;
-;  Phalcon Framework
+; This file is part of the Phalcon.
 ;
-;  Copyright (c) 2011-present Phalcon Team (https://www.phalconphp.com)
+; (c) Phalcon Team <team@phalconphp.com>
 ;
-;  This source file is subject to the New BSD License that is bundled
-;  with this package in the file LICENSE.txt.
+; For the full copyright and license information, please view
+; the LICENSE.txt file that was distributed with this source code.
 ;
-;  If you did not receive a copy of the license and are unable to
-;  obtain it through the world-wide-web, please send an email
-;  to license@phalconphp.com so we can send you a copy immediately.
+; If you did not receive a copy of the license it is available
+; through the world-wide-web at the following url:
+; https://license.phalconphp.com
 ;
-;  Authors: Phalcon Team <team@phalconphp.com>
+; If you did not receive a copy of the license and are unable to
+; obtain it through the world-wide-web, please send an email
+; to license@phalconphp.com so we can send you a copy immediately.
 
 ; %{summary}
 [%{ext_name}]

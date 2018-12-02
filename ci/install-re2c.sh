@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
 #
-# Zephir Parser
-# Copyright (c) 2013-present Zephir Team (https://zephir-lang.com/)
+# This file is part of the Phalcon.
 #
-# This source file is subject the MIT license, that is bundled with this
-# package in the file LICENSE, and is available through the world-wide-web
-# at the following url: http://zephir-lang.com/license.html
+# (c) Phalcon Team <team@phalconphp.com>
+#
+# For the full copyright and license information, please view
+# the LICENSE.txt file that was distributed with this source code.
+#
+# If you did not receive a copy of the license it is available
+# through the world-wide-web at the following url:
+# https://license.phalconphp.com
+#
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@phalconphp.com so we can send you a copy immediately.
 
 echo -e "Install a tool for writing fast and flexible scanners in C from regular expressions"
 

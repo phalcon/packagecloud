@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 #
-#  Phalcon Framework
+# This file is part of the Zephir Parser.
 #
-#  Copyright (c) 2011-present Phalcon Team (https://www.phalconphp.com)
+# (c) Zephir Team <team@zephir-lang.com>
 #
-#  This source file is subject to the New BSD License that is bundled
-#  with this package in the file LICENSE.txt.
+# For the full copyright and license information, please view
+# the LICENSE.txt file that was distributed with this source code.
 #
-#  If you did not receive a copy of the license and are unable to
-#  obtain it through the world-wide-web, please send an email
-#  to license@phalconphp.com so we can send you a copy immediately.
+# If you did not receive a copy of the license it is available
+# through the world-wide-web at the following url:
+# https://github.com/phalcon/php-zephir-parser/blob/development/LICENSE
 #
-#  Authors: Phalcon Framework Team <team@phalconphp.com>
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@phalconphp.com so we can send you a copy immediately.
 
 # Ensure that this is being run inside a CI container
 if [ "${CI}" != "true" ]; then
