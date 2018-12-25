@@ -179,7 +179,7 @@ extconf %{_bindir}/zts-php-config
 
 : Get needed extensions for check
 modules=""
-for mod in json pdo; do
+for mod in json pdo psr; do
   if [ -f %{php_extdir}/${mod}.so ]; then
     modules="$modules -d extension=${mod}.so"
   fi
