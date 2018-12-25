@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 #
-# This file is part of the Zephir Parser.
+# This file is part of the Phalcon.
 #
-# (c) Zephir Team <team@zephir-lang.com>
+# (c) Phalcon Team <team@phalconphp.com>
 #
 # For the full copyright and license information, please view
 # the LICENSE.txt file that was distributed with this source code.
 #
 # If you did not receive a copy of the license it is available
 # through the world-wide-web at the following url:
-# https://github.com/phalcon/php-zephir-parser/blob/development/LICENSE
+# https://license.phalconphp.com
 #
 # If you did not receive a copy of the license and are unable to
 # obtain it through the world-wide-web, please send an email
@@ -17,38 +17,23 @@
 
 # Ensure that this is being run inside a CI container
 if [ "${CI}" != "true" ]; then
-    echo "This script is designed to run inside a CI container only. Exiting"
-    exit 1
+	echo "This script is designed to run inside a CI container only. Exiting"
+	exit 1
 fi
 
-ZEPHIR_PARSER_VERSION=${ZEPHIR_PARSER_VERSION:-development}
-PHP_MAJOR=`$(phpenv which php-config) --version | cut -d '.' -f 1,2`
+ZEPHIR_PARSER_VERSION=${ZEPHIR_PARSER_VERSION:-master}
 
-LOCAL_SRC_DIR=${HOME}/.cache/zephir-parser/src
-LOCAL_LIB_DIR=${HOME}/.local/lib
-LOCAL_LIBRARY=${LOCAL_LIB_DIR}/zephir-parser-${ZEPHIR_PARSER_VERSION}-${PHP_MAJOR}.so
+git clone --depth=1 -v https://github.com/phalcon/php-zephir-parser.git -b ${ZEPHIR_PARSER_VERSION}
 
-EXTENSION_DIR=`$(phpenv which php-config) --extension-dir`
+pushd php-zephir-parser
 
-if [ ! -f ${LOCAL_LIBRARY} ]; then
-	rm -rf ${LOCAL_SRC_DIR}
+$(phpenv which phpize)
+./configure --with-php-config=$(phpenv which php-config)
+make
+make install
 
-    mkdir -p ${LOCAL_SRC_DIR}
-    mkdir -p ${LOCAL_LIB_DIR}
+popd
 
-    git clone --depth=1 -v https://github.com/phalcon/php-zephir-parser.git -b ${ZEPHIR_PARSER_VERSION} ${LOCAL_SRC_DIR}
+echo "extension=zephir_parser.so" >> $(phpenv root)/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
-    bash ${LOCAL_SRC_DIR}/install
-
-    if [ ! -f "${EXTENSION_DIR}/zephir_parser.so" ]; then
-        echo "Unable to locate installed zephir_parser.so"
-        exit 1
-    fi
-
-    cp "${EXTENSION_DIR}/zephir_parser.so" ${LOCAL_LIBRARY}
-fi
-
-echo "[Zephir Parser]" > ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/conf.d/zephir-parser.ini
-echo "extension=${LOCAL_LIBRARY}" >> ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/conf.d/zephir-parser.ini
-
-php --ri 'Zephir Parser'
+$(phpenv which php) --ri 'Zephir Parser'
