@@ -116,9 +116,17 @@ install:
         fi
 
 before_script:
-    - echo "git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b $CLONE_BRANCH $SOURCEDIR"
-    - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b $CLONE_BRANCH $SOURCEDIR
-    - if [ "${CLONE_BRANCH}" = "${NIGHTLY_BRANCH}" ]; then bash ${TRAVIS_BUILD_DIR}/ci/regenerate_build.sh; fi
+    # The '--branch <tag_name>' does (at least now) work for tags.
+    - |
+        if [ "${CLONE_BRANCH}" != "${NIGHTLY_BRANCH}" ]; then
+            git clone -q https://github.com/phalcon/cphalcon.git $SOURCEDIR
+            cd $SOURCEDIR
+            git checkout "tags/${CLONE_BRANCH}" -b $CLONE_BRANCH
+            cd $TRAVIS_BUILD_DIR
+        else
+            git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b $CLONE_BRANCH $SOURCEDIR
+            bash ${TRAVIS_BUILD_DIR}/ci/regenerate_build.sh
+        fi
 
 script:
     - cd ${TRAVIS_BUILD_DIR}; make -f .travis.mk ${TARGET}
