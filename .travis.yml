@@ -37,17 +37,14 @@ env:
         - ZEPHIR_VERSION=0.11.8
         - ZEPHIR_PARSER_VERSION=v1.1.4
         - ZEND_BACKEND="--backend=ZendEngine3"
-        # This should be a branch name or a tag
         - STABLE_BRANCH=v4.0.0.alpha1
         - NIGHTLY_BRANCH=4.0.x
-        # This should be increased to reb-build and push package
         - STABLE_BUILD_VERSION=1
         - NIGHTLY_BUILD_VERSION=$TRAVIS_BUILD_NUMBER
         - TARGET=package
         - RE2C_VERSION="1.1.1"
 
     matrix:
-        # Stable versions
         - OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$STABLE_BRANCH REPO_VENDOR=ius
         - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
         - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
@@ -59,7 +56,6 @@ env:
         - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
         - OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
         - OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
-        # Nightly versions
         - OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$NIGHTLY_BRANCH REPO_VENDOR=ius
         - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
         - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
@@ -72,7 +68,6 @@ env:
         - OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
         - OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
 
-# multiple php version exclusion matrix
 matrix:
     fast_finish: true
     allow_failures:
@@ -88,89 +83,48 @@ matrix:
         - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
         - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
     exclude:
-          php: 7.2
-        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
-          php: 7.2
-        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
+        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
           php: 7.2
         - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
           php: 7.2
-        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
-          php: 7.2
-        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
-          php: 7.2
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-          php: 7.2
-        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
           php: 7.2
         - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
           php: 7.2
-        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
-          php: 7.2
         - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-          php: 7.2
-        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
           php: 7.2
         - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
           php: 7.2
-        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
-          php: 7.2
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-          php: 7.2
-        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.0
-          php: 7.2
-        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
           php: 7.2
         - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
           php: 7.2
-        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.0
-          php: 7.2
-        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
-          php: 7.2
         - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-          php: 7.2
-        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.1
-          php: 7.2
-        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-          php: 7.2
-        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.1
           php: 7.2
 
 before_install:
     - export PHP_MAJOR_VERSION="$(echo $TRAVIS_PHP_VERSION | cut -d '.' -f 1)"
-    # Use proper debian/stuff
-    - if [ $OS != "el" ]; then
-        bash ${TRAVIS_BUILD_DIR}/ci/prepare_debian.sh;
-      fi
-    # Disable not needed xdebug if any
+    - if [ $OS != "el" ]; then bash ${TRAVIS_BUILD_DIR}/ci/prepare_debian.sh; fi
     - phpenv config-rm xdebug.ini || true
-    # Create useful symlinks
-    - sudo ln -s /home/travis/.phpenv/versions/$(phpenv version-name)/bin/phpize /usr/bin/
-    - sudo ln -s /home/travis/.phpenv/versions/$(phpenv version-name)/bin/php-config /usr/bin/
 
 install:
-    # Install Zephir
-    - if [ "${CLONE_BRANCH}" = "${NIGHTLY_BRANCH}" ]; then
-        bash ${TRAVIS_BUILD_DIR}/ci/install-re2c.sh;
-        bash ${TRAVIS_BUILD_DIR}/ci/install_zephir_parser.sh;
-        bash ${TRAVIS_BUILD_DIR}/ci/zephir.sh;
-      fi
+    - |
+        if [ "${CLONE_BRANCH}" = "${NIGHTLY_BRANCH}" ]; then
+            bash ${TRAVIS_BUILD_DIR}/ci/install-re2c.sh
+            bash ${TRAVIS_BUILD_DIR}/ci/install_zephir_parser.sh
+            bash ${TRAVIS_BUILD_DIR}/ci/zephir.sh
+        fi
 
 before_script:
     - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b $CLONE_BRANCH $SOURCEDIR
-    # Regenerate build and
-    - if [ "${CLONE_BRANCH}" = "${NIGHTLY_BRANCH}" ]; then
-        bash ${TRAVIS_BUILD_DIR}/ci/regenerate_build.sh;
-      fi
+    - if [ "${CLONE_BRANCH}" = "${NIGHTLY_BRANCH}" ]; then bash ${TRAVIS_BUILD_DIR}/ci/regenerate_build.sh; fi
 
 script:
     - cd ${TRAVIS_BUILD_DIR}; make -f .travis.mk ${TARGET}
 
 before_deploy:
-    - if [ "${CLONE_BRANCH}" = "${NIGHTLY_BRANCH}" ]; then
-        export PACKAGECLOUD_REPO=nightly;
-      fi
-    - ls -l build/;
+    - if [ "${CLONE_BRANCH}" = "${NIGHTLY_BRANCH}" ]; then export PACKAGECLOUD_REPO=nightly; fi
+    - ls -l build/
 
 deploy:
     - provider: packagecloud
