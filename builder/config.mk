@@ -97,7 +97,11 @@ endif
 endif
 
 REVISION=$(shell cd $(SOURCEDIR); git rev-parse --short=8 HEAD)
+ifeq (el,$(OS))
+VERSION?=$(shell cat "$(SOURCEDIR)/config.json" | grep version | head -1 | sed -E 's|[\", ]||g' | cut -d ':' -f 2 | tr -s '-' | tr '-' '_')
+else
 VERSION?=$(shell cat "$(SOURCEDIR)/config.json" | grep version | head -1 | sed -E 's|[\", ]||g' | cut -d ':' -f 2)
+endif
 VERSION_FULL=$(VERSION)-$(RELEASE)-$(REVISION)
 DOCKER_IMAGE=$(OSDIST)$(DOCKER_SUFFIX)
 DOCKER_TAG=$(DOCKER_REPO):$(OSDIST)$(DOCKER_SUFFIX)
