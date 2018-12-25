@@ -90,18 +90,6 @@ RELEASE:=$(temp)+php$(PHP_VERSION)
 endif
 endif
 
-ifeq ($(PHP_VERSION),7.0)
-ifneq (,$(filter $(DIST),jessie trusty))
-DOCKER_SUFFIX=-7.0
-endif
-endif
-
-ifeq ($(PHP_VERSION),7.1)
-ifneq (,$(filter $(DIST),stretch jessie trusty xenial))
-DOCKER_SUFFIX=-7.1
-endif
-endif
-
 ifeq ($(PHP_VERSION),7.2)
 ifneq (,$(filter $(DIST),stretch jessie trusty xenial))
 DOCKER_SUFFIX=-7.2
