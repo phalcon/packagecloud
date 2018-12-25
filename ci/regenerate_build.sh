@@ -21,28 +21,13 @@ cd ${SOURCEDIR}
 
 zephir fullclean
 
-if [ ${PHP_MAJOR_VERSION} -eq 7 ]; then
-	rm -rf ${SOURCEDIR}/ext/kernel
-
-	echo -e "zephir generate ${ZEND_BACKEND}"
-	zephir generate ${ZEND_BACKEND}
-
-	# Workaround to clean ZE3 kernel from ZE2
-	OUTDATED_KERNEL_FILES=`git status --short | grep ' D ' | awk -F' D ' '{print $2}'`
-
-	if [ ! -z "$OUTDATED_KERNEL_FILES" ]; then
-		echo -e "Going to remove from git index:\n${OUTDATED_KERNEL_FILES}"
-		echo $OUTDATED_KERNEL_FILES | xargs git rm -rf
-	fi
-else
-	echo -e "zephir generate ${ZEND_BACKEND}"
-	zephir generate ${ZEND_BACKEND}
-fi
+echo -e "zephir generate ${ZEND_BACKEND}"
+zephir generate ${ZEND_BACKEND}
 
 cd ${SOURCEDIR}/build
 
+# TODO: Do we need still need install Phalcon to regenerate optimized source?
 ./install --phpize $(phpenv which phpize) --php-config $(phpenv which php-config)
-
 phpenv config-add ${TRAVIS_BUILD_DIR}/ci/phalcon.ini
 
 cd ${SOURCEDIR}/build
