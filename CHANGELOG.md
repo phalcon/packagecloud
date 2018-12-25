@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Changed
 - Changed the Zephir Parser installer
+- Changed build process to use latest Zephir and proper Phalcon branches
 
 ## [1.3.0] - 2018-07-28
 ### Added
