@@ -17,16 +17,7 @@
 
 set -e
 
-git clone -q --depth=1 https://github.com/phalcon/zephir.git -b ${ZEPHIR_VERSION} /tmp/zephir &> /dev/null
-cd /tmp/zephir
+wget --no-clobber -O $HOME/bin/zephir https://github.com/phalcon/zephir/releases/download/${ZEPHIR_VERSION}/zephir.phar
+chmod +x $HOME/bin/zephir
 
-ZEPHIRDIR="$( cd "$( dirname . )" && pwd )"
-sed "s#%ZEPHIRDIR%#$ZEPHIRDIR#g" bin/zephir > bin/zephir-cmd
-chmod 755 bin/zephir-cmd
-
-mkdir -p ${HOME}/bin
-
-cp bin/zephir-cmd ${HOME}/bin/zephir
-rm bin/zephir-cmd
-
-zephir help
+zephir
