@@ -138,9 +138,6 @@ deploy:
           branch: "master"
           condition: -n "${OS}" && -n "${DIST}" && -n "${PACKAGECLOUD_TOKEN}"
 
-after_failure:
-    # @TODO
-
 notifications:
     email:
         recipients:
