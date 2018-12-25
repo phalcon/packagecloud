@@ -30,7 +30,7 @@ if [ ${PHP_MAJOR_VERSION} -eq 7 ]; then
 	# Workaround to clean ZE3 kernel from ZE2
 	OUTDATED_KERNEL_FILES=`git status --short | grep ' D ' | awk -F' D ' '{print $2}'`
 
-	if [ ! -z ${OUTDATED_KERNEL_FILES+x} ]; then
+	if [ ! -z "$OUTDATED_KERNEL_FILES" ]; then
 		echo -e "Going to remove from git index:\n${OUTDATED_KERNEL_FILES}"
 		echo $OUTDATED_KERNEL_FILES | xargs git rm -rf
 	fi
