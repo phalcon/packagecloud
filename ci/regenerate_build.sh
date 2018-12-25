@@ -25,10 +25,4 @@ echo -e "zephir generate ${ZEND_BACKEND}"
 zephir generate ${ZEND_BACKEND}
 
 cd ${SOURCEDIR}/build
-
-# TODO: Do we need still need install Phalcon to regenerate optimized source?
-./install --phpize $(phpenv which phpize) --php-config $(phpenv which php-config)
-phpenv config-add ${TRAVIS_BUILD_DIR}/ci/phalcon.ini
-
-cd ${SOURCEDIR}/build
 $(phpenv which php) gen-build.php
