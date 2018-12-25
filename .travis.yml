@@ -38,7 +38,7 @@ env:
         - ZEPHIR_VERSION=0.11.8
         - ZEPHIR_PARSER_VERSION=v1.1.4
         # This should be a branch name or a tag
-        - STABLE_BRANCH=v4.0.0-alpha1
+        - STABLE_BRANCH=v4.0.0.alpha1
         - NIGHTLY_BRANCH=4.0.x
         # This should be increased to reb-build and push package
         - STABLE_BUILD_VERSION=2
