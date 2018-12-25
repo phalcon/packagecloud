@@ -19,49 +19,7 @@ set -e
 
 echo -e "Current PHP version: ${TRAVIS_PHP_VERSION}"
 
-if [ "$TRAVIS_PHP_VERSION" = "7.0" ] || [ "$TRAVIS_PHP_VERSION" = "7.1" ] || [ "$TRAVIS_PHP_VERSION" = "7.2" ]; then
-	echo -e "Remove ${TRAVIS_BUILD_DIR}/debian/php5-phalcon.*"
-	rm -f ${TRAVIS_BUILD_DIR}/debian/php5-phalcon.*
-
-	if [ "$TRAVIS_PHP_VERSION" = "7.0" ]; then
-		echo -e "Remove ${TRAVIS_BUILD_DIR}/debian/php7.1-phalcon.*"
-		rm -f ${TRAVIS_BUILD_DIR}/debian/php7.1-phalcon.*
-		echo -e "Remove ${TRAVIS_BUILD_DIR}/debian/php7.2-phalcon.*"
-		rm -f ${TRAVIS_BUILD_DIR}/debian/php7.2-phalcon.*
-		echo -e "Remove ${TRAVIS_BUILD_DIR}/debian/control.7.1"
-		rm -f ${TRAVIS_BUILD_DIR}/debian/control.7.1
-		echo -e "Remove ${TRAVIS_BUILD_DIR}/debian/control.7.2"
-		rm -f ${TRAVIS_BUILD_DIR}/debian/control.7.2
-	fi
-
-	if [ "$TRAVIS_PHP_VERSION" = "7.1" ]; then
-		echo -e "Remove ${TRAVIS_BUILD_DIR}/debian/php7.0-phalcon.*"
-		rm -f ${TRAVIS_BUILD_DIR}/debian/php7.0-phalcon.*
-		echo -e "Remove ${TRAVIS_BUILD_DIR}/debian/php7.2-phalcon.*"
-		rm -f ${TRAVIS_BUILD_DIR}/debian/php7.2-phalcon.*
-		echo -e "Remove ${TRAVIS_BUILD_DIR}/debian/control.7.0"
-		rm -f ${TRAVIS_BUILD_DIR}/debian/control.7.0
-		echo -e "Remove ${TRAVIS_BUILD_DIR}/debian/control.7.2"
-		rm -f ${TRAVIS_BUILD_DIR}/debian/control.7.2
-	fi
-
-	if [ "$TRAVIS_PHP_VERSION" = "7.2" ]; then
-		echo -e "Remove ${TRAVIS_BUILD_DIR}/debian/php7.0-phalcon.*"
-		rm -f ${TRAVIS_BUILD_DIR}/debian/php7.0-phalcon.*
-		echo -e "Remove ${TRAVIS_BUILD_DIR}/debian/php7.1-phalcon.*"
-		rm -f ${TRAVIS_BUILD_DIR}/debian/php7.1-phalcon.*
-		echo -e "Remove ${TRAVIS_BUILD_DIR}/debian/control.7.0"
-		rm -f ${TRAVIS_BUILD_DIR}/debian/control.7.0
-		echo -e "Remove ${TRAVIS_BUILD_DIR}/debian/control.7.1"
-		rm -f ${TRAVIS_BUILD_DIR}/debian/control.7.1
-	fi
-
+if [ "$TRAVIS_PHP_VERSION" = "7.2" ]; then
 	echo -e "Move ${TRAVIS_BUILD_DIR}/debian/control.${TRAVIS_PHP_VERSION} => ${TRAVIS_BUILD_DIR}/debian/control"
 	mv -f ${TRAVIS_BUILD_DIR}/debian/control.${TRAVIS_PHP_VERSION} ${TRAVIS_BUILD_DIR}/debian/control
-else
-	echo -e "Remove ${TRAVIS_BUILD_DIR}/debian/php7*"
-	rm -f ${TRAVIS_BUILD_DIR}/debian/php7*
-
-	echo -e "Remove ${TRAVIS_BUILD_DIR}/debian/control.7*"
-	rm -f ${TRAVIS_BUILD_DIR}/debian/control.7*
 fi
