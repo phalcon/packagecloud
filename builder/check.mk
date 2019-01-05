@@ -17,8 +17,8 @@ ifndef SOURCEDIR
 $(error SOURCEDIR is undefined)
 endif
 
-ifeq ($(TRAVIS_PHP_VERSION),)
-$(error TRAVIS_PHP_VERSION is undefined)
+ifeq ($(PHP_VERSION),)
+$(error PHP_VERSION is undefined)
 endif
 
 ifndef CLONE_BRANCH

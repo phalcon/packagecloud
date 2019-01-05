@@ -1,12 +1,12 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
 #
-# This file is part of the Phalcon.
+# This file is part of the Phalcon Builder.
 #
 # (c) Phalcon Team <team@phalconphp.com>
 #
 # For the full copyright and license information, please view
-# the LICENSE.txt file that was distributed with this source code.
+# the LICENSE file that was distributed with this source code.
 #
 # If you did not receive a copy of the license it is available
 # through the world-wide-web at the following url:
@@ -26,14 +26,20 @@ include $(SCRIPTDIR)/builder/config.mk
 include $(SCRIPTDIR)/builder/check.mk
 include $(SCRIPTDIR)/builder/patching.mk
 
-$(SCRIPTDIR)/packpack:
-	$(shell git clone --depth=1 --branch=$(PACK_BRANCH) $(PACK_REPO) $(SCRIPTDIR)/packpack)
+$(SCRIPTDIR)/.build.mk:
+	touch $(SCRIPTDIR)/.build.mk
+
+$(SCRIPTDIR)/packpack: $(SCRIPTDIR)/.build.mk
+	$(shell git clone $(PACK_REPO) $(SCRIPTDIR)/packpack)
 	$(shell cd $(SCRIPTDIR)/packpack && git checkout -qf $(PACK_COMMIT))
 	$(info -------------------------------------------------------------------)
 	$(info Patching packpak...)
 	$(shell cd $(SCRIPTDIR)/packpack && git apply $(SCRIPTDIR)/gh-84.patch)
 	$(shell cd $(SCRIPTDIR)/packpack && git apply $(SCRIPTDIR)/gh-97.patch)
+	$(shell cd $(SCRIPTDIR)/packpack && git apply $(SCRIPTDIR)/rpmbuild-flags.patch)
 	$(info -------------------------------------------------------------------)
+	$(info Append .build.mk file...)
+	echo "RPMBUILD_FLAGS=$(RPMBUILD_FLAGS)" >> $(SCRIPTDIR)/build/env
 
 .PHONY: source
 source: $(D_TARGETS) $(SCRIPTDIR)/packpack
@@ -56,18 +62,21 @@ report:
 	$(info Current path .......................: $(SCRIPTDIR))
 	$(info )
 	$(info Stable branch/tag ..................: $(STABLE_BRANCH))
+	$(info Mainline branch/tag ................: $(MAINLINE_BRANCH))
 	$(info Nightly branch/tag .................: $(NIGHTLY_BRANCH))
 	$(info Current working branch/tag .........: $(CLONE_BRANCH))
 	$(info Travis build number ................: $(TRAVIS_BUILD_NUMBER))
+	$(info )
+	$(info Zephir version .....................: $(ZEPHIR_VERSION))
+	$(info Zephir Parser version ..............: $(ZEPHIR_PARSER_VERSION))
 	$(info )
 	$(info Build release ......................: $(RELEASE))
 	$(info Revision ...........................: $(REVISION))
 	$(info Semantic version: ..................: $(VERSION))
 	$(info Full version name ..................: $(VERSION_FULL))
 	$(info )
-	$(info Travis PHP version .................: $(TRAVIS_PHP_VERSION))
+	$(info Used PHP version ...................: $(PHP_VERSION))
 	$(info PHP major version ..................: $(PHP_MAJOR))
-	$(info Overrided PHP version ..............: $(PHP_VERSION))
 	$(info Zend Engine backend ................: $(ZEND_BACKEND))
 	$(info )
 	$(info Repo vendor ........................: $(REPO_VENDOR))

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+set -e
+
+#EXTRA#
+
+if [ "$1" = "configure" ]; then
+	# Install the new versioned configuration
+	inidir=/etc/php/7.0/mods-available
+
+	if [ -e /usr/lib/php/php-maintscript-helper ] ; then
+		. /usr/lib/php/php-maintscript-helper
+
+		# Register new conffile with UCF
+		ucf /usr/share/php7.0-phalcon/phalcon/phalcon.ini ${inidir}/phalcon.ini
+		ucfr --force php7.0-phalcon ${inidir}/phalcon.ini
+
+		if [ -f "${inidir}/phalcon.ini.dpkg-new" ]; then
+			md5sum="$(md5sum ${inidir}/phalcon.ini.dpkg-new | sed -e 's/ .*//')"
+			old_md5sum="$(md5sum ${inidir}/phalcon.ini | sed -e 's/ .*//')"
+
+			if [ "$md5sum" = "$old_md5sum" ]; then
+				mv "${inidir}/phalcon.ini.dpkg-new" "${inidir}/phalcon.ini"
+			fi
+		fi
+
+		php_invoke enmod 7.0 ALL phalcon
+	fi
+fi
+
+#DEBHELPER#
+
+exit 0

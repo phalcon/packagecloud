@@ -1,9 +1,9 @@
-# This file is part of the Phalcon.
+# This file is part of the Phalcon Builder.
 #
 # (c) Phalcon Team <team@phalconphp.com>
 #
 # For the full copyright and license information, please view
-# the LICENSE.txt file that was distributed with this source code.
+# the LICENSE file that was distributed with this source code.
 #
 # If you did not receive a copy of the license it is available
 # through the world-wide-web at the following url:
@@ -23,7 +23,7 @@
 %global php_base    php56u
 # will be replaced by the automated script
 %global repo_vendor ius
-# after 40-json.ini, 20-pdo.ini
+# after 40-json.ini, 20-pdo.ini and 40-prs.ini (if any)
 %global ini_name    50-%{ext_name}.ini
 
 %global src_dir build/php%{php_major}/safe
@@ -39,6 +39,10 @@
 %else
 %global with_libpcre  0
 %endif
+
+%global phalcon_major %((rpm -E %version  | cut -d. -f1) | tail -1)
+
+%{!?zts_php_extdir: %{expand: %%define zts_php_extdir %(zts-php-config --extension-dir)}}
 
 Name: %{php_base}-phalcon
 Version: %{version}
@@ -58,7 +62,22 @@ BuildRequires: %{php_base}-devel%{?_isa}
 %if %{with_libpcre}
 BuildRequires: pcre-devel%{?_isa} >= 8.20
 %endif
+
+%if "%{phalcon_major}" == "4"
+%if "%{repo_vendor}" == "ius"
+# header files for the psr extension for the IUS (remi) repo
+BuildRequires: php-pecl-psr-devel%{?_isa}
+%endif
+%endif
+
 BuildRequires: re2c%{?_isa}
+%if "%{phalcon_major}" == "4"
+%if "%{repo_vendor}" == "ius"
+# the psr extension for the IUS (remi)
+BuildRequires: php-pecl-psr%{?_isa}
+%endif
+%endif
+
 # grep -nr __builtin_saddl_overflow ~/src/php/7.2.0 | wc -l
 # 6
 # The `__builtin_saddl_overflow' was added in clang 3.4 and gcc 5.0.0
@@ -177,21 +196,25 @@ extconf %{_bindir}/zts-php-config
 %{__cc} --version
 %{__php} --version
 
-: Get needed extensions for check
+: Get needed extensions for NTS check
 modules=""
-for mod in json pdo psr; do
+for mod in json pdo; do
   if [ -f %{php_extdir}/${mod}.so ]; then
     modules="$modules -d extension=${mod}.so"
   fi
 done
 
-ls -al %{buildroot}%{php_extdir}/
+%if "%{phalcon_major}" == "4"
+	if [ -f "%{php_extdir}/psr.so" ]; then
+		modules="$modules -d extension=psr.so"
+	fi
+%endif
 
 : Minimal load test for NTS extension
 %{__php} --no-php-ini \
     $modules \
-    --define extension=%{buildroot}%{php_extdir}/%{ext_name}.so \
-    --modules | grep -i %{ext_name}
+    -d extension=%{buildroot}%{php_extdir}/%{ext_name}.so \
+    --ri %{ext_name}
 
 %if %{with_tests}
 : Upstream test suite NTS extension
@@ -204,12 +227,26 @@ REPORT_EXIT_STATUS=1 \
 %{__php} -n run-tests.php --show-diff
 %endif
 
+: Get needed extensions for ZTS check
+modules=""
+for mod in json pdo; do
+  if [ -f %{zts_php_extdir}/${mod}.so ]; then
+    modules="$modules -d extension=${mod}.so"
+  fi
+done
+
+%if "%{phalcon_major}" == "4"
+	if [ -f "%{zts_php_extdir}/psr.so" ]; then
+		modules="$modules -d extension=psr.so"
+	fi
+%endif
+
 %if %{with_zts}
 : Minimal load test for ZTS extension
 %{__ztsphp} --no-php-ini \
     $modules \
-    --define extension=%{buildroot}%{php_ztsextdir}/%{ext_name}.so \
-    --modules | grep -i %{ext_name}
+    -d extension=%{buildroot}%{php_ztsextdir}/%{ext_name}.so \
+    --ri %{ext_name}
 %endif
 
 %clean
@@ -233,6 +270,9 @@ extclean zts-phpize
 %defattr(-,root,root,-)
 %{!?_licensedir:%global license %%doc}
 %license LICENSE.txt
+%if "%{phalcon_major}" == "4"
+%doc CHANGELOG-4.0.md
+%endif
 %doc BACKERS.md
 %doc CHANGELOG.md
 %doc CONTRIBUTING.md

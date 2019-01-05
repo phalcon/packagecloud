@@ -1,18 +1,29 @@
-# Phalcon Package Builder
+<p align="center"><a href="https://phalconphp.com" target="_blank">
+    <img src="https://docs.phalconphp.com/images/footer_logo.svg" height="100" alt="Phalcon Builder"/>
+</a></p>
 
-[![Build Status](https://travis-ci.org/phalcongelist/packagecloud.svg?branch=master)][:build-st:]
+<p align="center">
+    <a href="https://travis-ci.org/phalcongelist/packagecloud">
+        <img src="https://travis-ci.org/phalcongelist/packagecloud.svg" alt="Build Status" />
+    </a>
+</p>
 
-Phalcon is an open source web framework delivered as a C extension for the PHP language
-providing high performance and lower resource consumption.
+Phalcon Builder - is a packaging system that make it easy and quick to build [Phalcon][1] packages such
+as rpms, debs, etc. Phalcon distribution that hosted at [PackageCloud][2].
 
-## Installation Instructions
+Installation Instructions
+-------------------------
 
-Phalcon distribution is hosted at [PackageCloud][:cloud:].
-Stable versions correspond to Phalcon release tags and should be used in production.
-Nightly versions are built daily and should **not** be used in production.
-Installation/configuration details for each version and operating system [can be found below](#add-new-package-repository):
+How we schedule product releases at Phalcon:
 
-## Supported Operating Systems
+- **Stable** versions correspond to Phalcon release tags and should be used in production
+- **Mainline** versions correspond to Phalcon release tags. Сan be used _with care_ by experienced users
+- **Nightly** versions are built daily and _should not_ be used in production
+
+Installation/configuration details for each version and operating system can be found below:
+
+Supported Operating Systems
+---------------------------
 
 - Ubuntu 14.04 LTS (Trusty)
 - Ubuntu 16.04 LTS (Xenial)
@@ -21,53 +32,80 @@ Installation/configuration details for each version and operating system [can be
 - Debian 9 LTS (Stretch)
 - CentOS 7.2 LTS (Core)
 
+Configuration
+-------------
+
+**DEB packages**
+
 ```sh
 # Stable releases
 curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash
+
+# Mainline releases
+curl -s https://packagecloud.io/install/repositories/phalcon/mainline/script.deb.sh | sudo bash
 
 # Nightly releases
 curl -s https://packagecloud.io/install/repositories/phalcon/nightly/script.deb.sh | sudo bash
 ```
 
-### RPM packages
+**RPM packages**
 
 ```sh
 # Stable releases
 curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.rpm.sh | sudo bash
 
+# Mainline releases
+curl -s https://packagecloud.io/install/repositories/phalcon/mainline/script.rpm.sh | sudo bash
+
 # Nightly releases
 curl -s https://packagecloud.io/install/repositories/phalcon/nightly/script.rpm.sh | sudo bash
 ```
 
-## Installation
+**Programmatic way**
 
-### DEB packages
+```bash
+export BRANCH=mainline
+export PACKAGE=rpm
 
-```sh
-# PHP 7.2
-sudo apt-get install php7.2-phalcon
+curl -s "https://packagecloud.io/install/repositories/phalcon/${BRANCH}/script.${PACKAGE}.sh" | sudo bash
 ```
 
-### RPM packages
+Installation
+------------
+
+Select the required package from the list using the command as follows:
+
+**DEB packages**
 
 ```sh
-# PHP 7.2
-sudo yum install php72u-phalcon
+apt-cache search phalcon
 ```
 
-## Download packages manually
+**RPM packages**
 
-* Packages for [stable version][:stable:]
-* Packages for [nightly version][:nightly:]
+```sh
+# Phalcon PHP framework
+yum search phalcon | grep "High performance PHP framework"
 
-## License
+# Debug symbols for Phalcon
+yum search phalcon | grep "Debug information for package"
+```
 
-This work licensed under the BSD 3-Clause License.<br>
-Copyright © 2011-present, Phalcon Team.<br>
-See the [LICENSE.txt](https://github.com/phalcongelist/packagecloud/blob/master/LICENSE.txt) file for more.
+Download packages manually
+--------------------------
 
-[:build-st:]: https://travis-ci.org/phalcongelist/packagecloud
-[:cloud:]: https://packagecloud.io/phalcon
-[:stable:]: https://packagecloud.io/phalcon/stable
-[:nightly:]: https://packagecloud.io/phalcon/nightly
-[:ius:]: https://github.com/iuscommunity-pkg
+* Packages for [stable version][3]
+* Packages for [mainline version][4]
+* Packages for [nightly version][5]
+
+License
+-------
+
+Phalcon Builder licensed under the BSD 3-Clause License. See the [LICENSE][8] file for more information.
+
+[1]: https://phalconphp.com
+[2]: https://packagecloud.io/phalcon
+[3]: https://packagecloud.io/phalcon/stable
+[4]: https://packagecloud.io/phalcon/mainline
+[5]: https://packagecloud.io/phalcon/nightly
+[8]: https://github.com/phalcon/zephir/blob/master/LICENSE

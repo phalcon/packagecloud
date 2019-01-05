@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -e
+
+#EXTRA#
+
+if [ "$1" = "configure" ]; then
+	# Install the new versioned configuration
+	inidir=/etc/php5/mods-available
+
+	if [ -e /usr/share/php5/php5-maintscript-helper ] ; then
+		. /usr/share/php5/php5-maintscript-helper
+
+		# Register new conffile with UCF
+		ucf /usr/share/php5/php5-phalcon/phalcon/phalcon.ini ${inidir}/phalcon.ini
+		ucfr --force php5-phalcon ${inidir}/phalcon.ini
+
+		# Move pre-extension manager conffile
+		dpkg-maintscript-helper mv_conffile /etc/php5/conf.d/phalcon.ini ${inidir}/phalcon.ini 3.0.0 -- "$@";
+
+		if [ -f "${inidir}/phalcon.ini.dpkg-new" ]; then
+			md5sum="$(md5sum ${inidir}/phalcon.ini.dpkg-new | sed -e 's/ .*//')"
+			old_md5sum="$(md5sum ${inidir}/phalcon.ini | sed -e 's/ .*//')"
+			if [ "$md5sum" = "$old_md5sum" ]; then
+				mv "${inidir}/phalcon.ini.dpkg-new" "${inidir}/phalcon.ini"
+			fi
+		fi
+
+		php5_invoke enmod ALL phalcon
+	fi
+fi
+
+#DEBHELPER#
+
+exit 0

@@ -5,13 +5,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Added https://packagecloud.io/phalcon/mainline support
+
 ### Changed
-- Changed the Zephir Parser installer
-- Changed build process to use latest Zephir and proper Phalcon branches
+- Fullly refactored build matrix to allow build Phalcon 3.x and 4.x
 
 ## [1.3.0] - 2018-07-28
 ### Added
-- Added ability to build packages for Ubuntu 18.04 [phalcongelist/packagecloud#27](https://github.com/phalcongelist/packagecloud/issues/27), [phalcon/cphalcon#13376](https://github.com/phalcon/cphalcon/issues/13376)
+- Added ability to build packages for Ubuntu 18.04
+  - [phalcongelist/packagecloud#27](https://github.com/phalcongelist/packagecloud/issues/27)
+  - [phalcon/cphalcon#13376](https://github.com/phalcon/cphalcon/issues/13376)
 - Added a common Debian/Ubuntu `prebuild.sh` script
 
 ### Changed

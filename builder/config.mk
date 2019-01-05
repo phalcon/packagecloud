@@ -18,19 +18,25 @@ CHANGELOG_EMAIL=build@phalconphp.com
 CHANGELOG_TEXT=Automated build. See details at release page https://github.com/phalcon/cphalcon/releases
 
 PACK_REPO=https://github.com/packpack/packpack.git
-PACK_BRANCH=master
 PACK_COMMIT=30ff7b51654c19b8919d01ca8d4aa480e87e8241
 
 DOCKER_REPO=phalconphp/build
 
+# Use -vv to display debugging information
+RPMBUILD_FLAGS=-vv
+
 PHP_VERSION?=
+PHP_MAJOR=$(shell echo "$(PHP_VERSION)" | cut -d '.' -f 1,2)
+
 ZEND_BACKEND?=
 REPO_VENDOR?=
 RELEASE=
 PRODUCT?=php-phalcon
 PRODUCT_EXTRA=
-NIGHTLY_BUILD_VERSION?=1
+
 STABLE_BUILD_VERSION?=1
+MAINLINE_BUILD_VERSION?=1
+NIGHTLY_BUILD_VERSION?=1
 
 # List of supported OS
 FEDORA:=fedora-rawhide fedora24 fedora23
@@ -43,8 +49,6 @@ RPMS:=$(FEDORA) $(CENTOS)
 
 SUPPORTED_PACKAGES=rpm deb
 SUPPORTED_VENDORS=ius
-
-PHP_MAJOR=$(shell echo "$(TRAVIS_PHP_VERSION)" | cut -d '.' -f 1,2)
 
 ifeq (el,$(OS))
 BUILD_OS=centos
@@ -68,12 +72,15 @@ ifeq ($(filter $(PACKAGE), $(SUPPORTED_PACKAGES)),)
 $(error $(PACKAGE) does not exist in supported package types)
 endif
 
-ifneq ($(CLONE_BRANCH), $(STABLE_BRANCH))
-PACKAGECLOUD_REPO=nightly
-RELEASE:=$(NIGHTLY_BUILD_VERSION)
-else
-PACKAGECLOUD_REPO=stable
+ifeq ($(CLONE_BRANCH), $(STABLE_BRANCH))
+PACKAGECLOUD_REPO=$(PACKAGECLOUD_STABLE_REPO)
 RELEASE:=$(STABLE_BUILD_VERSION)
+else ifeq ($(CLONE_BRANCH), $(MAINLINE_BRANCH))
+PACKAGECLOUD_REPO=$(PACKAGECLOUD_MAINLINE_REPO)
+RELEASE:=$(MAINLINE_BUILD_VERSION)
+else
+PACKAGECLOUD_REPO=$(PACKAGECLOUD_NIGHTLY_REPO)
+RELEASE:=$(NIGHTLY_BUILD_VERSION)
 endif
 
 DOCKER_SUFFIX=
@@ -87,6 +94,18 @@ ifneq ($(PHP_VERSION),)
 ifneq ($(filter $(OSDIST),$(DEBS)),)
 temp=$(RELEASE)
 RELEASE:=$(temp)+php$(PHP_VERSION)
+endif
+endif
+
+ifeq ($(PHP_VERSION),7.0)
+ifneq (,$(filter $(DIST),jessie trusty))
+DOCKER_SUFFIX=-7.0
+endif
+endif
+
+ifeq ($(PHP_VERSION),7.1)
+ifneq (,$(filter $(DIST),stretch jessie trusty xenial))
+DOCKER_SUFFIX=-7.1
 endif
 endif
 
