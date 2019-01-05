@@ -1,9 +1,9 @@
-# This file is part of the Phalcon.
+# This file is part of the Phalcon Builder.
 #
 # (c) Phalcon Team <team@phalconphp.com>
 #
 # For the full copyright and license information, please view
-# the LICENSE.txt file that was distributed with this source code.
+# the LICENSE file that was distributed with this source code.
 #
 # If you did not receive a copy of the license it is available
 # through the world-wide-web at the following url:
@@ -18,129 +18,131 @@ dist: trusty
 services:
     - docker
 
-language: php
-
-php:
-    - 7.2
+language: generic
 
 git:
   depth: 1
 
-env:
-    global:
-        - PATH="$HOME/bin:$PATH"
-        - PRODUCT=php-phalcon
-        - PACKAGECLOUD_USER=phalcon
-        - PACKAGECLOUD_REPO=stable
-        - DOCKER_REPO=phalconphp/build
-        - SOURCEDIR=$TRAVIS_BUILD_DIR/cphalcon
-        - ZEPHIR_VERSION=0.11.8
-        - ZEPHIR_PARSER_VERSION=v1.1.4
-        - ZEND_BACKEND="--backend=ZendEngine3"
-        - STABLE_BRANCH=v4.0.0-alpha1
-        - NIGHTLY_BRANCH=4.0.x
-        - STABLE_BUILD_VERSION=1
-        - NIGHTLY_BUILD_VERSION=$TRAVIS_BUILD_NUMBER
-        - TARGET=package
-        - RE2C_VERSION="1.1.1"
+cache:
+  apt: true
+  timeout: 604800
+  directories:
+    - ${HOME}/.cache/re2c
+    - ${HOME}/.cache/php
+    - ${HOME}/.cache/zephir
 
-    matrix:
-        - OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$STABLE_BRANCH REPO_VENDOR=ius
-        - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-        - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
-        - OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-        - OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
-        - OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-        - OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
-        - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-        - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
-        - OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-        - OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH PHP_VERSION=7.2
-        - OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$NIGHTLY_BRANCH REPO_VENDOR=ius
-        - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-        - OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
-        - OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-        - OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
-        - OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-        - OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
-        - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-        - OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
-        - OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-        - OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
+env:
+  # The `BUILDTAB' variable contains descriptive information about the packages
+  # the CI can build.  This variable is only read by programs, and not written;
+  # it is the duty of the maintainer to properly create and maintain this
+  # variable.  The order of records in `BUILDTAB' is important because build
+  # programs sequentially iterate through `BUILDTAB' doing their thing.
+  #
+  # Each build in this matrix is described on a separate line in a format:
+  #     - BUILDTAB="<OS> <DIST> <PACKAGE> <CLONE_BRANCH> <PHP_VERSION> \
+  #                 <PACKAGECLOUD_REPO> <REPO_VENDOR>"
+  # Fields on each line are separated by tabs or spaces.
+  # Lines starting with '#' are comments.  Blank lines are ignored.
+  matrix:
+    # stable - ubuntu
+    - BUILDTAB="ubuntu trusty  deb v3.4.2 5.5 stable -" # done
+    - BUILDTAB="ubuntu trusty  deb v3.4.2 5.6 stable -" # done
+    - BUILDTAB="ubuntu trusty  deb v3.4.2 7.0 stable -" # done
+    - BUILDTAB="ubuntu trusty  deb v3.4.2 7.1 stable -" # done
+    - BUILDTAB="ubuntu trusty  deb v3.4.2 7.2 stable -" # done
+    - BUILDTAB="ubuntu xenial  deb v3.4.2 7.0 stable -" # done
+    - BUILDTAB="ubuntu xenial  deb v3.4.2 7.1 stable -" # done
+    - BUILDTAB="ubuntu xenial  deb v3.4.2 7.2 stable -" # done
+    - BUILDTAB="ubuntu bionic  deb v3.4.2 7.0 stable -" # done
+    - BUILDTAB="ubuntu bionic  deb v3.4.2 7.1 stable -" # done
+    - BUILDTAB="ubuntu bionic  deb v3.4.2 7.2 stable -" # done
+
+    # stable - debian
+    - BUILDTAB="debian jessie  deb v3.4.2 5.6 stable -" # done
+    - BUILDTAB="debian jessie  deb v3.4.2 7.0 stable -" # done
+    - BUILDTAB="debian jessie  deb v3.4.2 7.1 stable -" # done
+    - BUILDTAB="debian jessie  deb v3.4.2 7.2 stable -" # done
+    - BUILDTAB="debian stretch deb v3.4.2 7.0 stable -" # done
+    - BUILDTAB="debian stretch deb v3.4.2 7.1 stable -" # done
+    - BUILDTAB="debian stretch deb v3.4.2 7.2 stable -" # done
+
+    # stable - centos
+    - BUILDTAB="el 7 rpm v3.4.2 5.5 stable ius" # done
+    - BUILDTAB="el 7 rpm v3.4.2 5.6 stable ius" # done
+    - BUILDTAB="el 7 rpm v3.4.2 7.0 stable ius" # done
+    - BUILDTAB="el 7 rpm v3.4.2 7.1 stable ius" # done
+    - BUILDTAB="el 7 rpm v3.4.2 7.2 stable ius" # done
+
+    # mainline - ubuntu
+    - BUILDTAB="ubuntu trusty  deb v4.0.0-alpha1 7.2 mainline -" # done
+    - BUILDTAB="ubuntu xenial  deb v4.0.0-alpha1 7.2 mainline -" # done
+    - BUILDTAB="ubuntu bionic  deb v4.0.0-alpha1 7.2 mainline -" # done
+
+    # mainline - debian
+    - BUILDTAB="debian jessie  deb v4.0.0-alpha1 7.2 mainline -" # done
+    - BUILDTAB="debian stretch deb v4.0.0-alpha1 7.2 mainline -" # done
+
+    # mainline - cenot
+    - BUILDTAB="el 7 rpm v4.0.0-alpha1 7.2 mainline ius"
+
+    # nightly - ubuntu
+    - BUILDTAB="ubuntu trusty deb 4.0.x 7.2 nightly -" # done
+    - BUILDTAB="ubuntu xenial deb 4.0.x 7.2 nightly -" # done
+    - BUILDTAB="ubuntu bionic deb 4.0.x 7.2 nightly -" # done
+
+    # nightly - debian
+    - BUILDTAB="debian jessie  deb 4.0.x 7.2 nightly -" # done
+    - BUILDTAB="debian stretch deb 4.0.x 7.2 nightly -" # done
+
+    # nightly - centos
+    - BUILDTAB="el 7 rpm 4.0.x 7.2 nightly ius"
 
 matrix:
-    fast_finish: true
-    allow_failures:
-        - env: OS=el DIST=7 PACKAGE=rpm CLONE_BRANCH=$NIGHTLY_BRANCH REPO_VENDOR=ius
-        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
-        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
-        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
-        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
-        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH PHP_VERSION=7.2
-    exclude:
-        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-          php: 7.2
-        - env: OS=ubuntu DIST=trusty PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-          php: 7.2
-        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-          php: 7.2
-        - env: OS=ubuntu DIST=xenial PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-          php: 7.2
-        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-          php: 7.2
-        - env: OS=ubuntu DIST=bionic PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-          php: 7.2
-        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-          php: 7.2
-        - env: OS=debian DIST=jessie PACKAGE=deb CLONE_BRANCH=$NIGHTLY_BRANCH
-          php: 7.2
-        - env: OS=debian DIST=stretch PACKAGE=deb CLONE_BRANCH=$STABLE_BRANCH
-          php: 7.2
+  fast_finish: true
+  # allow_failures:
+  #   - env: BUILDTAB="ubuntu trusty  deb 4.0.x 7.2 nightly -"
+  #   - env: BUILDTAB="ubuntu xenial  deb 4.0.x 7.2 nightly -"
+  #   - env: BUILDTAB="ubuntu bionic  deb 4.0.x 7.2 nightly -"
+  #   - env: BUILDTAB="debian jessie  deb 4.0.x 7.2 nightly -"
+  #   - env: BUILDTAB="debian stretch deb 4.0.x 7.2 nightly -"
+  #   - env: BUILDTAB="el 7 rpm 4.0.x 7.2 nightly ius"
 
 before_install:
-    - export PHP_MAJOR_VERSION="$(echo $TRAVIS_PHP_VERSION | cut -d '.' -f 1)"
-    - if [ $OS != "el" ]; then bash ${TRAVIS_BUILD_DIR}/ci/prepare_debian.sh; fi
-    - phpenv config-rm xdebug.ini || true
+  - source environment
+  - export $(cut -d= -f1 environment)
+  - source ci/export-buildtab.sh
+  - if [ $OS != "el" ]; then ./ci/prepare-debian.sh; fi
+  - if [ $REPO_VENDOR == "-" ]; then unset REPO_VENDOR; fi
 
 install:
-    - |
-        if [ "${CLONE_BRANCH}" = "${NIGHTLY_BRANCH}" ]; then
-            bash ${TRAVIS_BUILD_DIR}/ci/install-re2c.sh
-            bash ${TRAVIS_BUILD_DIR}/ci/install_zephir_parser.sh
-            bash ${TRAVIS_BUILD_DIR}/ci/zephir.sh
-        fi
+  - ./ci/install-php.sh || travis_terminate 1
+  - source ./ci/setup-build.sh
+  - ./ci/install-re2c.sh || travis_terminate 1
+  - ./ci/install-zephir-parser.sh || travis_terminate 1
+  - ./ci/install-zephir.sh || travis_terminate 1
 
 before_script:
-    - git clone --branch $CLONE_BRANCH --single-branch --depth 1 https://github.com/phalcon/cphalcon.git $SOURCEDIR
-    - if [ "${CLONE_BRANCH}" == "${NIGHTLY_BRANCH}" ]; then bash ${TRAVIS_BUILD_DIR}/ci/regenerate_build.sh; fi
+  - git clone -b $CLONE_BRANCH --depth 1 -q $PRODUCT_GIT $SOURCEDIR 2>/dev/null
+  - ./ci/regenerate-build.sh || travis_terminate 1
 
 script:
-    - cd ${TRAVIS_BUILD_DIR}; make -f .travis.mk ${TARGET}
+  - make -f .travis.mk ${TARGET} || travis_terminate 1
 
 before_deploy:
-    - if [ "${CLONE_BRANCH}" = "${NIGHTLY_BRANCH}" ]; then export PACKAGECLOUD_REPO=nightly; fi
-    - ls -l build/
+  - ls -l build/
 
 deploy:
-    - provider: packagecloud
-      username: "${PACKAGECLOUD_USER}"
-      repository: "${PACKAGECLOUD_REPO}"
-      token: "${PACKAGECLOUD_TOKEN}"
-      dist: "${OS}/${DIST}"
-      package_glob: build/*.{rpm,deb,dsc}
-      skip_cleanup: true
-      on:
-          branch: "master"
-          condition: -n "${OS}" && -n "${DIST}" && -n "${PACKAGECLOUD_TOKEN}"
+  - provider: packagecloud
+    username: "${PACKAGECLOUD_USER}"
+    repository: "${PACKAGECLOUD_REPO}"
+    token: "${PACKAGECLOUD_TOKEN}"
+    dist: "${OS}/${DIST}"
+    package_glob: build/*.{rpm,deb,dsc}
+    skip_cleanup: true
+    on:
+      # branch: "master"
+      all_branches: true
+      condition: -n "${OS}" && -n "${DIST}" && -n "${PACKAGECLOUD_TOKEN}"
 
 notifications:
-    email:
-        recipients:
-            - build@phalconphp.com
-        on_success: change
-        on_failure: always
+    email: false

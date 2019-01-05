@@ -1,0 +1,31 @@
+diff --git a/pack/rpm.mk b/pack/rpm.mk
+index 8c9e5a1..f6b1ee3 100644
+--- a/pack/rpm.mk
++++ b/pack/rpm.mk
+@@ -20,7 +20,7 @@ PREBUILD := prebuild.sh
+ PREBUILD_OS := prebuild-$(OS).sh
+ PREBUILD_OS_DIST := prebuild-$(OS)-$(DIST).sh
+ THEDATE := $(shell date +"%a %b %d %Y")
+-
++RPMBUILD_FLAGS?=
+ 
+ #
+ # Run prebuild scripts
+@@ -100,7 +100,7 @@ $(BUILDDIR)/$(RPMSRC): $(BUILDDIR)/$(TARBALL) \
+ 	@echo "-------------------------------------------------------------------"
+ 	@echo "Building source package"
+ 	@echo "-------------------------------------------------------------------"
+-	rpmbuild \
++	rpmbuild $(RPMBUILD_FLAGS) \
+ 		--define '_topdir $(BUILDDIR)' \
+ 		--define '_sourcedir $(BUILDDIR)' \
+ 		--define '_specdir $(BUILDDIR)' \
+@@ -124,7 +124,7 @@ package: $(BUILDDIR)/$(RPMSRC)
+ 	@echo "-------------------------------------------------------------------"
+ 	@echo "Building RPM packages"
+ 	@echo "-------------------------------------------------------------------"
+-	rpmbuild \
++	rpmbuild $(RPMBUILD_FLAGS) \
+ 		--define '_topdir $(BUILDDIR)' \
+ 		--define '_sourcedir $(BUILDDIR)' \
+ 		--define '_specdir $(BUILDDIR)' \
