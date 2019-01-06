@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Added https://packagecloud.io/phalcon/mainline support
 
 ### Changed
-- Fullly refactored build matrix to allow build Phalcon 3.x and 4.x
+- Fully refactored build matrix to allow build Phalcon 3.x and 4.x
 
 ## [1.3.0] - 2018-07-28
 ### Added
