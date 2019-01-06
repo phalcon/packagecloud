@@ -14,10 +14,11 @@ as rpms, debs, etc. Phalcon distribution that hosted at [PackageCloud][2].
 Installation Instructions
 -------------------------
 
-How we schedule product releases at Phalcon:
+How the Phalcon Team will schedule framework releases in the future:
 
 - **Stable** versions correspond to Phalcon release tags and should be used in production
-- **Mainline** versions correspond to Phalcon release tags. Сan be used _with care_ by experienced users
+- **Mainline** versions correspond to Phalcon release tags which _are not stable_.
+  Сan be used _with care_ by experienced users
 - **Nightly** versions are built daily and _should not_ be used in production
 
 Installation/configuration details for each version and operating system can be found below:
@@ -64,10 +65,12 @@ curl -s https://packagecloud.io/install/repositories/phalcon/nightly/script.rpm.
 **Programmatic way**
 
 ```bash
+export BASE_URI=https://packagecloud.io/install/repositories
+export PRODUCT=phalcon
 export BRANCH=mainline
 export PACKAGE=rpm
 
-curl -s "https://packagecloud.io/install/repositories/phalcon/${BRANCH}/script.${PACKAGE}.sh" | sudo bash
+curl -s "${BASE_URI}/${PRODUCT}/${BRANCH}/script.${PACKAGE}.sh" | sudo bash
 ```
 
 Installation
