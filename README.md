@@ -78,7 +78,11 @@ Select the required package from the list using the command as follows:
 **DEB packages**
 
 ```sh
-apt-cache search phalcon
+# Phalcon PHP framework
+apt-cache search phalcon | grep "High performance PHP framework"
+
+# Debug symbols for Phalcon
+apt-cache search phalcon-dbgsym
 ```
 
 **RPM packages**
