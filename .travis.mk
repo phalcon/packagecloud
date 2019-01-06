@@ -26,20 +26,13 @@ include $(SCRIPTDIR)/builder/config.mk
 include $(SCRIPTDIR)/builder/check.mk
 include $(SCRIPTDIR)/builder/patching.mk
 
-$(SCRIPTDIR)/.build.mk:
-	touch $(SCRIPTDIR)/.build.mk
-
-$(SCRIPTDIR)/packpack: $(SCRIPTDIR)/.build.mk
+$(SCRIPTDIR)/packpack:
 	$(shell git clone $(PACK_REPO) $(SCRIPTDIR)/packpack)
 	$(shell cd $(SCRIPTDIR)/packpack && git checkout -qf $(PACK_COMMIT))
 	$(info -------------------------------------------------------------------)
 	$(info Patching packpak...)
 	$(shell cd $(SCRIPTDIR)/packpack && git apply $(SCRIPTDIR)/gh-84.patch)
 	$(shell cd $(SCRIPTDIR)/packpack && git apply $(SCRIPTDIR)/gh-97.patch)
-	$(shell cd $(SCRIPTDIR)/packpack && git apply $(SCRIPTDIR)/rpmbuild-flags.patch)
-	$(info -------------------------------------------------------------------)
-	$(info Append .build.mk file...)
-	echo "RPMBUILD_FLAGS=$(RPMBUILD_FLAGS)" >> $(SCRIPTDIR)/build/env
 
 .PHONY: source
 source: $(D_TARGETS) $(SCRIPTDIR)/packpack
