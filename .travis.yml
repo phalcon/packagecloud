@@ -45,67 +45,67 @@ env:
   # Lines starting with '#' are comments.  Blank lines are ignored.
   matrix:
     # stable - ubuntu
-    - BUILDTAB="ubuntu trusty  deb v3.4.2 5.5 stable -" # done
-    - BUILDTAB="ubuntu trusty  deb v3.4.2 5.6 stable -" # done
-    - BUILDTAB="ubuntu trusty  deb v3.4.2 7.0 stable -" # done
-    - BUILDTAB="ubuntu trusty  deb v3.4.2 7.1 stable -" # done
-    - BUILDTAB="ubuntu trusty  deb v3.4.2 7.2 stable -" # done
-    - BUILDTAB="ubuntu xenial  deb v3.4.2 7.0 stable -" # done
-    - BUILDTAB="ubuntu xenial  deb v3.4.2 7.1 stable -" # done
-    - BUILDTAB="ubuntu xenial  deb v3.4.2 7.2 stable -" # done
-    - BUILDTAB="ubuntu bionic  deb v3.4.2 7.0 stable -" # done
-    - BUILDTAB="ubuntu bionic  deb v3.4.2 7.1 stable -" # done
-    - BUILDTAB="ubuntu bionic  deb v3.4.2 7.2 stable -" # done
+    - BUILDTAB="ubuntu trusty deb v3.4.2 5.5 stable -"
+    - BUILDTAB="ubuntu trusty deb v3.4.2 5.6 stable -"
+    - BUILDTAB="ubuntu trusty deb v3.4.2 7.0 stable -"
+    - BUILDTAB="ubuntu trusty deb v3.4.2 7.1 stable -"
+    - BUILDTAB="ubuntu trusty deb v3.4.2 7.2 stable -"
+    - BUILDTAB="ubuntu xenial deb v3.4.2 7.0 stable -"
+    - BUILDTAB="ubuntu xenial deb v3.4.2 7.1 stable -"
+    - BUILDTAB="ubuntu xenial deb v3.4.2 7.2 stable -"
+    - BUILDTAB="ubuntu bionic deb v3.4.2 7.0 stable -"
+    - BUILDTAB="ubuntu bionic deb v3.4.2 7.1 stable -"
+    - BUILDTAB="ubuntu bionic deb v3.4.2 7.2 stable -"
 
     # stable - debian
-    - BUILDTAB="debian jessie  deb v3.4.2 5.6 stable -" # done
-    - BUILDTAB="debian jessie  deb v3.4.2 7.0 stable -" # done
-    - BUILDTAB="debian jessie  deb v3.4.2 7.1 stable -" # done
-    - BUILDTAB="debian jessie  deb v3.4.2 7.2 stable -" # done
-    - BUILDTAB="debian stretch deb v3.4.2 7.0 stable -" # done
-    - BUILDTAB="debian stretch deb v3.4.2 7.1 stable -" # done
-    - BUILDTAB="debian stretch deb v3.4.2 7.2 stable -" # done
+    - BUILDTAB="debian jessie deb v3.4.2 5.6 stable -"
+    - BUILDTAB="debian jessie deb v3.4.2 7.0 stable -"
+    - BUILDTAB="debian jessie deb v3.4.2 7.1 stable -"
+    - BUILDTAB="debian jessie deb v3.4.2 7.2 stable -"
+    - BUILDTAB="debian stretch deb v3.4.2 7.0 stable -"
+    - BUILDTAB="debian stretch deb v3.4.2 7.1 stable -"
+    - BUILDTAB="debian stretch deb v3.4.2 7.2 stable -"
 
     # stable - centos
-    - BUILDTAB="el 7 rpm v3.4.2 5.5 stable ius" # done
-    - BUILDTAB="el 7 rpm v3.4.2 5.6 stable ius" # done
-    - BUILDTAB="el 7 rpm v3.4.2 7.0 stable ius" # done
-    - BUILDTAB="el 7 rpm v3.4.2 7.1 stable ius" # done
-    - BUILDTAB="el 7 rpm v3.4.2 7.2 stable ius" # done
+    - BUILDTAB="el 7 rpm v3.4.2 5.5 stable ius"
+    - BUILDTAB="el 7 rpm v3.4.2 5.6 stable ius"
+    - BUILDTAB="el 7 rpm v3.4.2 7.0 stable ius"
+    - BUILDTAB="el 7 rpm v3.4.2 7.1 stable ius"
+    - BUILDTAB="el 7 rpm v3.4.2 7.2 stable ius"
 
     # mainline - ubuntu
-    - BUILDTAB="ubuntu trusty  deb v4.0.0-alpha1 7.2 mainline -" # done
-    - BUILDTAB="ubuntu xenial  deb v4.0.0-alpha1 7.2 mainline -" # done
-    - BUILDTAB="ubuntu bionic  deb v4.0.0-alpha1 7.2 mainline -" # done
+    - BUILDTAB="ubuntu trusty deb v4.0.0-alpha1 7.2 mainline -"
+    - BUILDTAB="ubuntu xenial deb v4.0.0-alpha1 7.2 mainline -"
+    - BUILDTAB="ubuntu bionic deb v4.0.0-alpha1 7.2 mainline -"
 
     # mainline - debian
-    - BUILDTAB="debian jessie  deb v4.0.0-alpha1 7.2 mainline -" # done
-    - BUILDTAB="debian stretch deb v4.0.0-alpha1 7.2 mainline -" # done
+    - BUILDTAB="debian jessie deb v4.0.0-alpha1 7.2 mainline -"
+    - BUILDTAB="debian stretch deb v4.0.0-alpha1 7.2 mainline -"
 
-    # mainline - cenot
+    # mainline - centos
     - BUILDTAB="el 7 rpm v4.0.0-alpha1 7.2 mainline ius"
 
     # nightly - ubuntu
-    - BUILDTAB="ubuntu trusty deb 4.0.x 7.2 nightly -" # done
-    - BUILDTAB="ubuntu xenial deb 4.0.x 7.2 nightly -" # done
-    - BUILDTAB="ubuntu bionic deb 4.0.x 7.2 nightly -" # done
+    - BUILDTAB="ubuntu trusty deb 4.0.x 7.2 nightly -"
+    - BUILDTAB="ubuntu xenial deb 4.0.x 7.2 nightly -"
+    - BUILDTAB="ubuntu bionic deb 4.0.x 7.2 nightly -"
 
     # nightly - debian
-    - BUILDTAB="debian jessie  deb 4.0.x 7.2 nightly -" # done
-    - BUILDTAB="debian stretch deb 4.0.x 7.2 nightly -" # done
+    - BUILDTAB="debian jessie deb 4.0.x 7.2 nightly -"
+    - BUILDTAB="debian stretch deb 4.0.x 7.2 nightly -"
 
     # nightly - centos
     - BUILDTAB="el 7 rpm 4.0.x 7.2 nightly ius"
 
 matrix:
   fast_finish: true
-  # allow_failures:
-  #   - env: BUILDTAB="ubuntu trusty  deb 4.0.x 7.2 nightly -"
-  #   - env: BUILDTAB="ubuntu xenial  deb 4.0.x 7.2 nightly -"
-  #   - env: BUILDTAB="ubuntu bionic  deb 4.0.x 7.2 nightly -"
-  #   - env: BUILDTAB="debian jessie  deb 4.0.x 7.2 nightly -"
-  #   - env: BUILDTAB="debian stretch deb 4.0.x 7.2 nightly -"
-  #   - env: BUILDTAB="el 7 rpm 4.0.x 7.2 nightly ius"
+  allow_failures:
+    - env: BUILDTAB="ubuntu trusty deb 4.0.x 7.2 nightly -"
+    - env: BUILDTAB="ubuntu xenial deb 4.0.x 7.2 nightly -"
+    - env: BUILDTAB="ubuntu bionic deb 4.0.x 7.2 nightly -"
+    - env: BUILDTAB="debian jessie deb 4.0.x 7.2 nightly -"
+    - env: BUILDTAB="debian stretch deb 4.0.x 7.2 nightly -"
+    - env: BUILDTAB="el 7 rpm 4.0.x 7.2 nightly ius"
 
 before_install:
   - source environment
@@ -140,8 +140,8 @@ deploy:
     package_glob: build/*.{rpm,deb,dsc}
     skip_cleanup: true
     on:
-      # branch: "master"
-      all_branches: true
+      branch: "master"
+      # all_branches: true
       condition: -n "${OS}" && -n "${DIST}" && -n "${PACKAGECLOUD_TOKEN}"
 
 notifications:
