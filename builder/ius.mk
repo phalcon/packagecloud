@@ -48,3 +48,9 @@ PRODUCT_EXTRA=php72u-phalcon
 PHP_VERSION=php72u
 DOCKER_SUFFIX=-ius72
 endif
+
+ifeq ($(PHP_MAJOR),7.3)
+PRODUCT_EXTRA=php73u-phalcon
+PHP_VERSION=php73u
+DOCKER_SUFFIX=-ius73
+endif
