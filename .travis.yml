@@ -132,6 +132,7 @@ before_install:
   - if [ "${PACKAGECLOUD_REPO}${TRAVIS_EVENT_TYPE}" = "stablecron" ]; then travis_terminate 0 ; fi
   - if [ "${PACKAGECLOUD_REPO}${TRAVIS_EVENT_TYPE}" = "mainlinecron" ]; then travis_terminate 0 ; fi
   - if [ $OS != "el" ]; then ./ci/prepare-debian.sh; fi
+  - if [ $OS = "el" ]; then ./ci/prepare-rpm.sh; fi
   - if [ $REPO_VENDOR == "-" ]; then unset REPO_VENDOR; fi
 
 install:

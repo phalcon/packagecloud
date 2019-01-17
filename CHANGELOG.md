@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 - Added PHP 7.3 support
+- The rpm spec files were divided regarding PHP versions
 
 ## [1.4.0] - 2019-01-06
 ### Added

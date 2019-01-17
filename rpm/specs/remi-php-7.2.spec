@@ -15,23 +15,18 @@
 
 %global with_zts    0%{?__ztsphp:1}
 %global with_tests  %{?_with_tests:1}%{!?_with_tests:0}
-%global ext_name    phalcon
 %global php_apiver  %((rpm -E %php_core_api | cut -d '-' -f 1) | tail -1)
 %global zend_apiver %((rpm -E %php_zend_api | cut -d '-' -f 1) | tail -1)
-%global php_major   %((rpm -E %php_version  | cut -d. -f1)     | tail -1)
-# will be replaced by the automated script
-%global php_base    php56u
-# will be replaced by the automated script
-%global repo_vendor ius
-# after 40-json.ini, 20-pdo.ini and 40-prs.ini (if any)
-%global ini_name    50-%{ext_name}.ini
 
-%global src_dir build/php%{php_major}/safe
+# after 40-json.ini, 20-pdo.ini and 40-prs.ini (if any)
+%global ini_name 50-phalcon.ini
+
+%global src_dir build/php7/safe
 %if %{__isa_bits} == 32
-%global src_dir build/php%{php_major}/32bits
+%global src_dir build/php7/32bits
 %endif
 %if %{__isa_bits} == 64
-%global src_dir build/php%{php_major}/64bits
+%global src_dir build/php7/64bits
 %endif
 
 %if 0%{?fedora} >= 17 || 0%{?rhel} >= 7
@@ -44,10 +39,9 @@
 
 %{!?zts_php_extdir: %{expand: %%define zts_php_extdir %(zts-php-config --extension-dir)}}
 
-Name: %{php_base}-phalcon
+Name: php72u-phalcon
 Version: %{version}
-# will be replaced by the automated script
-Release: 1.%{repo_vendor}%{?dist}
+Release: 1.ius%{?dist}
 Summary: High performance PHP framework
 Group: Development/Libraries
 Packager: Phalcon Team <build@phalconphp.com>
@@ -55,37 +49,31 @@ License: BSD 3-Clause
 URL: https://github.com/phalcon/cphalcon
 Source0: phalcon-php-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-%if %{php_major} == 5
-BuildRequires: %{php_base}-pecl-jsonc-devel%{?_isa}
-%endif
-BuildRequires: %{php_base}-devel%{?_isa}
+BuildRequires: php-devel%{?_isa}
 %if %{with_libpcre}
 BuildRequires: pcre-devel%{?_isa} >= 8.20
 %endif
 
-%if "%{phalcon_major}" == "4"
-%if "%{repo_vendor}" == "ius"
-# header files for the psr extension for the IUS (remi) repo
-BuildRequires: php-pecl-psr-devel%{?_isa}
-%endif
-%endif
-
 BuildRequires: re2c%{?_isa}
+
+BuildRequires: php-json%{?_isa}
+BuildRequires: php-pdo%{?_isa}
+
 %if "%{phalcon_major}" == "4"
-%if "%{repo_vendor}" == "ius"
-# the psr extension for the IUS (remi)
+Requires: php-pecl-psr%{?_isa}
+
 BuildRequires: php-pecl-psr%{?_isa}
-%endif
+BuildRequires: php-pecl-psr-devel%{?_isa}
 %endif
 
 # grep -nr __builtin_saddl_overflow ~/src/php/7.2.0 | wc -l
 # 6
 # The `__builtin_saddl_overflow' was added in clang 3.4 and gcc 5.0.0
-%if "%{php_version}" >= "7.2"
 BuildRequires: gcc >= 5.0.0
-%endif
-Requires: %{php_base}-pdo%{?_isa}
-Requires: %{php_base}-common%{?_isa}
+
+Requires: php-json%{?_isa}
+Requires: php-pdo%{?_isa}
+Requires: php-common%{?_isa}
 Requires: php(zend-abi) = %{php_zend_api}
 Requires: php(api) = %{php_core_api}
 
@@ -120,26 +108,26 @@ Documentation: https://docs.phalconphp.com
 ; to license@phalconphp.com so we can send you a copy immediately.
 
 ; %{summary}
-[%{ext_name}]
-extension = %{ext_name}.so
+[phalcon]
+extension = phalcon.so
 
 ; ----- Options to use the Phalcon Framework
 
-; %{ext_name}.db.escape_identifiers = On
-; %{ext_name}.db.force_casting = Off
+; phalcon.db.escape_identifiers = On
+; phalcon.db.force_casting = Off
 
-; %{ext_name}.orm.events = On
-; %{ext_name}.orm.virtual_foreign_keys = On
-; %{ext_name}.orm.column_renaming = On
-; %{ext_name}.orm.not_null_validations = On
-; %{ext_name}.orm.exception_on_failed_save = Off
-; %{ext_name}.orm.enable_literals = On
-; %{ext_name}.orm.late_state_binding = Off
-; %{ext_name}.orm.enable_implicit_joins = On
-; %{ext_name}.orm.cast_on_hydrate = Off
-; %{ext_name}.orm.ignore_unknown_columns = Off
-; %{ext_name}.orm.update_snapshot_on_save = On
-; %{ext_name}.orm.disable_assign_setters = Off
+; phalcon.orm.events = On
+; phalcon.orm.virtual_foreign_keys = On
+; phalcon.orm.column_renaming = On
+; phalcon.orm.not_null_validations = On
+; phalcon.orm.exception_on_failed_save = Off
+; phalcon.orm.enable_literals = On
+; phalcon.orm.late_state_binding = Off
+; phalcon.orm.enable_implicit_joins = On
+; phalcon.orm.cast_on_hydrate = Off
+; phalcon.orm.ignore_unknown_columns = Off
+; phalcon.orm.update_snapshot_on_save = On
+; phalcon.orm.disable_assign_setters = Off
 
 EOF
 
@@ -213,15 +201,15 @@ done
 : Minimal load test for NTS extension
 %{__php} --no-php-ini \
     $modules \
-    -d extension=%{buildroot}%{php_extdir}/%{ext_name}.so \
-    --ri %{ext_name}
+    -d extension=%{buildroot}%{php_extdir}/phalcon.so \
+    --ri phalcon
 
 %if %{with_tests}
 : Upstream test suite NTS extension
 cd build/NTS
 SKIP_ONLINE_TESTS=1 \
 TEST_PHP_EXECUTABLE=%{__php} \
-TEST_PHP_ARGS="-n $modules -d extension=$PWD/modules/%{ext_name}.so" \
+TEST_PHP_ARGS="-n $modules -d extension=$PWD/modules/phalcon.so" \
 NO_INTERACTION=1 \
 REPORT_EXIT_STATUS=1 \
 %{__php} -n run-tests.php --show-diff
@@ -245,8 +233,8 @@ done
 : Minimal load test for ZTS extension
 %{__ztsphp} --no-php-ini \
     $modules \
-    -d extension=%{buildroot}%{php_ztsextdir}/%{ext_name}.so \
-    --ri %{ext_name}
+    -d extension=%{buildroot}%{php_ztsextdir}/phalcon.so \
+    --ri phalcon
 %endif
 
 %clean
@@ -278,14 +266,14 @@ extclean zts-phpize
 %doc CONTRIBUTING.md
 %doc README.md
 
-%{php_extdir}/%{ext_name}.so
+%{php_extdir}/phalcon.so
 %config(noreplace) %{php_inidir}/%{ini_name}
-%{php_incldir}/ext/%{ext_name}/php_phalcon.h
+%{php_incldir}/ext/phalcon/php_phalcon.h
 
 %if %{with_zts}
-%{php_ztsextdir}/%{ext_name}.so
+%{php_ztsextdir}/phalcon.so
 %config(noreplace) %{php_ztsinidir}/%{ini_name}
-%{php_ztsincldir}/ext/%{ext_name}/php_phalcon.h
+%{php_ztsincldir}/ext/phalcon/php_phalcon.h
 %endif
 
 %changelog

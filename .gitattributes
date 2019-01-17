@@ -1,5 +1,8 @@
 *.mk               linguist-language=Makefile
 debian/rules       linguist-language=Makefile
-environment        linguist-language=Bash
-debian/postinsts/* linguist-language=Bash
-debian/preinsts/*  linguist-language=Bash
+
+environment        linguist-language=Shell
+debian/postinsts/* linguist-language=Shell
+debian/preinsts/*  linguist-language=Shell
+
+rpm/specs/*.spec   linguist-language=RPM Spec
