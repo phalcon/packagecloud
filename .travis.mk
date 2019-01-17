@@ -48,7 +48,6 @@ package: $(D_TARGETS) $(SCRIPTDIR)/packpack
 report:
 	$(info )
 	$(info Product ............................: $(PRODUCT))
-	$(info Product extra ......................: $(PRODUCT_EXTRA))
 	$(info )
 	$(info Source path ........................: $(SOURCEDIR))
 	$(info Build path .........................: $(BUILDDIR))

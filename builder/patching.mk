@@ -18,38 +18,6 @@ DEB_SPEC=$(SCRIPTDIR)/debian/rules
 
 RPM_SPEC=$(SCRIPTDIR)/rpm/php-phalcon.spec
 RPM_PRODUCT=
-RPM_PHP_BASE=
-
-ifneq ($(PRODUCT_EXTRA),)
-RPM_PRODUCT:=$(PRODUCT_EXTRA)
-else ifneq ($(PRODUCT),)
-RPM_PRODUCT:=$(PRODUCT)
-else
-RPM_PRODUCT:=php-phalcon
-endif
-
-ifeq ($(PHP_VERSION),php72u)
-RPM_PHP_BASE:=php
-else ifneq ($(PHP_VERSION),)
-RPM_PHP_BASE:=$(PHP_VERSION)
-else
-RPM_PHP_BASE:=php
-endif
-
-define patching_rpmspec
-	cp $(1) rpmspec.tmp
-	sed \
-		-e 's/Name:\([\ \t]*\)%{php_base}-phalcon/Name: $(RPM_PRODUCT)/' \
-		-e 's/%global\([\ \t]*\)php_base\([\ \t]*\).*/%global php_base $(RPM_PHP_BASE)/' \
-		-e 's/%global\([\ \t]*\)repo_vendor\([\ \t]*\).*/%global repo_vendor $(REPO_VENDOR)/' \
-		-i rpmspec.tmp
-	grep -F "Name: $(RPM_PRODUCT)" rpmspec.tmp && \
-		grep -F "php_base $(RPM_PHP_BASE)" rpmspec.tmp && \
-		grep -F "repo_vendor $(REPO_VENDOR)" rpmspec.tmp || \
-		(echo "Failed to patch $(1)" && exit 1)
-	mkdir -p $(SOURCEDIR)/rpm
-	mv -f rpmspec.tmp $(SOURCEDIR)/rpm/php-phalcon.spec
-endef
 
 .PHONY: prepare-build
 prepare-build: prepare-$(PACKAGE)-spec
@@ -76,7 +44,8 @@ prepare-deb-spec: $(DEB_SPEC)
 .PHONY: prepare-rpm-spec
 prepare-rpm-spec: $(RPM_SPEC)
 	$(info -------------------------------------------------------------------)
-	$(info Patching $<)
+	$(info Prepare $<)
 	$(info -------------------------------------------------------------------)
-	$(call patching_rpmspec,$<)
+	@mkdir -p $(SOURCEDIR)/rpm
+	@cp -f $< $(SOURCEDIR)/rpm/php-phalcon.spec
 	$(info )
