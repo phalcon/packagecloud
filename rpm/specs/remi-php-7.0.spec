@@ -47,7 +47,7 @@ Summary: High performance PHP framework
 Group: Development/Libraries
 Packager: Phalcon Team <build@phalconphp.com>
 License: BSD 3-Clause
-URL: https://github.com/phalcon/cphalcon
+URL: https://phalconphp.com
 Source0: phalcon-php-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: php70u-devel%{?_isa}
