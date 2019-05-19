@@ -128,6 +128,8 @@ extension = phalcon.so
 ; phalcon.orm.ignore_unknown_columns = Off
 ; phalcon.orm.update_snapshot_on_save = On
 ; phalcon.orm.disable_assign_setters = Off
+; phalcon.orm.resultset_prefetch_records = Off
+; phalcon.orm.cast_last_insert_id_to_int = Off
 
 EOF
 
