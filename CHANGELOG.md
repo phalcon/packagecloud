@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Install missed PHP extensions on non-stable branches to regenerate C-code
 
 ## [1.5.0] - 2019-02-31
 ### Added
