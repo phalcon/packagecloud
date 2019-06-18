@@ -132,7 +132,7 @@ matrix:
 
 before_install:
   - source environment
-  - export $(cut -d= -f1 environment)
+  - export $(cat environment | grep -v "^#\|^$" | cut -d= -f1)
   - source ci/export-buildtab.sh
   # Create daily builds only for nightly branch
   - if [ "${PACKAGECLOUD_REPO}${TRAVIS_EVENT_TYPE}" = "stablecron" ]; then travis_terminate 0 ; fi
