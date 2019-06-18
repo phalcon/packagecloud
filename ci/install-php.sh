@@ -30,10 +30,37 @@ fi
 
 if [ -z ${PHP_VERSION+x} ];
 then
-	(>&2 echo "The PHP_VERSION is absent or empty.")
+	(>&2 echo "The PHP_VERSION variable is absent or empty.")
 	(>&2 echo "Aborting.")
 	exit 1
 fi
+
+if [ -z ${PACKAGECLOUD_REPO+x} ];
+then
+	(>&2 echo "The PACKAGECLOUD_REPO variable is absent or empty.")
+	(>&2 echo "Aborting.")
+	exit 1
+fi
+
+install_psr_ext() {
+	# We need to regenerate C-code on non-stable branches.
+	# This is why we need to install psr extension.
+	if [ "$PACKAGECLOUD_REPO" != "stable" ]
+	then
+		case "$PHP_VERSION" in
+			7.[0-9])
+				printf "\n" | pecl install --force psr &> /dev/null
+				# will exit with 1 in case of extension absence
+				php -m | grep psr &> /dev/null
+				;;
+			*)
+				(>&2 echo "Current PHP version is not supported by PSR extension.")
+				(>&2 echo "Skip extension installation.")
+				;;
+		esac
+	fi
+	return 0
+}
 
 # Travis creates symbolic links to the real version like:
 # ~/.phpenv/versions/7.2 -> ~/.phpenv/versions/7.2.13
@@ -42,6 +69,8 @@ then
 	phpenv global "${PHP_VERSION}"
 	phpenv rehash
 	php -v
+
+	install_psr_ext
 	exit 0
 fi
 
@@ -72,3 +101,5 @@ tar xjf "${downloadfile}" --directory /
 phpenv global "${PHP_VERSION}"
 phpenv rehash
 php -v
+
+install_psr_ext
