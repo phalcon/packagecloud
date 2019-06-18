@@ -7,7 +7,8 @@ SOURCEDIR="${TRAVIS_BUILD_DIR}/cphalcon"
 TARGET="package"
 RE2C_VERSION="1.1.1"
 
-ZEPHIR_VERSION="0.11.11"
+# To build 4.x branch use version >= 0.11.x, for example 0.11.11
+ZEPHIR_VERSION=0.10.14
 ZEPHIR_PARSER_VERSION="v1.2.0"
 ZEND_BACKEND="--backend=ZendEngine3"
 STABLE_BUILD_VERSION="2"
