@@ -42,24 +42,26 @@ then
 	exit 1
 fi
 
-install_psr_ext() {
-	# We need to regenerate C-code on non-stable branches.
-	# This is why we need to install psr extension.
+install_exts() {
+	# We'll need to regenerate C-code on non-stable branches.
+	# This is why we need to install missed extensions.
 	if [ "$PACKAGECLOUD_REPO" != "stable" ]
 	then
 		case "$PHP_VERSION" in
 			7.[0-9])
 				printf "\n" | pecl install --force psr &> /dev/null
+				printf "\n" | pecl install --force redis &> /dev/null
 				# will exit with 1 in case of extension absence
 				php -m | grep psr &> /dev/null
+				php -m | grep redis &> /dev/null
 				;;
 			*)
-				(>&2 echo "Current PHP version is not supported by PSR extension.")
-				(>&2 echo "Skip extension installation.")
+				(>&2 echo "PHP v${PHP_VERSION} is not supported by Phalcon ${PACKAGECLOUD_REPO}.")
+				(>&2 echo "Aborting.")
+				exit 1
 				;;
 		esac
 	fi
-	return 0
 }
 
 # Travis creates symbolic links to the real version like:
@@ -70,7 +72,7 @@ then
 	phpenv rehash
 	php -v
 
-	install_psr_ext
+	install_exts
 	exit 0
 fi
 
@@ -102,4 +104,4 @@ phpenv global "${PHP_VERSION}"
 phpenv rehash
 php -v
 
-install_psr_ext
+install_exts
