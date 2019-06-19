@@ -8,10 +8,6 @@
 # If you did not receive a copy of the license it is available
 # through the world-wide-web at the following url:
 # https://license.phalconphp.com
-#
-# If you did not receive a copy of the license and are unable to
-# obtain it through the world-wide-web, please send an email
-# to license@phalconphp.com so we can send you a copy immediately.
 
 %global with_zts    0%{?__ztsphp:1}
 %global with_tests  %{?_with_tests:1}%{!?_with_tests:0}
@@ -93,10 +89,6 @@ Documentation: https://docs.phalconphp.com
 ; If you did not receive a copy of the license it is available
 ; through the world-wide-web at the following url:
 ; https://license.phalconphp.com
-;
-; If you did not receive a copy of the license and are unable to
-; obtain it through the world-wide-web, please send an email
-; to license@phalconphp.com so we can send you a copy immediately.
 
 ; %{summary}
 [phalcon]

@@ -10,10 +10,6 @@
 # If you did not receive a copy of the license it is available
 # through the world-wide-web at the following url:
 # https://license.phalconphp.com
-#
-# If you did not receive a copy of the license and are unable to
-# obtain it through the world-wide-web, please send an email
-# to license@phalconphp.com so we can send you a copy immediately.
 
 # Ensure that this is being run inside a CI container
 if [ "${CI}" != "true" ];
