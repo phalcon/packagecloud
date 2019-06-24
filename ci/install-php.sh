@@ -47,9 +47,11 @@ install_exts() {
 			7.[0-9])
 				printf "\n" | pecl install --force psr &> /dev/null
 				printf "\n" | pecl install --force redis &> /dev/null
+				printf "\n" | pecl install --force memcached &> /dev/null
 				# will exit with 1 in case of extension absence
 				php -m | grep psr &> /dev/null
 				php -m | grep redis &> /dev/null
+				php -m | grep memcached &> /dev/null
 				;;
 			*)
 				(>&2 echo "PHP v${PHP_VERSION} is not supported by Phalcon ${PACKAGECLOUD_REPO}.")
