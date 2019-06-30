@@ -7,16 +7,21 @@ SOURCEDIR="${TRAVIS_BUILD_DIR}/cphalcon"
 TARGET="package"
 RE2C_VERSION="1.1.1"
 
-# To build 3.x branch use version >= 0.10.0, for example 0.10.14
-# To build 4.x branch use version >= 0.11.0, for example 0.11.11
-ZEPHIR_VERSION="0.11.11"
-ZEPHIR_PARSER_VERSION="v1.2.0"
+# To build 3.x branch use version ZEPHIR_VERSION >= 0.10.0, for example 0.10.14
+# To build 3.x branch use version ZEPHIR_PARSER_VERSION >= v1.1.x, for example v1.1.4
+ZEPHIR_VERSION="0.10.16"
+ZEPHIR_PARSER_VERSION="v1.1.4"
+# To build 4.x branch use version ZEPHIR_VERSION >= 0.11.0, for example 0.11.11
+# To build 4.x branch use version ZEPHIR_PARSER_VERSION >= v1.2.x, for example v1.2.0
+# ZEPHIR_VERSION="0.11.11"
+# ZEPHIR_PARSER_VERSION="v1.2.0"
+
 ZEND_BACKEND="--backend=ZendEngine3"
-STABLE_BUILD_VERSION="5"
+STABLE_BUILD_VERSION="1"
 MAINLINE_BUILD_VERSION="${TRAVIS_BUILD_NUMBER}"
 NIGHTLY_BUILD_VERSION="${TRAVIS_BUILD_NUMBER}"
 
-STABLE_BRANCH="v3.4.3"
+STABLE_BRANCH="v3.4.4"
 MAINLINE_BRANCH="v4.0.0-alpha.5"
 NIGHTLY_BRANCH="4.0.x"
 
