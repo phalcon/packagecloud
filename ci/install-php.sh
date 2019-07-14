@@ -38,7 +38,48 @@ then
 	exit 1
 fi
 
-install_exts() {
+function install_memcached() {
+	local php_confd="$(phpenv root)/versions/$(phpenv version-name)/etc/conf.d"
+	local php_extd="$(`phpenv which php-config` --extension-dir)"
+
+	if [ ! -f "$php_extd/memcached.so" ];
+	then
+		cd /tmp
+		phpenv local "${PHP_VERSION}" 1>/dev/null && phpenv rehash
+
+		rm -rf memcached-latest && mkdir memcached-latest
+		pecl download memcached 1> /dev/null
+		tar -xf memcached-*.tgz -C ./memcached-latest --strip-components=1
+
+		cd memcached-latest
+		phpenv local "${PHP_VERSION}" 1>/dev/null && phpenv rehash
+
+		phpize 1> /dev/null
+
+		# TODO: Looks like "--disable-memcached-sasl" is required on Ubuntu 14.04
+		./configure \
+			--with-libmemcached-dir=/usr \
+			--with-zlib-dir=/usr \
+			--with-system-fastlz=no \
+			--with-php-config=$(phpenv which php-config) \
+			--enable-memcached-igbinary=no \
+			--enable-memcached-msgpack=no \
+			--enable-memcached \
+			--enable-memcached-protocol=no \
+			--enable-memcached-json=yes \
+			--enable-memcached-session=yes \
+			--disable-memcached-sasl \
+			1>/dev/null
+
+		make --silent -j"$(getconf _NPROCESSORS_ONLN)" 1>/dev/null
+		make --silent install 1>/dev/null
+	fi
+
+	ls $php_extd | grep memcached.so 1> /dev/null
+	echo extension=memcached.so > "$php_confd/memcached.ini"
+}
+
+function install_exts() {
 	# We'll need to regenerate C-code on non-stable branches.
 	# This is why we need to install missed extensions.
 	if [ "$PACKAGECLOUD_REPO" = "nightly" ]
@@ -46,13 +87,19 @@ install_exts() {
 		(>&1 echo "Installing PHP extensions...")
 		case "$PHP_VERSION" in
 			7.[0-9])
-				printf "\n" | pecl install --force psr &> /dev/null
-				printf "\n" | pecl install --force redis &> /dev/null
-				printf "\n" | pecl install --force memcached &> /dev/null
+				(>&1 echo "  * psr")
+				printf "\n" | pecl install --force psr 1> /dev/null
+
+				(>&1 echo "  * redis")
+				printf "\n" | pecl install --force redis 1> /dev/null
+
+				(>&1 echo "  * memcached")
+				install_memcached
+
 				# will exit with 1 in case of extension absence
-				php -m | grep psr &> /dev/null
-				php -m | grep redis &> /dev/null
-				php -m | grep memcached &> /dev/null
+				php -m | grep psr 1> /dev/null
+				php -m | grep redis 1> /dev/null
+				php -m | grep memcached 1> /dev/null
 				;;
 			*)
 				(>&2 echo "PHP v${PHP_VERSION} is not supported by Phalcon ${PACKAGECLOUD_REPO}.")
@@ -104,3 +151,5 @@ phpenv rehash
 php -v
 
 install_exts
+
+unset os_version pkgname source downloaddir downloadfile
