@@ -41,8 +41,9 @@ fi
 install_exts() {
 	# We'll need to regenerate C-code on non-stable branches.
 	# This is why we need to install missed extensions.
-	if [ "$PACKAGECLOUD_REPO" != "stable" ]
+	if [ "$PACKAGECLOUD_REPO" = "nightly" ]
 	then
+		(>&1 echo "Installing PHP extensions...")
 		case "$PHP_VERSION" in
 			7.[0-9])
 				printf "\n" | pecl install --force psr &> /dev/null
