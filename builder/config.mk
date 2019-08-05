@@ -36,7 +36,7 @@ NIGHTLY_BUILD_VERSION?=1
 # List of supported OS
 FEDORA:=fedora-rawhide fedora24 fedora23
 CENTOS:=centos7 centos6
-DEBIAN:=debian-sid debian-stretch debian-jessie debian-wheezy
+DEBIAN:=debian-sid debian-buster debian-stretch debian-jessie debian-wheezy
 UBUNTU:=ubuntu-bionic ubuntu-xenial ubuntu-trusty
 
 DEBS:=$(DEBIAN) $(UBUNTU)
@@ -111,7 +111,7 @@ endif
 endif
 
 ifeq ($(PHP_VERSION),7.3)
-ifneq (,$(filter $(DIST),stretch jessie trusty xenial bionic))
+ifneq (,$(filter $(DIST),buster stretch jessie trusty xenial bionic))
 DOCKER_SUFFIX=-7.3
 endif
 endif

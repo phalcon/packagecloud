@@ -66,6 +66,7 @@ env:
     # - BUILDTAB="debian stretch deb v3.4.4 7.1 stable -"
     # - BUILDTAB="debian stretch deb v3.4.4 7.2 stable -"
     # - BUILDTAB="debian stretch deb v3.4.4 7.3 stable -"
+    - BUILDTAB="debian buster deb v3.4.4 7.3 stable -"
 
     # stable - centos
     # - BUILDTAB="el 7 rpm v3.4.4 5.5 stable ius"
@@ -76,40 +77,40 @@ env:
     # - BUILDTAB="el 7 rpm v3.4.4 7.3 stable ius"
 
     # mainline - ubuntu
-    - BUILDTAB="ubuntu trusty deb v4.0.0-beta.1 7.2 mainline -"
-    - BUILDTAB="ubuntu trusty deb v4.0.0-beta.1 7.3 mainline -"
-    - BUILDTAB="ubuntu xenial deb v4.0.0-beta.1 7.2 mainline -"
-    - BUILDTAB="ubuntu xenial deb v4.0.0-beta.1 7.3 mainline -"
-    - BUILDTAB="ubuntu bionic deb v4.0.0-beta.1 7.2 mainline -"
-    - BUILDTAB="ubuntu bionic deb v4.0.0-beta.1 7.3 mainline -"
+    # - BUILDTAB="ubuntu trusty deb v4.0.0-beta.1 7.2 mainline -"
+    # - BUILDTAB="ubuntu trusty deb v4.0.0-beta.1 7.3 mainline -"
+    # - BUILDTAB="ubuntu xenial deb v4.0.0-beta.1 7.2 mainline -"
+    # - BUILDTAB="ubuntu xenial deb v4.0.0-beta.1 7.3 mainline -"
+    # - BUILDTAB="ubuntu bionic deb v4.0.0-beta.1 7.2 mainline -"
+    # - BUILDTAB="ubuntu bionic deb v4.0.0-beta.1 7.3 mainline -"
 
     # mainline - debian
-    - BUILDTAB="debian jessie deb v4.0.0-beta.1 7.2 mainline -"
-    - BUILDTAB="debian jessie deb v4.0.0-beta.1 7.3 mainline -"
-    - BUILDTAB="debian stretch deb v4.0.0-beta.1 7.2 mainline -"
-    - BUILDTAB="debian stretch deb v4.0.0-beta.1 7.3 mainline -"
+    # - BUILDTAB="debian jessie deb v4.0.0-beta.1 7.2 mainline -"
+    # - BUILDTAB="debian jessie deb v4.0.0-beta.1 7.3 mainline -"
+    # - BUILDTAB="debian stretch deb v4.0.0-beta.1 7.2 mainline -"
+    # - BUILDTAB="debian stretch deb v4.0.0-beta.1 7.3 mainline -"
 
     # mainline - centos
-    - BUILDTAB="el 7 rpm v4.0.0-beta.1 7.2 mainline ius"
-    - BUILDTAB="el 7 rpm v4.0.0-beta.1 7.3 mainline ius"
+    # - BUILDTAB="el 7 rpm v4.0.0-beta.1 7.2 mainline ius"
+    # - BUILDTAB="el 7 rpm v4.0.0-beta.1 7.3 mainline ius"
 
     # nightly - ubuntu
-    - BUILDTAB="ubuntu trusty deb 4.0.x 7.2 nightly -"
-    - BUILDTAB="ubuntu trusty deb 4.0.x 7.3 nightly -"
-    - BUILDTAB="ubuntu xenial deb 4.0.x 7.2 nightly -"
-    - BUILDTAB="ubuntu xenial deb 4.0.x 7.3 nightly -"
-    - BUILDTAB="ubuntu bionic deb 4.0.x 7.2 nightly -"
-    - BUILDTAB="ubuntu bionic deb 4.0.x 7.3 nightly -"
+    # - BUILDTAB="ubuntu trusty deb 4.0.x 7.2 nightly -"
+    # - BUILDTAB="ubuntu trusty deb 4.0.x 7.3 nightly -"
+    # - BUILDTAB="ubuntu xenial deb 4.0.x 7.2 nightly -"
+    # - BUILDTAB="ubuntu xenial deb 4.0.x 7.3 nightly -"
+    # - BUILDTAB="ubuntu bionic deb 4.0.x 7.2 nightly -"
+    # - BUILDTAB="ubuntu bionic deb 4.0.x 7.3 nightly -"
 
     # nightly - debian
-    - BUILDTAB="debian jessie deb 4.0.x 7.2 nightly -"
-    - BUILDTAB="debian jessie deb 4.0.x 7.3 nightly -"
-    - BUILDTAB="debian stretch deb 4.0.x 7.2 nightly -"
-    - BUILDTAB="debian stretch deb 4.0.x 7.3 nightly -"
+    # - BUILDTAB="debian jessie deb 4.0.x 7.2 nightly -"
+    # - BUILDTAB="debian jessie deb 4.0.x 7.3 nightly -"
+    # - BUILDTAB="debian stretch deb 4.0.x 7.2 nightly -"
+    # - BUILDTAB="debian stretch deb 4.0.x 7.3 nightly -"
 
     # nightly - centos
-    - BUILDTAB="el 7 rpm 4.0.x 7.2 nightly ius"
-    - BUILDTAB="el 7 rpm 4.0.x 7.3 nightly ius"
+    # - BUILDTAB="el 7 rpm 4.0.x 7.2 nightly ius"
+    # - BUILDTAB="el 7 rpm 4.0.x 7.3 nightly ius"
 
 matrix:
   fast_finish: true
