@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Install missed PHP extensions on non-stable branches to regenerate C-code
+- Added Debian Buster support
+  [#47](https://github.com/phalcongelist/packagecloud/issues/47)
 
 ## [1.5.0] - 2019-02-31
 ### Added
