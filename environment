@@ -11,10 +11,10 @@ RE2C_VERSION="1.1.1"
 #  ZEPHIR_VERSION >= 0.10.0 (for example 0.10.14)
 #  ZEPHIR_PARSER_VERSION >= v1.1.x (for example v1.1.4)
 # To build 4.x branch use
-#  ZEPHIR_VERSION >= 0.11.0 (for example 0.12.0)
-#  ZEPHIR_PARSER_VERSION >= v1.2.x (for example v1.3.0)
-ZEPHIR_VERSION="0.12.0"
-ZEPHIR_PARSER_VERSION="v1.3.0"
+#  ZEPHIR_VERSION >= 0.11.0 (for example 0.12.2)
+#  ZEPHIR_PARSER_VERSION >= v1.2.x (for example v1.3.1)
+ZEPHIR_VERSION="0.12.2"
+ZEPHIR_PARSER_VERSION="v1.3.1"
 
 ZEND_BACKEND="--backend=ZendEngine3"
 STABLE_BUILD_VERSION="3"
