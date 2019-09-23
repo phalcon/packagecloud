@@ -12,7 +12,7 @@
 dist: trusty
 
 services:
-    - docker
+  - docker
 
 language: generic
 

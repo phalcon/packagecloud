@@ -16,6 +16,9 @@
 # -o	This setting prevents errors in a pipeline from being masked.
 set -euo pipefail
 
+# Remove a Makefile desired for local development only
+[ -f "$SOURCEDIR/Makefile" ] && echo '' > "$SOURCEDIR/Makefile"
+
 if [ "${CLONE_BRANCH}" != "${NIGHTLY_BRANCH}" ];
 then
 	(>&1 echo "Phalcon C code need to regenerated only on '${NIGHTLY_BRANCH}' branch.")
@@ -24,10 +27,10 @@ then
 	exit 0
 fi
 
-cd $SOURCEDIR
+cd "$SOURCEDIR" || exit 1
 
 zephir fullclean
-zephir generate $ZEND_BACKEND
+zephir generate "$ZEND_BACKEND"
 
-cd $SOURCEDIR/build
-$(phpenv which php) gen-build.php
+cd "$SOURCEDIR/build" || exit 1
+"$(phpenv which php)" gen-build.php
