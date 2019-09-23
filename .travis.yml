@@ -76,23 +76,23 @@ env:
     # - BUILDTAB="el 7 rpm v3.4.4 7.3 stable ius"
 
     # mainline - ubuntu
-    - BUILDTAB="ubuntu trusty deb v4.0.0-beta.2 7.2 mainline -"
-    - BUILDTAB="ubuntu trusty deb v4.0.0-beta.2 7.3 mainline -"
-    - BUILDTAB="ubuntu xenial deb v4.0.0-beta.2 7.2 mainline -"
-    - BUILDTAB="ubuntu xenial deb v4.0.0-beta.2 7.3 mainline -"
-    - BUILDTAB="ubuntu bionic deb v4.0.0-beta.2 7.2 mainline -"
-    - BUILDTAB="ubuntu bionic deb v4.0.0-beta.2 7.3 mainline -"
+    - BUILDTAB="ubuntu trusty deb v4.0.0-rc.1 7.2 mainline -"
+    - BUILDTAB="ubuntu trusty deb v4.0.0-rc.1 7.3 mainline -"
+    - BUILDTAB="ubuntu xenial deb v4.0.0-rc.1 7.2 mainline -"
+    - BUILDTAB="ubuntu xenial deb v4.0.0-rc.1 7.3 mainline -"
+    - BUILDTAB="ubuntu bionic deb v4.0.0-rc.1 7.2 mainline -"
+    - BUILDTAB="ubuntu bionic deb v4.0.0-rc.1 7.3 mainline -"
 
     # mainline - debian
-    - BUILDTAB="debian jessie deb v4.0.0-beta.2 7.2 mainline -"
-    - BUILDTAB="debian jessie deb v4.0.0-beta.2 7.3 mainline -"
-    - BUILDTAB="debian stretch deb v4.0.0-beta.2 7.2 mainline -"
-    - BUILDTAB="debian stretch deb v4.0.0-beta.2 7.3 mainline -"
-    - BUILDTAB="debian buster deb v4.0.0-beta.2 7.3 mainline -"
+    - BUILDTAB="debian jessie deb v4.0.0-rc.1 7.2 mainline -"
+    - BUILDTAB="debian jessie deb v4.0.0-rc.1 7.3 mainline -"
+    - BUILDTAB="debian stretch deb v4.0.0-rc.1 7.2 mainline -"
+    - BUILDTAB="debian stretch deb v4.0.0-rc.1 7.3 mainline -"
+    - BUILDTAB="debian buster deb v4.0.0-rc.1 7.3 mainline -"
 
     # mainline - centos
-    - BUILDTAB="el 7 rpm v4.0.0-beta.2 7.2 mainline ius"
-    - BUILDTAB="el 7 rpm v4.0.0-beta.2 7.3 mainline ius"
+    - BUILDTAB="el 7 rpm v4.0.0-rc.1 7.2 mainline ius"
+    - BUILDTAB="el 7 rpm v4.0.0-rc.1 7.3 mainline ius"
 
     # nightly - ubuntu
     - BUILDTAB="ubuntu trusty deb 4.0.x 7.2 nightly -"
