@@ -149,7 +149,7 @@ install:
   - ./ci/install-zephir.sh || travis_terminate 1
 
 before_script:
-  - git clone -b $CLONE_BRANCH --depth 1 -q $PRODUCT_GIT $SOURCEDIR 2>/dev/null
+  - git clone -b $CLONE_BRANCH --depth 1 -q $PRODUCT_GIT $SOURCEDIR 1>/dev/null
   - ./ci/regenerate-build.sh || travis_terminate 1
 
 script:
