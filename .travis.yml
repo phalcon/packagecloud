@@ -67,7 +67,7 @@ env:
     - BUILDTAB="debian stretch deb v4.0.0 7.2 stable -"
     - BUILDTAB="debian stretch deb v4.0.0 7.3 stable -"
     - BUILDTAB="debian buster deb v4.0.0 7.3 stable -"
-    - BUILDTAB="debian buster dev v4.0.0 7.4 stable -"
+    - BUILDTAB="debian buster deb v4.0.0 7.4 stable -"
 
     # stable - centos
     #- BUILDTAB="el 7 rpm v3.4.5 5.5 stable ius"
