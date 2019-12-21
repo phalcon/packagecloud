@@ -1,13 +1,13 @@
 # This file is part of the Phalcon.
 #
-# (c) Phalcon Team <team@phalconphp.com>
+# (c) Phalcon Team <team@phalcon.io>
 #
 # For the full copyright and license information, please view
 # the LICENSE.txt file that was distributed with this source code.
 #
 # If you did not receive a copy of the license it is available
 # through the world-wide-web at the following url:
-# https://license.phalconphp.com
+# https://license.phalcon.io
 
 SUPPORTED_IUS_VERSIONS=5.5 5.6 7.0 7.1 7.2 7.3 7.4
 
