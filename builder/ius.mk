@@ -9,7 +9,7 @@
 # through the world-wide-web at the following url:
 # https://license.phalconphp.com
 
-SUPPORTED_IUS_VERSIONS=5.5 5.6 7.0 7.1 7.2 7.3
+SUPPORTED_IUS_VERSIONS=5.5 5.6 7.0 7.1 7.2 7.3 7.4
 
 ifeq ($(filter $(PHP_MAJOR),$(SUPPORTED_IUS_VERSIONS)),)
 $(error The $(PHP_MAJOR) is unsupported PHP version for $(REPO_VENDOR))
@@ -43,4 +43,9 @@ endif
 ifeq ($(PHP_MAJOR),7.3)
 PHP_VERSION=php73u
 DOCKER_SUFFIX=-ius73
+endif
+
+ifeq ($(PHP_MAJOR),7.4)
+PHP_VERSION=php74u
+DOCKER_SUFFIX=-ius74
 endif
