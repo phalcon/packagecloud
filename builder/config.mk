@@ -1,16 +1,16 @@
 # This file is part of the Phalcon.
 #
-# (c) Phalcon Team <team@phalconphp.com>
+# (c) Phalcon Team <team@phalcon.io>
 #
 # For the full copyright and license information, please view
 # the LICENSE.txt file that was distributed with this source code.
 #
 # If you did not receive a copy of the license it is available
 # through the world-wide-web at the following url:
-# https://license.phalconphp.com
+# https://license.phalcon.io
 
 CHANGELOG_NAME=Phalcon Team
-CHANGELOG_EMAIL=build@phalconphp.com
+CHANGELOG_EMAIL=team@phalcon.io
 CHANGELOG_TEXT=Automated build. See details at release page https://github.com/phalcon/cphalcon/releases
 
 PACK_REPO=https://github.com/packpack/packpack.git
@@ -113,6 +113,12 @@ endif
 ifeq ($(PHP_VERSION),7.3)
 ifneq (,$(filter $(DIST),buster stretch jessie trusty xenial bionic))
 DOCKER_SUFFIX=-7.3
+endif
+endif
+
+ifeq ($(PHP_VERSION),7.4)
+ifneq (,$(filter $(DIST),buster stretch jessie trusty xenial bionic))
+DOCKER_SUFFIX=-7.4
 endif
 endif
 
