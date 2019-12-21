@@ -26,7 +26,7 @@ Installation/configuration details for each version and operating system can be 
 Supported Operating Systems
 ---------------------------
 
-- Ubuntu 14.04 LTS (Trusty)
+- Ubuntu 14.04 LTS (Trusty) (up to PHP 7.3)
 - Ubuntu 16.04 LTS (Xenial)
 - Ubuntu 18.04 LTS (Bionic)
 - Debian 8.5 LTS (Jessie)
