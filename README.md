@@ -1,5 +1,5 @@
-<p align="center"><a href="https://phalconphp.com" target="_blank">
-    <img src="https://assets.phalconphp.com/phalcon/images/svg/phalcon-logo-transparent-black.svg" height="100" alt="Phalcon Builder"/>
+<p align="center"><a href="https://phalcon.io" target="_blank">
+    <img src="https://assets.phalcon.io/phalcon/images/svg/phalcon-logo-transparent-black.svg" height="100" alt="Phalcon Builder"/>
 </a></p>
 
 <p align="center">
@@ -111,7 +111,7 @@ License
 
 Phalcon Builder licensed under the BSD 3-Clause License. See the [LICENSE][8] file for more information.
 
-[1]: https://phalconphp.com
+[1]: https://phalcon.io
 [2]: https://packagecloud.io/phalcon
 [3]: https://packagecloud.io/phalcon/stable
 [4]: https://packagecloud.io/phalcon/mainline

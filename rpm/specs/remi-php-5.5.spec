@@ -1,13 +1,13 @@
 # This file is part of the Phalcon Builder.
 #
-# (c) Phalcon Team <team@phalconphp.com>
+# (c) Phalcon Team <team@phalcon.io>
 #
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 #
 # If you did not receive a copy of the license it is available
 # through the world-wide-web at the following url:
-# https://license.phalconphp.com
+# https://license.phalcon.io
 
 %global with_zts    0%{?__ztsphp:1}
 %global with_tests  %{?_with_tests:1}%{!?_with_tests:0}
@@ -40,9 +40,9 @@ Version: %{version}
 Release: 1.ius%{?dist}
 Summary: High performance PHP framework
 Group: Development/Libraries
-Packager: Phalcon Team <build@phalconphp.com>
+Packager: Phalcon Team <build@phalcon.io>
 License: BSD 3-Clause
-URL: https://phalconphp.com
+URL: https://phalcon.io
 Source0: phalcon-php-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: php55u-pecl-jsonc-devel%{?_isa}
@@ -72,7 +72,7 @@ the PHP language providing high performance and lower resource consumption.
 
 This package provides the Phalcon PHP extension.
 
-Documentation: https://docs.phalconphp.com
+Documentation: https://docs.phalcon.io
 
 %prep
 %setup -q -n phalcon-php-%{version}
@@ -81,14 +81,14 @@ Documentation: https://docs.phalconphp.com
 ;
 ; This file is part of the Phalcon.
 ;
-; (c) Phalcon Team <team@phalconphp.com>
+; (c) Phalcon Team <team@phalcon.io>
 ;
 ; For the full copyright and license information, please view
 ; the LICENSE.txt file that was distributed with this source code.
 ;
 ; If you did not receive a copy of the license it is available
 ; through the world-wide-web at the following url:
-; https://license.phalconphp.com
+; https://license.phalcon.io
 
 ; %{summary}
 [phalcon]
