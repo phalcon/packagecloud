@@ -6,14 +6,14 @@ set -e
 
 if [ "$1" = "configure" ]; then
 	# Install the new versioned configuration
-	inidir=/etc/php/7.3/mods-available
+	inidir=/etc/php/7.4/mods-available
 
 	if [ -e /usr/lib/php/php-maintscript-helper ] ; then
 		. /usr/lib/php/php-maintscript-helper
 
 		# Register new conffile with UCF
-		ucf /usr/share/php7.3-phalcon/phalcon/phalcon.ini ${inidir}/phalcon.ini
-		ucfr --force php7.3-phalcon ${inidir}/phalcon.ini
+		ucf /usr/share/php7.4-phalcon/phalcon/phalcon.ini ${inidir}/phalcon.ini
+		ucfr --force php7.4-phalcon ${inidir}/phalcon.ini
 
 		if [ -f "${inidir}/phalcon.ini.dpkg-new" ]; then
 			md5sum="$(md5sum ${inidir}/phalcon.ini.dpkg-new | sed -e 's/ .*//')"
@@ -24,7 +24,7 @@ if [ "$1" = "configure" ]; then
 			fi
 		fi
 
-		php_invoke enmod 7.3 ALL phalcon
+		php_invoke enmod 7.4 ALL phalcon
 	fi
 fi
 
