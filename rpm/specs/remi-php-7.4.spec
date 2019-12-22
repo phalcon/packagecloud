@@ -35,7 +35,7 @@
 
 %{!?zts_php_extdir: %{expand: %%define zts_php_extdir %(zts-php-config --extension-dir)}}
 
-Name: php73u-phalcon
+Name: php74u-phalcon
 Version: %{version}
 Release: 1.ius%{?dist}
 Summary: High performance PHP framework
@@ -45,7 +45,7 @@ License: BSD 3-Clause
 URL: https://phalcon.io
 Source0: phalcon-php-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires: php73-php-devel%{?_isa}
+BuildRequires: php74-php-devel%{?_isa}
 %if %{with_libpcre}
 BuildRequires: pcre-devel%{?_isa} >= 8.20
 %endif
