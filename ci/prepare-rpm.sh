@@ -33,7 +33,7 @@ then
 fi
 
 case "$PHP_VERSION" in
-"5.5" | "5.6" | "7.0" | "7.1"| "7.2" | "7.3" )
+"5.5" | "5.6" | "7.0" | "7.1"| "7.2" | "7.3" | "7.4" )
 	cp "rpm/specs/remi-php-${PHP_VERSION}.spec" rpm/php-phalcon.spec
 	;;
 *)
