@@ -52,6 +52,7 @@ env:
     # stable - debian
     - BUILDTAB="debian jessie deb v4.0.0 7.2 stable -"
     - BUILDTAB="debian jessie deb v4.0.0 7.3 stable -"
+    - BUILDTAB="debian jessie deb v4.0.0 7.4 stable -"
     - BUILDTAB="debian stretch deb v4.0.0 7.2 stable -"
     - BUILDTAB="debian stretch deb v4.0.0 7.3 stable -"
     - BUILDTAB="debian stretch deb v4.0.0 7.4 stable -"
@@ -76,6 +77,7 @@ env:
     # mainline - debian
     #- BUILDTAB="debian jessie deb v4.0.0-rc.3 7.2 mainline -"
     #- BUILDTAB="debian jessie deb v4.0.0-rc.3 7.3 mainline -"
+    #- BUILDTAB="debian jessie deb v4.0.0-rc.3 7.4 mainline -"
     #- BUILDTAB="debian stretch deb v4.0.0-rc.3 7.2 mainline -"
     #- BUILDTAB="debian stretch deb v4.0.0-rc.3 7.3 mainline -"
     #- BUILDTAB="debian stretch deb v4.0.0-rc.3 7.4 mainline -"
@@ -100,6 +102,7 @@ env:
     # nightly - debian
     #- BUILDTAB="debian jessie deb 4.0.x 7.2 nightly -"
     #- BUILDTAB="debian jessie deb 4.0.x 7.3 nightly -"
+    #- BUILDTAB="debian jessie deb 4.0.x 7.4 nightly -"
     #- BUILDTAB="debian stretch deb 4.0.x 7.2 nightly -"
     #- BUILDTAB="debian stretch deb 4.0.x 7.3 nightly -"
     #- BUILDTAB="debian stretch deb 4.0.x 7.4 nightly -"
@@ -124,6 +127,7 @@ matrix:
     #- env: BUILDTAB="ubuntu bionic deb 4.0.x 7.4 nightly -"
     #- env: BUILDTAB="debian jessie deb 4.0.x 7.2 nightly -"
     #- env: BUILDTAB="debian jessie deb 4.0.x 7.3 nightly -"
+    #- env: BUILDTAB="debian jessie deb 4.0.x 7.4 nightly -"
     #- env: BUILDTAB="debian stretch deb 4.0.x 7.2 nightly -"
     #- env: BUILDTAB="debian stretch deb 4.0.x 7.3 nightly -"
     #- env: BUILDTAB="debian stretch deb 4.0.x 7.4 nightly -"
