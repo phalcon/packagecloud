@@ -54,6 +54,7 @@ env:
     - BUILDTAB="debian jessie deb v4.0.0 7.3 stable -"
     - BUILDTAB="debian stretch deb v4.0.0 7.2 stable -"
     - BUILDTAB="debian stretch deb v4.0.0 7.3 stable -"
+    - BUILDTAB="debian stretch deb v4.0.0 7.4 stable -"
     - BUILDTAB="debian buster deb v4.0.0 7.3 stable -"
     - BUILDTAB="debian buster deb v4.0.0 7.4 stable -"
 
@@ -77,6 +78,7 @@ env:
     #- BUILDTAB="debian jessie deb v4.0.0-rc.3 7.3 mainline -"
     #- BUILDTAB="debian stretch deb v4.0.0-rc.3 7.2 mainline -"
     #- BUILDTAB="debian stretch deb v4.0.0-rc.3 7.3 mainline -"
+    #- BUILDTAB="debian stretch deb v4.0.0-rc.3 7.4 mainline -"
     #- BUILDTAB="debian buster deb v4.0.0-rc.3 7.3 mainline -"
     #- BUILDTAB="debian buster deb v4.0.0-rc.3 7.4 mainline -"
 
@@ -100,6 +102,7 @@ env:
     #- BUILDTAB="debian jessie deb 4.0.x 7.3 nightly -"
     #- BUILDTAB="debian stretch deb 4.0.x 7.2 nightly -"
     #- BUILDTAB="debian stretch deb 4.0.x 7.3 nightly -"
+    #- BUILDTAB="debian stretch deb 4.0.x 7.4 nightly -"
     #- BUILDTAB="debian buster deb 4.0.x 7.3 nightly -"
     #- BUILDTAB="debian buster deb 4.0.x 7.4 nightly -"
 
@@ -123,6 +126,7 @@ matrix:
     #- env: BUILDTAB="debian jessie deb 4.0.x 7.3 nightly -"
     #- env: BUILDTAB="debian stretch deb 4.0.x 7.2 nightly -"
     #- env: BUILDTAB="debian stretch deb 4.0.x 7.3 nightly -"
+    #- env: BUILDTAB="debian stretch deb 4.0.x 7.4 nightly -"
     #- env: BUILDTAB="debian buster deb 4.0.x 7.3 nightly -"
     #- env: BUILDTAB="debian buster deb 4.0.x 7.4 nightly -"
     #- env: BUILDTAB="el 7 rpm 4.0.x 7.2 nightly ius"
