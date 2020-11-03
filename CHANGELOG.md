@@ -75,7 +75,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Ubuntu 14.04-16.04, Debian 8.5-9 and CentOS 7.2 by using
 [Packpack](https://github.com/packpack/packpack).
 
-
 [Unreleased]: https://github.com/phalcongelist/packagecloud/compare/v1.5.0...HEAD
 [1.5.0]: https://github.com/phalcongelist/packagecloud/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/phalcongelist/packagecloud/compare/v1.3.0...v1.4.0
