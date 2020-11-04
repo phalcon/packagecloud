@@ -242,7 +242,7 @@ extclean zts-phpize
 %{!?_licensedir:%global license %%doc}
 %license LICENSE.txt
 %if "%{phalcon_major}" == "4"
-%doc CHANGELOG-4.0.md
+%doc CHANGELOG-4.1.md
 %endif
 %doc BACKERS.md
 %doc CHANGELOG.md
