@@ -184,7 +184,6 @@ deploy:
     skip_cleanup: true
     on:
       branch: "master"
-      # all_branches: true
       condition: -n "${OS}" && -n "${DIST}" && -n "${PACKAGECLOUD_TOKEN}"
 
 notifications:
