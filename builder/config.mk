@@ -105,19 +105,19 @@ endif
 endif
 
 ifeq ($(PHP_VERSION),7.2)
-ifneq (,$(filter $(DIST),stretch jessie trusty xenial focal))
+ifneq (,$(filter $(DIST),stretch jessie trusty xenial focal groovy))
 DOCKER_SUFFIX=-7.2
 endif
 endif
 
 ifeq ($(PHP_VERSION),7.3)
-ifneq (,$(filter $(DIST),buster stretch jessie trusty xenial bionic focal))
+ifneq (,$(filter $(DIST),buster stretch jessie trusty xenial bionic focal groovy))
 DOCKER_SUFFIX=-7.3
 endif
 endif
 
 ifeq ($(PHP_VERSION),7.4)
-ifneq (,$(filter $(DIST),buster stretch jessie trusty xenial bionic focal))
+ifneq (,$(filter $(DIST),buster stretch jessie trusty xenial bionic focal groovy))
 DOCKER_SUFFIX=-7.4
 endif
 endif
