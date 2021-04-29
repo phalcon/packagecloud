@@ -37,7 +37,7 @@ NIGHTLY_BUILD_VERSION?=1
 FEDORA:=fedora-rawhide fedora24 fedora23
 CENTOS:=centos7 centos6
 DEBIAN:=debian-sid debian-buster debian-stretch debian-jessie debian-wheezy
-UBUNTU:=ubuntu-bionic ubuntu-xenial ubuntu-trusty ubuntu-focal
+UBUNTU:=ubuntu-bionic ubuntu-xenial ubuntu-trusty ubuntu-focal ubuntu-groovy
 
 DEBS:=$(DEBIAN) $(UBUNTU)
 RPMS:=$(FEDORA) $(CENTOS)
