@@ -51,8 +51,8 @@ env:
     - BUILDTAB="ubuntu focal deb v4.1.0 7.2 stable -"
     - BUILDTAB="ubuntu focal deb v4.1.0 7.3 stable -"
     - BUILDTAB="ubuntu focal deb v4.1.0 7.4 stable -"
-    - BUILDTAB="ubuntu groovy deb v4.1.0 7.3 stable -"
-    - BUILDTAB="ubuntu groovy deb v4.1.0 7.4 stable -"
+    #- BUILDTAB="ubuntu groovy deb v4.1.0 7.3 stable -"
+    #- BUILDTAB="ubuntu groovy deb v4.1.0 7.4 stable -"
 
     # stable - debian
     #- BUILDTAB="debian jessie deb v4.1.0 7.2 stable -"
@@ -106,8 +106,8 @@ env:
     - BUILDTAB="ubuntu focal deb 4.1.x 7.2 nightly -"
     - BUILDTAB="ubuntu focal deb 4.1.x 7.3 nightly -"
     - BUILDTAB="ubuntu focal deb 4.1.x 7.4 nightly -"
-    - BUILDTAB="ubuntu groovy deb 4.1.x 7.3 nightly -"
-    - BUILDTAB="ubuntu groovy deb 4.1.x 7.4 nightly -"
+    #- BUILDTAB="ubuntu groovy deb 4.1.x 7.3 nightly -"
+    #- BUILDTAB="ubuntu groovy deb 4.1.x 7.4 nightly -"
 
     # nightly - debian
     #- BUILDTAB="debian jessie deb 4.1.x 7.2 nightly -"
