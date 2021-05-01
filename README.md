@@ -30,6 +30,7 @@ Supported Operating Systems
 - Ubuntu 16.04 LTS (Xenial)
 - Ubuntu 18.04 LTS (Bionic)
 - Ubuntu 20.04 LTS (Focal)
+- Ubuntu 20.10 (Groovy)
 - Debian 8.5 LTS (Jessie)
 - Debian 9 LTS (Stretch)
 - Debian 10 (Buster)

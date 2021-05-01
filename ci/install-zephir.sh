@@ -72,7 +72,7 @@ then
 	chmod +x "${downloaddir}/${downloadfile}"
 	ln -s "${downloaddir}/${downloadfile}" "${HOME}/bin/zephir"
 else
-	(>&1 echo "Downloading sorce: ${repo}.git")
+	(>&1 echo "Downloading source: ${repo}.git")
 	git clone -q --depth=1 "${repo}.git" -b ${ZEPHIR_VERSION} /tmp/zephir &> /dev/null
 	cd /tmp/zephir
 
