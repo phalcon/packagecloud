@@ -9,7 +9,7 @@
 </p>
 
 Phalcon Builder - is a packaging system that make it easy and quick to build [Phalcon][1] packages such
-as rpms, debs, etc. Phalcon distribution that hosted at [PackageCloud][2].
+as rpms, debs, etc. Phalcon's distribution that hosted at [PackageCloud][2].
 
 Installation Instructions
 -------------------------
