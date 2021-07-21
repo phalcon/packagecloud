@@ -55,9 +55,6 @@ env:
     #- BUILDTAB="ubuntu groovy deb v4.1.0 7.4 stable -"
 
     # stable - debian
-    #- BUILDTAB="debian jessie deb v4.1.2 7.2 stable -"
-    #- BUILDTAB="debian jessie deb v4.1.2 7.3 stable -"
-    #- BUILDTAB="debian jessie deb v4.1.2 7.4 stable -"
     #- BUILDTAB="debian stretch deb v4.1.2 7.2 stable -"
     - BUILDTAB="debian stretch deb v4.1.2 7.3 stable -"
     - BUILDTAB="debian stretch deb v4.1.2 7.4 stable -"
@@ -80,9 +77,6 @@ env:
     #- BUILDTAB="ubuntu bionic deb v4.0.0-rc.3 7.4 mainline -"
 
     # mainline - debian
-    #- BUILDTAB="debian jessie deb v4.0.0-rc.3 7.2 mainline -"
-    #- BUILDTAB="debian jessie deb v4.0.0-rc.3 7.3 mainline -"
-    #- BUILDTAB="debian jessie deb v4.0.0-rc.3 7.4 mainline -"
     #- BUILDTAB="debian stretch deb v4.0.0-rc.3 7.2 mainline -"
     #- BUILDTAB="debian stretch deb v4.0.0-rc.3 7.3 mainline -"
     #- BUILDTAB="debian stretch deb v4.0.0-rc.3 7.4 mainline -"
@@ -110,9 +104,6 @@ env:
     #- BUILDTAB="ubuntu groovy deb 4.1.x 7.4 nightly -"
 
     # nightly - debian
-    #- BUILDTAB="debian jessie deb 4.1.x 7.2 nightly -"
-    #- BUILDTAB="debian jessie deb 4.1.x 7.3 nightly -"
-    #- BUILDTAB="debian jessie deb 4.1.x 7.4 nightly -"
     #- BUILDTAB="debian stretch deb 4.1.x 7.2 nightly -"
     - BUILDTAB="debian stretch deb 4.1.x 7.3 nightly -"
     - BUILDTAB="debian stretch deb 4.1.x 7.4 nightly -"
