@@ -36,7 +36,7 @@ NIGHTLY_BUILD_VERSION?=1
 # List of supported OS
 FEDORA:=fedora-rawhide fedora24 fedora23
 CENTOS:=centos7 centos6
-DEBIAN:=debian-sid debian-buster debian-stretch debian-jessie debian-wheezy
+DEBIAN:=debian-sid debian-buster debian-stretch debian-wheezy
 UBUNTU:=ubuntu-bionic ubuntu-xenial ubuntu-trusty ubuntu-focal ubuntu-groovy
 
 DEBS:=$(DEBIAN) $(UBUNTU)
@@ -93,31 +93,31 @@ endif
 endif
 
 ifeq ($(PHP_VERSION),7.0)
-ifneq (,$(filter $(DIST),jessie trusty))
+ifneq (,$(filter $(DIST),trusty))
 DOCKER_SUFFIX=-7.0
 endif
 endif
 
 ifeq ($(PHP_VERSION),7.1)
-ifneq (,$(filter $(DIST),stretch jessie trusty xenial))
+ifneq (,$(filter $(DIST),stretch trusty xenial))
 DOCKER_SUFFIX=-7.1
 endif
 endif
 
 ifeq ($(PHP_VERSION),7.2)
-ifneq (,$(filter $(DIST),stretch jessie trusty xenial focal groovy))
+ifneq (,$(filter $(DIST),stretch trusty xenial focal groovy))
 DOCKER_SUFFIX=-7.2
 endif
 endif
 
 ifeq ($(PHP_VERSION),7.3)
-ifneq (,$(filter $(DIST),buster stretch jessie trusty xenial bionic focal groovy))
+ifneq (,$(filter $(DIST),buster stretch trusty xenial bionic focal groovy))
 DOCKER_SUFFIX=-7.3
 endif
 endif
 
 ifeq ($(PHP_VERSION),7.4)
-ifneq (,$(filter $(DIST),buster stretch jessie trusty xenial bionic focal groovy))
+ifneq (,$(filter $(DIST),buster stretch trusty xenial bionic focal groovy))
 DOCKER_SUFFIX=-7.4
 endif
 endif

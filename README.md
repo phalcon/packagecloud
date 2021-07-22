@@ -9,7 +9,7 @@
 </p>
 
 Phalcon Builder - is a packaging system that make it easy and quick to build [Phalcon][1] packages such
-as rpms, debs, etc. Phalcon distribution that hosted at [PackageCloud][2].
+as rpms, debs, etc. Phalcon's distribution that hosted at [PackageCloud][2].
 
 Installation Instructions
 -------------------------
@@ -31,7 +31,6 @@ Supported Operating Systems
 - Ubuntu 18.04 LTS (Bionic)
 - Ubuntu 20.04 LTS (Focal)
 - Ubuntu 20.10 (Groovy)
-- Debian 8.5 LTS (Jessie)
 - Debian 9 LTS (Stretch)
 - Debian 10 (Buster)
 - CentOS 7.2 LTS (Core)
