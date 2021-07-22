@@ -12,13 +12,13 @@ jobs:
 
     runs-on: ubuntu-18.04
 
+    env:
+      BUILDTAB: ${BUILDTAB}
+
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
-
-      - env:
-          BUILDTAB: ${BUILDTAB}
 
       - name: Before install
         run: |
