@@ -77,7 +77,6 @@ jobs:
 
       - name: Install
         run: |
-          source ./ci/setup-build.sh
           ./ci/install-re2c.sh
           ./ci/install-zephir-parser.sh
           ./ci/install-zephir.sh
