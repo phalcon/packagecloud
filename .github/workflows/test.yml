@@ -110,12 +110,15 @@ jobs:
 #        env:
 #          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Clone cphalcon
+        run: git clone -b ${{ env.CLONE_BRANCH }} --depth 1 -q ${{ env.PRODUCT_GIT }} ${{ env.SOURCEDIR }} 1>/dev/null
+
+      - run: ./ci/regenerate-build.sh
+
       - name: Install
         run: |
           ./ci/install-re2c.sh
           ./ci/install-zephir-parser.sh
           ./ci/install-zephir.sh
-
-      - run: ./ci/regenerate-build.sh
 
       - run: make -f .travis.mk ${TARGET}
