@@ -8,12 +8,12 @@ jobs:
     strategy:
       matrix:
         BUILDTAB:
-          - ubuntu trusty deb v4.1.2 7.3 stable -
+          - "ubuntu trusty deb v4.1.2 7.3 stable -"
 
     runs-on: ubuntu-18.04
 
     env:
-      BUILDTAB: ${BUILDTAB}
+      BUILDTAB: ${{ matrix.BUILDTAB }}
 
     steps:
       - uses: actions/checkout@v2
