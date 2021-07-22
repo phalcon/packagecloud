@@ -37,10 +37,18 @@ then
 	exit 1
 fi
 
-export OS="${build_conf[0]}"
-export DIST="${build_conf[1]}"
-export PACKAGE="${build_conf[2]}"
-export CLONE_BRANCH="${build_conf[3]}"
-export PHP_VERSION="${build_conf[4]}"
-export PACKAGECLOUD_REPO="${build_conf[5]}"
-export REPO_VENDOR="${build_conf[6]}"
+#export OS="${build_conf[0]}"
+#export DIST="${build_conf[1]}"
+#export PACKAGE="${build_conf[2]}"
+#export CLONE_BRANCH="${build_conf[3]}"
+#export PHP_VERSION="${build_conf[4]}"
+#export PACKAGECLOUD_REPO="${build_conf[5]}"
+#export REPO_VENDOR="${build_conf[6]}"
+
+echo "OS=${build_conf[0]}" >> $GITHUB_ENV
+echo "DIST=${build_conf[1]}" >> $GITHUB_ENV
+echo "PACKAGE=${build_conf[2]}" >> $GITHUB_ENV
+echo "CLONE_BRANCH=${build_conf[3]}" >> $GITHUB_ENV
+echo "PHP_VERSION=${build_conf[4]}" >> $GITHUB_ENV
+echo "PACKAGECLOUD_REPO=${build_conf[5]}" >> $GITHUB_ENV
+echo "REPO_VENDOR=${build_conf[6]}" >> $GITHUB_ENV
