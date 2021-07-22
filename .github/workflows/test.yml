@@ -88,6 +88,7 @@ jobs:
 
       - run: echo "MAINLINE_BUILD_VERSION=${GITHUB_RUN_ID}" >> $GITHUB_ENV
       - run: echo "NIGHTLY_BUILD_VERSION=${GITHUB_RUN_ID}" >> $GITHUB_ENV
+      - run: echo "SOURCEDIR=${GITHUB_WORKSPACE}/cphalcon" >> $GITHUB_ENV
 
       - name: Setup cache environment
         id: extcache
@@ -123,7 +124,5 @@ jobs:
           ./ci/install-re2c.sh
           ./ci/install-zephir-parser.sh
           ./ci/install-zephir.sh
-
-      - run: echo "SOURCEDIR=${GITHUB_WORKSPACE}/cphalcon" >> $GITHUB_ENV
 
       - run: make -f .travis.mk ${{ env.TARGET }}
