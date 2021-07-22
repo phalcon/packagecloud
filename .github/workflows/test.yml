@@ -38,6 +38,7 @@ jobs:
       CLONE_BRANCH: ${{ matrix.branch }}
       PHP_VERSION: ${{ matrix.php }}
       PACKAGECLOUD_REPO: ${{ matrix.packagecloud_repo }}
+      PHP_EXTENSIONS: memcached, psr, redis
 
     steps:
       - uses: actions/checkout@v2
@@ -54,9 +55,9 @@ jobs:
         id: extcache
         uses: shivammathur/cache-extensions@v1
         with:
-          php-version: ${{ matrix.php-versions }}
-          extensions: ${{ env.extensions }}
-          key: ${{ env.ext_cache_key }}
+          php-version: ${{ matrix.php }}
+          extensions: ${{ env.PHP_EXTENSIONS }}
+          key: "phalcon-packagecloud"
 
       - name: Cache extensions
         uses: actions/cache@v2
@@ -70,7 +71,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
 #          ini-values: apc.enable_cli=on, session.save_path=/tmp
-          extensions: memcached, psr, redis
+          extensions: ${{ env.PHP_EXTENSIONS }}
 #        env:
 #          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
