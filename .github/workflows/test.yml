@@ -17,6 +17,9 @@ jobs:
         with:
           fetch-depth: 1
 
+      - env:
+          BUILDTAB: ${BUILDTAB}
+
       - name: Before install
         run: |
           source environment
