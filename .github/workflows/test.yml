@@ -126,6 +126,6 @@ jobs:
           ./ci/install-zephir-parser.sh
           ./ci/install-zephir.sh
 
-      - run: make -f .travis.mk ${{ env.TARGET }} || true
+      - run: make -f .travis.mk ${{ env.TARGET }}
 
       - run: ls -la build/
