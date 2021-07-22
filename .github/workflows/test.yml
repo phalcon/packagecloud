@@ -40,6 +40,41 @@ jobs:
       PACKAGECLOUD_REPO: ${{ matrix.packagecloud_repo }}
       PHP_EXTENSIONS: memcached, psr, redis
 
+      #
+      PRODUCT: "php-phalcon"
+      PRODUCT_GIT: "https://github.com/phalcon/cphalcon.git"
+
+      DOCKER_REPO: "phalconphp/build"
+      SOURCEDIR: "${{ env.GITHUB_WORKSPACE }}/cphalcon"
+
+      TARGET: "package"
+      RE2C_VERSION: "1.1.1"
+
+      # To build 3.x branch use
+      #  ZEPHIR_VERSION >= 0.10.0 (for example 0.10.16)
+      #  ZEPHIR_PARSER_VERSION >= v1.1.x (for example v1.1.4)
+      # To build 4.x branch use
+      #  ZEPHIR_VERSION >= 0.11.0 (for example 0.12.15)
+      #  ZEPHIR_PARSER_VERSION >= v1.2.x (for example v1.3.3)
+      ZEPHIR_VERSION: "0.12.21"
+      ZEPHIR_PARSER_VERSION: "v1.3.6"
+
+      ZEND_BACKEND: "--backend=ZendEngine3"
+      STABLE_BUILD_VERSION: "1"
+      MAINLINE_BUILD_VERSION: ${{ env.GITHUB_RUN_ID }}
+      NIGHTLY_BUILD_VERSION: ${{ env.GITHUB_RUN_ID }}
+
+      STABLE_BRANCH: "v3.4.5"
+      MAINLINE_BRANCH: "v4.1.2"
+      NIGHTLY_BRANCH: "4.1.x"
+
+      PACKAGECLOUD_USER: "phalcon"
+
+      PACKAGECLOUD_STABLE_REPO: "stable"
+      PACKAGECLOUD_MAINLINE_REPO: "mainline"
+      PACKAGECLOUD_NIGHTLY_REPO: "nightly"
+
+
     steps:
       - uses: actions/checkout@v2
         with:
