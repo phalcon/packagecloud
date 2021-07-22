@@ -50,9 +50,33 @@ jobs:
           export $(cat environment | grep -v "^#\|^$" | cut -d= -f1)
 #          source ci/export-buildtab.sh
 
+      - name: Setup cache environment
+        id: extcache
+        uses: shivammathur/cache-extensions@v1
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: ${{ env.extensions }}
+          key: ${{ env.ext_cache_key }}
+
+      - name: Cache extensions
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.extcache.outputs.dir }}
+          key: ${{ steps.extcache.outputs.key }}
+          restore-keys: ${{ steps.extcache.outputs.key }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+#          ini-values: apc.enable_cli=on, session.save_path=/tmp
+          extensions: memcached, psr, redis
+#        env:
+#          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Install
         run: |
-          ./ci/install-php.sh
+#          ./ci/install-php.sh
           source ./ci/setup-build.sh
           ./ci/install-re2c.sh
           ./ci/install-zephir-parser.sh
