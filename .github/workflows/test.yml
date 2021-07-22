@@ -45,7 +45,7 @@ jobs:
       PRODUCT_GIT: "https://github.com/phalcon/cphalcon.git"
 
       DOCKER_REPO: "phalconphp/build"
-      SOURCEDIR: $GITHUB_WORKSPACE/cphalcon
+      SOURCEDIR: "${GITHUB_WORKSPACE}/cphalcon"
 
       TARGET: "package"
       RE2C_VERSION: "1.1.1"
@@ -61,8 +61,8 @@ jobs:
 
       ZEND_BACKEND: "--backend=ZendEngine3"
       STABLE_BUILD_VERSION: "1"
-      MAINLINE_BUILD_VERSION: $GITHUB_RUN_ID
-      NIGHTLY_BUILD_VERSION: $GITHUB_RUN_ID
+      MAINLINE_BUILD_VERSION: ${GITHUB_RUN_ID}
+      NIGHTLY_BUILD_VERSION: ${GITHUB_RUN_ID}
 
       STABLE_BRANCH: "v3.4.5"
       MAINLINE_BRANCH: "v4.1.2"
