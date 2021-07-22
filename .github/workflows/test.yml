@@ -121,4 +121,6 @@ jobs:
           ./ci/install-zephir-parser.sh
           ./ci/install-zephir.sh
 
-      - run: make -f .travis.mk ${TARGET}
+      - run: echo "SOURCEDIR=${GITHUB_WORKSPACE}/cphalcon" >> $GITHUB_ENV
+
+      - run: make -f .travis.mk ${{ env.TARGET }}
