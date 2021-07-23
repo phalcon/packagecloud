@@ -146,7 +146,7 @@ jobs:
       - run: ls -la build/
 
       - run: |
-          gem update --system
+          sudo gem update --system
           sudo gem install package_cloud
 
       - run: package_cloud push phalcon/${{ matrix.packagecloud_repo }}/${{ matrix.os }}/${{ matrix.dist }} build/*.${{ matrix.package }}
