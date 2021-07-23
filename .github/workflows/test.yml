@@ -30,6 +30,14 @@ jobs:
             php: 7.4
             packagecloud_repo: "stable"
 
+          - os: "el"
+            dist: "7"
+            package: "rpm"
+            branch: "v4.1.2"
+            php: 7.3
+            packagecloud_repo: "stable"
+            repo_vendor: ius
+
     runs-on: ubuntu-18.04
 
     env:
@@ -39,6 +47,7 @@ jobs:
       CLONE_BRANCH: ${{ matrix.branch }}
       PHP_VERSION: ${{ matrix.php }}
       PACKAGECLOUD_REPO: ${{ matrix.packagecloud_repo }}
+      REPO_VENDOR: ${{ matrix.repo_vendor }}
       PHP_EXTENSIONS: memcached, psr, redis
 
       #
