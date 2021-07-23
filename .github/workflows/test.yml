@@ -100,6 +100,12 @@ jobs:
       - run: echo "NIGHTLY_BUILD_VERSION=${GITHUB_RUN_ID}" >> $GITHUB_ENV
       - run: echo "SOURCEDIR=${GITHUB_WORKSPACE}/cphalcon" >> $GITHUB_ENV
 
+      - name: Prepare OS
+        run: |
+          if [ $OS != "el" ]; then ./ci/prepare-debian.sh; fi
+          if [ $OS = "el" ]; then ./ci/prepare-rpm.sh; fi
+#          if [ $REPO_VENDOR == "-" ]; then unset REPO_VENDOR; fi
+
       - name: Setup cache environment
         id: extcache
         uses: shivammathur/cache-extensions@v1
