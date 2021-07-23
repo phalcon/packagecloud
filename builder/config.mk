@@ -14,7 +14,7 @@ CHANGELOG_EMAIL=team@phalcon.io
 CHANGELOG_TEXT=Automated build. See details at release page https://github.com/phalcon/cphalcon/releases
 
 PACK_REPO=https://github.com/packpack/packpack.git
-PACK_COMMIT=0154f5e5af03126744e3ff35648de7264a011fcd
+PACK_COMMIT=30ff7b51654c19b8919d01ca8d4aa480e87e8241
 
 DOCKER_REPO=phalconphp/build
 
