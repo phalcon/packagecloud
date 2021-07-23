@@ -144,3 +144,7 @@ jobs:
       - run: make -f .travis.mk ${{ env.TARGET }}
 
       - run: ls -la build/
+
+      - run: gem install package_cloud
+
+      - run: package_cloud push phalcon/${{ matrix.packagecloud_repo }}/${{ matrix.os }}/${{ matrix.dist }} build/*.${{ matrix.package }}
