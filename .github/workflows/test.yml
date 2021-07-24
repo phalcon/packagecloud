@@ -1,4 +1,4 @@
-name: First attempt
+name: Build & deploy
 
 on:
   push
