@@ -41,8 +41,6 @@ jobs:
 
     runs-on: ubuntu-18.04
 
-    name: ${{ matrix.os }}/${{ matrix.dist }} - PHP${{ matrix.php }} with ${{ env.PHALCON_VERSION_BRANCH_RELEASE }}
-
     env:
       OS: ${{ matrix.os }}
       DIST: ${{ matrix.dist }}
@@ -86,6 +84,8 @@ jobs:
       PACKAGECLOUD_STABLE_REPO: "stable"
       PACKAGECLOUD_MAINLINE_REPO: "mainline"
       PACKAGECLOUD_NIGHTLY_REPO: "nightly"
+
+    name: ${{ matrix.os }}/${{ matrix.dist }} - PHP${{ matrix.php }} with ${{ env.PHALCON_VERSION_BRANCH_RELEASE }}
 
 
     steps:
