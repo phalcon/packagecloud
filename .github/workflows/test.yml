@@ -11,7 +11,7 @@ jobs:
         os: ["ubuntu", "el"]
         php: [7.3, 7.4]
         branch: ["v4.1.2"]
-        packagecloud_repo: ["stable"]
+        packagecloud_repo: ["stable-v41"]
         experimental: [false]
         include:
           - os: "ubuntu"
