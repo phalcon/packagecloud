@@ -15,14 +15,14 @@ jobs:
           - os: "ubuntu"
             dist: "trusty"
             package: "deb"
-            branch: ${{ env.PHALCON_VERSION_BRANCH_RELEASE }}
+            branch: $PHALCON_VERSION_BRANCH_RELEASE
             php: 7.3
             packagecloud_repo: "stable"
 
           - os: "ubuntu"
             dist: "xenial"
             package: "deb"
-            branch: ${{ env.PHALCON_VERSION_BRANCH_RELEASE }}
+            branch: $PHALCON_VERSION_BRANCH_RELEASE
             php: 7.3
             packagecloud_repo: "stable"
 
