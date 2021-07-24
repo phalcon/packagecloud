@@ -148,12 +148,12 @@ jobs:
 
       - run: ls -la build/
 
-      - name: Install Package Cloud
-        run: |
-          sudo gem install rake
-          sudo gem install package_cloud
+#      - name: Install Package Cloud
+#        run: |
+#          sudo gem install rake
+#          sudo gem install package_cloud
 
-      - name: Push package to phalcon/${{ matrix.packagecloud_repo }}/${{ matrix.os }}/${{ matrix.dist }}
-      - run: package_cloud push phalcon/${{ matrix.packagecloud_repo }}/${{ matrix.os }}/${{ matrix.dist }} build/*.${{ matrix.package }}
-        env:
-          PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
+#      - name: Push package to phalcon/${{ matrix.packagecloud_repo }}/${{ matrix.os }}/${{ matrix.dist }}
+#      - run: package_cloud push phalcon/${{ matrix.packagecloud_repo }}/${{ matrix.os }}/${{ matrix.dist }} build/*.${{ matrix.package }}
+#        env:
+#          PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
