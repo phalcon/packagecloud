@@ -51,7 +51,6 @@ jobs:
       PRODUCT_GIT: "https://github.com/phalcon/cphalcon.git"
 
       DOCKER_REPO: "phalconphp/build"
-#      SOURCEDIR: ${GITHUB_WORKSPACE}/cphalcon
 
       TARGET: "package"
       RE2C_VERSION: "1.1.1"
@@ -67,8 +66,6 @@ jobs:
 
       ZEND_BACKEND: "--backend=ZendEngine3"
       STABLE_BUILD_VERSION: "1"
-#      MAINLINE_BUILD_VERSION: ${GITHUB_RUN_ID}
-#      NIGHTLY_BUILD_VERSION: ${GITHUB_RUN_ID}
 
       STABLE_BRANCH: "v3.4.5"
       MAINLINE_BRANCH: "v4.1.2"
@@ -91,15 +88,14 @@ jobs:
           export $(cat environment | grep -v "^#\|^$" | cut -d= -f1)
 #          source ci/export-buildtab.sh
 
-      - run: echo "MAINLINE_BUILD_VERSION=${GITHUB_RUN_ID}" >> $GITHUB_ENV
-      - run: echo "NIGHTLY_BUILD_VERSION=${GITHUB_RUN_ID}" >> $GITHUB_ENV
+      - run: echo "MAINLINE_BUILD_VERSION=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+      - run: echo "NIGHTLY_BUILD_VERSION=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
       - run: echo "SOURCEDIR=${GITHUB_WORKSPACE}/cphalcon" >> $GITHUB_ENV
 
       - name: Prepare OS
         run: |
           if [ $OS != "el" ]; then ./ci/prepare-debian.sh; fi
           if [ $OS = "el" ]; then ./ci/prepare-rpm.sh; fi
-#          if [ $REPO_VENDOR == "-" ]; then unset REPO_VENDOR; fi
 
       - name: Setup cache environment
         id: extcache
@@ -120,7 +116,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-#          ini-values: apc.enable_cli=on, session.save_path=/tmp
           extensions: ${{ env.PHP_EXTENSIONS }}
 #        env:
 #          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
