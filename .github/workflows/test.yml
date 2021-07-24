@@ -146,7 +146,6 @@ jobs:
       - run: ls -la build/
 
       - run: |
-          sudo gem update --system
           sudo gem install rake
           sudo gem install package_cloud
 
