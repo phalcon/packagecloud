@@ -88,7 +88,7 @@ endif
 ifneq ($(PHP_VERSION),)
 ifneq ($(filter $(OSDIST),$(DEBS)),)
 temp=$(RELEASE)
-RELEASE:=$(temp)-$(OSDIST)
+RELEASE:=$(temp)+php$(PHP_VERSION)
 endif
 endif
 
