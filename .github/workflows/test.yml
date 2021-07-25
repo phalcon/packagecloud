@@ -123,7 +123,12 @@ jobs:
           if [ $OS = "el" ]; then ./ci/prepare-rpm.sh; fi
 
       - name: Clone cphalcon
-        run: git clone -b ${{ env.CLONE_BRANCH }} --depth 1 -q ${{ env.PRODUCT_GIT }} ${{ env.SOURCEDIR }} 1>/dev/null
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          repository: phalcon/cphalcon
+          ref: ${{ env.CLONE_BRANCH }}
+          path: cphalcon
 
       - run: ./ci/regenerate-build.sh
 
