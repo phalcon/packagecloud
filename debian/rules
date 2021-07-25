@@ -26,7 +26,15 @@ include /usr/share/dpkg/default.mk
 
 export DEB_HOST_MULTIARCH
 
-PHP_MAJOR_VERSION=$(shell echo $(PHP_VERSION) | head -c 1)
+PHP_VERSION:=
+PROPOSED_PHP_VERSION=$(PHP_VERSION)
+
+ifeq ($(strip $(PROPOSED_PHP_VERSION)),)
+PHP_FULL_VERSION=$(shell php-config --version 2> /dev/null || php-config5 --version 2> /dev/null)
+PHP_MAJOR_VERSION=$(shell echo $(PHP_FULL_VERSION) | head -c 1)
+else
+PHP_MAJOR_VERSION=$(shell echo $(PROPOSED_PHP_VERSION) | head -c 1)
+endif
 
 ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),5))
 PACKAGE=php5-phalcon
