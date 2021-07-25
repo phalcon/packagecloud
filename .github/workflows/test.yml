@@ -82,21 +82,7 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Before install
-        run: |
-          source environment
-          export $(cat environment | grep -v "^#\|^$" | cut -d= -f1)
-#          source ci/export-buildtab.sh
-
-      - run: echo "MAINLINE_BUILD_VERSION=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
-      - run: echo "NIGHTLY_BUILD_VERSION=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
-      - run: echo "SOURCEDIR=${GITHUB_WORKSPACE}/cphalcon" >> $GITHUB_ENV
-
-      - name: Prepare OS
-        run: |
-          if [ $OS != "el" ]; then ./ci/prepare-debian.sh; fi
-          if [ $OS = "el" ]; then ./ci/prepare-rpm.sh; fi
-
+      # Setup PHP
       - name: Setup cache environment
         id: extcache
         uses: shivammathur/cache-extensions@v1
@@ -117,8 +103,21 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: ${{ env.PHP_EXTENSIONS }}
-#        env:
-#          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Before install
+        run: |
+          source environment
+          export $(cat environment | grep -v "^#\|^$" | cut -d= -f1)
+#          source ci/export-buildtab.sh
+
+      - run: echo "MAINLINE_BUILD_VERSION=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+      - run: echo "NIGHTLY_BUILD_VERSION=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+      - run: echo "SOURCEDIR=${GITHUB_WORKSPACE}/cphalcon" >> $GITHUB_ENV
+
+      - name: Prepare OS
+        run: |
+          if [ $OS != "el" ]; then ./ci/prepare-debian.sh; fi
+          if [ $OS = "el" ]; then ./ci/prepare-rpm.sh; fi
 
       - name: Clone cphalcon
         run: git clone -b ${{ env.CLONE_BRANCH }} --depth 1 -q ${{ env.PRODUCT_GIT }} ${{ env.SOURCEDIR }} 1>/dev/null
