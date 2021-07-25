@@ -1,4 +1,4 @@
-PRODUCT="php-phalcon"
+PRODUCT="phalcon"
 PRODUCT_GIT="https://github.com/phalcon/cphalcon.git"
 
 DOCKER_REPO="phalconphp/build"
