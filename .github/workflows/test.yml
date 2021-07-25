@@ -109,7 +109,7 @@ jobs:
           echo "MAINLINE_BUILD_VERSION=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
           echo "NIGHTLY_BUILD_VERSION=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
           echo "SOURCEDIR=${GITHUB_WORKSPACE}/cphalcon" >> $GITHUB_ENV
-          echo "PHP_FULL_VERSION=$(php -r "echo PHP_VERSION;")" >> $GITHUB_ENV
+          echo "PHP_FULL_VERSION=$(php-config --version)" >> $GITHUB_ENV
           echo "PHP_SEM_VERSION=$(php -r "echo current(explode('-', PHP_VERSION));")" >> $GITHUB_ENV
 
       - name: Prepare OS
