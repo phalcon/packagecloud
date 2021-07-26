@@ -8,32 +8,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["ubuntu", "debian", "el"]
-        package: ["deb", "rpm"]
+        os_dist: [
+            "ubuntu/trusty", "ubuntu/xenial", "ubuntu/bionic", "ubuntu/focal",
+            "debian/stretch", "debian/buster",
+            "el/7"
+        ]
+        package: ["deb", "rpm", "7"]
         php: [7.3, 7.4]
         branch: ["v4.1.2"]
         packagecloud_repo: ["stable-41"]
         repo_vendor: [""]
         experimental: [false]
         include:
-          - os: "ubuntu"
-            dist: "trusty"
-
-          - os: "ubuntu"
-            dist: "xenial"
-
-          - os: "ubuntu"
-            dist: "bionic"
-
-          - os: "ubuntu"
-            dist: "focal"
-
-          - os: "debian"
-            dist: "stretch"
-
-          - os: "debian"
-            dist: "buster"
-
           - os: "el"
             dist: "7"
             repo_vendor: ius
@@ -50,11 +36,11 @@ jobs:
     runs-on: ubuntu-18.04
 #    continue-on-error: ${{ matrix.experimental }}
 
-    name: ${{ matrix.os }}/${{ matrix.dist }} - PHP${{ matrix.php }} with ${{ matrix.branch }}
+    name: ${{ matrix.os_dist }} - PHP${{ matrix.php }} with ${{ matrix.branch }}
 
     env:
-      OS: ${{ matrix.os }}
-      DIST: ${{ matrix.dist }}
+#      OS: ${{ matrix.os }}
+#      DIST: ${{ matrix.dist }}
       PACKAGE: ${{ matrix.package }}
       CLONE_BRANCH: ${{ matrix.branch }}
       PHP_VERSION: ${{ matrix.php }}
@@ -122,6 +108,10 @@ jobs:
 
       - name: Declare extra environment variables
         run: |
+          IFS=';' read -ra os_dist <<< $(echo ${{ matrix.os_dist }} | tr -s "/" ";")
+          echo "OS=${os_dist[0]}" >> $GITHUB_ENV
+          echo "DIST=${os_dist[1]}" >> $GITHUB_ENV
+
           echo "MAINLINE_BUILD_VERSION=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
           echo "NIGHTLY_BUILD_VERSION=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
           echo "SOURCEDIR=${GITHUB_WORKSPACE}/cphalcon" >> $GITHUB_ENV
@@ -158,7 +148,7 @@ jobs:
           sudo gem install rake
           sudo gem install package_cloud
 
-      - name: Push package to phalcon/${{ matrix.packagecloud_repo }}/${{ matrix.os }}/${{ matrix.dist }}
-        run: package_cloud push phalcon/${{ matrix.packagecloud_repo }}/${{ matrix.os }}/${{ matrix.dist }} build/*.${{ matrix.package }}
+      - name: Push package to phalcon/${{ matrix.packagecloud_repo }}/${{ matrix.os_dist }}
+        run: package_cloud push phalcon/${{ matrix.packagecloud_repo }}/${{ matrix.os_.dist }} build/*.${{ matrix.package }}
         env:
           PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
