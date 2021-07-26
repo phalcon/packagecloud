@@ -108,13 +108,13 @@ jobs:
       - name: Prepare OS
         run: |
           if [ $OS != "el" ]; then
-            echo "PACKAGE=deb" >> $GITHUB_ENV
+            echo "PACKAGE=deb" >> $GITHUB_ENV;
             ./ci/prepare-debian.sh;
           fi
 
           if [ $OS = "el" ]; then
-            echo "PACKAGE=rpm" >> $GITHUB_ENV
-            echo "REPO_VENDOR=ius" >> $GITHUB_ENV
+            echo "PACKAGE=rpm" >> $GITHUB_ENV;
+            echo "REPO_VENDOR=ius" >> $GITHUB_ENV;
             ./ci/prepare-rpm.sh;
           fi
 
