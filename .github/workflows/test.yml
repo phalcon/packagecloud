@@ -1,7 +1,13 @@
 name: Build & deploy
 
 on:
-  push
+  schedule:
+    - cron: '0 2 * * *' # Daily at 02:00 runs only on default branch
+  push:
+    paths-ignore:
+      - '**.md'
+      - '**.txt'
+  pull_request:
 
 jobs:
   build:
