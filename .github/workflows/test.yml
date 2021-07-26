@@ -13,7 +13,7 @@ jobs:
         php: [7.3, 7.4]
         branch: ["v4.1.2"]
         packagecloud_repo: ["stable-41"]
-        repo_vendor: ["-"]
+        repo_vendor: [""]
         experimental: [false]
         include:
           - os: "ubuntu"
