@@ -9,17 +9,19 @@ jobs:
       fail-fast: false
       matrix:
         os: ["ubuntu", "debian", "el"]
+        dist: [
+            "trusty", "xenial", "bionic", "focal"
+            "stretch", "buster",
+            "7"
+        ]
         php: [7.3, 7.4]
         branch: ["v4.1.2"]
         packagecloud_repo: ["stable-41"]
+        repo_vendor: ["-"]
         experimental: [false]
         include:
           - os: "ubuntu"
             dist: "trusty"
-            package: "deb"
-
-          - os: "ubuntu"
-            dist: "xenial"
             package: "deb"
 
           - os: "ubuntu"
