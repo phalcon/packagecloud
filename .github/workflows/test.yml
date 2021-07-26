@@ -9,11 +9,6 @@ jobs:
       fail-fast: false
       matrix:
         os: ["ubuntu", "debian", "el"]
-        dist: [
-            "trusty", "xenial", "bionic", "focal",
-            "stretch", "buster",
-            "7"
-        ]
         package: ["deb", "rpm"]
         php: [7.3, 7.4]
         branch: ["v4.1.2"]
@@ -23,32 +18,34 @@ jobs:
         include:
           - os: "ubuntu"
             dist: "trusty"
-            package: "deb"
 
           - os: "ubuntu"
             dist: "xenial"
-            package: "deb"
 
           - os: "ubuntu"
             dist: "bionic"
-            package: "deb"
 
           - os: "ubuntu"
             dist: "focal"
-            package: "deb"
 
           - os: "debian"
             dist: "stretch"
-            package: "deb"
 
           - os: "debian"
             dist: "buster"
-            package: "deb"
 
           - os: "el"
             dist: "7"
-            package: "rpm"
             repo_vendor: ius
+        exclude:
+          - os: "ubuntu"
+            package: "7"
+
+          - os: "debian"
+            package: "7"
+
+          - os: "el"
+            package: "deb"
 
     runs-on: ubuntu-18.04
 #    continue-on-error: ${{ matrix.experimental }}
