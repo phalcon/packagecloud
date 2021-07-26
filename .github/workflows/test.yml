@@ -13,16 +13,13 @@ jobs:
             "debian/stretch", "debian/buster",
             "el/7"
         ]
-        package: ["deb"]
         php: [7.3, 7.4]
         branch: ["v4.1.2"]
         packagecloud_repo: ["stable-41"]
-        repo_vendor: ["-"]
-        experimental: [false]
-        include:
-          - os_dist: "el/7"
-            package: "rpm"
-            repo_vendor: ius
+
+        exclude:
+          - os_dist: "ubuntu/trusty"
+            php: 7.4
 
     runs-on: ubuntu-18.04
 #    continue-on-error: ${{ matrix.experimental }}
@@ -32,11 +29,10 @@ jobs:
     env:
 #      OS: ${{ matrix.os }}
 #      DIST: ${{ matrix.dist }}
-      PACKAGE: ${{ matrix.package }}
+#      PACKAGE: ${{ matrix.package }}
       CLONE_BRANCH: ${{ matrix.branch }}
       PHP_VERSION: ${{ matrix.php }}
       PACKAGECLOUD_REPO: ${{ matrix.packagecloud_repo }}
-      REPO_VENDOR: ${{ matrix.repo_vendor }}
       PHP_EXTENSIONS: memcached, psr, redis
 
       #
@@ -111,8 +107,16 @@ jobs:
 
       - name: Prepare OS
         run: |
-          if [ $OS != "el" ]; then ./ci/prepare-debian.sh; fi
-          if [ $OS = "el" ]; then ./ci/prepare-rpm.sh; fi
+          if [ $OS != "el" ]; then
+            ./ci/prepare-debian.sh;
+            echo "PACKAGE=deb" >> $GITHUB_ENV
+          fi
+
+          if [ $OS = "el" ]; then
+            ./ci/prepare-rpm.sh;
+            echo "PACKAGE=rpm" >> $GITHUB_ENV
+            echo "REPO_VENDOR=ius" >> $GITHUB_ENV
+          fi
 
       - name: Clone cphalcon
         uses: actions/checkout@v2
