@@ -13,25 +13,16 @@ jobs:
             "debian/stretch", "debian/buster",
             "el/7"
         ]
-        package: ["deb", "rpm", "7"]
+        package: ["deb"]
         php: [7.3, 7.4]
         branch: ["v4.1.2"]
         packagecloud_repo: ["stable-41"]
-        repo_vendor: [""]
+        repo_vendor: ["-"]
         experimental: [false]
         include:
-          - os: "el"
-            dist: "7"
+          - os_dist: "el/7"
+            package: "rpm"
             repo_vendor: ius
-        exclude:
-          - os: "ubuntu"
-            package: "7"
-
-          - os: "debian"
-            package: "7"
-
-          - os: "el"
-            package: "deb"
 
     runs-on: ubuntu-18.04
 #    continue-on-error: ${{ matrix.experimental }}
