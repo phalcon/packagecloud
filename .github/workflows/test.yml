@@ -51,7 +51,7 @@ jobs:
             repo_vendor: ius
 
     runs-on: ubuntu-18.04
-    continue-on-error: ${{ matrix.experimental }}
+#    continue-on-error: ${{ matrix.experimental }}
 
     name: ${{ matrix.os }}/${{ matrix.dist }} - PHP${{ matrix.php }} with ${{ matrix.branch }}
 
