@@ -10,10 +10,11 @@ jobs:
       matrix:
         os: ["ubuntu", "debian", "el"]
         dist: [
-            "trusty", "xenial", "bionic", "focal"
+            "trusty", "xenial", "bionic", "focal",
             "stretch", "buster",
             "7"
         ]
+        package: ["deb", "rpm"]
         php: [7.3, 7.4]
         branch: ["v4.1.2"]
         packagecloud_repo: ["stable-41"]
