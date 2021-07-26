@@ -115,6 +115,8 @@ jobs:
           if [ $OS = "el" ]; then
             echo "PACKAGE=rpm" >> $GITHUB_ENV;
             echo "REPO_VENDOR=ius" >> $GITHUB_ENV;
+
+            export REPO_VENDOR="ius";
             ./ci/prepare-rpm.sh;
           fi
 
