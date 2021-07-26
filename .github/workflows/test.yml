@@ -38,6 +38,10 @@ jobs:
             dist: "stretch"
             package: "deb"
 
+          - os: "debian"
+            dist: "buster"
+            package: "deb"
+
           - os: "el"
             dist: "7"
             package: "rpm"
