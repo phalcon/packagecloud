@@ -108,14 +108,14 @@ jobs:
       - name: Prepare OS
         run: |
           if [ $OS != "el" ]; then
-            ./ci/prepare-debian.sh;
             echo "PACKAGE=deb" >> $GITHUB_ENV
+            ./ci/prepare-debian.sh;
           fi
 
           if [ $OS = "el" ]; then
-            ./ci/prepare-rpm.sh;
             echo "PACKAGE=rpm" >> $GITHUB_ENV
             echo "REPO_VENDOR=ius" >> $GITHUB_ENV
+            ./ci/prepare-rpm.sh;
           fi
 
       - name: Clone cphalcon
