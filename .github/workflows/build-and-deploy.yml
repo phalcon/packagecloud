@@ -7,7 +7,6 @@ on:
     paths-ignore:
       - '**.md'
       - '**.txt'
-  pull_request:
 
 jobs:
   build:
