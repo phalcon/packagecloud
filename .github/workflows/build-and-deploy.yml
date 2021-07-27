@@ -83,7 +83,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: ${{ env.PHP_EXTENSIONS }}
-          key: "phalcon-packagecloud"
+          key: "phalcon-packagecloud-v1"
 
       - name: Cache extensions
         uses: actions/cache@v2
