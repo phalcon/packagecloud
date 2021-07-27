@@ -1,0 +1,155 @@
+name: Build & deploy
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # Daily at 02:00 runs only on default branch
+  push:
+    paths-ignore:
+      - '**.md'
+      - '**.txt'
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os_dist: [
+            "ubuntu/trusty", "ubuntu/xenial", "ubuntu/bionic", "ubuntu/focal",
+            "debian/stretch", "debian/buster",
+            "el/7"
+        ]
+        php: [7.3, 7.4]
+        branch: ["v4.1.2"]
+        packagecloud_repo: ["stable-41"]
+
+        exclude:
+          - os_dist: "ubuntu/trusty"
+            php: 7.4
+
+    runs-on: ubuntu-18.04
+#    continue-on-error: ${{ matrix.experimental }}
+
+    name: ${{ matrix.os_dist }} - PHP${{ matrix.php }} with ${{ matrix.branch }}
+
+    env:
+#      OS: ${{ matrix.os }}
+#      DIST: ${{ matrix.dist }}
+#      PACKAGE: ${{ matrix.package }}
+      CLONE_BRANCH: ${{ matrix.branch }}
+      PHP_VERSION: ${{ matrix.php }}
+      PACKAGECLOUD_REPO: ${{ matrix.packagecloud_repo }}
+      PHP_EXTENSIONS: memcached, psr, redis
+
+      #
+      PRODUCT: "php-phalcon"
+      PRODUCT_GIT: "https://github.com/phalcon/cphalcon.git"
+
+      DOCKER_REPO: "phalconphp/build"
+
+      TARGET: "package"
+      RE2C_VERSION: "1.1.1"
+
+      # To build 3.x branch use
+      #  ZEPHIR_VERSION >= 0.10.0 (for example 0.10.16)
+      #  ZEPHIR_PARSER_VERSION >= v1.1.x (for example v1.1.4)
+      # To build 4.x branch use
+      #  ZEPHIR_VERSION >= 0.11.0 (for example 0.12.15)
+      #  ZEPHIR_PARSER_VERSION >= v1.2.x (for example v1.3.3)
+      ZEPHIR_VERSION: "0.12.21"
+      ZEPHIR_PARSER_VERSION: "v1.3.6"
+
+      ZEND_BACKEND: "--backend=ZendEngine3"
+      STABLE_BUILD_VERSION: "1"
+
+      STABLE_BRANCH: "v3.4.5"
+      MAINLINE_BRANCH: "v4.1.2"
+      NIGHTLY_BRANCH: "4.1.x"
+
+      PACKAGECLOUD_USER: "phalcon"
+
+      PACKAGECLOUD_STABLE_REPO: "stable"
+      PACKAGECLOUD_MAINLINE_REPO: "mainline"
+      PACKAGECLOUD_NIGHTLY_REPO: "nightly"
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      # Setup PHP
+      - name: Setup cache environment
+        id: extcache
+        uses: shivammathur/cache-extensions@v1
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: ${{ env.PHP_EXTENSIONS }}
+          key: "phalcon-packagecloud"
+
+      - name: Cache extensions
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.extcache.outputs.dir }}
+          key: ${{ steps.extcache.outputs.key }}
+          restore-keys: ${{ steps.extcache.outputs.key }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: ${{ env.PHP_EXTENSIONS }}
+
+      - name: Declare extra environment variables
+        run: |
+          IFS=';' read -ra os_dist <<< $(echo ${{ matrix.os_dist }} | tr -s "/" ";")
+          echo "OS=${os_dist[0]}" >> $GITHUB_ENV
+          echo "DIST=${os_dist[1]}" >> $GITHUB_ENV
+
+          echo "MAINLINE_BUILD_VERSION=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+          echo "NIGHTLY_BUILD_VERSION=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+          echo "SOURCEDIR=${GITHUB_WORKSPACE}/cphalcon" >> $GITHUB_ENV
+          echo "PHP_FULL_VERSION=$(php-config --version)" >> $GITHUB_ENV
+          echo "PHP_SEM_VERSION=$(php -r "echo current(explode('-', PHP_VERSION));")" >> $GITHUB_ENV
+
+      - name: Prepare OS
+        run: |
+          if [ $OS != "el" ]; then
+            echo "PACKAGE=deb" >> $GITHUB_ENV;
+            ./ci/prepare-debian.sh;
+          fi
+
+          if [ $OS = "el" ]; then
+            echo "PACKAGE=rpm" >> $GITHUB_ENV;
+            echo "REPO_VENDOR=ius" >> $GITHUB_ENV;
+
+            export REPO_VENDOR="ius";
+            ./ci/prepare-rpm.sh;
+          fi
+
+      - name: Clone cphalcon
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          repository: phalcon/cphalcon
+          ref: ${{ env.CLONE_BRANCH }}
+          path: cphalcon
+
+      - run: ./ci/regenerate-build.sh
+
+      - name: Install
+        run: |
+          ./ci/install-re2c.sh
+          ./ci/install-zephir-parser.sh
+          ./ci/install-zephir.sh
+
+      - run: make -f .travis.mk ${{ env.TARGET }}
+
+      - run: ls -la build/
+
+      - name: Push package to phalcon/${{ matrix.packagecloud_repo }}/${{ matrix.os_dist }}
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+        run: |
+          sudo gem install rake
+          sudo gem install package_cloud
+          package_cloud push phalcon/${{ matrix.packagecloud_repo }}/${{ matrix.os_dist }} build/*.${{ env.PACKAGE }}
+        env:
+          PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}

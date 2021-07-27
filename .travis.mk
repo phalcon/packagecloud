@@ -65,6 +65,8 @@ report:
 	$(info )
 	$(info Used PHP version ...................: $(PHP_VERSION))
 	$(info PHP major version ..................: $(PHP_MAJOR))
+	$(info PHP full version ...................: $(PHP_FULL_VERSION))
+	$(info PHP semantic version ...............: $(PHP_SEM_VERSION))
 	$(info Zend Engine backend ................: $(ZEND_BACKEND))
 	$(info )
 	$(info Repo vendor ........................: $(REPO_VENDOR))
