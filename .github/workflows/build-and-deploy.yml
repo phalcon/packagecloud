@@ -15,7 +15,7 @@ jobs:
       matrix:
         os_dist: [
             "ubuntu/trusty", "ubuntu/xenial", "ubuntu/bionic", "ubuntu/focal",
-            "debian/stretch", "debian/buster",
+            "debian/stretch", "debian/buster", "debian/bullseye"
             "el/7"
         ]
         php: [7.3, 7.4]
