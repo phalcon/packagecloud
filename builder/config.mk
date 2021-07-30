@@ -36,7 +36,7 @@ NIGHTLY_BUILD_VERSION?=1
 # List of supported OS
 FEDORA:=fedora-rawhide fedora24 fedora23
 CENTOS:=centos7 centos6
-DEBIAN:=debian-sid debian-buster debian-stretch debian-wheezy
+DEBIAN:=debian-sid debian-buster debian-stretch debian-wheezy debian-bullseye
 UBUNTU:=ubuntu-bionic ubuntu-xenial ubuntu-trusty ubuntu-focal ubuntu-groovy
 
 DEBS:=$(DEBIAN) $(UBUNTU)
