@@ -18,13 +18,24 @@ jobs:
             "debian/stretch", "debian/buster",
             "el/7"
         ]
-        php: [7.3, 7.4]
-        branch: ["v4.1.2"]
-        packagecloud_repo: ["stable-41"]
+        php: [7.3, 7.4, 8.0]
+        branch: ["v4.1.2", "v5.0.0alpha5"]
+        packagecloud_repo: ["stable-41", "nightly-50"]
 
         exclude:
           - os_dist: "ubuntu/trusty"
             php: 7.4
+
+          - os_dist: "ubuntu/trusty"
+            php: 8.0
+
+          - branch: "v4.1.2"
+            php: 8.0
+            packagecloud_repo: "nightly-50"
+
+          - branch: "v5.0.0alpha5"
+            php: 7.3
+            packagecloud_repo: "stable-41"
 
     runs-on: ubuntu-18.04
 #    continue-on-error: ${{ matrix.experimental }}
@@ -32,9 +43,6 @@ jobs:
     name: ${{ matrix.os_dist }} - PHP${{ matrix.php }} with ${{ matrix.branch }}
 
     env:
-#      OS: ${{ matrix.os }}
-#      DIST: ${{ matrix.dist }}
-#      PACKAGE: ${{ matrix.package }}
       CLONE_BRANCH: ${{ matrix.branch }}
       PHP_VERSION: ${{ matrix.php }}
       PACKAGECLOUD_REPO: ${{ matrix.packagecloud_repo }}
@@ -76,22 +84,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      # Setup PHP
-#      - name: Setup cache environment
-#        id: extcache
-#        uses: shivammathur/cache-extensions@v1
-#        with:
-#          php-version: ${{ matrix.php }}
-#          extensions: ${{ env.PHP_EXTENSIONS }}
-#          key: "phalcon-packagecloud-v1"
-
-#      - name: Cache extensions
-#        uses: actions/cache@v2
-#        with:
-#          path: ${{ steps.extcache.outputs.dir }}
-#          key: ${{ steps.extcache.outputs.key }}
-#          restore-keys: ${{ steps.extcache.outputs.key }}
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -128,7 +120,6 @@ jobs:
       - name: Clone cphalcon
         uses: actions/checkout@v2
         with:
-          fetch-depth: 1
           repository: phalcon/cphalcon
           ref: ${{ env.CLONE_BRANCH }}
           path: cphalcon
@@ -144,6 +135,12 @@ jobs:
       - run: make -f .travis.mk ${{ env.TARGET }}
 
       - run: ls -la build/
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ OS }}-${{ DIST }}-php-${{ matrix.php }}-${{ matrix.branch }}.zip
+          path: build/
 
       - name: Push package to phalcon/${{ matrix.packagecloud_repo }}/${{ matrix.os_dist }}
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
