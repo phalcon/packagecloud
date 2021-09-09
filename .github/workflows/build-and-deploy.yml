@@ -18,7 +18,7 @@ jobs:
             "debian/stretch", "debian/buster",
             "el/7"
         ]
-        php: [7.3, 7.4, 8.0]
+        php: ["7.3", "7.4", "8.0"]
         branch: ["v4.1.2", "v5.0.0alpha5"]
         packagecloud_repo: ["stable-41", "nightly-50"]
         zephir_parser_version: ["v1.3.8"]
@@ -26,16 +26,16 @@ jobs:
 
         exclude:
           - os_dist: "ubuntu/trusty"
-            php: 7.4
+            php: "7.4"
 
           - os_dist: "ubuntu/trusty"
-            php: 8.0
+            php: "8.0"
 
           - branch: "v4.1.2"
-            php: 8.0
+            php: "8.0"
 
           - branch: "v5.0.0alpha5"
-            php: 7.3
+            php: "7.3"
 
           - branch: "v4.1.2"
             packagecloud_repo: "nightly-50"
