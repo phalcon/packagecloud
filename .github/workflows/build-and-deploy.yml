@@ -33,12 +33,20 @@ jobs:
 
           - branch: "v4.1.2"
             php: 8.0
-            packagecloud_repo: "nightly-50"
-            zephir_version: "0.14.0-beta.3"
 
           - branch: "v5.0.0alpha5"
             php: 7.3
+
+          - branch: "v4.1.2"
+            packagecloud_repo: "nightly-50"
+
+          - branch: "v4.1.2"
+            zephir_version: "0.14.0-beta.3"
+
+          - branch: "v5.0.0alpha5"
             packagecloud_repo: "stable-41"
+
+          - branch: "v5.0.0alpha5"
             zephir_version: "0.12.21"
 
     runs-on: ubuntu-18.04
