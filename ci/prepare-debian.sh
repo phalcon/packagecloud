@@ -30,7 +30,7 @@ case "$PHP_VERSION" in
 	cp debian/postinsts/legacy debian/php5-phalcon.postinst
 	cp debian/preinsts/legacy debian/php5-phalcon.preinst
 	;;
-"7.0" | "7.1"| "7.2" | "7.3" | "7.4")
+"7.0" | "7.1"| "7.2" | "7.3" | "7.4" | "8.0")
 	cp "debian/controls/php-${PHP_VERSION}" debian/control
 	cp "debian/postinsts/php-${PHP_VERSION}" "debian/php${PHP_VERSION}-phalcon.postinst"
 	cp "debian/preinsts/php-${PHP_VERSION}" "debian/php${PHP_VERSION}-phalcon.preinst"

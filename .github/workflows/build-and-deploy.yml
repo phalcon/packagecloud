@@ -18,13 +18,36 @@ jobs:
             "debian/stretch", "debian/buster",
             "el/7"
         ]
-        php: [7.3, 7.4]
-        branch: ["v4.1.2"]
-        packagecloud_repo: ["stable-41"]
+        php: ["7.3", "7.4", "8.0"]
+        branch: ["v4.1.2", "v5.0.0alpha5"]
+        packagecloud_repo: ["stable-41", "nightly-50"]
+        zephir_parser_version: ["v1.3.8"]
+        zephir_version: ["0.12.21", "0.14.0-beta.3"]
 
         exclude:
           - os_dist: "ubuntu/trusty"
-            php: 7.4
+            php: "7.4"
+
+          - os_dist: "ubuntu/trusty"
+            php: "8.0"
+
+          - branch: "v4.1.2"
+            php: "8.0"
+
+          - branch: "v5.0.0alpha5"
+            php: "7.3"
+
+          - branch: "v4.1.2"
+            packagecloud_repo: "nightly-50"
+
+          - branch: "v4.1.2"
+            zephir_version: "0.14.0-beta.3"
+
+          - branch: "v5.0.0alpha5"
+            packagecloud_repo: "stable-41"
+
+          - branch: "v5.0.0alpha5"
+            zephir_version: "0.12.21"
 
     runs-on: ubuntu-18.04
 #    continue-on-error: ${{ matrix.experimental }}
@@ -32,9 +55,6 @@ jobs:
     name: ${{ matrix.os_dist }} - PHP${{ matrix.php }} with ${{ matrix.branch }}
 
     env:
-#      OS: ${{ matrix.os }}
-#      DIST: ${{ matrix.dist }}
-#      PACKAGE: ${{ matrix.package }}
       CLONE_BRANCH: ${{ matrix.branch }}
       PHP_VERSION: ${{ matrix.php }}
       PACKAGECLOUD_REPO: ${{ matrix.packagecloud_repo }}
@@ -55,8 +75,8 @@ jobs:
       # To build 4.x branch use
       #  ZEPHIR_VERSION >= 0.11.0 (for example 0.12.15)
       #  ZEPHIR_PARSER_VERSION >= v1.2.x (for example v1.3.3)
-      ZEPHIR_VERSION: "0.12.21"
-      ZEPHIR_PARSER_VERSION: "v1.3.6"
+#      ZEPHIR_VERSION: "0.12.21"
+#      ZEPHIR_PARSER_VERSION: "v1.3.6"
 
       ZEND_BACKEND: "--backend=ZendEngine3"
       STABLE_BUILD_VERSION: "1"
@@ -76,22 +96,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      # Setup PHP
-#      - name: Setup cache environment
-#        id: extcache
-#        uses: shivammathur/cache-extensions@v1
-#        with:
-#          php-version: ${{ matrix.php }}
-#          extensions: ${{ env.PHP_EXTENSIONS }}
-#          key: "phalcon-packagecloud-v1"
-
-#      - name: Cache extensions
-#        uses: actions/cache@v2
-#        with:
-#          path: ${{ steps.extcache.outputs.dir }}
-#          key: ${{ steps.extcache.outputs.key }}
-#          restore-keys: ${{ steps.extcache.outputs.key }}
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -103,6 +107,9 @@ jobs:
           IFS=';' read -ra os_dist <<< $(echo ${{ matrix.os_dist }} | tr -s "/" ";")
           echo "OS=${os_dist[0]}" >> $GITHUB_ENV
           echo "DIST=${os_dist[1]}" >> $GITHUB_ENV
+
+          echo "ZEPHIR_VERSION=${{ matrix.zephir_version }}" >> $GITHUB_ENV
+          echo "ZEPHIR_PARSER_VERSION=${{ matrix.zephir_parser_version }}" >> $GITHUB_ENV
 
           echo "MAINLINE_BUILD_VERSION=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
           echo "NIGHTLY_BUILD_VERSION=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
@@ -128,7 +135,6 @@ jobs:
       - name: Clone cphalcon
         uses: actions/checkout@v2
         with:
-          fetch-depth: 1
           repository: phalcon/cphalcon
           ref: ${{ env.CLONE_BRANCH }}
           path: cphalcon
@@ -144,6 +150,12 @@ jobs:
       - run: make -f .travis.mk ${{ env.TARGET }}
 
       - run: ls -la build/
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.OS }}-${{ env.DIST }}-php-${{ matrix.php }}-${{ matrix.branch }}.zip
+          path: build/
 
       - name: Push package to phalcon/${{ matrix.packagecloud_repo }}/${{ matrix.os_dist }}
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
