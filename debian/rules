@@ -51,7 +51,7 @@ endif
 
 PHALCON_SUBSTVARS=$(PACKAGE).substvars
 
-ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),8))
+ifeq ($(VERSION),$(filter $(VERSION),5))
 SOURCEDIR=build/phalcon
 else
 SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/safe
@@ -60,7 +60,7 @@ endif
 DEB_HOST_ARCH?=$(shell dpkg-architecture -qDEB_HOST_ARCH)
 
 ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),i386))
-ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),8))
+ifeq ($(VERSION),$(filter $(VERSION),5))
 SOURCEDIR=build/phalcon
 else
 SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/32bits
@@ -68,7 +68,7 @@ endif
 endif
 
 ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),amd64))
-ifeq ($(PHP_MAJOR_VERSION),$(filter $(PHP_MAJOR_VERSION),8))
+ifeq ($(VERSION),$(filter $(VERSION),5))
 SOURCEDIR=build/phalcon
 else
 SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/64bits
