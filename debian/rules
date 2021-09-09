@@ -51,28 +51,17 @@ endif
 
 PHALCON_SUBSTVARS=$(PACKAGE).substvars
 
-ifeq ($(VERSION),$(filter $(VERSION),5))
-SOURCEDIR=build/phalcon
-else
 SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/safe
-endif
+SOURCEDIR_V5=build/phalcon
 
 DEB_HOST_ARCH?=$(shell dpkg-architecture -qDEB_HOST_ARCH)
 
 ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),i386))
-ifeq ($(VERSION),$(filter $(VERSION),5))
-SOURCEDIR=build/phalcon
-else
 SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/32bits
-endif
 endif
 
 ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),amd64))
-ifeq ($(VERSION),$(filter $(VERSION),5))
-SOURCEDIR=build/phalcon
-else
 SOURCEDIR=build/php$(PHP_MAJOR_VERSION)/64bits
-endif
 endif
 
 CFLAGS+=-g3 -fvisibility=hidden -DPHALCON_RELEASE
@@ -94,17 +83,17 @@ prepare-files-stamp:
 	touch prepare-files-stamp
 
 override_dh_auto_configure:
-	cd $(SOURCEDIR); \
+	[ -d "$(SOURCEDIR_V5)" ] && cd $(SOURCEDIR_V5) || cd $(SOURCEDIR); \
 	phpize; \
 	./configure --enable-phalcon=shared
 
 override_dh_auto_build:
-	$(MAKE) -C $(SOURCEDIR)
+	[ -d "$(SOURCEDIR_V5)" ] && $(MAKE) -C $(SOURCEDIR_V5) || $(MAKE) -C $(SOURCEDIR)
 
 override_dh_auto_clean:
 	dh_auto_clean
 	( \
-		cd $(SOURCEDIR); \
+		[ -d "$(SOURCEDIR_V5)" ] && cd $(SOURCEDIR_V5) || cd $(SOURCEDIR); \
 		[ -f Makefile ] && $(MAKE) distclean; \
 		phpize --clean; \
 		rm -f tmp-php.ini; \
@@ -114,7 +103,7 @@ override_dh_installdirs: prepare-files-stamp
 	dh_installdirs
 
 override_dh_auto_install:
-	INSTALL_ROOT=$(BUILD) $(MAKE) -C $(SOURCEDIR) install
+	[ -d "$(SOURCEDIR_V5)" ] && INSTALL_ROOT=$(BUILD) $(MAKE) -C $(SOURCEDIR_V5) install || INSTALL_ROOT=$(BUILD) $(MAKE) -C $(SOURCEDIR) install
 
 override_dh_strip:
 	dh_strip -s --dbg-package=$(PACKAGE)-dbgsym
